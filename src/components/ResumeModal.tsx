@@ -150,33 +150,33 @@ EDUCATION
 
   return (
     <div
-      className={`resume-modal-overlay fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/85 backdrop-blur-md ${
+      className={`resume-modal-overlay fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-slate-900/60 backdrop-blur-md ${
         isOpen ? 'flex' : 'hidden print:block'
       }`}
     >
-      <div className="resume-modal-box relative w-full max-w-4xl bg-[#0b101e] border border-cyan-500/40 rounded-2xl shadow-2xl flex flex-col h-[92vh] overflow-hidden">
+      <div className="resume-modal-box relative w-full max-w-4xl bg-white border border-slate-200 rounded-2xl shadow-2xl flex flex-col h-[92vh] overflow-hidden">
         {/* Top Control Bar (Never Printed) */}
-        <div className="no-print flex flex-wrap items-center justify-between p-3 sm:p-4 bg-[#0e1629] border-b border-slate-800 gap-2 sm:gap-3">
+        <div className="no-print flex flex-wrap items-center justify-between p-3 sm:p-4 bg-slate-50 border-b border-slate-200 gap-2 sm:gap-3">
           <div className="flex flex-wrap items-center gap-2">
-            <FileText className="w-5 h-5 text-cyan-400 shrink-0" />
+            <FileText className="w-5 h-5 text-sky-600 shrink-0" />
             <div className="flex items-center gap-2">
-              <span className="font-bold text-white text-sm sm:text-base font-display">
+              <span className="font-bold text-slate-900 text-sm sm:text-base font-display">
                 Official Resume
               </span>
-              <span className="text-[10px] font-mono bg-cyan-500/10 text-cyan-300 px-2 py-0.5 rounded border border-cyan-500/30">
+              <span className="text-[10px] font-mono bg-sky-50 text-sky-700 px-2 py-0.5 rounded border border-sky-200 font-semibold">
                 Verified 2026
               </span>
             </div>
 
             {/* View Mode Toggle */}
-            <div className="flex items-center bg-slate-900 p-0.5 rounded-lg border border-slate-700 ml-1 sm:ml-2">
+            <div className="flex items-center bg-slate-200/80 p-0.5 rounded-lg border border-slate-300 ml-1 sm:ml-2">
               <button
                 type="button"
                 onClick={() => setViewMode('pdf')}
                 className={`px-2.5 py-1 rounded text-xs font-mono font-semibold transition-all ${
                   viewMode === 'pdf'
-                    ? 'bg-cyan-500 text-slate-950 font-bold shadow-sm'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-sky-500 text-white font-bold shadow-sm'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
                 title="Preview original Google Drive PDF"
               >
@@ -187,8 +187,8 @@ EDUCATION
                 onClick={() => setViewMode('ats')}
                 className={`px-2.5 py-1 rounded text-xs font-mono font-semibold transition-all ${
                   viewMode === 'ats'
-                    ? 'bg-cyan-500 text-slate-950 font-bold shadow-sm'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-sky-500 text-white font-bold shadow-sm'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
                 title="View ATS structured readable text layout"
               >
@@ -203,7 +203,7 @@ EDUCATION
               href="/Zafarali_Inamdar_Resume.pdf"
               download="Zafarali_Inamdar_Resume.pdf"
               id="resume-download-official-btn"
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-500 text-slate-950 text-xs font-bold hover:brightness-110 active:scale-95 transition-all shadow-md shadow-emerald-500/20"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-bold hover:brightness-110 active:scale-95 transition-all shadow-sm"
               title="Download official 1-page PDF directly"
             >
               <Download className="w-4 h-4" />
@@ -215,17 +215,17 @@ EDUCATION
               href="https://drive.google.com/file/d/1zJbDNuuUu1DTW65sB7WTlAqmrysI2cPM/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-950 text-blue-200 border border-blue-500/40 hover:bg-blue-900 text-xs font-medium transition-colors"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 text-xs font-semibold transition-colors"
               title="Open in Google Drive in new tab"
             >
-              <ExternalLink className="w-3.5 h-3.5 text-blue-400" />
+              <ExternalLink className="w-3.5 h-3.5 text-blue-600" />
               <span className="hidden sm:inline">Google Drive</span>
             </a>
 
             <button
               onClick={handlePrint}
               id="resume-print-pdf-btn"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 hover:border-cyan-400 text-xs font-medium transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-slate-700 border border-slate-200 hover:border-slate-300 text-xs font-medium transition-colors shadow-sm"
               title="Print directly or save clean 2-page PDF"
             >
               <Printer className="w-4 h-4" />
@@ -238,16 +238,16 @@ EDUCATION
               rel="noopener noreferrer"
               download="GenAI_Research_Paper_Inamdar_2026.pdf"
               id="modal-download-research-paper-btn"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-purple-950 text-purple-200 border border-purple-500/40 hover:bg-purple-900 hover:border-purple-300 text-xs font-medium transition-all"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-purple-50 text-purple-700 border border-purple-200 hover:bg-purple-100 text-xs font-medium transition-all"
               title="Download published Gen-AI research paper PDF (030117.pdf)"
             >
-              <BookOpen className="w-4 h-4 text-purple-400" />
+              <BookOpen className="w-4 h-4 text-purple-600" />
               <span className="hidden lg:inline">Paper PDF</span>
             </a>
 
             <button
               onClick={handleDownloadTxt}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 hover:border-cyan-400 text-xs font-medium transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-slate-700 border border-slate-200 hover:border-slate-300 text-xs font-medium transition-colors shadow-sm"
               title="Download text resume"
             >
               <FileDown className="w-4 h-4" />
@@ -256,16 +256,16 @@ EDUCATION
 
             <button
               onClick={handleCopyText}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 hover:border-cyan-400 text-xs font-medium transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-slate-700 border border-slate-200 hover:border-slate-300 text-xs font-medium transition-colors shadow-sm"
               title="Copy entire text to clipboard"
             >
-              {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+              {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
               <span>{copied ? 'Copied!' : 'Copy'}</span>
             </button>
 
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg bg-slate-800 text-slate-400 hover:text-white transition-colors"
+              className="p-1.5 rounded-lg bg-slate-200/80 text-slate-600 hover:text-slate-900 hover:bg-slate-300 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -274,13 +274,13 @@ EDUCATION
 
         {/* PDF Viewer Container (Visible when viewMode === 'pdf') */}
         {viewMode === 'pdf' && (
-          <div className="no-print flex-1 w-full h-full p-2 sm:p-4 bg-[#080d19] flex flex-col overflow-hidden">
-            <div className="w-full h-full flex flex-col rounded-xl overflow-hidden border border-slate-800 bg-[#0e1629] shadow-2xl">
-              <div className="flex items-center justify-between px-3 sm:px-4 py-2 bg-[#0a0f1d] border-b border-slate-800 text-xs">
-                <div className="flex items-center gap-2 text-slate-300">
-                  <FileText className="w-4 h-4 text-cyan-400" />
-                  <span className="font-semibold text-white">Zafarali_Inamdar_Resume.pdf</span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hidden sm:inline-block">
+          <div className="no-print flex-1 w-full h-full p-2 sm:p-4 bg-slate-100 flex flex-col overflow-hidden">
+            <div className="w-full h-full flex flex-col rounded-xl overflow-hidden border border-slate-200 bg-white shadow-xl">
+              <div className="flex items-center justify-between px-3 sm:px-4 py-2 bg-slate-50 border-b border-slate-200 text-xs">
+                <div className="flex items-center gap-2 text-slate-700">
+                  <FileText className="w-4 h-4 text-sky-600" />
+                  <span className="font-semibold text-slate-900">Zafarali_Inamdar_Resume.pdf</span>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold hidden sm:inline-block">
                     Official 1-Page Document
                   </span>
                 </div>
@@ -288,7 +288,7 @@ EDUCATION
                   <a
                     href="/Zafarali_Inamdar_Resume.pdf"
                     download="Zafarali_Inamdar_Resume.pdf"
-                    className="flex items-center gap-1 px-3 py-1 rounded bg-emerald-500 text-slate-950 font-bold text-xs hover:brightness-110 transition-all shadow-sm"
+                    className="flex items-center gap-1 px-3 py-1 rounded bg-emerald-600 text-white font-bold text-xs hover:brightness-110 transition-all shadow-sm"
                   >
                     <Download className="w-3.5 h-3.5" />
                     <span>Download</span>
@@ -297,14 +297,14 @@ EDUCATION
                     href="https://drive.google.com/file/d/1zJbDNuuUu1DTW65sB7WTlAqmrysI2cPM/view?usp=sharing"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:text-white text-xs border border-slate-700 transition-colors"
+                    className="flex items-center gap-1 px-2.5 py-1 rounded bg-white text-slate-700 hover:text-slate-900 text-xs border border-slate-200 transition-colors shadow-sm"
                   >
-                    <ExternalLink className="w-3.5 h-3.5 text-blue-400" />
+                    <ExternalLink className="w-3.5 h-3.5 text-blue-600" />
                     <span className="hidden md:inline">Open Drive</span>
                   </a>
                 </div>
               </div>
-              <div className="flex-1 w-full h-full relative bg-slate-900">
+              <div className="flex-1 w-full h-full relative bg-slate-100">
                 <iframe
                   src="/Zafarali_Inamdar_Resume.pdf#toolbar=1"
                   className="w-full h-full border-none"
@@ -317,7 +317,7 @@ EDUCATION
 
         {/* Resume Scrollable Document Canvas (Always printed via @media print, visible on screen when viewMode === 'ats') */}
         <div
-          className={`resume-scroll-canvas flex-1 overflow-y-auto p-4 sm:p-8 bg-[#080d19] ${
+          className={`resume-scroll-canvas flex-1 overflow-y-auto p-4 sm:p-8 bg-slate-100 ${
             viewMode === 'ats' ? 'block' : 'hidden print:block'
           }`}
         >

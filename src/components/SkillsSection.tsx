@@ -34,17 +34,17 @@ export const SkillsSection: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-mono uppercase tracking-wider mb-3">
             <Zap className="w-3.5 h-3.5" />
             <span>Technical Capabilities</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-display tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 font-display tracking-tight">
             Engineered For{' '}
-            <span className="bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
               High Complexity
             </span>
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base mt-2">
+          <p className="text-slate-600 text-sm sm:text-base mt-2">
             Languages, frameworks, architecture paradigms, and cloud infrastructure verified across production deployments.
           </p>
         </div>
@@ -57,8 +57,8 @@ export const SkillsSection: React.FC = () => {
               onClick={() => setActiveCategory(cat.category)}
               className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
                 activeCategory === cat.category
-                  ? 'bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/25 scale-105'
-                  : 'bg-slate-900/80 text-slate-400 border border-slate-800 hover:border-slate-700 hover:text-white'
+                  ? 'bg-sky-500 text-white shadow-lg shadow-sky-500/25 scale-105'
+                  : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:text-slate-900 shadow-sm'
               }`}
             >
               {getCategoryIcon(cat.iconName)}
@@ -77,33 +77,33 @@ export const SkillsSection: React.FC = () => {
               glareOpacity={0.1}
               className="h-full"
             >
-              <div className="glass-panel p-5 rounded-xl border border-slate-800 hover:border-cyan-500/30 transition-colors h-full flex flex-col justify-between group">
+              <div className="bg-white/95 p-5 rounded-xl border border-slate-200/90 hover:border-sky-400 hover:shadow-lg transition-all h-full flex flex-col justify-between group shadow-md">
                 <div>
                   <div className="flex items-center justify-between gap-3 mb-1.5">
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-white text-sm sm:text-base group-hover:text-cyan-300 transition-colors">
+                      <span className="font-bold text-slate-900 text-sm sm:text-base group-hover:text-sky-600 transition-colors">
                         {skill.name}
                       </span>
                       {skill.highlight && (
-                        <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                        <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-sky-50 text-sky-700 border border-sky-200">
                           Core
                         </span>
                       )}
                     </div>
-                    <span className="text-xs font-mono text-cyan-400 font-bold">
+                    <span className="text-xs font-mono text-sky-600 font-bold">
                       {skill.level}%
                     </span>
                   </div>
 
                   {/* Progress bar */}
-                  <div className="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden my-2 border border-slate-800/80">
+                  <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden my-2 border border-slate-200">
                     <div
-                      className="h-full bg-gradient-to-r from-cyan-500 via-sky-400 to-indigo-500 rounded-full transition-all duration-700 ease-out"
+                      className="h-full bg-gradient-to-r from-sky-500 via-blue-500 to-indigo-500 rounded-full transition-all duration-700 ease-out"
                       style={{ width: `${skill.level}%` }}
                     />
                   </div>
 
-                  <p className="text-xs text-slate-400 leading-relaxed">
+                  <p className="text-xs text-slate-600 leading-relaxed">
                     {skill.description}
                   </p>
                 </div>
@@ -113,8 +113,8 @@ export const SkillsSection: React.FC = () => {
         </div>
 
         {/* Core Languages Strip */}
-        <div className="mt-12 p-6 rounded-2xl glass-panel border border-slate-800">
-          <div className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-3">
+        <div className="mt-12 p-6 rounded-2xl bg-white/95 border border-slate-200/90 shadow-md">
+          <div className="text-xs font-mono text-slate-500 uppercase tracking-wider mb-3">
             Core Programming Languages:
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -128,10 +128,10 @@ export const SkillsSection: React.FC = () => {
             ].map((lang) => (
               <div
                 key={lang.name}
-                className="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs font-mono flex items-center gap-2"
+                className="px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs font-mono flex items-center gap-2"
               >
-                <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
-                <span className="text-slate-200 font-semibold">{lang.name}</span>
+                <span className="w-2 h-2 rounded-full bg-sky-500"></span>
+                <span className="text-slate-800 font-semibold">{lang.name}</span>
                 <span className="text-[10px] text-slate-500">({lang.type})</span>
               </div>
             ))}

@@ -56,7 +56,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#05070d] text-slate-100 relative selection:bg-cyan-500 selection:text-black">
+    <div className="min-h-screen bg-[#f8fafc] text-slate-900 relative selection:bg-sky-500 selection:text-white">
       {/* Dynamic Physics / Constellation Canvas */}
       <BackgroundCanvas />
 

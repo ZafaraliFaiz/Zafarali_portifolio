@@ -201,17 +201,17 @@ export const ArchitectureVisualizer: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-mono uppercase tracking-wider mb-3 font-semibold">
             <Cpu className="w-3.5 h-3.5" />
             <span>Interactive Engineering Visualizer</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-display tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 font-display tracking-tight">
             How I Architect{' '}
-            <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
               Mission-Critical Systems
             </span>
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base mt-3">
+          <p className="text-slate-600 text-sm sm:text-base mt-3">
             Interact with live simulations of the key engineering patterns I designed across my projects: 
             Offline-first queues, atomic warehouse stock deductions, multi-provider Gen-AI orchestration, and automated CI/CD pipelines.
           </p>
@@ -221,10 +221,10 @@ export const ArchitectureVisualizer: React.FC = () => {
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8">
           <button
             onClick={() => setActiveTab('tain-electai')}
-            className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
+            className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 shadow-sm ${
               activeTab === 'tain-electai'
-                ? 'bg-sky-500 text-slate-950 shadow-lg shadow-sky-500/25 scale-105'
-                : 'bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-slate-700'
+                ? 'bg-sky-600 text-white shadow-md shadow-sky-500/25 scale-105'
+                : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'
             }`}
           >
             <Smartphone className="w-4 h-4" />
@@ -233,10 +233,10 @@ export const ArchitectureVisualizer: React.FC = () => {
 
           <button
             onClick={() => setActiveTab('agrostock')}
-            className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
+            className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 shadow-sm ${
               activeTab === 'agrostock'
-                ? 'bg-emerald-500 text-slate-950 shadow-lg shadow-emerald-500/25 scale-105'
-                : 'bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-slate-700'
+                ? 'bg-emerald-600 text-white shadow-md shadow-emerald-500/25 scale-105'
+                : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'
             }`}
           >
             <Layers className="w-4 h-4" />
@@ -245,10 +245,10 @@ export const ArchitectureVisualizer: React.FC = () => {
 
           <button
             onClick={() => setActiveTab('ai-engine')}
-            className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
+            className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 shadow-sm ${
               activeTab === 'ai-engine'
-                ? 'bg-purple-500 text-slate-950 shadow-lg shadow-purple-500/25 scale-105'
-                : 'bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-slate-700'
+                ? 'bg-purple-600 text-white shadow-md shadow-purple-500/25 scale-105'
+                : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'
             }`}
           >
             <Cpu className="w-4 h-4" />
@@ -257,10 +257,10 @@ export const ArchitectureVisualizer: React.FC = () => {
 
           <button
             onClick={() => setActiveTab('devops')}
-            className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
+            className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 shadow-sm ${
               activeTab === 'devops'
-                ? 'bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/25 scale-105'
-                : 'bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-slate-700'
+                ? 'bg-amber-600 text-white shadow-md shadow-amber-500/25 scale-105'
+                : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'
             }`}
           >
             <GitBranch className="w-4 h-4" />
@@ -270,16 +270,16 @@ export const ArchitectureVisualizer: React.FC = () => {
 
         {/* Tab 1: TAIN Elect AI Offline-First Architecture */}
         {activeTab === 'tain-electai' && (
-          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-sky-500/25 shadow-2xl relative overflow-hidden">
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-sky-200 shadow-xl relative overflow-hidden bg-white/95">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-200">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono uppercase bg-sky-500/20 text-sky-300 px-2.5 py-1 rounded-md border border-sky-500/40">
+                  <span className="text-xs font-mono uppercase bg-sky-50 text-sky-800 px-2.5 py-1 rounded-md border border-sky-200 font-semibold">
                     TAIN Elect AI • React Native + Supabase
                   </span>
-                  <span className="text-xs text-slate-400 font-mono">AsyncStorage + NetInfo + Exponential Backoff</span>
+                  <span className="text-xs text-slate-500 font-mono">AsyncStorage + NetInfo + Exponential Backoff</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white mt-1">
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mt-1">
                   Offline-First Local Write-Queue & Background Sync
                 </h3>
               </div>
@@ -288,19 +288,19 @@ export const ArchitectureVisualizer: React.FC = () => {
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleToggleOnline}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-mono font-bold transition-all shadow-md ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-mono font-bold transition-all shadow-sm ${
                     isOnline
-                      ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                      : 'bg-rose-500/20 text-rose-400 border border-rose-500/40'
+                      ? 'bg-emerald-50 text-emerald-800 border border-emerald-300'
+                      : 'bg-rose-50 text-rose-800 border border-rose-300'
                   }`}
                 >
-                  {isOnline ? <Wifi className="w-4 h-4 text-emerald-400" /> : <WifiOff className="w-4 h-4 text-rose-400" />}
+                  {isOnline ? <Wifi className="w-4 h-4 text-emerald-600" /> : <WifiOff className="w-4 h-4 text-rose-600" />}
                   <span>Status: {isOnline ? 'ONLINE' : 'OFFLINE (Simulated)'}</span>
                 </button>
 
                 <button
                   onClick={handleAddVoteRecord}
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-sky-500 text-slate-950 text-xs sm:text-sm font-bold hover:brightness-110 active:scale-95 transition-all"
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-sky-600 text-white text-xs sm:text-sm font-bold hover:bg-sky-500 active:scale-95 transition-all shadow-sm"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>Record Voter Action</span>
@@ -311,45 +311,45 @@ export const ArchitectureVisualizer: React.FC = () => {
             {/* Architecture Flow Diagram */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
               {/* Step 1: React Native UI */}
-              <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 flex flex-col justify-between">
+              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
                 <div>
-                  <div className="text-xs font-mono text-sky-400 flex items-center gap-1.5 mb-1">
+                  <div className="text-xs font-mono text-sky-700 font-semibold flex items-center gap-1.5 mb-1">
                     <Smartphone className="w-4 h-4" />
                     <span>01. React Native Device UI</span>
                   </div>
-                  <p className="text-xs text-slate-400">
+                  <p className="text-xs text-slate-600">
                     Field agents record voter counseling, unlisted app forms, and camera captures on iOS/Android.
                   </p>
                 </div>
-                <div className="mt-4 pt-3 border-t border-slate-800/80 text-[11px] font-mono text-slate-300">
-                  Write latency: <span className="text-emerald-400 font-bold">&lt; 4ms</span> (Optimistic UI)
+                <div className="mt-4 pt-3 border-t border-slate-200 text-[11px] font-mono text-slate-600">
+                  Write latency: <span className="text-emerald-600 font-bold">&lt; 4ms</span> (Optimistic UI)
                 </div>
               </div>
 
               {/* Step 2: Local AsyncStorage Write-Queue */}
               <div className={`p-4 rounded-xl border transition-all ${
-                offlineQueue.length > 0 ? 'bg-sky-950/30 border-sky-500/50' : 'bg-slate-950/70 border-slate-800'
+                offlineQueue.length > 0 ? 'bg-sky-50/70 border-sky-300' : 'bg-slate-50 border border-slate-200'
               }`}>
-                <div className="text-xs font-mono text-sky-400 flex items-center justify-between mb-1">
+                <div className="text-xs font-mono text-sky-800 font-semibold flex items-center justify-between mb-1">
                   <div className="flex items-center gap-1.5">
-                    <Database className="w-4 h-4" />
+                    <Database className="w-4 h-4 text-sky-600" />
                     <span>02. AsyncStorage Write-Queue</span>
                   </div>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-sky-500/20 text-sky-300">
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-sky-100 text-sky-800 font-bold">
                     {offlineQueue.length} queued
                   </span>
                 </div>
-                <p className="text-xs text-slate-400 mb-2">
+                <p className="text-xs text-slate-600 mb-2">
                   Writes persist safely in local sandbox memory. If NetInfo is offline, items wait with retry backoff.
                 </p>
                 <div className="space-y-1.5 max-h-24 overflow-y-auto pr-1">
                   {offlineQueue.length === 0 ? (
-                    <div className="text-[11px] text-slate-500 italic">Queue empty (All records synchronized)</div>
+                    <div className="text-[11px] text-slate-400 italic">Queue empty (All records synchronized)</div>
                   ) : (
                     offlineQueue.map((item, idx) => (
-                      <div key={idx} className="text-[11px] font-mono bg-sky-500/10 text-sky-200 p-1.5 rounded border border-sky-500/20 flex items-center justify-between">
+                      <div key={idx} className="text-[11px] font-mono bg-white text-slate-800 p-1.5 rounded border border-slate-200 flex items-center justify-between shadow-sm">
                         <span className="truncate">{item}</span>
-                        <span className="text-[9px] text-amber-400 font-bold">QUEUED</span>
+                        <span className="text-[9px] text-amber-600 font-bold">QUEUED</span>
                       </div>
                     ))
                   )}
@@ -357,83 +357,83 @@ export const ArchitectureVisualizer: React.FC = () => {
               </div>
 
               {/* Step 3: Supabase Cloud Postgres */}
-              <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 flex flex-col justify-between">
+              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
                 <div>
-                  <div className="text-xs font-mono text-emerald-400 flex items-center justify-between mb-1">
+                  <div className="text-xs font-mono text-emerald-700 font-semibold flex items-center justify-between mb-1">
                     <div className="flex items-center gap-1.5">
-                      <Server className="w-4 h-4" />
+                      <Server className="w-4 h-4 text-emerald-600" />
                       <span>03. Supabase Postgres & Auth</span>
                     </div>
                     {isSyncing && (
-                      <span className="text-[10px] text-cyan-400 flex items-center gap-1 animate-pulse">
+                      <span className="text-[10px] text-sky-600 flex items-center gap-1 animate-pulse">
                         <RefreshCw className="w-3 h-3 animate-spin" /> Syncing...
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-slate-400 mb-2">
+                  <p className="text-xs text-slate-600 mb-2">
                     Synced records reconciled with role-based PII masking and hardened security policies.
                   </p>
                 </div>
                 <div className="space-y-1 max-h-24 overflow-y-auto pr-1">
                   {syncedRecords.slice(0, 3).map((item, idx) => (
-                    <div key={idx} className="text-[11px] font-mono bg-emerald-500/10 text-emerald-300 p-1 rounded border border-emerald-500/20 flex items-center justify-between">
+                    <div key={idx} className="text-[11px] font-mono bg-emerald-50 text-emerald-800 p-1 rounded border border-emerald-200 flex items-center justify-between">
                       <span className="truncate">{item}</span>
-                      <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
+                      <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />
                     </div>
                   ))}
                 </div>
               </div>
             </div>
 
-            <div className="text-xs text-slate-400 font-mono bg-slate-950 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
-              <span>💡 <strong className="text-slate-200">How to test:</strong> Click &quot;Record Voter Action&quot; while OFFLINE to see the queue grow. Toggle to &quot;ONLINE&quot; to witness automatic queue sync!</span>
-              <span className="text-sky-400 font-bold">Resilience: 100% Zero-Loss</span>
+            <div className="text-xs text-slate-600 font-mono bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center justify-between">
+              <span>💡 <strong className="text-slate-800">How to test:</strong> Click &quot;Record Voter Action&quot; while OFFLINE to see the queue grow. Toggle to &quot;ONLINE&quot; to witness automatic queue sync!</span>
+              <span className="text-sky-700 font-bold">Resilience: 100% Zero-Loss</span>
             </div>
           </div>
         )}
 
         {/* Tab 2: AgroStock Inventory & Billing Pipeline */}
         {activeTab === 'agrostock' && (
-          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-emerald-500/25 shadow-2xl relative overflow-hidden">
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-emerald-200 shadow-xl relative overflow-hidden bg-white/95">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-200">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono uppercase bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-md border border-emerald-500/40">
+                  <span className="text-xs font-mono uppercase bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md border border-emerald-200 font-semibold">
                     Nebula Technology • React Vite + Redux Toolkit + Node.js
                   </span>
-                  <span className="text-xs text-slate-400 font-mono">Atomic Stock Reconciliation + GST Billing + jsPDF Invoicing</span>
+                  <span className="text-xs text-slate-500 font-mono">Atomic Stock Reconciliation + GST Billing + jsPDF Invoicing</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white mt-1">
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mt-1">
                   High-Throughput ERP Sales Billing & Batch Inventory Pipeline
                 </h3>
               </div>
 
               {/* Order Controls */}
               <div className="flex flex-wrap items-center gap-3">
-                <div className="flex items-center gap-2 bg-slate-900/90 border border-slate-800 rounded-xl px-3 py-1.5">
-                  <span className="text-xs font-mono text-slate-400">Product:</span>
+                <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 shadow-sm">
+                  <span className="text-xs font-mono text-slate-600 font-semibold">Product:</span>
                   <select
                     value={selectedProductId}
                     onChange={(e) => setSelectedProductId(e.target.value)}
-                    className="bg-transparent text-xs font-mono text-emerald-300 focus:outline-none cursor-pointer"
+                    className="bg-transparent text-xs font-mono text-emerald-800 font-bold focus:outline-none cursor-pointer"
                   >
                     {erpProducts.map((p) => (
-                      <option key={p.id} value={p.id} className="bg-slate-900 text-white">
+                      <option key={p.id} value={p.id} className="bg-white text-slate-900">
                         {p.name.split(' ')[0]} ({p.sku}) - ₹{p.unitPrice}
                       </option>
                     ))}
                   </select>
                 </div>
 
-                <div className="flex items-center gap-2 bg-slate-900/90 border border-slate-800 rounded-xl px-3 py-1.5">
-                  <span className="text-xs font-mono text-slate-400">Qty:</span>
+                <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 shadow-sm">
+                  <span className="text-xs font-mono text-slate-600 font-semibold">Qty:</span>
                   <input
                     type="number"
                     min="1"
                     max="50"
                     value={orderQuantity}
                     onChange={(e) => setOrderQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                    className="w-12 bg-transparent text-xs font-mono text-white text-center focus:outline-none border-b border-slate-700"
+                    className="w-12 bg-transparent text-xs font-mono text-slate-900 font-bold text-center focus:outline-none border-b border-slate-300"
                   />
                   <span className="text-[10px] text-slate-500">units</span>
                 </div>
@@ -441,7 +441,7 @@ export const ArchitectureVisualizer: React.FC = () => {
                 <button
                   onClick={handleDispatchOrder}
                   disabled={isProcessingOrder}
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-500 text-slate-950 text-xs sm:text-sm font-bold hover:brightness-110 active:scale-95 transition-all disabled:opacity-50 shadow-md shadow-emerald-500/20"
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs sm:text-sm font-bold hover:bg-emerald-500 active:scale-95 transition-all disabled:opacity-50 shadow-md shadow-emerald-500/20"
                 >
                   <Package className={`w-3.5 h-3.5 ${isProcessingOrder ? 'animate-bounce' : ''}`} />
                   <span>{isProcessingOrder ? 'Deducting Stock...' : 'Dispatch B2B Bill & Deduct'}</span>
@@ -461,34 +461,34 @@ export const ArchitectureVisualizer: React.FC = () => {
                     onClick={() => setSelectedProductId(p.id)}
                     className={`p-4 rounded-xl border cursor-pointer transition-all ${
                       isSelected
-                        ? 'bg-emerald-950/40 border-emerald-400 shadow-md shadow-emerald-500/10'
-                        : 'bg-slate-950/70 border-slate-800 hover:border-slate-700'
+                        ? 'bg-emerald-50/60 border-emerald-400 shadow-md ring-2 ring-emerald-400/20'
+                        : 'bg-white border-slate-200 hover:border-slate-300 shadow-sm'
                     }`}
                   >
                     <div className="flex items-center justify-between gap-2 mb-1.5">
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-700">
                         {p.category} • {p.sku}
                       </span>
                       {isLowStock ? (
-                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30 font-bold animate-pulse flex items-center gap-1">
+                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 font-bold animate-pulse flex items-center gap-1">
                           <AlertTriangle className="w-2.5 h-2.5" /> LOW STOCK
                         </span>
                       ) : (
-                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold">
+                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold">
                           IN STOCK
                         </span>
                       )}
                     </div>
 
-                    <div className="text-sm font-bold text-white truncate">{p.name}</div>
-                    <div className="flex items-baseline justify-between mt-2 pt-2 border-t border-slate-800/80">
+                    <div className="text-sm font-bold text-slate-900 truncate">{p.name}</div>
+                    <div className="flex items-baseline justify-between mt-2 pt-2 border-t border-slate-200">
                       <div>
-                        <div className="text-[10px] text-slate-400 font-mono">Wholesale Price</div>
-                        <div className="text-xs font-mono font-bold text-slate-200">₹{p.unitPrice.toLocaleString()} / unit</div>
+                        <div className="text-[10px] text-slate-500 font-mono">Wholesale Price</div>
+                        <div className="text-xs font-mono font-bold text-slate-800">₹{p.unitPrice.toLocaleString()} / unit</div>
                       </div>
                       <div className="text-right">
-                        <div className="text-[10px] text-slate-400 font-mono">Available Stock</div>
-                        <div className={`text-base font-mono font-extrabold ${isLowStock ? 'text-rose-400' : 'text-emerald-400'}`}>
+                        <div className="text-[10px] text-slate-500 font-mono">Available Stock</div>
+                        <div className={`text-base font-mono font-extrabold ${isLowStock ? 'text-rose-600' : 'text-emerald-600'}`}>
                           {p.stock} units
                         </div>
                       </div>
@@ -500,7 +500,7 @@ export const ArchitectureVisualizer: React.FC = () => {
                           e.stopPropagation();
                           handleRestock(p.id);
                         }}
-                        className="w-full mt-3 py-1 rounded-lg bg-rose-500/10 text-rose-300 border border-rose-500/30 hover:bg-rose-500 hover:text-slate-950 text-[10px] font-mono font-bold transition-all"
+                        className="w-full mt-3 py-1 rounded-lg bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 text-[10px] font-mono font-bold transition-all"
                       >
                         + Restock Batch (+100 Units)
                       </button>
@@ -513,41 +513,41 @@ export const ArchitectureVisualizer: React.FC = () => {
             {/* Visual 4-Stage Transaction Pipeline */}
             <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-6">
               <div className={`p-3.5 rounded-xl border text-center transition-all ${
-                billingStage === 'pricing' ? 'bg-emerald-500/20 border-emerald-400 scale-[1.02]' : 'bg-slate-950/60 border-slate-800'
+                billingStage === 'pricing' ? 'bg-emerald-50 border-emerald-400 scale-[1.02]' : 'bg-slate-50 border-slate-200'
               }`}>
-                <div className="text-xs font-mono text-emerald-400 font-bold mb-1">1. Pricing & GST</div>
-                <div className="text-[11px] text-slate-400">Multi-tier wholesale calculation + 18% GST</div>
-                <div className="mt-2 text-[10px] font-mono text-slate-300">
+                <div className="text-xs font-mono text-emerald-800 font-bold mb-1">1. Pricing & GST</div>
+                <div className="text-[11px] text-slate-600">Multi-tier wholesale calculation + 18% GST</div>
+                <div className="mt-2 text-[10px] font-mono text-slate-700 font-semibold">
                   {billingStage === 'pricing' ? 'COMPUTING TAX...' : 'State: Ready'}
                 </div>
               </div>
 
               <div className={`p-3.5 rounded-xl border text-center transition-all ${
-                billingStage === 'stock' ? 'bg-cyan-500/20 border-cyan-400 scale-[1.02]' : 'bg-slate-950/60 border-slate-800'
+                billingStage === 'stock' ? 'bg-sky-50 border-sky-400 scale-[1.02]' : 'bg-slate-50 border-slate-200'
               }`}>
-                <div className="text-xs font-mono text-cyan-400 font-bold mb-1">2. Atomic Stock Deduct</div>
-                <div className="text-[11px] text-slate-400">Prevents overselling & checks min-threshold</div>
-                <div className="mt-2 text-[10px] font-mono text-slate-300">
+                <div className="text-xs font-mono text-sky-800 font-bold mb-1">2. Atomic Stock Deduct</div>
+                <div className="text-[11px] text-slate-600">Prevents overselling & checks min-threshold</div>
+                <div className="mt-2 text-[10px] font-mono text-slate-700 font-semibold">
                   {billingStage === 'stock' ? 'LOCKING BIN...' : 'Bin Lock: Free'}
                 </div>
               </div>
 
               <div className={`p-3.5 rounded-xl border text-center transition-all ${
-                billingStage === 'ledger' ? 'bg-indigo-500/20 border-indigo-400 scale-[1.02]' : 'bg-slate-950/60 border-slate-800'
+                billingStage === 'ledger' ? 'bg-indigo-50 border-indigo-400 scale-[1.02]' : 'bg-slate-50 border-slate-200'
               }`}>
-                <div className="text-xs font-mono text-indigo-400 font-bold mb-1">3. Ledger Posting</div>
-                <div className="text-[11px] text-slate-400">Double-entry debit/credit reconciliation</div>
-                <div className="mt-2 text-[10px] font-mono text-slate-300">
+                <div className="text-xs font-mono text-indigo-800 font-bold mb-1">3. Ledger Posting</div>
+                <div className="text-[11px] text-slate-600">Double-entry debit/credit reconciliation</div>
+                <div className="mt-2 text-[10px] font-mono text-slate-700 font-semibold">
                   {billingStage === 'ledger' ? 'POSTING LEDGER...' : 'Accounts: Balanced'}
                 </div>
               </div>
 
               <div className={`p-3.5 rounded-xl border text-center transition-all ${
-                billingStage === 'invoice' ? 'bg-emerald-500/20 border-emerald-400 scale-[1.02]' : 'bg-slate-950/60 border-slate-800'
+                billingStage === 'invoice' ? 'bg-emerald-50 border-emerald-400 scale-[1.02]' : 'bg-slate-50 border-slate-200'
               }`}>
-                <div className="text-xs font-mono text-emerald-400 font-bold mb-1">4. Vector jsPDF</div>
-                <div className="text-[11px] text-slate-400">Printable invoice + QR + auto-dispatch</div>
-                <div className="mt-2 text-[10px] font-mono text-slate-300">
+                <div className="text-xs font-mono text-emerald-800 font-bold mb-1">4. Vector jsPDF</div>
+                <div className="text-[11px] text-slate-600">Printable invoice + QR + auto-dispatch</div>
+                <div className="mt-2 text-[10px] font-mono text-emerald-700 font-bold">
                   {billingStage === 'invoice' ? 'INVOICE ISSUED ✓' : 'Thermal & PDF Ready'}
                 </div>
               </div>
@@ -555,47 +555,47 @@ export const ArchitectureVisualizer: React.FC = () => {
 
             {/* Live Terminal / Audit Log */}
             <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs space-y-1 max-h-36 overflow-y-auto">
-              <div className="text-slate-500 font-semibold mb-2 flex items-center justify-between">
+              <div className="text-slate-400 font-semibold mb-2 flex items-center justify-between">
                 <span># AgroStock ERP Transaction & Audit Log:</span>
                 <span className="text-[10px] text-emerald-400">Live Stream • Synchronized</span>
               </div>
               {erpLogs.map((log, index) => (
-                <div key={index} className="text-slate-300 leading-relaxed">
+                <div key={index} className="text-slate-200 leading-relaxed">
                   {log}
                 </div>
               ))}
             </div>
 
-            <div className="mt-4 pt-3 border-t border-slate-800 text-xs font-mono text-slate-400 flex flex-wrap items-center justify-between gap-2">
+            <div className="mt-4 pt-3 border-t border-slate-200 text-xs font-mono text-slate-600 flex flex-wrap items-center justify-between gap-2">
               <span>💡 Try dispatching orders to watch stock decrement in real-time. If stock drops below threshold, an automated reorder alert triggers!</span>
-              <span className="text-emerald-400 font-bold">Stock Reconciliation: 100% Atomic</span>
+              <span className="text-emerald-700 font-bold">Stock Reconciliation: 100% Atomic</span>
             </div>
           </div>
         )}
 
         {/* Tab 3: AI Multi-LLM Engine */}
         {activeTab === 'ai-engine' && (
-          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-purple-500/25 shadow-2xl relative overflow-hidden">
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-purple-200 shadow-xl relative overflow-hidden bg-white/95">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-200">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono uppercase bg-purple-500/20 text-purple-300 px-2.5 py-1 rounded-md border border-purple-500/40">
+                  <span className="text-xs font-mono uppercase bg-purple-50 text-purple-800 px-2.5 py-1 rounded-md border border-purple-200 font-semibold">
                     Gen-AI Platform • FastAPI + LangChain + Gemini
                   </span>
-                  <span className="text-xs text-slate-400 font-mono">Dynamic Tone Adaptation & Multi-Provider Fallback</span>
+                  <span className="text-xs text-slate-500 font-mono">Dynamic Tone Adaptation & Multi-Provider Fallback</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white mt-1">
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mt-1">
                   Context-Preserving Tone Transformation Engine
                 </h3>
               </div>
 
               {/* Model Provider Picker */}
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono text-slate-400">Primary Provider:</span>
+                <span className="text-xs font-mono text-slate-600 font-semibold">Primary Provider:</span>
                 <select
                   value={selectedProvider}
                   onChange={(e) => setSelectedProvider(e.target.value as any)}
-                  className="bg-slate-900 border border-purple-500/40 text-purple-300 text-xs font-mono rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-purple-400"
+                  className="bg-white border border-purple-300 text-purple-800 text-xs font-mono rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-purple-400 shadow-sm"
                 >
                   <option value="Gemini 2.5 Flash">Google Gemini 2.5 Flash</option>
                   <option value="OpenAI GPT-4o">OpenAI GPT-4o (Dual Routing)</option>
@@ -605,15 +605,15 @@ export const ArchitectureVisualizer: React.FC = () => {
 
             {/* Tone Selector Pills */}
             <div className="flex flex-wrap items-center gap-2 my-5">
-              <span className="text-xs font-mono text-slate-400 mr-2">Select Target Tone:</span>
+              <span className="text-xs font-mono text-slate-600 font-semibold mr-2">Select Target Tone:</span>
               {(['Executive', 'Diplomatic', 'Concise', 'Persuasive'] as const).map((tone) => (
                 <button
                   key={tone}
                   onClick={() => setSelectedTone(tone)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-mono transition-all ${
                     selectedTone === tone
-                      ? 'bg-purple-500 text-slate-950 font-bold shadow-md shadow-purple-500/30'
-                      : 'bg-slate-900 text-slate-300 border border-slate-800 hover:border-purple-500/30'
+                      ? 'bg-purple-600 text-white font-bold shadow-md shadow-purple-500/25'
+                      : 'bg-white text-slate-700 border border-slate-200 hover:border-purple-300 shadow-sm'
                   }`}
                 >
                   {tone} Tone
@@ -623,48 +623,48 @@ export const ArchitectureVisualizer: React.FC = () => {
 
             {/* Input vs Output Comparison */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
-                <div className="text-xs font-mono text-slate-400 mb-2 flex items-center justify-between">
+              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                <div className="text-xs font-mono text-slate-500 mb-2 flex items-center justify-between">
                   <span>Input Draft (Raw context):</span>
-                  <span className="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-300">Original</span>
+                  <span className="text-[10px] bg-slate-200 px-1.5 py-0.5 rounded text-slate-700">Original</span>
                 </div>
-                <div className="text-sm text-slate-300 font-sans p-3 rounded-lg bg-slate-900/60 border border-slate-800">
+                <div className="text-sm text-slate-700 font-sans p-3 rounded-lg bg-white border border-slate-200 shadow-sm">
                   {simulatedAIText}
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-purple-950/20 border border-purple-500/40">
-                <div className="text-xs font-mono text-purple-300 mb-2 flex items-center justify-between">
+              <div className="p-4 rounded-xl bg-purple-50/50 border border-purple-200">
+                <div className="text-xs font-mono text-purple-800 font-semibold mb-2 flex items-center justify-between">
                   <span>AI Transformed ({selectedTone} tone):</span>
-                  <span className="text-[10px] bg-purple-500/20 px-1.5 py-0.5 rounded text-purple-300 border border-purple-500/30">
+                  <span className="text-[10px] bg-purple-100 px-1.5 py-0.5 rounded text-purple-800 border border-purple-200">
                     Engine: {selectedProvider}
                   </span>
                 </div>
-                <div className="text-sm text-purple-100 font-sans p-3 rounded-lg bg-slate-900/90 border border-purple-500/30 shadow-inner">
+                <div className="text-sm text-purple-950 font-sans p-3 rounded-lg bg-white border border-purple-200 shadow-sm font-medium">
                   {toneSamples[selectedTone]}
                 </div>
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-slate-800 text-xs font-mono text-slate-400 flex flex-wrap items-center justify-between gap-2">
+            <div className="mt-4 pt-3 border-t border-slate-200 text-xs font-mono text-slate-600 flex flex-wrap items-center justify-between gap-2">
               <span>LangChain Fallback Strategy: If provider rate-limit occurs, automatic zero-loss switch to secondary LLM in &lt; 200ms.</span>
-              <span className="text-purple-400 font-semibold">MySQL translation history cached</span>
+              <span className="text-purple-700 font-semibold">MySQL translation history cached</span>
             </div>
           </div>
         )}
 
         {/* Tab 4: DevOps & Cloud Pipeline */}
         {activeTab === 'devops' && (
-          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-amber-500/25 shadow-2xl relative overflow-hidden">
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-amber-200 shadow-xl relative overflow-hidden bg-white/95">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-200">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono uppercase bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-md border border-amber-500/40">
+                  <span className="text-xs font-mono uppercase bg-amber-50 text-amber-800 px-2.5 py-1 rounded-md border border-amber-200 font-semibold">
                     House Rent Admin • Cloud Infrastructure
                   </span>
-                  <span className="text-xs text-slate-400 font-mono">Docker + NGINX + Jenkins CI/CD + AWS EC2</span>
+                  <span className="text-xs text-slate-500 font-mono">Docker + NGINX + Jenkins CI/CD + AWS EC2</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white mt-1">
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mt-1">
                   Automated CI/CD Pipeline to AWS Cloud
                 </h3>
               </div>
@@ -672,7 +672,7 @@ export const ArchitectureVisualizer: React.FC = () => {
               <button
                 onClick={handleRunDevOpsPipeline}
                 disabled={pipelineActive}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-500 text-slate-950 text-xs sm:text-sm font-bold hover:brightness-110 active:scale-95 transition-all disabled:opacity-50"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-600 text-white text-xs sm:text-sm font-bold hover:bg-amber-500 active:scale-95 transition-all disabled:opacity-50 shadow-md shadow-amber-500/20"
               >
                 <Play className="w-3.5 h-3.5 fill-current" />
                 <span>{pipelineActive ? 'Pipeline Running...' : 'Trigger Git Push CI/CD'}</span>
@@ -697,32 +697,32 @@ export const ArchitectureVisualizer: React.FC = () => {
                     key={item.step}
                     className={`p-3.5 rounded-xl border text-center transition-all ${
                       isCurrent
-                        ? 'bg-amber-500/20 border-amber-400 scale-105'
+                        ? 'bg-amber-100 border-amber-400 scale-105 shadow-md'
                         : isPassed
-                        ? 'bg-emerald-950/30 border-emerald-500/40'
-                        : 'bg-slate-950/60 border-slate-800'
+                        ? 'bg-emerald-50 border-emerald-300'
+                        : 'bg-slate-50 border-slate-200'
                     }`}
                   >
                     <div className="flex justify-center mb-1.5">
                       <IconComponent
                         className={`w-5 h-5 ${
                           isCurrent
-                            ? 'text-amber-400 animate-bounce'
+                            ? 'text-amber-600 animate-bounce'
                             : isPassed
-                            ? 'text-emerald-400'
-                            : 'text-slate-600'
+                            ? 'text-emerald-600'
+                            : 'text-slate-400'
                         }`}
                       />
                     </div>
-                    <div className="text-xs font-mono font-bold text-slate-200">{item.title}</div>
-                    <div className="text-[10px] text-slate-400 mt-0.5">{item.desc}</div>
+                    <div className="text-xs font-mono font-bold text-slate-800">{item.title}</div>
+                    <div className="text-[10px] text-slate-500 mt-0.5">{item.desc}</div>
                     <div className="mt-2 text-[9px] font-mono font-bold uppercase">
                       {isCurrent ? (
-                        <span className="text-amber-400">RUNNING...</span>
+                        <span className="text-amber-700">RUNNING...</span>
                       ) : isPassed ? (
-                        <span className="text-emerald-400">PASSED ✓</span>
+                        <span className="text-emerald-700">PASSED ✓</span>
                       ) : (
-                        <span className="text-slate-600">PENDING</span>
+                        <span className="text-slate-400">PENDING</span>
                       )}
                     </div>
                   </div>
@@ -730,9 +730,9 @@ export const ArchitectureVisualizer: React.FC = () => {
               })}
             </div>
 
-            <div className="bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs font-mono text-slate-400 flex items-center justify-between">
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs font-mono text-slate-600 flex items-center justify-between">
               <span>Docker footprint optimized through Alpine bases and layer caching. Continuous deployment straight to AWS EC2 cluster.</span>
-              <span className="text-amber-400 font-bold">100% Automated</span>
+              <span className="text-amber-700 font-bold">100% Automated</span>
             </div>
           </div>
         )}

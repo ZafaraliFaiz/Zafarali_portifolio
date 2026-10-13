@@ -53,6 +53,8 @@ export const BackgroundCanvas: React.FC = () => {
 
     let mouseX = -1000;
     let mouseY = -1000;
+    let smoothMouseNormX = 0;
+    let smoothMouseNormY = 0;
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
@@ -70,60 +72,75 @@ export const BackgroundCanvas: React.FC = () => {
       const scrollDelta = (currentScrollY - lastScrollY) * 0.15;
       lastScrollY = currentScrollY;
 
-      // Draw subtle connections
-      for (let i = 0; i < particles.length; i++) {
-        const p1 = particles[i];
+      // Smooth mouse normalized coordinates for multi-plane parallax drift
+      const targetNormX = (mouseX > 0 ? (mouseX / width) - 0.5 : 0) * 2;
+      const targetNormY = (mouseY > 0 ? (mouseY / height) - 0.5 : 0) * 2;
+      smoothMouseNormX += (targetNormX - smoothMouseNormX) * 0.05;
+      smoothMouseNormY += (targetNormY - smoothMouseNormY) * 0.05;
 
-        // Apply velocities + scroll parallax offset
-        p1.x += p1.vx;
-        p1.y += p1.vy - scrollDelta * p1.depth;
+      // Compute rendered coordinates with individual layer-depth mouse parallax
+      const renderedParticles = particles.map((p) => {
+        // Base velocity + vertical scroll offset
+        p.x += p.vx;
+        p.y += p.vy - scrollDelta * p.depth;
 
         // Wrap around boundaries
-        if (p1.x < 0) p1.x = width;
-        if (p1.x > width) p1.x = 0;
-        if (p1.y < 0) p1.y = height;
-        if (p1.y > height) p1.y = 0;
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        if (p.y > height) p.y = 0;
+
+        // 3D Parallax offset based on particle depth layer
+        const px = p.x + smoothMouseNormX * 36 * p.depth;
+        const py = p.y + smoothMouseNormY * 36 * p.depth;
+
+        return { ...p, px, py };
+      });
+
+      // Draw constellation connections and nodes
+      for (let i = 0; i < renderedParticles.length; i++) {
+        const p1 = renderedParticles[i];
 
         p1.alpha += Math.sin(Date.now() * p1.pulseSpeed) * 0.005;
-        const clampedAlpha = Math.max(0.12, Math.min(0.7, p1.alpha));
+        const clampedAlpha = Math.max(0.15, Math.min(0.8, p1.alpha));
 
-        // Draw particle with depth coloring
+        // Draw particle node with vivid depth coloring for bright background
         ctx.beginPath();
-        ctx.arc(p1.x, p1.y, p1.radius * p1.depth, 0, Math.PI * 2);
+        ctx.arc(p1.px, p1.py, p1.radius * p1.depth, 0, Math.PI * 2);
         ctx.fillStyle = p1.depth > 0.6 
-          ? `rgba(56, 189, 248, ${clampedAlpha})` 
-          : `rgba(129, 140, 248, ${clampedAlpha * 0.8})`;
+          ? `rgba(2, 132, 199, ${clampedAlpha * 1.35})` 
+          : `rgba(99, 102, 241, ${clampedAlpha * 1.25})`;
         ctx.fill();
 
         // Connect nearby particles
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dx = p1.x - p2.x;
-          const dy = p1.y - p2.y;
+        for (let j = i + 1; j < renderedParticles.length; j++) {
+          const p2 = renderedParticles[j];
+          const dx = p1.px - p2.px;
+          const dy = p1.py - p2.py;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 135) {
-            const lineAlpha = (1 - dist / 135) * 0.15;
+          if (dist < 140) {
+            const lineAlpha = (1 - dist / 140) * 0.28;
             ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(56, 189, 248, ${lineAlpha})`;
-            ctx.lineWidth = 0.8;
+            ctx.moveTo(p1.px, p1.py);
+            ctx.lineTo(p2.px, p2.py);
+            ctx.strokeStyle = `rgba(14, 165, 233, ${lineAlpha})`;
+            ctx.lineWidth = 0.95;
             ctx.stroke();
           }
         }
 
-        // Mouse interaction line & gentle push
-        const mdx = p1.x - mouseX;
-        const mdy = p1.y - mouseY;
+        // Mouse connection beam & magnetic aura
+        const mdx = p1.px - mouseX;
+        const mdy = p1.py - mouseY;
         const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
-        if (mdist < 150) {
-          const mouseLineAlpha = (1 - mdist / 150) * 0.35;
+        if (mdist < 170) {
+          const mouseLineAlpha = (1 - mdist / 170) * 0.5;
           ctx.beginPath();
-          ctx.moveTo(p1.x, p1.y);
+          ctx.moveTo(p1.px, p1.py);
           ctx.lineTo(mouseX, mouseY);
-          ctx.strokeStyle = `rgba(168, 85, 247, ${mouseLineAlpha})`;
-          ctx.lineWidth = 1;
+          ctx.strokeStyle = `rgba(147, 51, 234, ${mouseLineAlpha})`;
+          ctx.lineWidth = 1.3;
           ctx.stroke();
         }
       }
@@ -154,10 +171,10 @@ export const BackgroundCanvas: React.FC = () => {
           style={{
             left: `${mouse.rawX}px`,
             top: `${mouse.rawY}px`,
-            width: '700px',
-            height: '700px',
+            width: '720px',
+            height: '720px',
             transform: 'translate(-50%, -50%)',
-            background: 'radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, rgba(99, 102, 241, 0.04) 45%, transparent 75%)',
+            background: 'radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, rgba(99, 102, 241, 0.06) 45%, transparent 75%)',
           }}
         />
       )}
@@ -165,7 +182,7 @@ export const BackgroundCanvas: React.FC = () => {
       {/* 2. Parallax Nebula Glows reacting to scroll & mouse depth */}
       {/* Top Left Cyan Glow */}
       <div
-        className="absolute -top-40 -left-40 w-[36rem] h-[36rem] bg-cyan-500/12 rounded-full blur-[110px] pointer-events-none will-change-transform"
+        className="absolute -top-40 -left-40 w-[38rem] h-[38rem] bg-sky-400/22 rounded-full blur-[120px] pointer-events-none will-change-transform"
         style={{
           transform: `translate3d(${-mouseXOffset * 1.2}px, ${(-scrollY * 0.12) - mouseYOffset * 1.1}px, 0)`,
         }}
@@ -173,7 +190,7 @@ export const BackgroundCanvas: React.FC = () => {
 
       {/* Top Right Violet Glow */}
       <div
-        className="absolute top-20 -right-40 w-[34rem] h-[34rem] bg-indigo-600/15 rounded-full blur-[120px] pointer-events-none will-change-transform"
+        className="absolute top-20 -right-40 w-[36rem] h-[36rem] bg-indigo-400/18 rounded-full blur-[130px] pointer-events-none will-change-transform"
         style={{
           transform: `translate3d(${mouseXOffset * 1.5}px, ${(-scrollY * 0.18) + mouseYOffset * 1.3}px, 0)`,
         }}
@@ -181,7 +198,7 @@ export const BackgroundCanvas: React.FC = () => {
 
       {/* Mid-Page Purple / Sky Glow */}
       <div
-        className="absolute top-1/2 left-1/3 w-[42rem] h-[42rem] bg-sky-500/10 rounded-full blur-[140px] pointer-events-none will-change-transform"
+        className="absolute top-1/2 left-1/3 w-[42rem] h-[42rem] bg-purple-400/15 rounded-full blur-[140px] pointer-events-none will-change-transform"
         style={{
           transform: `translate3d(${-mouseXOffset * 0.8}px, ${(-scrollY * 0.25) - mouseYOffset * 0.9}px, 0)`,
         }}
@@ -189,7 +206,7 @@ export const BackgroundCanvas: React.FC = () => {
 
       {/* Bottom Emerald Glow */}
       <div
-        className="absolute bottom-10 right-1/4 w-[32rem] h-[32rem] bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none will-change-transform"
+        className="absolute bottom-10 right-1/4 w-[34rem] h-[34rem] bg-emerald-400/16 rounded-full blur-[120px] pointer-events-none will-change-transform"
         style={{
           transform: `translate3d(${mouseXOffset * 1.1}px, ${(-scrollY * 0.2) + mouseYOffset}px, 0)`,
         }}
@@ -197,7 +214,7 @@ export const BackgroundCanvas: React.FC = () => {
 
       {/* 3. Parallax Floating Cyber Crosshairs & Tech Glyphs */}
       <div
-        className="absolute top-28 left-16 text-cyan-500/20 font-mono text-sm select-none will-change-transform hidden sm:block"
+        className="absolute top-28 left-16 text-sky-700/35 font-mono text-sm select-none will-change-transform hidden sm:block"
         style={{
           transform: `translate3d(${-mouseXOffset * 1.8}px, ${(-scrollY * 0.35) - mouseYOffset * 1.5}px, 0)`,
         }}
@@ -206,7 +223,7 @@ export const BackgroundCanvas: React.FC = () => {
       </div>
 
       <div
-        className="absolute top-1/3 right-24 text-indigo-400/20 font-mono text-xs select-none will-change-transform hidden sm:block"
+        className="absolute top-1/3 right-24 text-indigo-700/35 font-mono text-xs select-none will-change-transform hidden sm:block"
         style={{
           transform: `translate3d(${mouseXOffset * 2.2}px, ${(-scrollY * 0.4) + mouseYOffset * 1.8}px, 0)`,
         }}
@@ -215,7 +232,7 @@ export const BackgroundCanvas: React.FC = () => {
       </div>
 
       <div
-        className="absolute top-2/3 left-1/4 text-emerald-400/20 font-mono text-xs select-none will-change-transform hidden sm:block"
+        className="absolute top-2/3 left-1/4 text-emerald-700/35 font-mono text-xs select-none will-change-transform hidden sm:block"
         style={{
           transform: `translate3d(${-mouseXOffset * 1.4}px, ${(-scrollY * 0.3) - mouseYOffset * 1.2}px, 0)`,
         }}
@@ -225,7 +242,7 @@ export const BackgroundCanvas: React.FC = () => {
 
       {/* 4. Subtle Cyber Grid with Mouse Tilt */}
       <div 
-        className="absolute inset-0 bg-grid-pattern opacity-55 pointer-events-none will-change-transform"
+        className="absolute inset-0 bg-grid-pattern opacity-65 pointer-events-none will-change-transform"
         style={{
           transform: `translate3d(${mouseXOffset * 0.3}px, ${(scrollY * 0.05) + mouseYOffset * 0.3}px, 0)`,
         }}

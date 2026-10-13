@@ -196,32 +196,32 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
         
         {/* Scrollytelling Top HUD Header */}
         <div className="w-full max-w-7xl mx-auto z-30">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800/80">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
             <div>
               <div className="flex items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[10px] font-mono uppercase tracking-wider">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-[10px] font-mono uppercase tracking-wider font-semibold">
                   <Sparkles className="w-3 h-3" />
                   <span>Horizontal Scrollytelling Experience</span>
                 </span>
-                <span className="text-slate-500 font-mono text-xs hidden sm:inline">•</span>
-                <span className="text-xs font-mono text-slate-400 hidden sm:inline">
+                <span className="text-slate-400 font-mono text-xs hidden sm:inline">•</span>
+                <span className="text-xs font-mono text-slate-500 hidden sm:inline">
                   Chapter 0{activeChapter + 1} of 05
                 </span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-bold text-white font-display mt-1">
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 font-display mt-1">
                 The Engineering Journey & Architectural Narrative
               </h2>
             </div>
 
             {/* Navigation Controls */}
             <div className="flex items-center gap-2 self-start sm:self-auto">
-              <span className="text-[11px] font-mono text-slate-400 hidden md:inline">
+              <span className="text-[11px] font-mono text-slate-500 hidden md:inline">
                 Scroll down or click arrows:
               </span>
               <button
                 onClick={handlePrev}
                 disabled={activeChapter === 0}
-                className="p-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-cyan-300 hover:border-cyan-400 disabled:opacity-40 disabled:hover:border-slate-700 disabled:hover:text-slate-300 transition-colors"
+                className="p-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:text-sky-600 hover:border-sky-400 disabled:opacity-40 disabled:hover:border-slate-200 disabled:hover:text-slate-400 transition-colors shadow-sm"
                 title="Previous Chapter"
               >
                 <ArrowLeft className="w-4 h-4" />
@@ -229,7 +229,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
               <button
                 onClick={handleNext}
                 disabled={activeChapter === 4}
-                className="p-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-cyan-300 hover:border-cyan-400 disabled:opacity-40 disabled:hover:border-slate-700 disabled:hover:text-slate-300 transition-colors"
+                className="p-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:text-sky-600 hover:border-sky-400 disabled:opacity-40 disabled:hover:border-slate-200 disabled:hover:text-slate-400 transition-colors shadow-sm"
                 title="Next Chapter"
               >
                 <ArrowRight className="w-4 h-4" />
@@ -245,8 +245,8 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                 onClick={() => scrollToChapter(idx)}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-mono transition-all whitespace-nowrap shrink-0 border ${
                   activeChapter === idx
-                    ? 'bg-cyan-500 text-slate-950 font-bold border-cyan-400 shadow-lg shadow-cyan-500/20 scale-[1.02]'
-                    : 'bg-slate-950/70 text-slate-400 border-slate-800/80 hover:border-slate-700 hover:text-slate-200'
+                    ? 'bg-sky-500 text-white font-bold border-sky-500 shadow-md shadow-sky-500/20 scale-[1.02]'
+                    : 'bg-white/80 text-slate-600 border-slate-200 hover:border-slate-300 hover:text-slate-900 shadow-sm'
                 }`}
               >
                 <span className="opacity-70 text-[10px] font-bold">{ch.num}</span>
@@ -256,9 +256,9 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
           </div>
 
           {/* Glowing Horizontal Progress Track */}
-          <div className="w-full h-1 bg-slate-900 rounded-full overflow-hidden mt-1 relative">
+          <div className="w-full h-1 bg-slate-200 rounded-full overflow-hidden mt-1 relative">
             <div
-              className="h-full bg-gradient-to-r from-cyan-400 via-emerald-400 via-purple-400 to-indigo-500 transition-all duration-75"
+              className="h-full bg-gradient-to-r from-sky-500 via-emerald-500 via-purple-500 to-indigo-500 transition-all duration-75"
               style={{ width: `${progress * 100}%` }}
             />
           </div>
@@ -277,66 +277,66 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             {/* CHAPTER 01: Academic Rigor & Foundations */}
             <div className="w-[88vw] max-w-[960px] min-w-[340px] shrink-0">
               <TiltCard maxTilt={6} scale={1.01} glareOpacity={0.12}>
-                <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-emerald-500/30 shadow-2xl relative overflow-hidden bg-gradient-to-br from-[#071318]/90 to-[#070b14]/90">
+                <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-emerald-200/90 shadow-2xl relative overflow-hidden bg-white/95">
                   <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
                   <div className="flex items-center justify-between gap-3 mb-4">
-                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold">
+                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold">
                       CHAPTER 01 // FOUNDATIONS
                     </span>
-                    <span className="text-xs font-mono text-emerald-400">
+                    <span className="text-xs font-mono text-emerald-700 font-semibold">
                       Savitribai Phule Pune University
                     </span>
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-display">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">
                     Algorithmic Rigor & Double 9.05 CGPA Distinction
                   </h3>
-                  <p className="text-slate-300 text-xs sm:text-sm mt-2 leading-relaxed">
+                  <p className="text-slate-600 text-xs sm:text-sm mt-2 leading-relaxed">
                     Engineering production resilience starts with core computer science foundations. Achieved a 
-                    <strong className="text-emerald-400"> 9.05 CGPA in M.Sc. Computer Science</strong> and a 
-                    <strong className="text-emerald-400"> 9.05 CGPA in B.Sc. Computer Science</strong>, mastering computational complexity,
+                    <strong className="text-emerald-700 font-bold"> 9.05 CGPA in M.Sc. Computer Science</strong> and a 
+                    <strong className="text-emerald-700 font-bold"> 9.05 CGPA in B.Sc. Computer Science</strong>, mastering computational complexity,
                     data structures, and distributed systems.
                   </p>
 
                   {/* Core Metrics & Highlights */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mt-6">
-                    <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800">
-                      <div className="flex items-center gap-2 text-emerald-400 font-mono font-bold text-xl">
-                        <GraduationCap className="w-5 h-5 text-emerald-400" />
+                    <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+                      <div className="flex items-center gap-2 text-emerald-600 font-mono font-bold text-xl">
+                        <GraduationCap className="w-5 h-5 text-emerald-600" />
                         <span>9.05 CGPA</span>
                       </div>
-                      <div className="text-xs font-bold text-white mt-1">M.Sc. Computer Science</div>
-                      <div className="text-[11px] text-slate-400">2023 - 2025 • SPPU Pune</div>
+                      <div className="text-xs font-bold text-slate-800 mt-1">M.Sc. Computer Science</div>
+                      <div className="text-[11px] text-slate-500">2023 - 2025 • SPPU Pune</div>
                     </div>
 
-                    <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800">
-                      <div className="flex items-center gap-2 text-emerald-400 font-mono font-bold text-xl">
-                        <GraduationCap className="w-5 h-5 text-emerald-400" />
+                    <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+                      <div className="flex items-center gap-2 text-emerald-600 font-mono font-bold text-xl">
+                        <GraduationCap className="w-5 h-5 text-emerald-600" />
                         <span>9.05 CGPA</span>
                       </div>
-                      <div className="text-xs font-bold text-white mt-1">B.Sc. Computer Science</div>
-                      <div className="text-[11px] text-slate-400">2020 - 2023 • SPPU Pune</div>
+                      <div className="text-xs font-bold text-slate-800 mt-1">B.Sc. Computer Science</div>
+                      <div className="text-[11px] text-slate-500">2020 - 2023 • SPPU Pune</div>
                     </div>
 
-                    <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800">
-                      <div className="flex items-center gap-2 text-cyan-400 font-mono font-bold text-xl">
-                        <Zap className="w-5 h-5 text-cyan-400" />
+                    <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+                      <div className="flex items-center gap-2 text-sky-600 font-mono font-bold text-xl">
+                        <Zap className="w-5 h-5 text-sky-600" />
                         <span>Top 1%</span>
                       </div>
-                      <div className="text-xs font-bold text-white mt-1">Theoretical Mastery</div>
-                      <div className="text-[11px] text-slate-400">OOP, ACID DBs, Distributed Systems</div>
+                      <div className="text-xs font-bold text-slate-800 mt-1">Theoretical Mastery</div>
+                      <div className="text-[11px] text-slate-500">OOP, ACID DBs, Distributed Systems</div>
                     </div>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-3">
-                    <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <div className="mt-6 pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex items-center gap-2 text-xs font-mono text-slate-600">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                       <span>Certified Academic Foundation for Mission-Critical Engineering</span>
                     </div>
                     <button
                       onClick={onOpenResume}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-500 text-slate-950 text-xs font-bold hover:bg-emerald-400 transition-colors shadow-md"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-500 transition-colors shadow-md"
                     >
                       <FileDown className="w-3.5 h-3.5" />
                       <span>View Academic Record</span>
@@ -349,43 +349,43 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             {/* CHAPTER 02: Enterprise ERP Billing & Dynamic Stock Reconciliation */}
             <div className="w-[88vw] max-w-[960px] min-w-[340px] shrink-0">
               <TiltCard maxTilt={6} scale={1.01} glareOpacity={0.12}>
-                <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-cyan-500/30 shadow-2xl relative overflow-hidden bg-gradient-to-br from-[#06121f]/90 to-[#070b14]/90">
-                  <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-sky-200/90 shadow-2xl relative overflow-hidden bg-white/95">
+                  <div className="absolute top-0 right-0 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
 
                   <div className="flex items-center justify-between gap-3 mb-4">
-                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-bold">
+                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-sky-50 text-sky-800 border border-sky-200 font-bold">
                       CHAPTER 02 // ENTERPRISE ARCHITECTURE
                     </span>
-                    <span className="text-xs font-mono text-cyan-400">
+                    <span className="text-xs font-mono text-sky-700 font-semibold">
                       AgroStock ERP & Greentop Systems
                     </span>
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-display">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">
                     High-Throughput ERP Billing & Dynamic Stock Reconciliation
                   </h3>
-                  <p className="text-slate-300 text-xs sm:text-sm mt-2 leading-relaxed">
+                  <p className="text-slate-600 text-xs sm:text-sm mt-2 leading-relaxed">
                     Designed complex multi-warehouse inventory pipelines and B2B wholesale workflows. Built atomic
                     stock deduction routines that prevent overselling across wholesale counters, compute tiered pricing
                     with automated 18% GST calculation, update ledger balances, and generate vector PDF invoices instantly.
                   </p>
 
                   {/* Interactive ERP Order Dispatch Simulator */}
-                  <div className="mt-5 p-4 rounded-2xl bg-slate-950/90 border border-slate-800">
+                  <div className="mt-5 p-4 rounded-2xl bg-slate-50 border border-slate-200">
                     <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-mono text-slate-400">Warehouse Stock (SKU-WHT-300):</span>
+                        <span className="text-xs font-mono text-slate-600 font-semibold">Warehouse Stock (SKU-WHT-300):</span>
                         <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded ${
                           erpStockCount > 100
-                            ? 'bg-emerald-500/20 text-emerald-400'
+                            ? 'bg-emerald-100 text-emerald-800'
                             : erpStockCount > 25
-                            ? 'bg-amber-500/20 text-amber-400'
-                            : 'bg-rose-500/20 text-rose-400'
+                            ? 'bg-amber-100 text-amber-800'
+                            : 'bg-rose-100 text-rose-800'
                         }`}>
                           {erpStockCount} Units Available
                         </span>
                         {erpDispatchStatus !== 'idle' && (
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 animate-pulse">
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-bold animate-pulse">
                             {erpDispatchStatus === 'deducting' ? 'DEDUCTING STOCK...' : 'BILLED & POSTED ✓'}
                           </span>
                         )}
@@ -393,29 +393,29 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                       <button
                         onClick={handleDispatchOrder}
                         disabled={erpDispatchStatus === 'deducting'}
-                        className="px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 hover:bg-cyan-500 hover:text-slate-950 text-xs font-mono font-semibold transition-all disabled:opacity-50 flex items-center gap-1.5"
+                        className="px-3 py-1.5 rounded-lg bg-sky-600 text-white hover:bg-sky-500 text-xs font-mono font-semibold transition-all disabled:opacity-50 flex items-center gap-1.5 shadow-sm"
                       >
                         <Zap className="w-3.5 h-3.5" />
                         <span>Dispatch B2B Order (-25 Bags)</span>
                       </button>
                     </div>
-                    <div className="text-[11px] font-mono text-slate-300 bg-slate-900/80 p-2.5 rounded-lg border border-slate-800">
+                    <div className="text-[11px] font-mono text-emerald-400 bg-slate-950 p-2.5 rounded-lg border border-slate-800">
                       &gt; {erpLog}
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mt-5">
-                    <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
-                      <div className="text-xs text-slate-400">SKU Inventory Scale</div>
-                      <div className="text-base font-bold text-cyan-400 font-mono mt-0.5">10,000+ Items</div>
+                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                      <div className="text-xs text-slate-500">SKU Inventory Scale</div>
+                      <div className="text-base font-bold text-sky-600 font-mono mt-0.5">10,000+ Items</div>
                     </div>
-                    <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
-                      <div className="text-xs text-slate-400">Stock Overselling Rate</div>
-                      <div className="text-base font-bold text-emerald-400 font-mono mt-0.5">0.00% Zero-Loss</div>
+                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                      <div className="text-xs text-slate-500">Stock Overselling Rate</div>
+                      <div className="text-base font-bold text-emerald-600 font-mono mt-0.5">0.00% Zero-Loss</div>
                     </div>
-                    <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
-                      <div className="text-xs text-slate-400">Vector PDF Generation</div>
-                      <div className="text-base font-bold text-indigo-400 font-mono mt-0.5">&lt; 150ms jsPDF</div>
+                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                      <div className="text-xs text-slate-500">Vector PDF Generation</div>
+                      <div className="text-base font-bold text-indigo-600 font-mono mt-0.5">&lt; 150ms jsPDF</div>
                     </div>
                   </div>
                 </div>
@@ -425,75 +425,75 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             {/* CHAPTER 03: Offline-First Mobile Resilience */}
             <div className="w-[88vw] max-w-[960px] min-w-[340px] shrink-0">
               <TiltCard maxTilt={6} scale={1.01} glareOpacity={0.12}>
-                <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-sky-500/30 shadow-2xl relative overflow-hidden bg-gradient-to-br from-[#061222]/90 to-[#070b14]/90">
+                <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-sky-200/90 shadow-2xl relative overflow-hidden bg-white/95">
                   <div className="absolute top-0 right-0 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
 
                   <div className="flex items-center justify-between gap-3 mb-4">
-                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30 font-bold">
+                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-blue-50 text-blue-800 border border-blue-200 font-bold">
                       CHAPTER 03 // MOBILE ENGINEERING
                     </span>
-                    <span className="text-xs font-mono text-sky-400">
+                    <span className="text-xs font-mono text-blue-700 font-semibold">
                       TAIN Elect AI
                     </span>
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-display">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">
                     Offline-First Field Resilience & SQLite Sync
                   </h3>
-                  <p className="text-slate-300 text-xs sm:text-sm mt-2 leading-relaxed">
+                  <p className="text-slate-600 text-xs sm:text-sm mt-2 leading-relaxed">
                     Designed for field election teams operating in zero-connectivity rural zones. Built on React Native
                     (Expo Router) with a local SQLite transactional store. Field workers log surveys, voter verifications,
                     and polling updates without lag; changes auto-sync in batches the instant network connects.
                   </p>
 
                   {/* Interactive Network Simulator */}
-                  <div className="mt-5 p-4 rounded-2xl bg-slate-950/90 border border-slate-800">
+                  <div className="mt-5 p-4 rounded-2xl bg-slate-50 border border-slate-200">
                     <div className="flex items-center justify-between gap-3 mb-3">
                       <div className="flex items-center gap-2">
                         {simOnline ? (
-                          <div className="flex items-center gap-1.5 text-emerald-400 font-mono text-xs font-bold">
-                            <Wifi className="w-4 h-4" />
+                          <div className="flex items-center gap-1.5 text-emerald-700 font-mono text-xs font-bold">
+                            <Wifi className="w-4 h-4 text-emerald-600" />
                             <span>ONLINE (Syncing with Cloud API)</span>
                           </div>
                         ) : (
-                          <div className="flex items-center gap-1.5 text-amber-400 font-mono text-xs font-bold">
-                            <WifiOff className="w-4 h-4" />
+                          <div className="flex items-center gap-1.5 text-amber-700 font-mono text-xs font-bold">
+                            <WifiOff className="w-4 h-4 text-amber-600" />
                             <span>OFFLINE (Zero Connection, Local SQLite Active)</span>
                           </div>
                         )}
                       </div>
                       <button
                         onClick={handleToggleOnline}
-                        className={`px-3 py-1 rounded-lg text-xs font-mono font-semibold transition-all border ${
+                        className={`px-3 py-1 rounded-lg text-xs font-mono font-semibold transition-all border shadow-sm ${
                           simOnline
-                            ? 'bg-amber-500/20 text-amber-300 border-amber-500/40 hover:bg-amber-500 hover:text-slate-950'
-                            : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 hover:bg-emerald-500 hover:text-slate-950'
+                            ? 'bg-amber-50 text-amber-800 border-amber-300 hover:bg-amber-100'
+                            : 'bg-emerald-50 text-emerald-800 border-emerald-300 hover:bg-emerald-100'
                         }`}
                       >
                         {simOnline ? 'Cut Network (Go Offline)' : 'Restore Network (Go Online)'}
                       </button>
                     </div>
 
-                    <div className="flex items-center justify-between p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono">
-                      <span className="text-slate-400">Local Unsynced SQLite Queue:</span>
-                      <span className="text-sky-300 font-bold">
+                    <div className="flex items-center justify-between p-2.5 rounded-lg bg-white border border-slate-200 text-xs font-mono">
+                      <span className="text-slate-600">Local Unsynced SQLite Queue:</span>
+                      <span className="text-blue-700 font-bold">
                         {offlineQueueCount} voter updates pending sync
                       </span>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mt-5">
-                    <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
-                      <div className="text-xs text-slate-400">Offline Availability</div>
-                      <div className="text-base font-bold text-sky-400 font-mono mt-0.5">100% Operational</div>
+                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                      <div className="text-xs text-slate-500">Offline Availability</div>
+                      <div className="text-base font-bold text-sky-600 font-mono mt-0.5">100% Operational</div>
                     </div>
-                    <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
-                      <div className="text-xs text-slate-400">Data Loss Rate</div>
-                      <div className="text-base font-bold text-emerald-400 font-mono mt-0.5">0% Guaranteed</div>
+                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                      <div className="text-xs text-slate-500">Data Loss Rate</div>
+                      <div className="text-base font-bold text-emerald-600 font-mono mt-0.5">0% Guaranteed</div>
                     </div>
-                    <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
-                      <div className="text-xs text-slate-400">Stack</div>
-                      <div className="text-base font-bold text-indigo-400 font-mono mt-0.5">Expo + SQLite</div>
+                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                      <div className="text-xs text-slate-500">Stack</div>
+                      <div className="text-base font-bold text-indigo-600 font-mono mt-0.5">Expo + SQLite</div>
                     </div>
                   </div>
                 </div>
@@ -503,43 +503,43 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             {/* CHAPTER 04: Applied Gen-AI & Peer-Reviewed Research */}
             <div className="w-[88vw] max-w-[960px] min-w-[340px] shrink-0">
               <TiltCard maxTilt={6} scale={1.01} glareOpacity={0.12}>
-                <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-purple-500/30 shadow-2xl relative overflow-hidden bg-gradient-to-br from-[#12071d]/90 to-[#070b14]/90">
+                <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-purple-200/90 shadow-2xl relative overflow-hidden bg-white/95">
                   <div className="absolute top-0 right-0 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
 
                   <div className="flex items-center justify-between gap-3 mb-4">
-                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 font-bold">
+                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-purple-50 text-purple-800 border border-purple-200 font-bold">
                       CHAPTER 04 // AI & RESEARCH
                     </span>
-                    <span className="text-xs font-mono text-purple-400">
+                    <span className="text-xs font-mono text-purple-700 font-semibold">
                       International Research Journal
                     </span>
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-display">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">
                     Peer-Reviewed Gen-AI Research & LangChain Agents
                   </h3>
-                  <p className="text-slate-300 text-xs sm:text-sm mt-2 leading-relaxed">
+                  <p className="text-slate-600 text-xs sm:text-sm mt-2 leading-relaxed">
                     Published original empirical research investigating Generative AI systems, prompt optimization,
                     and autonomous reasoning models (ISSN: 2582-8436). Engineered LangChain autonomous agents,
                     structured LLM schema validation, and multi-provider failover routing between Gemini 2.5 and OpenAI GPT-4o.
                   </p>
 
                   {/* Research Paper Citation Box */}
-                  <div className="mt-5 p-4 rounded-2xl bg-slate-950/90 border border-purple-500/30">
-                    <div className="text-xs font-mono text-purple-400 font-bold uppercase mb-1">
+                  <div className="mt-5 p-4 rounded-2xl bg-purple-50/70 border border-purple-200">
+                    <div className="text-xs font-mono text-purple-800 font-bold uppercase mb-1">
                       Published Paper Citation (030117.pdf):
                     </div>
-                    <p className="text-xs sm:text-sm text-white font-display italic">
+                    <p className="text-xs sm:text-sm text-slate-900 font-display italic font-semibold">
                       &ldquo;A Study on Generative AI&rdquo;
                     </p>
-                    <div className="text-[11px] font-mono text-slate-400 mt-1">
+                    <div className="text-[11px] font-mono text-slate-600 mt-1">
                       Authors: Zafarali Faizahmed Inamdar, Dr. Jyoti Malhotra • Vol. 13, Issue 1, 2026
                     </div>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-3">
-                    <div className="flex items-center gap-2 text-xs font-mono text-purple-300">
-                      <BookOpen className="w-4 h-4 text-purple-400" />
+                  <div className="mt-6 pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex items-center gap-2 text-xs font-mono text-purple-800">
+                      <BookOpen className="w-4 h-4 text-purple-600" />
                       <span>Empirical methodology backed by peer-reviewed publication</span>
                     </div>
                     <div className="flex items-center gap-2">
@@ -560,49 +560,49 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             {/* CHAPTER 05: Cloud Infrastructure & Next Step */}
             <div className="w-[88vw] max-w-[960px] min-w-[340px] shrink-0">
               <TiltCard maxTilt={6} scale={1.01} glareOpacity={0.12}>
-                <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-indigo-500/30 shadow-2xl relative overflow-hidden bg-gradient-to-br from-[#0c0c24]/90 to-[#070b14]/90">
+                <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-indigo-200/90 shadow-2xl relative overflow-hidden bg-white/95">
                   <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
 
                   <div className="flex items-center justify-between gap-3 mb-4">
-                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-bold">
+                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-indigo-50 text-indigo-800 border border-indigo-200 font-bold">
                       CHAPTER 05 // SCALE & DELIVERY
                     </span>
-                    <span className="text-xs font-mono text-indigo-400">
+                    <span className="text-xs font-mono text-indigo-700 font-semibold">
                       AWS, Docker & CI/CD
                     </span>
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-display">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">
                     Cloud DevOps, 99.9% Reliability & Immediate Impact
                   </h3>
-                  <p className="text-slate-300 text-xs sm:text-sm mt-2 leading-relaxed">
+                  <p className="text-slate-600 text-xs sm:text-sm mt-2 leading-relaxed">
                     Code only creates value when it reliably runs in production. Deployed on AWS EC2 with Docker multi-stage
                     containers, automated GitHub Actions CI/CD, NGINX SSL reverse proxying, and Prometheus-ready health checks.
                     Ready to accelerate your engineering organization today.
                   </p>
 
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5">
-                    <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 text-center">
-                      <div className="text-[10px] text-slate-400 font-mono">AVAILABILITY</div>
-                      <div className="text-base font-bold text-emerald-400 font-mono mt-0.5">99.9% Uptime</div>
+                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+                      <div className="text-[10px] text-slate-500 font-mono">AVAILABILITY</div>
+                      <div className="text-base font-bold text-emerald-600 font-mono mt-0.5">99.9% Uptime</div>
                     </div>
-                    <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 text-center">
-                      <div className="text-[10px] text-slate-400 font-mono">CONTAINERS</div>
-                      <div className="text-base font-bold text-cyan-400 font-mono mt-0.5">Docker Multi-Stage</div>
+                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+                      <div className="text-[10px] text-slate-500 font-mono">CONTAINERS</div>
+                      <div className="text-base font-bold text-sky-600 font-mono mt-0.5">Docker Multi-Stage</div>
                     </div>
-                    <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 text-center">
-                      <div className="text-[10px] text-slate-400 font-mono">AUTOMATION</div>
-                      <div className="text-base font-bold text-indigo-400 font-mono mt-0.5">GitHub Actions</div>
+                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+                      <div className="text-[10px] text-slate-500 font-mono">AUTOMATION</div>
+                      <div className="text-base font-bold text-indigo-600 font-mono mt-0.5">GitHub Actions</div>
                     </div>
-                    <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 text-center">
-                      <div className="text-[10px] text-slate-400 font-mono">RESPONSE TIME</div>
-                      <div className="text-base font-bold text-purple-400 font-mono mt-0.5">&lt; 24h Contact</div>
+                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+                      <div className="text-[10px] text-slate-500 font-mono">RESPONSE TIME</div>
+                      <div className="text-base font-bold text-purple-600 font-mono mt-0.5">&lt; 24h Contact</div>
                     </div>
                   </div>
 
-                  <div className="mt-6 pt-5 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-3">
-                    <div className="text-xs text-slate-300 font-mono">
-                      Direct WhatsApp: <strong className="text-emerald-400 font-bold">{PERSONAL_INFO.phone}</strong>
+                  <div className="mt-6 pt-5 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+                    <div className="text-xs text-slate-600 font-mono">
+                      Direct WhatsApp: <strong className="text-emerald-700 font-bold">{PERSONAL_INFO.phone}</strong>
                     </div>
 
                     <div className="flex items-center gap-2">
@@ -610,17 +610,17 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                         href="https://wa.me/919860800543?text=Hi%20Zafarali,%20I%20reviewed%20your%20engineering%20scrollytelling%20journey%20and%20would%20like%20to%20connect."
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 text-slate-950 text-xs font-bold hover:brightness-110 transition-all shadow-md"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-500 transition-all shadow-md"
                       >
-                        <MessageCircle className="w-3.5 h-3.5 text-slate-950" />
+                        <MessageCircle className="w-3.5 h-3.5 text-white" />
                         <span>Chat on WhatsApp</span>
                       </a>
 
                       <button
                         onClick={onOpenTerminal}
-                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-900 text-cyan-300 border border-cyan-500/40 hover:bg-slate-800 text-xs font-mono font-semibold transition-all"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white text-sky-700 border border-sky-300 hover:bg-sky-50 text-xs font-mono font-semibold transition-all shadow-sm"
                       >
-                        <Terminal className="w-3.5 h-3.5 text-cyan-400" />
+                        <Terminal className="w-3.5 h-3.5 text-sky-600" />
                         <span>Run CLI</span>
                       </button>
                     </div>
@@ -633,21 +633,21 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
         </div>
 
         {/* Scrollytelling Bottom Flow Navigation Footer */}
-        <div className="w-full max-w-7xl mx-auto flex items-center justify-between pt-2 border-t border-slate-800/60 z-30 text-xs font-mono text-slate-400">
+        <div className="w-full max-w-7xl mx-auto flex items-center justify-between pt-2 border-t border-slate-200 z-30 text-xs font-mono text-slate-500">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-            <span className="text-[11px] text-slate-300">
+            <span className="w-2 h-2 rounded-full bg-sky-500 animate-ping" />
+            <span className="text-[11px] text-slate-600">
               Scroll down or drag track horizontally to advance through narrative
             </span>
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="text-[11px] text-cyan-400 font-bold">
+            <span className="text-[11px] text-sky-700 font-bold">
               {Math.round(progress * 100)}% Narrative Completed
             </span>
             <a
               href="#projects"
-              className="text-[11px] text-slate-400 hover:text-white underline"
+              className="text-[11px] text-slate-600 hover:text-slate-900 underline font-semibold"
             >
               Skip to Projects ↓
             </a>
