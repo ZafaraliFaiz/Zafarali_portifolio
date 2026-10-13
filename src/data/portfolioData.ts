@@ -14,6 +14,10 @@ export const PERSONAL_INFO = {
   githubDisplay: 'github.com/ZafaraliFaiz',
   bio: 'Full Stack Software Developer with hands-on experience building scalable web and cross-platform mobile applications using React.js, Next.js, React Native (Expo), Node.js, and Express.js. Skilled in RESTful API design, offline-first data sync architectures, Agile/Scrum, Git, and CI/CD-driven delivery.',
   tagline: 'Engineering high-resilience web platforms, offline-first mobile apps, and Gen-AI integrated software systems.',
+  resumeDriveUrl: 'https://drive.google.com/file/d/1zJbDNuuUu1DTW65sB7WTlAqmrysI2cPM/view?usp=sharing',
+  resumeDrivePreviewUrl: 'https://drive.google.com/file/d/1zJbDNuuUu1DTW65sB7WTlAqmrysI2cPM/preview',
+  resumeDownloadUrl: '/Zafarali_Inamdar_Resume.pdf',
+  resumeDriveDirectDownload: 'https://drive.google.com/uc?export=download&id=1zJbDNuuUu1DTW65sB7WTlAqmrysI2cPM',
 };
 
 export const PROJECTS: Project[] = [

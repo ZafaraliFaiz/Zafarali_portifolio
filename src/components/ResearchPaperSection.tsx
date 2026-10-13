@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BookOpen, Copy, Check, Sparkles, FileText, ExternalLink, Award, FileDown } from 'lucide-react';
 import { RESEARCH_PAPER } from '../data/portfolioData';
+import { TiltCard } from './TiltCard';
 
 export const ResearchPaperSection: React.FC = () => {
   const [copiedType, setCopiedType] = useState<'apa' | 'bibtex' | null>(null);
@@ -33,7 +34,8 @@ export const ResearchPaperSection: React.FC = () => {
         </div>
 
         {/* Paper Showcase Card */}
-        <div className="glass-panel p-6 sm:p-9 rounded-2xl border border-purple-500/30 shadow-2xl relative overflow-hidden">
+        <TiltCard maxTilt={5} scale={1.01} glareOpacity={0.12}>
+          <div className="glass-panel p-6 sm:p-9 rounded-2xl border border-purple-500/30 shadow-2xl relative overflow-hidden transition-all duration-300 hover:border-purple-400/50">
           {/* Subtle glow */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -187,6 +189,7 @@ export const ResearchPaperSection: React.FC = () => {
             </div>
           </div>
         </div>
+        </TiltCard>
       </div>
     </section>
   );

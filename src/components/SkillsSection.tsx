@@ -10,6 +10,7 @@ import {
   Zap
 } from 'lucide-react';
 import { SKILL_CATEGORIES } from '../data/portfolioData';
+import { TiltCard } from './TiltCard';
 
 export const SkillsSection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('Frontend & Mobile');
@@ -69,38 +70,45 @@ export const SkillsSection: React.FC = () => {
         {/* Skills Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
           {selectedCategoryData.skills.map((skill) => (
-            <div
+            <TiltCard
               key={skill.name}
-              className="glass-panel p-5 rounded-xl border border-slate-800 hover:border-cyan-500/30 transition-all group"
+              maxTilt={5}
+              scale={1.02}
+              glareOpacity={0.1}
+              className="h-full"
             >
-              <div className="flex items-center justify-between gap-3 mb-1.5">
-                <div className="flex items-center gap-2">
-                  <span className="font-bold text-white text-sm sm:text-base group-hover:text-cyan-300 transition-colors">
-                    {skill.name}
-                  </span>
-                  {skill.highlight && (
-                    <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-                      Core
+              <div className="glass-panel p-5 rounded-xl border border-slate-800 hover:border-cyan-500/30 transition-colors h-full flex flex-col justify-between group">
+                <div>
+                  <div className="flex items-center justify-between gap-3 mb-1.5">
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-white text-sm sm:text-base group-hover:text-cyan-300 transition-colors">
+                        {skill.name}
+                      </span>
+                      {skill.highlight && (
+                        <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                          Core
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-xs font-mono text-cyan-400 font-bold">
+                      {skill.level}%
                     </span>
-                  )}
+                  </div>
+
+                  {/* Progress bar */}
+                  <div className="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden my-2 border border-slate-800/80">
+                    <div
+                      className="h-full bg-gradient-to-r from-cyan-500 via-sky-400 to-indigo-500 rounded-full transition-all duration-700 ease-out"
+                      style={{ width: `${skill.level}%` }}
+                    />
+                  </div>
+
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    {skill.description}
+                  </p>
                 </div>
-                <span className="text-xs font-mono text-cyan-400 font-bold">
-                  {skill.level}%
-                </span>
               </div>
-
-              {/* Progress bar */}
-              <div className="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden my-2 border border-slate-800/80">
-                <div
-                  className="h-full bg-gradient-to-r from-cyan-500 via-sky-400 to-indigo-500 rounded-full transition-all duration-700 ease-out"
-                  style={{ width: `${skill.level}%` }}
-                />
-              </div>
-
-              <p className="text-xs text-slate-400 leading-relaxed">
-                {skill.description}
-              </p>
-            </div>
+            </TiltCard>
           ))}
         </div>
 

@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { PROJECTS } from '../data/portfolioData';
 import { Project } from '../types/portfolio';
+import { TiltCard } from './TiltCard';
 
 interface ProjectsSectionProps {
   onSelectProject: (project: Project) => void;
@@ -75,84 +76,89 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProjects.map((project) => (
-            <div
+            <TiltCard
               key={project.id}
-              className="glass-panel rounded-2xl border border-slate-800 p-6 flex flex-col justify-between glass-card-hover group relative overflow-hidden"
+              maxTilt={7}
+              scale={1.02}
+              glareOpacity={0.14}
+              className="h-full"
             >
-              {/* Top Accent Line */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-indigo-500 to-emerald-500 opacity-60 group-hover:opacity-100 transition-opacity" />
+              <div className="glass-panel rounded-2xl border border-slate-800 p-6 flex flex-col justify-between h-full group relative overflow-hidden transition-all duration-300 hover:border-cyan-500/40 hover:shadow-xl hover:shadow-cyan-500/10">
+                {/* Top Accent Line */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-indigo-500 to-emerald-500 opacity-60 group-hover:opacity-100 transition-opacity" />
 
-              <div>
-                {/* Meta badge */}
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
-                    {project.badge}
-                  </span>
-                  <span className="text-[11px] font-mono text-slate-500">
-                    {project.period}
-                  </span>
-                </div>
-
-                {/* Title & Client */}
-                <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors font-display">
-                  {project.title}
-                </h3>
-                {project.clientOrOrg && (
-                  <div className="text-xs font-mono text-emerald-400 font-medium mt-0.5">
-                    {project.clientOrOrg}
-                  </div>
-                )}
-
-                {/* Tagline */}
-                <p className="text-xs text-slate-300 font-medium mt-2 leading-relaxed">
-                  {project.tagline}
-                </p>
-
-                {/* Brief description */}
-                <p className="text-xs text-slate-400 mt-2 line-clamp-3 leading-relaxed">
-                  {project.description}
-                </p>
-
-                {/* Key Metric Highlights */}
-                {project.metrics && (
-                  <div className="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-slate-800/80">
-                    {project.metrics.slice(0, 2).map((m, idx) => (
-                      <div key={idx} className="bg-slate-950/60 p-2 rounded-lg border border-slate-800 text-center">
-                        <div className="text-[10px] text-slate-400">{m.label}</div>
-                        <div className="text-xs font-bold text-cyan-400 font-mono mt-0.5">{m.value}</div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Bottom Tech Tags & Action */}
-              <div className="mt-6 pt-4 border-t border-slate-800">
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {project.technologies.slice(0, 4).map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800"
-                    >
-                      {tech}
+                <div>
+                  {/* Meta badge */}
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
+                      {project.badge}
                     </span>
-                  ))}
-                  {project.technologies.length > 4 && (
-                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-900 text-slate-500">
-                      +{project.technologies.length - 4}
+                    <span className="text-[11px] font-mono text-slate-500">
+                      {project.period}
                     </span>
+                  </div>
+
+                  {/* Title & Client */}
+                  <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors font-display">
+                    {project.title}
+                  </h3>
+                  {project.clientOrOrg && (
+                    <div className="text-xs font-mono text-emerald-400 font-medium mt-0.5">
+                      {project.clientOrOrg}
+                    </div>
+                  )}
+
+                  {/* Tagline */}
+                  <p className="text-xs text-slate-300 font-medium mt-2 leading-relaxed">
+                    {project.tagline}
+                  </p>
+
+                  {/* Brief description */}
+                  <p className="text-xs text-slate-400 mt-2 line-clamp-3 leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  {/* Key Metric Highlights */}
+                  {project.metrics && (
+                    <div className="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-slate-800/80">
+                      {project.metrics.slice(0, 2).map((m, idx) => (
+                        <div key={idx} className="bg-slate-950/60 p-2 rounded-lg border border-slate-800 text-center">
+                          <div className="text-[10px] text-slate-400">{m.label}</div>
+                          <div className="text-xs font-bold text-cyan-400 font-mono mt-0.5">{m.value}</div>
+                        </div>
+                      ))}
+                    </div>
                   )}
                 </div>
 
-                <button
-                  onClick={() => onSelectProject(project)}
-                  className="w-full flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-slate-900 text-cyan-300 border border-cyan-500/30 group-hover:bg-cyan-500 group-hover:text-slate-950 group-hover:border-cyan-400 font-mono text-xs font-bold transition-all shadow-sm"
-                >
-                  <span>System Deep Dive</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </button>
+                {/* Bottom Tech Tags & Action */}
+                <div className="mt-6 pt-4 border-t border-slate-800">
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {project.technologies.slice(0, 4).map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {project.technologies.length > 4 && (
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-900 text-slate-500">
+                        +{project.technologies.length - 4}
+                      </span>
+                    )}
+                  </div>
+
+                  <button
+                    onClick={() => onSelectProject(project)}
+                    className="w-full flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-slate-900 text-cyan-300 border border-cyan-500/30 group-hover:bg-cyan-500 group-hover:text-slate-950 group-hover:border-cyan-400 font-mono text-xs font-bold transition-all shadow-sm"
+                  >
+                    <span>System Deep Dive</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </button>
+                </div>
               </div>
-            </div>
+            </TiltCard>
           ))}
         </div>
       </div>

@@ -6,6 +6,7 @@ import {
   MapPin, 
   CheckCircle2, 
   MessageSquare, 
+  MessageCircle,
   Copy, 
   Check, 
   Sparkles,
@@ -29,6 +30,8 @@ export const ContactSection: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
+
+  const [copiedMessage, setCopiedMessage] = useState(false);
 
   const roleTypes = [
     'Full-Time Engineering Role',
@@ -65,6 +68,61 @@ export const ContactSection: React.FC = () => {
     }
   };
 
+  const getEmailSubject = () => {
+    return `[${formData.roleType}] Inquiry from ${formData.name || 'Hiring Team'} (${formData.company || 'Direct'})`;
+  };
+
+  const getEmailBody = () => {
+    return `Hi Zafarali,\n\nName: ${formData.name || 'Hiring Team'}\nEmail: ${formData.email || 'Not specified'}\nCompany: ${formData.company || 'Direct Inquiry'}\nRole / Intent: ${formData.roleType}\n\nMessage Details:\n${formData.message || 'I would like to discuss an engineering opportunity with you.'}\n\n---\nSent via portfolio inquiry form`;
+  };
+
+  const handleSendViaGmail = () => {
+    const subject = encodeURIComponent(getEmailSubject());
+    const body = encodeURIComponent(getEmailBody());
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(PERSONAL_INFO.email)}&su=${subject}&body=${body}`;
+    window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleSendViaMailClient = () => {
+    const subject = encodeURIComponent(getEmailSubject());
+    const body = encodeURIComponent(getEmailBody());
+    window.location.href = `mailto:${PERSONAL_INFO.email}?subject=${subject}&body=${body}`;
+  };
+
+  const getWhatsAppMessage = () => {
+    const lines = [
+      `*New Portfolio Inquiry for Zafarali Inamdar*`,
+      ``,
+      `*Intent:* ${formData.roleType}`,
+      `*Name:* ${formData.name || 'Hiring Team'}`,
+      `*Email:* ${formData.email || 'Not specified'}`,
+    ];
+    if (formData.company) {
+      lines.push(`*Company:* ${formData.company}`);
+    }
+    lines.push(
+      ``,
+      `*Message Details:*`,
+      formData.message || 'Hi Zafarali, I would like to connect with you regarding an engineering opportunity.',
+      ``,
+      `_Sent via zafarali-portfolio_`
+    );
+    return lines.join('\n');
+  };
+
+  const handleSendViaWhatsApp = () => {
+    const text = encodeURIComponent(getWhatsAppMessage());
+    const phoneDigits = PERSONAL_INFO.phone.replace(/[^0-9]/g, '');
+    const waUrl = `https://wa.me/${phoneDigits}?text=${text}`;
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleCopyMessage = () => {
+    navigator.clipboard.writeText(getWhatsAppMessage());
+    setCopiedMessage(true);
+    setTimeout(() => setCopiedMessage(false), 2000);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
@@ -80,14 +138,8 @@ export const ContactSection: React.FC = () => {
     }
 
     setSubmitted(true);
-  };
-
-  const handleSendViaMailClient = () => {
-    const subject = encodeURIComponent(`[${formData.roleType}] Inquiry from ${formData.name || 'Hiring Team'} (${formData.company || 'Direct'})`);
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\nRole Type: ${formData.roleType}\n\nMessage:\n${formData.message}`
-    );
-    window.location.href = `mailto:${PERSONAL_INFO.email}?subject=${subject}&body=${body}`;
+    // Direct to WhatsApp (not Gmail)
+    handleSendViaWhatsApp();
   };
 
   const handleCopyEmail = () => {
@@ -167,19 +219,37 @@ export const ContactSection: React.FC = () => {
                       <Phone className="w-4 h-4" />
                     </div>
                     <div>
-                      <div className="text-[10px] font-mono text-slate-400 uppercase">Phone & WhatsApp</div>
-                      <a href={`tel:${PERSONAL_INFO.phone}`} className="text-xs sm:text-sm font-mono text-white hover:text-emerald-300 font-bold">
-                        {PERSONAL_INFO.phone}
+                      <div className="text-[10px] font-mono text-slate-400 uppercase">WhatsApp & Direct Phone</div>
+                      <a 
+                        href="https://wa.me/919860800543?text=Hi%20Zafarali,%20I%20would%20like%20to%20connect%20with%20you."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs sm:text-sm font-mono text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1.5"
+                      >
+                        <span>{PERSONAL_INFO.phone}</span>
+                        <ExternalLink className="w-3 h-3 text-emerald-400/70" />
                       </a>
                     </div>
                   </div>
-                  <button
-                    onClick={handleCopyPhone}
-                    className="p-2 rounded-lg bg-slate-900 text-slate-400 hover:text-white transition-colors"
-                    title="Copy Phone"
-                  >
-                    {copiedPhone ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                  </button>
+                  <div className="flex items-center gap-1.5">
+                    <a
+                      href="https://wa.me/919860800543?text=Hi%20Zafarali,%20I%20would%20like%20to%20connect%20with%20you."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-2.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 text-[11px] font-mono font-semibold transition-colors flex items-center gap-1"
+                      title="Direct WhatsApp Chat"
+                    >
+                      <MessageCircle className="w-3 h-3" />
+                      <span>Chat</span>
+                    </a>
+                    <button
+                      onClick={handleCopyPhone}
+                      className="p-2 rounded-lg bg-slate-900 text-slate-400 hover:text-white transition-colors"
+                      title="Copy Phone"
+                    >
+                      {copiedPhone ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                    </button>
+                  </div>
                 </div>
 
                 {/* Location */}
@@ -254,30 +324,77 @@ export const ContactSection: React.FC = () => {
                 </div>
               </div>
 
+              {/* Destination Notice */}
+              <div className="mb-5 p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/30 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                  <span className="text-xs text-slate-300">
+                    Direct Destination:{' '}
+                    <strong className="text-emerald-300 font-mono">WhatsApp (+91 9860800543)</strong>
+                  </span>
+                </div>
+                <span className="text-[10px] font-mono text-emerald-400/90 hidden sm:inline">
+                  Instant Direct Chat
+                </span>
+              </div>
+
               {submitted ? (
-                <div className="p-6 rounded-xl bg-emerald-950/40 border border-emerald-500/40 text-center space-y-4">
+                <div className="p-6 sm:p-8 rounded-xl bg-emerald-950/40 border border-emerald-500/40 text-center space-y-4">
                   <div className="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto">
-                    <CheckCircle2 className="w-6 h-6" />
+                    <MessageCircle className="w-6 h-6" />
                   </div>
                   <h4 className="text-lg font-bold text-white font-display">
-                    Thank You, {formData.name || 'Friend'}!
+                    Message Directed to WhatsApp!
                   </h4>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md mx-auto">
-                    Your inquiry has been generated. To ensure zero delivery delay, you can dispatch it directly to Zafarali&apos;s inbox with 1 click:
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-lg mx-auto">
+                    Your inquiry is prepared directly for Zafarali on WhatsApp (<strong className="text-emerald-300 font-mono">+91 9860800543</strong>).
+                    A WhatsApp chat tab has been opened. If you were blocked by a popup blocker or want to reopen/copy the message, choose an option below:
                   </p>
-                  <div className="flex flex-wrap justify-center gap-3 pt-2">
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 max-w-md mx-auto">
                     <button
-                      onClick={handleSendViaMailClient}
-                      className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 text-slate-950 text-xs sm:text-sm font-bold hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-emerald-500/20"
+                      type="button"
+                      onClick={handleSendViaWhatsApp}
+                      className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 text-slate-950 font-bold text-xs shadow-lg shadow-emerald-500/25 hover:brightness-110 active:scale-95 transition-all"
                     >
-                      <Mail className="w-4 h-4" />
-                      <span>Launch In Default Mail Client</span>
+                      <MessageCircle className="w-4 h-4 text-slate-950" />
+                      <span>Open WhatsApp Chat</span>
                     </button>
+
+                    <button
+                      type="button"
+                      onClick={handleCopyMessage}
+                      className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-slate-900 text-slate-200 border border-slate-700 hover:border-emerald-400 text-xs font-semibold transition-all"
+                    >
+                      {copiedMessage ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                      <span>{copiedMessage ? 'Copied to Clipboard!' : 'Copy WhatsApp Message'}</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={handleSendViaGmail}
+                      className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-slate-900 text-slate-300 border border-slate-700 hover:border-rose-400 text-xs font-semibold transition-all"
+                    >
+                      <Mail className="w-4 h-4 text-rose-400" />
+                      <span>Alternative: Gmail</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={handleSendViaMailClient}
+                      className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-slate-900 text-slate-300 border border-slate-700 hover:border-cyan-400 text-xs font-semibold transition-all"
+                    >
+                      <ExternalLink className="w-4 h-4 text-cyan-400" />
+                      <span>Default Mail App</span>
+                    </button>
+                  </div>
+
+                  <div className="pt-2">
                     <button
                       onClick={() => setSubmitted(false)}
-                      className="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 border border-slate-700 text-xs font-semibold hover:text-white"
+                      className="text-xs text-slate-400 hover:text-white underline font-mono"
                     >
-                      Edit Message
+                      ← Edit Message / Send Another
                     </button>
                   </div>
                 </div>
@@ -366,24 +483,41 @@ export const ContactSection: React.FC = () => {
                     />
                   </div>
 
-                  {/* Submit Button */}
-                  <div className="pt-2 flex flex-col sm:flex-row items-center gap-3">
-                    <button
-                      type="submit"
-                      className="w-full sm:flex-1 flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 text-slate-950 font-bold text-xs sm:text-sm hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-cyan-500/25"
-                    >
-                      <Send className="w-4 h-4 text-slate-950" />
-                      <span>Send Direct Message</span>
-                    </button>
+                  {/* Submit Button Bar */}
+                  <div className="pt-2 space-y-3">
+                    <div className="flex flex-col sm:flex-row items-center gap-3">
+                      <button
+                        type="submit"
+                        className="w-full sm:flex-1 flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-gradient-to-r from-emerald-400 via-teal-500 to-green-600 text-slate-950 font-bold text-xs sm:text-sm hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-emerald-500/25"
+                      >
+                        <MessageCircle className="w-4 h-4 text-slate-950" />
+                        <span>Send Direct via WhatsApp</span>
+                      </button>
 
-                    <button
-                      type="button"
-                      onClick={handleSendViaMailClient}
-                      className="w-full sm:w-auto px-4 py-3 rounded-xl bg-slate-900 text-slate-300 border border-slate-700 hover:border-cyan-400 text-xs font-mono font-semibold transition-colors flex items-center justify-center gap-1.5"
-                    >
-                      <Mail className="w-3.5 h-3.5 text-cyan-400" />
-                      <span>Open in Mail Client</span>
-                    </button>
+                      <button
+                        type="button"
+                        onClick={handleSendViaGmail}
+                        className="w-full sm:w-auto px-4 py-3.5 rounded-xl bg-slate-900 text-slate-300 border border-slate-700 hover:border-rose-400 text-xs font-mono font-semibold transition-colors flex items-center justify-center gap-1.5"
+                        title="Alternative: Open Gmail Web Compose"
+                      >
+                        <Mail className="w-3.5 h-3.5 text-rose-400" />
+                        <span>Gmail</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={handleSendViaMailClient}
+                        className="w-full sm:w-auto px-4 py-3.5 rounded-xl bg-slate-900 text-slate-300 border border-slate-700 hover:border-cyan-400 text-xs font-mono font-semibold transition-colors flex items-center justify-center gap-1.5"
+                        title="Open default desktop mail client"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />
+                        <span>Mail App</span>
+                      </button>
+                    </div>
+
+                    <div className="text-[11px] text-slate-400 text-center font-mono">
+                      Destination: <strong className="text-emerald-300 font-bold">WhatsApp (+91 9860800543)</strong> • Instant Response Guaranteed
+                    </div>
                   </div>
                 </form>
               )}

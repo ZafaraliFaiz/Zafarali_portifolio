@@ -14,7 +14,8 @@ import {
   Github,
   Linkedin,
   BookOpen,
-  FileDown
+  FileDown,
+  MessageCircle
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { PERSONAL_INFO, EXPERIENCES, PROJECTS, RESEARCH_PAPER, EDUCATION_LIST } from '../data/portfolioData';
@@ -26,6 +27,7 @@ interface ResumeModalProps {
 
 export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
   const [copied, setCopied] = useState(false);
+  const [viewMode, setViewMode] = useState<'pdf' | 'ats'>('pdf');
 
   const handlePrint = () => {
     try {
@@ -155,27 +157,79 @@ EDUCATION
       <div className="resume-modal-box relative w-full max-w-4xl bg-[#0b101e] border border-cyan-500/40 rounded-2xl shadow-2xl flex flex-col h-[92vh] overflow-hidden">
         {/* Top Control Bar (Never Printed) */}
         <div className="no-print flex flex-wrap items-center justify-between p-3 sm:p-4 bg-[#0e1629] border-b border-slate-800 gap-2 sm:gap-3">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <FileText className="w-5 h-5 text-cyan-400 shrink-0" />
             <div className="flex items-center gap-2">
               <span className="font-bold text-white text-sm sm:text-base font-display">
-                Official Resume Preview
+                Official Resume
               </span>
               <span className="text-[10px] font-mono bg-cyan-500/10 text-cyan-300 px-2 py-0.5 rounded border border-cyan-500/30">
                 Verified 2026
               </span>
             </div>
+
+            {/* View Mode Toggle */}
+            <div className="flex items-center bg-slate-900 p-0.5 rounded-lg border border-slate-700 ml-1 sm:ml-2">
+              <button
+                type="button"
+                onClick={() => setViewMode('pdf')}
+                className={`px-2.5 py-1 rounded text-xs font-mono font-semibold transition-all ${
+                  viewMode === 'pdf'
+                    ? 'bg-cyan-500 text-slate-950 font-bold shadow-sm'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+                title="Preview original Google Drive PDF"
+              >
+                PDF Preview
+              </button>
+              <button
+                type="button"
+                onClick={() => setViewMode('ats')}
+                className={`px-2.5 py-1 rounded text-xs font-mono font-semibold transition-all ${
+                  viewMode === 'ats'
+                    ? 'bg-cyan-500 text-slate-950 font-bold shadow-sm'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+                title="View ATS structured readable text layout"
+              >
+                ATS Text View
+              </button>
+            </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
+            {/* Primary Direct Download */}
+            <a
+              href="/Zafarali_Inamdar_Resume.pdf"
+              download="Zafarali_Inamdar_Resume.pdf"
+              id="resume-download-official-btn"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-500 text-slate-950 text-xs font-bold hover:brightness-110 active:scale-95 transition-all shadow-md shadow-emerald-500/20"
+              title="Download official 1-page PDF directly"
+            >
+              <Download className="w-4 h-4" />
+              <span>Download PDF</span>
+            </a>
+
+            {/* Google Drive Link */}
+            <a
+              href="https://drive.google.com/file/d/1zJbDNuuUu1DTW65sB7WTlAqmrysI2cPM/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-950 text-blue-200 border border-blue-500/40 hover:bg-blue-900 text-xs font-medium transition-colors"
+              title="Open in Google Drive in new tab"
+            >
+              <ExternalLink className="w-3.5 h-3.5 text-blue-400" />
+              <span className="hidden sm:inline">Google Drive</span>
+            </a>
+
             <button
               onClick={handlePrint}
               id="resume-print-pdf-btn"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 text-xs font-bold hover:brightness-110 active:scale-95 transition-all shadow-md shadow-emerald-500/20"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 hover:border-cyan-400 text-xs font-medium transition-colors"
               title="Print directly or save clean 2-page PDF"
             >
               <Printer className="w-4 h-4" />
-              <span>Print / Save as PDF</span>
+              <span className="hidden md:inline">Print</span>
             </button>
 
             <a
@@ -188,8 +242,7 @@ EDUCATION
               title="Download published Gen-AI research paper PDF (030117.pdf)"
             >
               <BookOpen className="w-4 h-4 text-purple-400" />
-              <span className="hidden sm:inline">Research Paper PDF</span>
-              <ExternalLink className="w-3 h-3 text-purple-400 hidden md:inline" />
+              <span className="hidden lg:inline">Paper PDF</span>
             </a>
 
             <button
@@ -197,8 +250,8 @@ EDUCATION
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 hover:border-cyan-400 text-xs font-medium transition-colors"
               title="Download text resume"
             >
-              <Download className="w-4 h-4" />
-              <span className="hidden sm:inline">Download .txt</span>
+              <FileDown className="w-4 h-4" />
+              <span className="hidden sm:inline">.txt</span>
             </button>
 
             <button
@@ -219,8 +272,55 @@ EDUCATION
           </div>
         </div>
 
-        {/* Resume Scrollable Document Canvas */}
-        <div className="resume-scroll-canvas flex-1 overflow-y-auto p-4 sm:p-8 bg-[#080d19]">
+        {/* PDF Viewer Container (Visible when viewMode === 'pdf') */}
+        {viewMode === 'pdf' && (
+          <div className="no-print flex-1 w-full h-full p-2 sm:p-4 bg-[#080d19] flex flex-col overflow-hidden">
+            <div className="w-full h-full flex flex-col rounded-xl overflow-hidden border border-slate-800 bg-[#0e1629] shadow-2xl">
+              <div className="flex items-center justify-between px-3 sm:px-4 py-2 bg-[#0a0f1d] border-b border-slate-800 text-xs">
+                <div className="flex items-center gap-2 text-slate-300">
+                  <FileText className="w-4 h-4 text-cyan-400" />
+                  <span className="font-semibold text-white">Zafarali_Inamdar_Resume.pdf</span>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hidden sm:inline-block">
+                    Official 1-Page Document
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <a
+                    href="/Zafarali_Inamdar_Resume.pdf"
+                    download="Zafarali_Inamdar_Resume.pdf"
+                    className="flex items-center gap-1 px-3 py-1 rounded bg-emerald-500 text-slate-950 font-bold text-xs hover:brightness-110 transition-all shadow-sm"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Download</span>
+                  </a>
+                  <a
+                    href="https://drive.google.com/file/d/1zJbDNuuUu1DTW65sB7WTlAqmrysI2cPM/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:text-white text-xs border border-slate-700 transition-colors"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5 text-blue-400" />
+                    <span className="hidden md:inline">Open Drive</span>
+                  </a>
+                </div>
+              </div>
+              <div className="flex-1 w-full h-full relative bg-slate-900">
+                <iframe
+                  src="/Zafarali_Inamdar_Resume.pdf#toolbar=1"
+                  className="w-full h-full border-none"
+                  title="Official Resume PDF Preview"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Resume Scrollable Document Canvas (Always printed via @media print, visible on screen when viewMode === 'ats') */}
+        <div
+          className={`resume-scroll-canvas flex-1 overflow-y-auto p-4 sm:p-8 bg-[#080d19] ${
+            viewMode === 'ats' ? 'block' : 'hidden print:block'
+          }`}
+        >
           <div className="print-page max-w-3xl mx-auto bg-white text-[#111827] p-6 sm:p-10 rounded-xl shadow-2xl font-sans text-xs leading-relaxed selection:bg-cyan-200">
             {/* Header */}
             <div className="print-section text-center border-b pb-3.5 border-slate-300">
@@ -399,22 +499,32 @@ EDUCATION
           <div className="text-xs text-slate-400 font-mono">
             Candidate: <strong className="text-white">Zafarali Faizahmed Inamdar</strong> • Pune, MH
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <a
-              href={RESEARCH_PAPER.pdfUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              download="GenAI_Research_Paper_Inamdar_2026.pdf"
-              className="px-3.5 py-2 rounded-xl bg-purple-950/80 text-purple-200 border border-purple-500/40 text-xs font-semibold hover:bg-purple-900 transition-all flex items-center gap-1.5"
+              href="/Zafarali_Inamdar_Resume.pdf"
+              download="Zafarali_Inamdar_Resume.pdf"
+              className="px-3.5 py-2 rounded-xl bg-emerald-500 text-slate-950 text-xs font-bold hover:brightness-110 transition-all flex items-center gap-1.5 shadow-md shadow-emerald-500/20"
             >
-              <BookOpen className="w-3.5 h-3.5 text-purple-400" />
-              <span>Research Paper PDF</span>
+              <Download className="w-3.5 h-3.5" />
+              <span>Download Resume (PDF)</span>
             </a>
             <a
-              href="mailto:zafaraliinamdar@gmail.com?subject=Job%20Opportunity%20-%20Zafarali%20Inamdar"
-              className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 text-xs font-bold hover:brightness-110 transition-all"
+              href="https://drive.google.com/file/d/1zJbDNuuUu1DTW65sB7WTlAqmrysI2cPM/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-2 rounded-xl bg-slate-900 text-blue-300 border border-blue-500/30 text-xs font-semibold hover:bg-slate-800 transition-all flex items-center gap-1.5"
             >
-              Contact Directly
+              <ExternalLink className="w-3.5 h-3.5 text-blue-400" />
+              <span>Google Drive</span>
+            </a>
+            <a
+              href="https://wa.me/919860800543?text=Hi%20Zafarali,%20I%20reviewed%20your%20resume%20and%20portfolio%20and%20would%20like%20to%20connect%20regarding%20an%20engineering%20opportunity."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 text-slate-950 text-xs font-bold hover:brightness-110 transition-all flex items-center gap-1.5 shadow-md shadow-emerald-500/20"
+            >
+              <MessageCircle className="w-3.5 h-3.5 text-slate-950" />
+              <span>Chat on WhatsApp</span>
             </a>
           </div>
         </div>

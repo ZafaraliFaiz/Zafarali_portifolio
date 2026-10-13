@@ -307,19 +307,27 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
               Outstanding decision! Zafarali is ready to accelerate your engineering team with production React/Next.js,
               React Native mobile resilience, and Gen-AI system architectures.
             </p>
-            <div className="flex gap-2 pt-1">
+            <div className="flex flex-wrap gap-2 pt-1">
+              <a
+                href="https://wa.me/919860800543?text=Hi%20Zafarali,%20I%20would%20like%20to%20connect%20regarding%20an%20engineering%20opportunity."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-1 rounded bg-emerald-500 text-slate-950 font-bold text-xs hover:bg-emerald-400 transition-colors"
+              >
+                Chat on WhatsApp (+91 9860800543)
+              </a>
               <a
                 href="#contact"
                 onClick={onClose}
-                className="px-3 py-1 rounded bg-emerald-500 text-slate-950 font-bold text-xs"
+                className="px-3 py-1 rounded bg-slate-800 text-cyan-300 border border-cyan-500/40 text-xs hover:bg-slate-700 transition-colors"
               >
-                Go to Direct Contact Form
+                Go to Contact Form
               </a>
               <a
                 href="mailto:zafaraliinamdar@gmail.com?subject=Interview%20Invitation%20for%20Zafarali%20Inamdar"
-                className="px-3 py-1 rounded bg-slate-800 text-cyan-300 border border-cyan-500/40 text-xs"
+                className="px-3 py-1 rounded bg-slate-900 text-slate-300 border border-slate-700 text-xs hover:text-white transition-colors"
               >
-                Send Direct Email
+                Email
               </a>
             </div>
           </div>

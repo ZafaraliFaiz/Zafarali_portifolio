@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { BackgroundCanvas } from './components/BackgroundCanvas';
+import { ScrollProgress } from './components/ScrollProgress';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ArchitectureVisualizer } from './components/ArchitectureVisualizer';
@@ -57,6 +58,9 @@ export default function App() {
     <div className="min-h-screen bg-[#05070d] text-slate-100 relative selection:bg-cyan-500 selection:text-black">
       {/* Dynamic Physics / Constellation Canvas */}
       <BackgroundCanvas />
+
+      {/* Dynamic Scroll Progress & HUD */}
+      <ScrollProgress />
 
       {/* Navigation */}
       <Navbar

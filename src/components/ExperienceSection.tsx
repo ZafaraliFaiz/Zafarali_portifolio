@@ -1,6 +1,7 @@
 import React from 'react';
 import { Briefcase, Calendar, MapPin, CheckCircle2, Building, Sparkles, ArrowRight } from 'lucide-react';
 import { EXPERIENCES } from '../data/portfolioData';
+import { TiltCard } from './TiltCard';
 
 interface ExperienceSectionProps {
   onOpenProject: (projectId: string) => void;
@@ -44,67 +45,69 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
 
                 {/* Content Card */}
                 <div className="ml-12 sm:ml-0 sm:w-1/2 sm:px-6 w-full">
-                  <div className="glass-panel p-6 sm:p-7 rounded-2xl border border-slate-800 hover:border-cyan-500/40 transition-all shadow-xl">
-                    {/* Header info */}
-                    <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                      <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 font-semibold">
-                        {exp.type}
-                      </span>
-                      <div className="flex items-center gap-1.5 text-xs font-mono text-slate-400">
-                        <Calendar className="w-3.5 h-3.5 text-cyan-400" />
-                        <span>{exp.period}</span>
-                      </div>
-                    </div>
-
-                    <h3 className="text-xl font-bold text-white font-display">
-                      {exp.role}
-                    </h3>
-                    <div className="text-sm font-semibold text-cyan-400 mt-0.5 flex items-center gap-1.5 font-mono">
-                      <Building className="w-4 h-4" />
-                      <span>{exp.company}</span>
-                    </div>
-
-                    <div className="flex items-center gap-1.5 text-xs text-slate-500 mt-1 mb-3">
-                      <MapPin className="w-3.5 h-3.5" />
-                      <span>{exp.location}</span>
-                    </div>
-
-                    <p className="text-xs sm:text-sm text-slate-300 mb-4 leading-relaxed">
-                      {exp.summary}
-                    </p>
-
-                    {/* Bullet Points */}
-                    <ul className="space-y-2 mb-5">
-                      {exp.highlights.map((h, i) => (
-                        <li key={i} className="flex items-start gap-2 text-xs sm:text-sm text-slate-400">
-                          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                          <span className="leading-relaxed">{h}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    {/* Tech Badges */}
-                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-800">
-                      {exp.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800"
-                        >
-                          {tech}
+                  <TiltCard maxTilt={5} scale={1.015} glareOpacity={0.12} className="h-full">
+                    <div className="glass-panel p-6 sm:p-7 rounded-2xl border border-slate-800 hover:border-cyan-500/40 transition-colors shadow-xl">
+                      {/* Header info */}
+                      <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 font-semibold">
+                          {exp.type}
                         </span>
-                      ))}
-                    </div>
+                        <div className="flex items-center gap-1.5 text-xs font-mono text-slate-400">
+                          <Calendar className="w-3.5 h-3.5 text-cyan-400" />
+                          <span>{exp.period}</span>
+                        </div>
+                      </div>
 
-                    {exp.associatedProject && (
-                      <button
-                        onClick={() => onOpenProject(exp.associatedProject!)}
-                        className="mt-4 flex items-center gap-1.5 text-xs font-mono text-cyan-400 hover:text-cyan-300 transition-colors"
-                      >
-                        <span>View Project Architecture & Spec</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
-                    )}
-                  </div>
+                      <h3 className="text-xl font-bold text-white font-display">
+                        {exp.role}
+                      </h3>
+                      <div className="text-sm font-semibold text-cyan-400 mt-0.5 flex items-center gap-1.5 font-mono">
+                        <Building className="w-4 h-4" />
+                        <span>{exp.company}</span>
+                      </div>
+
+                      <div className="flex items-center gap-1.5 text-xs text-slate-500 mt-1 mb-3">
+                        <MapPin className="w-3.5 h-3.5" />
+                        <span>{exp.location}</span>
+                      </div>
+
+                      <p className="text-xs sm:text-sm text-slate-300 mb-4 leading-relaxed">
+                        {exp.summary}
+                      </p>
+
+                      {/* Bullet Points */}
+                      <ul className="space-y-2 mb-5">
+                        {exp.highlights.map((h, i) => (
+                          <li key={i} className="flex items-start gap-2 text-xs sm:text-sm text-slate-400">
+                            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                            <span className="leading-relaxed">{h}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      {/* Tech Badges */}
+                      <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-800">
+                        {exp.technologies.map((tech) => (
+                          <span
+                            key={tech}
+                            className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      {exp.associatedProject && (
+                        <button
+                          onClick={() => onOpenProject(exp.associatedProject!)}
+                          className="mt-4 flex items-center gap-1.5 text-xs font-mono text-cyan-400 hover:text-cyan-300 transition-colors"
+                        >
+                          <span>View Project Architecture & Spec</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
+                      )}
+                    </div>
+                  </TiltCard>
                 </div>
               </div>
             );
