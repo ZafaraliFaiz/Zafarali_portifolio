@@ -400,6 +400,7 @@ export const EXPERIENCES: Experience[] = [
     period: "Aug 2026 – Present",
     location: "Pune, Maharashtra (Remote / Hybrid)",
     type: "Contract / Freelance",
+    category: "Mobile",
     summary:
       "Building a production-grade, offline-first mobile application (TAIN Elect AI) for field operations, election canvassing, voter counselling, and polling management across iOS and Android.",
     highlights: [
@@ -420,9 +421,52 @@ export const EXPERIENCES: Experience[] = [
       "Expo Camera",
       "Expo SecureStore",
       "EAS Build",
+      "Google Play Console",
+      "Apple Store Connect",
     ],
     associatedProject: "tain-electai",
-    accentColor: "#38bdf8",
+    accentColor: "#0284c7",
+    metrics: [
+      { label: "Store Releases", value: "Apple & Play Store Live" },
+      { label: "Network Reliance", value: "0% (Offline-First)" },
+      { label: "Sync Engine", value: "Write-Queue + Backoff" },
+      { label: "Constituent Data", value: "PII Masking & RLS" },
+    ],
+    architectureFocus:
+      "Offline-first client write-queue in AsyncStorage coupled with NetInfo state observers and automated retry workers to ensure zero data loss in remote election polling booths.",
+    engineeringChallenge: {
+      challenge:
+        "Field canvassing agents operated in rural polling booths with intermittent or zero cellular connectivity, risking lost voter counselling surveys and duplicate registrations.",
+      solution:
+        "Engineered a resilient client-side AsyncStorage mutation queue with optimistic UI state updates. Integrated NetInfo network watchers and an exponential backoff sync daemon that auto-reconciles records to Supabase upon connection recovery.",
+      impact:
+        "Zero voter survey data loss, seamless offline operation, and successful live production deployment on both Apple App Store and Google Play Store.",
+    },
+    storeLinks: {
+      appStoreUrl: "https://apps.apple.com/us/app/tain-electai/id6807301293",
+      playStoreUrl:
+        "https://play.google.com/store/apps/details?id=com.elitespro.BEMS&pcampaignid=web_share",
+      liveUrl:
+        "https://play.google.com/store/apps/details?id=com.elitespro.BEMS&pcampaignid=web_share",
+    },
+    keyPillars: [
+      {
+        title: "Offline-First Local Queue",
+        desc: "AsyncStorage queues votes/surveys immediately without waiting for server response.",
+      },
+      {
+        title: "Camera & Secure Storage",
+        desc: "expo-camera client-side compression paired with biometric encryption via expo-secure-store.",
+      },
+      {
+        title: "Role-Restricted PII Masking",
+        desc: "Strict permission guards and Supabase Row-Level Security guard voter data.",
+      },
+      {
+        title: "Multi-Store Distribution",
+        desc: "Navigated Apple iOS Unlisted App Distribution and Google Play Closed Testing tracks to live store release.",
+      },
+    ],
   },
   {
     id: "nebula-technology",
@@ -431,6 +475,7 @@ export const EXPERIENCES: Experience[] = [
     period: "Jan 2026 – Jun 2026",
     location: "Pune, Maharashtra",
     type: "Internship",
+    category: "ERP",
     summary:
       'Spearheaded frontend architecture for "AgroStock", a full-scale agriculture management ERP covering products, purchasing, stock, billing, ledgers, and automated reporting.',
     highlights: [
@@ -453,7 +498,41 @@ export const EXPERIENCES: Experience[] = [
       "Yup",
     ],
     associatedProject: "agrostock",
-    accentColor: "#10b981",
+    accentColor: "#059669",
+    metrics: [
+      { label: "Enterprise Modules", value: "7+ Core ERP Modules" },
+      { label: "Global State", value: "Redux Toolkit Slices" },
+      { label: "Reporting Pipeline", value: "Automated jsPDF Bills" },
+      { label: "Security & RBAC", value: "Super/Sub Admin Roles" },
+    ],
+    architectureFocus:
+      "Enterprise React SPA with Redux Toolkit centralized store managing high-volume agricultural inventory decrements, multi-tier pricing, and GST invoicing.",
+    engineeringChallenge: {
+      challenge:
+        "High-throughput merchant transactions during peak harvest seasons caused billing discrepancies, delayed invoicing, and inventory runout blind spots.",
+      solution:
+        "Created atomic stock deduction workflows in Redux Toolkit with automated low-stock reorder thresholds. Engineered client-side vectorized PDF rendering with jsPDF and AutoTable for instantaneous invoice printing.",
+      impact:
+        "Reduced invoice generation time to under 2 seconds, eliminated inventory count discrepancies, and provided comprehensive audit trails for agricultural merchants.",
+    },
+    keyPillars: [
+      {
+        title: "Complete 7+ Module ERP",
+        desc: "Product Master, Purchase Orders, Live Stock, Sales POS, Customer Ledgers, and Returns.",
+      },
+      {
+        title: "Dynamic Stock Reconciler",
+        desc: "Atomic warehouse decrementing with dynamic low-stock alerts and threshold reorder triggers.",
+      },
+      {
+        title: "Automated Invoicing & GST",
+        desc: "Integrated 18% GST calculation, credit ledgers, and audit-ready PDF export via jsPDF/AutoTable.",
+      },
+      {
+        title: "Role-Based Access Control",
+        desc: "Granular permissions differentiating Super Admin financials from store operator POS screens.",
+      },
+    ],
   },
   {
     id: "knowledge-keen",
@@ -462,6 +541,7 @@ export const EXPERIENCES: Experience[] = [
     period: "May 2025 – Jul 2025",
     location: "Pune, Maharashtra",
     type: "Internship",
+    category: "Full Stack",
     summary:
       'Engineered business management modules for "Greentop" enterprise suite using Next.js App Router, HeroUI, Express.js REST APIs, and transactional MySQL.',
     highlights: [
@@ -484,7 +564,41 @@ export const EXPERIENCES: Experience[] = [
       "Git",
     ],
     associatedProject: "greentop",
-    accentColor: "#8b5cf6",
+    accentColor: "#6366f1",
+    metrics: [
+      { label: "Frontend Paradigm", value: "Next.js App Router" },
+      { label: "Data Integrity", value: "MySQL ACID Writes" },
+      { label: "Cluster Runtime", value: "PM2 Process Manager" },
+      { label: "Observability", value: "Winston Daily Rotating Logs" },
+    ],
+    architectureFocus:
+      "Modern Next.js full-stack system communicating with clustered Express.js micro-services backed by connection-pooled MySQL databases ensuring ACID transaction safety.",
+    engineeringChallenge: {
+      challenge:
+        "High-concurrency B2B batch dispatches required concurrent multi-table database operations, risking deadlocks and orphaned dispatch records.",
+      solution:
+        "Implemented structured MySQL connection pooling with parameterized SQL queries wrapped in explicit ACID transactions (START TRANSACTION, COMMIT, ROLLBACK). Clustered server with PM2 and configured Winston daily log rotation.",
+      impact:
+        "Achieved sub-100ms response times for dispatch orders with zero orphaned records; PM2 clustering ensured zero-downtime reliability.",
+    },
+    keyPillars: [
+      {
+        title: "Next.js App Router & HeroUI",
+        desc: "Engineered responsive UI modules using HeroUI and Tailwind CSS with custom data caching hooks.",
+      },
+      {
+        title: "ACID Transactional Backend",
+        desc: "Express REST APIs maintaining data integrity across vendor directories, orders, and batches.",
+      },
+      {
+        title: "MySQL Connection Pooling",
+        desc: "Optimized connection pool with parameterized queries preventing SQL injection and thread starvation.",
+      },
+      {
+        title: "Zero-Downtime Daemon",
+        desc: "PM2 cluster manager with daily rotating Winston JSON log streams for rapid diagnostics.",
+      },
+    ],
   },
 ];
 

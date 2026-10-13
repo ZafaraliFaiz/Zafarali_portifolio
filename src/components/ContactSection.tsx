@@ -17,6 +17,8 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { ScrollAssemble } from './animations/ScrollAssemble';
+import { ScrollFocusZoom } from './animations/ScrollFocusZoom';
 
 export const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -152,28 +154,32 @@ export const ContactSection: React.FC = () => {
     <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 border-2 border-sky-300 text-sky-800 text-xs font-mono uppercase tracking-wider mb-3 font-bold shadow-sm">
-            <MessageSquare className="w-4 h-4 text-sky-600 stroke-[2.5]" />
-            <span>Direct Inquiries</span>
+        <ScrollAssemble direction="top">
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 border-2 border-sky-300 text-sky-800 text-xs font-mono uppercase tracking-wider mb-3 font-bold shadow-sm">
+              <MessageSquare className="w-4 h-4 text-sky-600 stroke-[2.5]" />
+              <span>Direct Inquiries</span>
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight">
+              Let&apos;s Build Something{' '}
+              <span className="bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                Exceptional Together
+              </span>
+            </h2>
+            <p className="text-slate-700 text-sm sm:text-base mt-2 font-medium leading-relaxed">
+              Recruiter, engineering manager, founder, or collaborator? Reach out directly to discuss opportunities.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight">
-            Let&apos;s Build Something{' '}
-            <span className="bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Exceptional Together
-            </span>
-          </h2>
-          <p className="text-slate-700 text-sm sm:text-base mt-2 font-medium leading-relaxed">
-            Recruiter, engineering manager, founder, or collaborator? Reach out directly to discuss opportunities.
-          </p>
-        </div>
+        </ScrollAssemble>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Direct Info & Credentials */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-white p-6 sm:p-8 rounded-3xl border-2 border-slate-200/90 shadow-2xl space-y-6 relative overflow-hidden">
-              {/* Top Accent Line */}
-              <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600" />
+            <ScrollAssemble direction="tilt-left" delay={0.1}>
+              <ScrollFocusZoom glowColor="rgba(56, 189, 248, 0.2)">
+                <div className="bg-white p-6 sm:p-8 rounded-3xl border-2 border-slate-200/90 shadow-2xl space-y-6 relative overflow-hidden">
+                  {/* Top Accent Line */}
+                  <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600" />
 
               <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display flex items-center gap-2 mt-1">
                 <span>Fast-Track Connection</span>
@@ -286,13 +292,17 @@ export const ContactSection: React.FC = () => {
                 </a>
               </div>
             </div>
+            </ScrollFocusZoom>
+            </ScrollAssemble>
           </div>
 
           {/* Right Column: Interactive Contact Form */}
           <div className="lg:col-span-7">
-            <div className="bg-white p-6 sm:p-8 rounded-3xl border-2 border-slate-200/90 shadow-2xl relative overflow-hidden">
-              {/* Top Accent Line */}
-              <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600" />
+            <ScrollAssemble direction="tilt-right" delay={0.2}>
+              <ScrollFocusZoom glowColor="rgba(99, 102, 241, 0.2)">
+                <div className="bg-white p-6 sm:p-8 rounded-3xl border-2 border-slate-200/90 shadow-2xl relative overflow-hidden">
+                  {/* Top Accent Line */}
+                  <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600" />
 
               {/* Pre-fill Quick Chips */}
               <div className="mb-6 mt-1">
@@ -503,6 +513,8 @@ export const ContactSection: React.FC = () => {
                 </form>
               )}
             </div>
+            </ScrollFocusZoom>
+            </ScrollAssemble>
           </div>
         </div>
       </div>

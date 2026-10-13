@@ -27,9 +27,9 @@ export const ScrollProgress: React.FC = () => {
         </div>
       </div>
 
-      {/* Floating Dynamic Flow HUD & Back-to-Top Pill */}
+      {/* Floating Back-to-Top Pill */}
       <div
-        className={`fixed bottom-6 right-6 z-40 transition-all duration-300 pointer-events-auto ${
+        className={`fixed bottom-6 right-6 z-40 transition-all duration-300 pointer-events-auto no-print ${
           scrollY > 320
             ? 'opacity-100 translate-y-0'
             : 'opacity-0 translate-y-4 pointer-events-none'
@@ -38,7 +38,7 @@ export const ScrollProgress: React.FC = () => {
         <button
           onClick={handleScrollToTop}
           title="Back to Top"
-          className="group glass-panel flex items-center gap-2 px-3 py-2 rounded-full border border-cyan-500/30 hover:border-cyan-400 text-xs font-mono text-cyan-300 hover:text-white shadow-xl shadow-black/50 backdrop-blur-xl transition-all active:scale-95 hover:bg-cyan-950/40"
+          className="group flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/95 border-2 border-slate-300 hover:border-sky-400 text-xs font-mono text-slate-700 hover:text-sky-700 shadow-xl shadow-slate-900/10 backdrop-blur-xl transition-all active:scale-95"
         >
           {/* Mini circular progress indicator */}
           <div className="relative w-4 h-4 flex items-center justify-center">
@@ -47,7 +47,7 @@ export const ScrollProgress: React.FC = () => {
                 cx="12"
                 cy="12"
                 r="9"
-                className="stroke-slate-700/60"
+                className="stroke-slate-200"
                 strokeWidth="2.5"
                 fill="none"
               />
@@ -55,7 +55,7 @@ export const ScrollProgress: React.FC = () => {
                 cx="12"
                 cy="12"
                 r="9"
-                className="stroke-cyan-400 transition-all duration-75"
+                className="stroke-sky-600 transition-all duration-75"
                 strokeWidth="2.5"
                 fill="none"
                 strokeDasharray={56.5}
@@ -66,7 +66,7 @@ export const ScrollProgress: React.FC = () => {
           </div>
 
           <span className="text-[11px] font-bold">{percentage}%</span>
-          <ArrowUp className="w-3.5 h-3.5 group-hover:-translate-y-0.5 transition-transform text-cyan-400" />
+          <ArrowUp className="w-3.5 h-3.5 group-hover:-translate-y-0.5 transition-transform text-sky-600 stroke-[2.5]" />
         </button>
       </div>
     </>

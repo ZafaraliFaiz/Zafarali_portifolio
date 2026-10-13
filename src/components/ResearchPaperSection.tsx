@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { BookOpen, Copy, Check, Sparkles, FileText, ExternalLink, Award, FileDown } from 'lucide-react';
 import { RESEARCH_PAPER } from '../data/portfolioData';
 import { TiltCard } from './TiltCard';
+import { ScrollAssemble } from './animations/ScrollAssemble';
+import { ScrollFocusZoom } from './animations/ScrollFocusZoom';
 
 export const ResearchPaperSection: React.FC = () => {
   const [copiedType, setCopiedType] = useState<'apa' | 'bibtex' | null>(null);
@@ -17,24 +19,28 @@ export const ResearchPaperSection: React.FC = () => {
     <section id="research" className="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100 border-2 border-purple-300 text-purple-900 text-xs font-mono uppercase tracking-wider mb-3 font-bold shadow-sm">
-            <BookOpen className="w-4 h-4 text-purple-600 stroke-[2.5]" />
-            <span>Academic Publication</span>
+        <ScrollAssemble direction="top" distance={35}>
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100 border-2 border-purple-300 text-purple-900 text-xs font-mono uppercase tracking-wider mb-3 font-bold shadow-sm">
+              <BookOpen className="w-4 h-4 text-purple-600 stroke-[2.5]" />
+              <span>Academic Publication</span>
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight">
+              Peer-Reviewed{' '}
+              <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 bg-clip-text text-transparent">
+                Gen-AI Research
+              </span>
+            </h2>
+            <p className="text-slate-700 text-sm sm:text-base mt-2 font-medium leading-relaxed">
+              Bridging software engineering industry practices with academic empirical methodology.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight">
-            Peer-Reviewed{' '}
-            <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 bg-clip-text text-transparent">
-              Gen-AI Research
-            </span>
-          </h2>
-          <p className="text-slate-700 text-sm sm:text-base mt-2 font-medium leading-relaxed">
-            Bridging software engineering industry practices with academic empirical methodology.
-          </p>
-        </div>
+        </ScrollAssemble>
 
         {/* Paper Showcase Card */}
-        <TiltCard maxTilt={5} scale={1.01} glareOpacity={0.12}>
+        <ScrollAssemble direction="bottom" distance={45}>
+          <ScrollFocusZoom maxScale={1.02} enableGlow glowColor="rgba(168, 85, 247, 0.25)">
+            <TiltCard maxTilt={5} scale={1.01} glareOpacity={0.12}>
           <div className="bg-white p-6 sm:p-9 rounded-3xl border-2 border-purple-400/90 shadow-2xl relative overflow-hidden transition-all duration-300 hover:border-purple-500">
           {/* Top Saturated Color Stripe */}
           <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-600" />
@@ -190,7 +196,9 @@ export const ResearchPaperSection: React.FC = () => {
             </div>
           </div>
         </div>
-        </TiltCard>
+      </TiltCard>
+      </ScrollFocusZoom>
+    </ScrollAssemble>
       </div>
     </section>
   );

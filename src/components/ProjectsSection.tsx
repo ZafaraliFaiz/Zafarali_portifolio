@@ -15,6 +15,8 @@ import { PROJECTS } from '../data/portfolioData';
 import { Project } from '../types/portfolio';
 import { TiltCard } from './TiltCard';
 import { StoreBadges } from './StoreBadges';
+import { ScrollAssemble } from './animations/ScrollAssemble';
+import { ScrollFocusZoom } from './animations/ScrollFocusZoom';
 
 interface ProjectsSectionProps {
   onSelectProject: (project: Project) => void;
@@ -39,52 +41,64 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
     <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 border-2 border-sky-300 text-sky-800 text-xs font-mono uppercase tracking-wider mb-3 font-bold shadow-sm">
-              <FolderGit2 className="w-4 h-4 text-sky-600 stroke-[2.5]" />
-              <span>Production Systems & Architecture</span>
+        <ScrollAssemble direction="top" distance={35}>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 border-2 border-sky-300 text-sky-800 text-xs font-mono uppercase tracking-wider mb-3 font-bold shadow-sm">
+                <FolderGit2 className="w-4 h-4 text-sky-600 stroke-[2.5]" />
+                <span>Production Systems & Architecture</span>
+              </div>
+              <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight">
+                Featured{' '}
+                <span className="bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                  Engineering Projects
+                </span>
+              </h2>
+              <p className="text-slate-700 text-sm sm:text-base mt-2 max-w-xl font-medium leading-relaxed">
+                High-concurrency web platforms, offline-first mobile apps, and Gen-AI integrated systems built for real-world enterprise operations.
+              </p>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight">
-              Featured{' '}
-              <span className="bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                Engineering Projects
-              </span>
-            </h2>
-            <p className="text-slate-700 text-sm sm:text-base mt-2 max-w-xl font-medium leading-relaxed">
-              High-concurrency web platforms, offline-first mobile apps, and Gen-AI integrated systems built for real-world enterprise operations.
-            </p>
-          </div>
 
-          {/* Filter Pills */}
-          <div className="flex flex-wrap items-center gap-1.5 bg-white p-1.5 rounded-2xl border-2 border-slate-300 shadow-sm">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-mono transition-all font-bold ${
-                  filter === cat
-                    ? 'bg-sky-600 text-white border-2 border-sky-600 shadow-md shadow-sky-500/25 scale-[1.02]'
-                    : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100 border-2 border-transparent'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+            {/* Filter Pills */}
+            <div className="flex flex-wrap items-center gap-1.5 bg-white p-1.5 rounded-2xl border-2 border-slate-300 shadow-sm">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setFilter(cat)}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-mono transition-all font-bold ${
+                    filter === cat
+                      ? 'bg-sky-600 text-white border-2 border-sky-600 shadow-md shadow-sky-500/25 scale-[1.02]'
+                      : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100 border-2 border-transparent'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        </ScrollAssemble>
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
-            <TiltCard
-              key={project.id}
-              maxTilt={7}
-              scale={1.02}
-              glareOpacity={0.14}
-              className="h-full"
-            >
-              <div className="bg-white rounded-3xl border-2 border-slate-200/90 p-6 sm:p-7 flex flex-col justify-between h-full group relative overflow-hidden transition-all duration-300 hover:border-sky-500 hover:shadow-2xl hover:shadow-sky-500/20 shadow-xl">
+          {filteredProjects.map((project, idx) => {
+            const scatterDir = idx % 3 === 0 ? 'tilt-left' : idx % 3 === 1 ? 'bottom' : 'tilt-right';
+
+            return (
+              <ScrollAssemble
+                key={project.id}
+                direction={scatterDir}
+                delay={(idx % 3) * 0.1}
+                distance={55}
+                className="h-full"
+              >
+                <ScrollFocusZoom maxScale={1.02} enableGlow glowColor="rgba(14, 165, 233, 0.15)" className="h-full">
+                  <TiltCard
+                    maxTilt={6}
+                    scale={1.01}
+                    glareOpacity={0.12}
+                    className="h-full"
+                  >
+                    <div className="bg-white rounded-3xl border-2 border-slate-200/90 p-6 sm:p-7 flex flex-col justify-between h-full group relative overflow-hidden transition-all duration-300 hover:border-sky-500 hover:shadow-2xl hover:shadow-sky-500/20 shadow-xl">
                 {/* Top Accent Line */}
                 <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-sky-500 via-indigo-600 to-emerald-500" />
 
@@ -239,10 +253,13 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
                     <span>System Deep Dive</span>
                     <ArrowUpRight className="w-4 h-4 stroke-[2.5] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </button>
+                  </div>
                 </div>
-              </div>
-            </TiltCard>
-          ))}
+              </TiltCard>
+            </ScrollFocusZoom>
+          </ScrollAssemble>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -35,6 +35,16 @@ export interface Experience {
   technologies: string[];
   associatedProject?: string;
   accentColor: string;
+  category?: 'Mobile' | 'ERP' | 'Full Stack';
+  metrics?: { label: string; value: string }[];
+  architectureFocus?: string;
+  engineeringChallenge?: { challenge: string; solution: string; impact: string };
+  storeLinks?: {
+    appStoreUrl?: string;
+    playStoreUrl?: string;
+    liveUrl?: string;
+  };
+  keyPillars?: { title: string; desc: string }[];
 }
 
 export interface SkillCategory {
