@@ -8,6 +8,7 @@ import { BackgroundCanvas } from './components/BackgroundCanvas';
 import { ScrollProgress } from './components/ScrollProgress';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { HorizontalScrollytelling } from './components/HorizontalScrollytelling';
 import { ArchitectureVisualizer } from './components/ArchitectureVisualizer';
 import { ProjectsSection } from './components/ProjectsSection';
 import { ProjectDetailModal } from './components/ProjectDetailModal';
@@ -75,6 +76,12 @@ export default function App() {
           onOpenTerminal={() => setIsTerminalOpen(true)}
           onOpenResume={() => setIsResumeOpen(true)}
           onOpenRecruiterDeck={() => setIsRecruiterDeckOpen(true)}
+        />
+
+        {/* Pinned Horizontal Scrollytelling Journey */}
+        <HorizontalScrollytelling
+          onOpenResume={() => setIsResumeOpen(true)}
+          onOpenTerminal={() => setIsTerminalOpen(true)}
         />
 
         {/* Interactive Architecture Visualizer (Krushi, BEMS, AI Engine, DevOps) */}
