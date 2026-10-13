@@ -398,7 +398,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md">
+    <div data-lenis-prevent className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md">
       <div className="relative w-full max-w-3xl bg-[#070b14] border border-cyan-500/40 rounded-2xl shadow-2xl flex flex-col h-[80vh] max-h-[640px] overflow-hidden">
         {/* Terminal Header */}
         <div className="flex items-center justify-between px-4 py-3 bg-[#0c1222] border-b border-cyan-500/20">

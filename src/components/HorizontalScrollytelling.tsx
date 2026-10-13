@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { TiltCard } from './TiltCard';
 import { StoreBadges } from './StoreBadges';
+import { scrollToTarget } from './SmoothScroll';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
 interface HorizontalScrollytellingProps {
@@ -138,7 +139,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
     const rect = containerRef.current.getBoundingClientRect();
     const scrollableDist = containerRef.current.offsetHeight - window.innerHeight;
     const targetScrollY = window.scrollY + rect.top + (index / 4.2) * scrollableDist;
-    window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
+    scrollToTarget(targetScrollY, { duration: 1.15 });
   };
 
   const handlePrev = () => {

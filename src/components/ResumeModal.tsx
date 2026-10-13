@@ -150,6 +150,7 @@ EDUCATION
 
   return (
     <div
+      data-lenis-prevent
       className={`resume-modal-overlay fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-slate-900/60 backdrop-blur-md ${
         isOpen ? 'flex' : 'hidden print:block'
       }`}

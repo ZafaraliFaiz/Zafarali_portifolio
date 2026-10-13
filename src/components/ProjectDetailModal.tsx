@@ -40,7 +40,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/60 backdrop-blur-md">
+    <div data-lenis-prevent className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/60 backdrop-blur-md">
       <div className="relative w-full max-w-4xl bg-white border-2 border-slate-300 rounded-3xl shadow-2xl flex flex-col max-h-[92vh] overflow-hidden">
         {/* Top Accent Line */}
         <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 z-10" />

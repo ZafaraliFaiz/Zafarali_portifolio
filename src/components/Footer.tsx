@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowUp, Heart, Terminal, Sparkles, Github, Linkedin, Mail, ShieldCheck } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { scrollToTarget } from './SmoothScroll';
 
 interface FooterProps {
   onOpenTerminal: () => void;
@@ -9,7 +10,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onOpenTerminal, onOpenResume }) => {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToTarget(0, { duration: 1.2 });
   };
 
   return (

@@ -21,6 +21,7 @@ import { Footer } from './components/Footer';
 import { TerminalModal } from './components/TerminalModal';
 import { ResumeModal } from './components/ResumeModal';
 import { RecruiterFastDeck } from './components/RecruiterFastDeck';
+import { SmoothScroll } from './components/SmoothScroll';
 import { Project } from './types/portfolio';
 import { PROJECTS } from './data/portfolioData';
 
@@ -29,6 +30,9 @@ export default function App() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const [isRecruiterDeckOpen, setIsRecruiterDeckOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  const isAnyModalOpen =
+    isTerminalOpen || isResumeOpen || isRecruiterDeckOpen || selectedProject !== null;
 
   // Global hotkeys (Cmd/Ctrl + K for Terminal, Escape to close modals)
   useEffect(() => {
@@ -57,6 +61,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#f8fafc] text-slate-900 relative selection:bg-sky-500 selection:text-white">
+      {/* Lenis Smooth Scrolling Engine */}
+      <SmoothScroll isModalOpen={isAnyModalOpen} />
+
       {/* Dynamic Physics / Constellation Canvas */}
       <BackgroundCanvas />
 

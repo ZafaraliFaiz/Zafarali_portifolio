@@ -35,7 +35,7 @@ export type ArchitectureTabId =
   | "ai-engine"
   | "devops";
 
-export const ARCHITECTURE_TABS: {
+const ARCHITECTURE_TABS: {
   id: ArchitectureTabId;
   indexStr: string;
   title: string;

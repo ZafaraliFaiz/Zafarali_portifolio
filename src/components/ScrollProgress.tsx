@@ -1,12 +1,13 @@
 import React from 'react';
 import { ArrowUp } from 'lucide-react';
 import { useScrollParallax } from '../hooks/useParallax';
+import { scrollToTarget } from './SmoothScroll';
 
 export const ScrollProgress: React.FC = () => {
   const { scrollY, scrollProgress } = useScrollParallax();
 
   const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToTarget(0, { duration: 1.2 });
   };
 
   const percentage = Math.round(scrollProgress * 100);

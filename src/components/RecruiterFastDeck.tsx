@@ -17,7 +17,7 @@ export const RecruiterFastDeck: React.FC<RecruiterFastDeckProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/60 backdrop-blur-md">
+    <div data-lenis-prevent className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/60 backdrop-blur-md">
       <div className="relative w-full max-w-2xl bg-white border-2 border-slate-300 rounded-3xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
         {/* Top Accent Gradient Bar */}
         <div className="h-2 w-full bg-gradient-to-r from-sky-500 via-indigo-600 to-purple-600" />
