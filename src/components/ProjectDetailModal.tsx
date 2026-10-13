@@ -1,5 +1,5 @@
-import React from 'react';
-import { X, CheckCircle2, Cpu, Database, ExternalLink, Github, Layers, ShieldCheck, Sparkles, Smartphone, Server } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, CheckCircle2, Cpu, Database, ExternalLink, Github, Layers, ShieldCheck, Sparkles, Smartphone, Server, Eye } from 'lucide-react';
 import { Project } from '../types/portfolio';
 
 interface ProjectDetailModalProps {
@@ -13,6 +13,12 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
   onClose,
   onOpenArchitectureTab,
 }) => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSelectedImage(project?.imageUrl || null);
+  }, [project]);
+
   if (!project) return null;
 
   return (
@@ -52,6 +58,54 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
         {/* Modal Body */}
         <div className="flex-1 p-5 sm:p-7 overflow-y-auto space-y-6">
+          {/* Visual Architecture & UI Screenshot Showcase */}
+          {project.imageUrl && (
+            <div className="space-y-3">
+              <div className="relative w-full h-56 sm:h-80 rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 shadow-2xl group">
+                <img
+                  src={selectedImage || project.imageUrl}
+                  alt={project.title}
+                  className="w-full h-full object-cover object-top transition-all duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#090e1b]/90 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs font-mono text-slate-300">
+                  <span className="flex items-center gap-1.5 bg-slate-950/80 backdrop-blur px-2.5 py-1 rounded-md border border-slate-700">
+                    <Eye className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>Production Architecture & UI Preview</span>
+                  </span>
+                  <a
+                    href={selectedImage || project.imageUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 px-2.5 py-1 rounded-md border border-cyan-500/40 transition-colors"
+                  >
+                    <span>Full Resolution</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Multi-screen thumbnail gallery */}
+              {project.previewImages && project.previewImages.length > 1 && (
+                <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                  {project.previewImages.map((img, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setSelectedImage(img)}
+                      className={`relative w-24 h-16 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${
+                        (selectedImage || project.imageUrl) === img
+                          ? 'border-cyan-400 scale-105 shadow-md shadow-cyan-500/25'
+                          : 'border-slate-800 opacity-60 hover:opacity-100 hover:border-slate-600'
+                      }`}
+                    >
+                      <img src={img} alt={`thumb-${i}`} className="w-full h-full object-cover" />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Metrics Grid */}
           {project.metrics && (
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">

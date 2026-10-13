@@ -65,7 +65,14 @@ export const PROJECTS: Project[] = [
       { title: 'Supabase Postgres & Auth', desc: 'Role-based access, row-level security (RLS), and biometric token exchange.', icon: 'shield' },
       { title: 'EAS Production Pipelines', desc: 'Unlisted distribution for Apple iOS enterprise & Android Closed Testing tracks.', icon: 'smartphone' }
     ],
-    demoType: 'simulation'
+    demoType: 'simulation',
+    imageUrl: '/images/projects/tain-elect-ai-preview.jpg',
+    logoUrl: '/images/projects/tain-elect-ai-icon.png',
+    previewImages: [
+      '/images/projects/tain-elect-ai-preview.jpg',
+      '/images/projects/tain-elect-ai-screen.jpeg',
+      '/images/projects/tain-elect-ai-mockup.png'
+    ]
   },
   {
     id: 'agrostock',
@@ -80,7 +87,7 @@ export const PROJECTS: Project[] = [
       'Engineered the core React.js frontend of a comprehensive agriculture management ecosystem. Built end-to-end modules covering product catalog, bulk purchasing, warehouse inventory management, sales billing, customer ledgers, returns processing, and automated audit-ready PDF reporting.',
     keyHighlights: [
       'Architected intuitive, high-throughput workflows for agricultural merchants covering stock monitoring, multi-tier pricing, sales tax invoicing, and credit ledgers.',
-      'Configured Redux Toolkit for unified global state and built Axios interceptors with cookie-based automatic token refresh to ensure uninterrupted sessions.',
+      'Configured Redux Toolkit for unified global state and built dynamic inventory stock deduction pipelines with automated low-stock reorder triggers.',
       'Implemented Super Admin and Sub Admin role-based access control (RBAC) with protected route boundaries and strict permission enforcement.',
       'Created robust form validation pipelines with React Hook Form and Yup schemas to prevent discrepancies in financial billing and quantity entries.',
       'Integrated Chart.js for real-time sales and stock velocity visualization, coupled with automated browser printing and PDF generation using jsPDF, AutoTable, and react-to-print.'
@@ -105,14 +112,21 @@ export const PROJECTS: Project[] = [
       { label: 'Security Model', value: 'RBAC (Super/Sub Admin)' }
     ],
     architectureOverview:
-      'Vite React SPA -> Redux Toolkit State Store -> Axios Token-Refresh Interceptors -> REST API Server -> Invoicing & jsPDF Engine -> Chart.js Visualizer.',
+      'Vite React SPA -> Redux Toolkit State Store -> Multi-Tier Pricing & Billing Engine -> Atomic Stock Reconciler & Low-Stock Alerts -> Invoicing & jsPDF Engine -> Chart.js Visualizer.',
     architectureNodes: [
       { title: 'ERP Business Engine', desc: 'Product Catalog, Purchase, Stock Inventory, Invoicing, Ledger, Returns.', icon: 'layout' },
-      { title: 'Token Refresh Lifecycle', desc: 'Silent Axios interceptor handles 401s via secure HTTP-only cookies without UX disruption.', icon: 'refresh' },
+      { title: 'Inventory Stock Reconciler', desc: 'Atomic warehouse batch decrementing with dynamic low-stock alerts and threshold reorder triggers.', icon: 'layers' },
       { title: 'Automated Invoicing', desc: 'Vectorized PDF rendering using jsPDF/AutoTable for invoices and ledgers.', icon: 'file-text' },
       { title: 'Analytics Dashboards', desc: 'Interactive Chart.js charts rendering revenue velocity, inventory runouts, and yield trends.', icon: 'bar-chart' }
     ],
-    demoType: 'interactive-flow'
+    demoType: 'interactive-flow',
+    imageUrl: '/images/projects/agrostock-preview.jpg',
+    logoUrl: '/images/projects/agrostock-logo.png',
+    previewImages: [
+      '/images/projects/agrostock-preview.jpg',
+      '/images/projects/agrostock-bg1.png',
+      '/images/projects/agrostock-shop.png'
+    ]
   },
   {
     id: 'greentop',
@@ -159,7 +173,11 @@ export const PROJECTS: Project[] = [
       { title: 'MySQL Connection Pool', desc: 'Optimized pool with parameterized queries preventing SQL injection and thread starvation.', icon: 'database' },
       { title: 'PM2 & Winston Observability', desc: 'Zero-downtime process daemon with daily rotating JSON log files.', icon: 'activity' }
     ],
-    demoType: 'interactive-flow'
+    demoType: 'interactive-flow',
+    imageUrl: '/images/projects/greentop-preview.jpg',
+    previewImages: [
+      '/images/projects/greentop-preview.jpg'
+    ]
   },
   {
     id: 'email-translator',
@@ -203,7 +221,13 @@ export const PROJECTS: Project[] = [
       { title: 'FastAPI Microservice', desc: 'Asynchronous Python backend with typed Pydantic payloads and CORS compliance.', icon: 'terminal' },
       { title: 'History & Tone Analytics', desc: 'MySQL relational storage capturing usage frequencies, sentiment shifts, and bookmarks.', icon: 'history' }
     ],
-    demoType: 'interactive-flow'
+    demoType: 'interactive-flow',
+    imageUrl: '/images/projects/ai-translator-preview.jpg',
+    logoUrl: '/images/projects/ai-translator-icon.jpg',
+    previewImages: [
+      '/images/projects/ai-translator-preview.jpg',
+      '/images/projects/ai-translator-icon.jpg'
+    ]
   },
   {
     id: 'house-rent-devops',
@@ -248,7 +272,13 @@ export const PROJECTS: Project[] = [
       { title: 'NGINX Edge Proxy', desc: 'SSL termination, compression, routing, and rate-limiting shield for internal Node services.', icon: 'shield-check' },
       { title: 'AWS Cloud Infrastructure', desc: 'EC2 computing cluster configured with least-privilege IAM roles and S3 storage.', icon: 'cloud' }
     ],
-    demoType: 'preview'
+    demoType: 'preview',
+    imageUrl: '/images/projects/house-rent-preview.jpg',
+    logoUrl: '/images/projects/house-rent.jpeg',
+    previewImages: [
+      '/images/projects/house-rent-preview.jpg',
+      '/images/projects/house-rent.jpeg'
+    ]
   }
 ];
 
@@ -297,7 +327,7 @@ export const EXPERIENCES: Experience[] = [
       'Built the React.js (Vite) frontend of a full-stack agriculture management system using Tailwind CSS, SCSS, and Material UI, covering product catalog, purchase, stock, sales billing, ledger, and returns.',
       'Designed and integrated responsive Chart.js dashboards for sales and inventory analytics.',
       'Implemented automated PDF export and printing workflows via jsPDF, jsPDF-AutoTable, and react-to-print for invoices and audit records.',
-      'Implemented Redux Toolkit state management, Axios API integration with cookie-based token refresh, and role-based access (Super Admin/Sub Admin) with protected routes and validated forms (React Hook Form, Yup).'
+      'Implemented Redux Toolkit state management, atomic sales billing workflows with inventory stock reconciliations, and role-based access (Super Admin/Sub Admin) with protected routes and validated forms (React Hook Form, Yup).'
     ],
     technologies: [
       'React.js',

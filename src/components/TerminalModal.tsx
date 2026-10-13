@@ -143,7 +143,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
               Catalog, Purchasing, Stock tracking, Sales billing, Financial ledger, Returns, and automated PDF reporting (jsPDF).
             </p>
             <p className="text-slate-400">
-              State: Redux Toolkit | Auth: Axios token refresh with HTTP-only cookies | RBAC: Super Admin/Sub Admin.
+              State: Redux Toolkit | Inventory: Atomic batch deduction & low-stock triggers | Invoicing: Automated jsPDF | RBAC: Super Admin/Sub Admin.
             </p>
           </div>
         );

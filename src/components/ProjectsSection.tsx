@@ -88,6 +88,41 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-indigo-500 to-emerald-500 opacity-60 group-hover:opacity-100 transition-opacity" />
 
                 <div>
+                  {/* Interactive Screenshot Preview */}
+                  {project.imageUrl && (
+                    <div 
+                      onClick={() => onSelectProject(project)}
+                      className="relative w-full h-44 sm:h-48 rounded-xl overflow-hidden mb-4 border border-slate-800/80 group/img cursor-pointer bg-slate-950"
+                    >
+                      <img
+                        src={project.imageUrl}
+                        alt={project.title}
+                        className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#090e1b] via-transparent to-transparent opacity-80" />
+                      
+                      {/* Floating App Icon / Client Tag */}
+                      {project.logoUrl && (
+                        <div className="absolute top-2.5 left-2.5">
+                          <img
+                            src={project.logoUrl}
+                            alt="app-icon"
+                            className="w-7 h-7 rounded-lg object-contain bg-slate-950/90 p-0.5 border border-slate-700 shadow-md"
+                          />
+                        </div>
+                      )}
+
+                      {/* Interactive Hover CTA */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity bg-black/40 backdrop-blur-[2px]">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cyan-500 text-slate-950 font-mono text-xs font-bold shadow-lg shadow-cyan-500/30 transform translate-y-1 group-hover/img:translate-y-0 transition-transform">
+                          <Sparkles className="w-3.5 h-3.5" />
+                          <span>View Architecture & Specs</span>
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Meta badge */}
                   <div className="flex items-center justify-between gap-2 mb-3">
                     <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">

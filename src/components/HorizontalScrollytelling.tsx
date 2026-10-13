@@ -40,9 +40,11 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
   const [activeChapter, setActiveChapter] = useState(0);
   const [maxTranslate, setMaxTranslate] = useState(0);
 
-  // Chapter 2 interactive simulation: Token interceptor
-  const [tokenSimStatus, setTokenSimStatus] = useState<'valid' | 'expired' | 'refreshing'>('valid');
-  const [tokenLog, setTokenLog] = useState('Session active. Refresh token queued.');
+  // Chapter 2 interactive simulation: ERP Sales Order Dispatch & Stock Deduction
+  const [erpStockCount, setErpStockCount] = useState<number>(450);
+  const [erpInvoiceNum, setErpInvoiceNum] = useState<number>(1042);
+  const [erpDispatchStatus, setErpDispatchStatus] = useState<'idle' | 'deducting' | 'billed'>('idle');
+  const [erpLog, setErpLog] = useState('Inventory state healthy: SKU-WHT-300 batch #24B verified at 450 units.');
 
   // Chapter 3 interactive simulation: TAIN Elect AI offline state
   const [simOnline, setSimOnline] = useState(false);
@@ -61,7 +63,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
     {
       id: 'enterprise',
       num: '02',
-      title: 'Enterprise ERP & Token Interceptor Architecture',
+      title: 'High-Throughput ERP Billing & Dynamic Inventory Reconciliation',
       shortTitle: 'Enterprise ERP',
       theme: 'cyan',
       tag: 'AgroStock & Greentop Systems',
@@ -147,16 +149,23 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
   };
 
   // Simulation helpers
-  const handleTestToken = () => {
-    setTokenSimStatus('expired');
-    setTokenLog('401 Unauthorized caught. Queueing API requests...');
+  const handleDispatchOrder = () => {
+    if (erpStockCount <= 25) {
+      setErpLog('⚠️ Reorder alert triggered! Stock at critical threshold (< 25 units). Replenishing demo batch to 450...');
+      setErpStockCount(450);
+      return;
+    }
+    setErpDispatchStatus('deducting');
+    setErpLog(`Dispatching B2B Order #INV-${erpInvoiceNum}... Verifying batch SKU-WHT-300.`);
     setTimeout(() => {
-      setTokenSimStatus('refreshing');
-      setTokenLog('Rotating refresh cookie via secure HTTP-only endpoint...');
-      setTimeout(() => {
-        setTokenSimStatus('valid');
-        setTokenLog('New JWT installed. 4 queued requests replayed with 100% success.');
-      }, 900);
+      const deduction = 25;
+      const newStock = erpStockCount - deduction;
+      const nextInv = erpInvoiceNum + 1;
+      setErpStockCount(newStock);
+      setErpInvoiceNum(nextInv);
+      setErpDispatchStatus('billed');
+      setErpLog(`✓ Invoiced ₹38,500 (+18% GST). Stock deducted: ${deduction} units (Balance: ${newStock}). jsPDF invoice generated & ledger updated.`);
+      setTimeout(() => setErpDispatchStatus('idle'), 1200);
     }, 700);
   };
 
@@ -337,7 +346,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
               </TiltCard>
             </div>
 
-            {/* CHAPTER 02: Enterprise ERP & Token Interceptor */}
+            {/* CHAPTER 02: Enterprise ERP Billing & Dynamic Stock Reconciliation */}
             <div className="w-[88vw] max-w-[960px] min-w-[340px] shrink-0">
               <TiltCard maxTilt={6} scale={1.01} glareOpacity={0.12}>
                 <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-cyan-500/30 shadow-2xl relative overflow-hidden bg-gradient-to-br from-[#06121f]/90 to-[#070b14]/90">
@@ -353,38 +362,45 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                   </div>
 
                   <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-display">
-                    High-Concurrency ERP & Transparent Token Queuing
+                    High-Throughput ERP Billing & Dynamic Stock Reconciliation
                   </h3>
                   <p className="text-slate-300 text-xs sm:text-sm mt-2 leading-relaxed">
-                    Designed complex multi-tenant inventory pipelines and B2B workflows. Built a zero-drop Axios interceptor
-                    architecture that captures expired JWTs, pauses subsequent concurrent requests, refreshes tokens silently,
-                    and replays pending queries without interrupting active user workflows.
+                    Designed complex multi-warehouse inventory pipelines and B2B wholesale workflows. Built atomic
+                    stock deduction routines that prevent overselling across wholesale counters, compute tiered pricing
+                    with automated 18% GST calculation, update ledger balances, and generate vector PDF invoices instantly.
                   </p>
 
-                  {/* Interactive Token Simulator */}
+                  {/* Interactive ERP Order Dispatch Simulator */}
                   <div className="mt-5 p-4 rounded-2xl bg-slate-950/90 border border-slate-800">
-                    <div className="flex items-center justify-between gap-3 mb-2">
+                    <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-mono text-slate-400">Live Interceptor Status:</span>
+                        <span className="text-xs font-mono text-slate-400">Warehouse Stock (SKU-WHT-300):</span>
                         <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded ${
-                          tokenSimStatus === 'valid'
+                          erpStockCount > 100
                             ? 'bg-emerald-500/20 text-emerald-400'
-                            : tokenSimStatus === 'expired'
-                            ? 'bg-rose-500/20 text-rose-400'
-                            : 'bg-amber-500/20 text-amber-400'
+                            : erpStockCount > 25
+                            ? 'bg-amber-500/20 text-amber-400'
+                            : 'bg-rose-500/20 text-rose-400'
                         }`}>
-                          {tokenSimStatus.toUpperCase()}
+                          {erpStockCount} Units Available
                         </span>
+                        {erpDispatchStatus !== 'idle' && (
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 animate-pulse">
+                            {erpDispatchStatus === 'deducting' ? 'DEDUCTING STOCK...' : 'BILLED & POSTED ✓'}
+                          </span>
+                        )}
                       </div>
                       <button
-                        onClick={handleTestToken}
-                        className="px-3 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 hover:bg-cyan-500 hover:text-slate-950 text-xs font-mono font-semibold transition-all"
+                        onClick={handleDispatchOrder}
+                        disabled={erpDispatchStatus === 'deducting'}
+                        className="px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 hover:bg-cyan-500 hover:text-slate-950 text-xs font-mono font-semibold transition-all disabled:opacity-50 flex items-center gap-1.5"
                       >
-                        ⚡ Simulate Expired JWT
+                        <Zap className="w-3.5 h-3.5" />
+                        <span>Dispatch B2B Order (-25 Bags)</span>
                       </button>
                     </div>
                     <div className="text-[11px] font-mono text-slate-300 bg-slate-900/80 p-2.5 rounded-lg border border-slate-800">
-                      &gt; {tokenLog}
+                      &gt; {erpLog}
                     </div>
                   </div>
 
@@ -394,12 +410,12 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                       <div className="text-base font-bold text-cyan-400 font-mono mt-0.5">10,000+ Items</div>
                     </div>
                     <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
-                      <div className="text-xs text-slate-400">Session Drop Rate</div>
-                      <div className="text-base font-bold text-emerald-400 font-mono mt-0.5">0.00% Zero-Drop</div>
+                      <div className="text-xs text-slate-400">Stock Overselling Rate</div>
+                      <div className="text-base font-bold text-emerald-400 font-mono mt-0.5">0.00% Zero-Loss</div>
                     </div>
                     <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
-                      <div className="text-xs text-slate-400">API Response Time</div>
-                      <div className="text-base font-bold text-indigo-400 font-mono mt-0.5">&lt; 120ms Latency</div>
+                      <div className="text-xs text-slate-400">Vector PDF Generation</div>
+                      <div className="text-base font-bold text-indigo-400 font-mono mt-0.5">&lt; 150ms jsPDF</div>
                     </div>
                   </div>
                 </div>

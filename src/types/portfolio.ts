@@ -16,6 +16,9 @@ export interface Project {
   demoType?: 'interactive-flow' | 'simulation' | 'preview';
   githubUrl?: string;
   liveUrl?: string;
+  imageUrl?: string;
+  logoUrl?: string;
+  previewImages?: string[];
 }
 
 export interface Experience {

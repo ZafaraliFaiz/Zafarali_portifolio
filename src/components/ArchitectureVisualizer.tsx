@@ -16,7 +16,11 @@ import {
   Send,
   GitBranch,
   Cloud,
-  Smartphone
+  Smartphone,
+  Package,
+  ShoppingCart,
+  FileText,
+  AlertTriangle
 } from 'lucide-react';
 
 export const ArchitectureVisualizer: React.FC = () => {
@@ -34,9 +38,30 @@ export const ArchitectureVisualizer: React.FC = () => {
   ]);
   const [isSyncing, setIsSyncing] = useState(false);
 
-  // AgroStock Simulation State
-  const [tokenStatus, setTokenStatus] = useState<'valid' | 'expired' | 'refreshing' | 'replayed'>('valid');
-  const [tokenLog, setTokenLog] = useState<string[]>(['Session initiated with secure HTTP-only refresh cookie.']);
+  // AgroStock ERP Inventory & Sales Pipeline State
+  interface ERPProduct {
+    id: string;
+    name: string;
+    sku: string;
+    unitPrice: number;
+    stock: number;
+    minThreshold: number;
+    category: string;
+  }
+
+  const [erpProducts, setErpProducts] = useState<ERPProduct[]>([
+    { id: '1', name: 'Wheat Seed Hybrid (Sharbati)', sku: 'SKU-WHT-300', unitPrice: 1540, stock: 240, minThreshold: 50, category: 'Seeds' },
+    { id: '2', name: 'Urea 46% Nitrogen Granular', sku: 'SKU-URE-460', unitPrice: 285, stock: 480, minThreshold: 100, category: 'Fertilizers' },
+    { id: '3', name: 'Potash Soluble Fertilizer 50kg', sku: 'SKU-POT-750', unitPrice: 1750, stock: 35, minThreshold: 40, category: 'Nutrients' },
+  ]);
+  const [selectedProductId, setSelectedProductId] = useState<string>('1');
+  const [orderQuantity, setOrderQuantity] = useState<number>(10);
+  const [isProcessingOrder, setIsProcessingOrder] = useState<boolean>(false);
+  const [billingStage, setBillingStage] = useState<'idle' | 'pricing' | 'stock' | 'ledger' | 'invoice'>('idle');
+  const [erpLogs, setErpLogs] = useState<string[]>([
+    'AgroStock Ledger Core v2.4 initialized. Real-time batch inventory listeners connected.',
+    'Warehouse bin verification passed: All stock quantities match primary ledger.',
+  ]);
 
   // AI Translator State
   const [selectedTone, setSelectedTone] = useState<'Executive' | 'Diplomatic' | 'Concise' | 'Persuasive'>('Executive');
@@ -76,31 +101,73 @@ export const ArchitectureVisualizer: React.FC = () => {
     }
   };
 
-  // Handle AgroStock Token Simulation
-  const handleSimulateTokenExpiry = () => {
-    setTokenStatus('expired');
-    setTokenLog((prev) => [
+  // Handle AgroStock ERP Billing & Stock Deduction Simulation
+  const handleDispatchOrder = () => {
+    const product = erpProducts.find((p) => p.id === selectedProductId);
+    if (!product) return;
+    if (product.stock < orderQuantity) {
+      setErpLogs((prev) => [
+        `❌ Dispatch Blocked: Insufficient stock for ${product.name}. Available: ${product.stock}, Requested: ${orderQuantity}.`,
+        ...prev,
+      ]);
+      return;
+    }
+
+    setIsProcessingOrder(true);
+    setBillingStage('pricing');
+    const subtotal = product.unitPrice * orderQuantity;
+    const gst = Math.round(subtotal * 0.18);
+    const total = subtotal + gst;
+    const invId = `INV-${Math.floor(10000 + Math.random() * 90000)}`;
+
+    setErpLogs((prev) => [
+      `⚡ [Step 1: Pricing & GST] Order: ${orderQuantity}x ${product.name} (${product.sku}) | Base: ₹${subtotal.toLocaleString()} + 18% GST: ₹${gst.toLocaleString()} = Total: ₹${total.toLocaleString()}`,
       ...prev,
-      '⚠️ Request dispatched -> Received HTTP 401 Unauthorized (JWT Expired)',
-      '🛡️ Axios Interceptor intercepted 401, queued original request.',
     ]);
 
     setTimeout(() => {
-      setTokenStatus('refreshing');
-      setTokenLog((prev) => [
+      setBillingStage('stock');
+      const updatedStock = product.stock - orderQuantity;
+      setErpProducts((prev) =>
+        prev.map((p) => (p.id === product.id ? { ...p, stock: updatedStock } : p))
+      );
+      setErpLogs((prev) => [
+        `📦 [Step 2: Atomic Warehouse Deduction] Bin lock acquired. Deducted ${orderQuantity} units from ${product.sku}. Remaining: ${updatedStock} units.${
+          updatedStock <= product.minThreshold ? ` ⚠️ REORDER WARNING: Stock fell below threshold (${product.minThreshold})!` : ''
+        }`,
         ...prev,
-        '🔄 Sending silent POST /auth/refresh with HttpOnly Cookie...',
-        '✨ New Access Token issued by backend (200 OK)',
       ]);
 
       setTimeout(() => {
-        setTokenStatus('replayed');
-        setTokenLog((prev) => [
+        setBillingStage('ledger');
+        setErpLogs((prev) => [
+          `📒 [Step 3: Double-Entry Ledger] Debited Accounts Receivable ₹${total.toLocaleString()} | Credited Sales Account & GST Output Tax.`,
           ...prev,
-          '🚀 Replaying original request with new Bearer token -> 200 OK SUCCESS',
         ]);
-      }, 900);
-    }, 900);
+
+        setTimeout(() => {
+          setBillingStage('invoice');
+          setIsProcessingOrder(false);
+          setErpLogs((prev) => [
+            `✅ [Step 4: Vector PDF Output] Generated Invoice #${invId} via jsPDF AutoTable. Ready for thermal print / WhatsApp billing.`,
+            ...prev,
+          ]);
+        }, 700);
+      }, 700);
+    }, 700);
+  };
+
+  const handleRestock = (productId: string) => {
+    setErpProducts((prev) =>
+      prev.map((p) => (p.id === productId ? { ...p, stock: p.stock + 100 } : p))
+    );
+    const prod = erpProducts.find((p) => p.id === productId);
+    if (prod) {
+      setErpLogs((prev) => [
+        `📥 Warehouse Restock: Added +100 units to ${prod.sku} (${prod.name}). Stock replenished.`,
+        ...prev,
+      ]);
+    }
   };
 
   // Tone transformations
@@ -146,7 +213,7 @@ export const ArchitectureVisualizer: React.FC = () => {
           </h2>
           <p className="text-slate-400 text-sm sm:text-base mt-3">
             Interact with live simulations of the key engineering patterns I designed across my projects: 
-            Offline-first queues, silent token refresh, multi-provider Gen-AI orchestration, and automated CI/CD pipelines.
+            Offline-first queues, atomic warehouse stock deductions, multi-provider Gen-AI orchestration, and automated CI/CD pipelines.
           </p>
         </div>
 
@@ -172,8 +239,8 @@ export const ArchitectureVisualizer: React.FC = () => {
                 : 'bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-slate-700'
             }`}
           >
-            <RefreshCw className="w-4 h-4" />
-            <span>AgroStock Silent Auth Refresh</span>
+            <Layers className="w-4 h-4" />
+            <span>AgroStock Inventory & Billing Pipeline</span>
           </button>
 
           <button
@@ -325,75 +392,183 @@ export const ArchitectureVisualizer: React.FC = () => {
           </div>
         )}
 
-        {/* Tab 2: AgroStock Silent Token Refresh */}
+        {/* Tab 2: AgroStock Inventory & Billing Pipeline */}
         {activeTab === 'agrostock' && (
           <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-emerald-500/25 shadow-2xl relative overflow-hidden">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-800">
               <div>
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-mono uppercase bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-md border border-emerald-500/40">
-                    Nebula Technology • React Vite + Redux Toolkit
+                    Nebula Technology • React Vite + Redux Toolkit + Node.js
                   </span>
-                  <span className="text-xs text-slate-400 font-mono">Axios Interceptors + HTTP-Only Cookie Refresh</span>
+                  <span className="text-xs text-slate-400 font-mono">Atomic Stock Reconciliation + GST Billing + jsPDF Invoicing</span>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-white mt-1">
-                  Zero-Interruption JWT Token Refresh Lifecycle
+                  High-Throughput ERP Sales Billing & Batch Inventory Pipeline
                 </h3>
               </div>
 
-              <button
-                onClick={handleSimulateTokenExpiry}
-                disabled={tokenStatus === 'refreshing'}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-500 text-slate-950 text-xs sm:text-sm font-bold hover:brightness-110 active:scale-95 transition-all disabled:opacity-50"
-              >
-                <RefreshCw className={`w-3.5 h-3.5 ${tokenStatus === 'refreshing' ? 'animate-spin' : ''}`} />
-                <span>Simulate Expired Token (401)</span>
-              </button>
-            </div>
+              {/* Order Controls */}
+              <div className="flex flex-wrap items-center gap-3">
+                <div className="flex items-center gap-2 bg-slate-900/90 border border-slate-800 rounded-xl px-3 py-1.5">
+                  <span className="text-xs font-mono text-slate-400">Product:</span>
+                  <select
+                    value={selectedProductId}
+                    onChange={(e) => setSelectedProductId(e.target.value)}
+                    className="bg-transparent text-xs font-mono text-emerald-300 focus:outline-none cursor-pointer"
+                  >
+                    {erpProducts.map((p) => (
+                      <option key={p.id} value={p.id} className="bg-slate-900 text-white">
+                        {p.name.split(' ')[0]} ({p.sku}) - ₹{p.unitPrice}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-            {/* Visual Token Lifecycle */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-3 my-6">
-              <div className={`p-3.5 rounded-xl border text-center transition-all ${
-                tokenStatus === 'valid' ? 'bg-emerald-950/40 border-emerald-400' : 'bg-slate-950/60 border-slate-800'
-              }`}>
-                <div className="text-xs font-mono text-emerald-400 font-bold mb-1">1. Active Request</div>
-                <div className="text-[11px] text-slate-400">User submits Sales Billing form</div>
-                <div className="mt-2 text-[10px] font-mono text-slate-300">Bearer Token: VALID</div>
-              </div>
+                <div className="flex items-center gap-2 bg-slate-900/90 border border-slate-800 rounded-xl px-3 py-1.5">
+                  <span className="text-xs font-mono text-slate-400">Qty:</span>
+                  <input
+                    type="number"
+                    min="1"
+                    max="50"
+                    value={orderQuantity}
+                    onChange={(e) => setOrderQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+                    className="w-12 bg-transparent text-xs font-mono text-white text-center focus:outline-none border-b border-slate-700"
+                  />
+                  <span className="text-[10px] text-slate-500">units</span>
+                </div>
 
-              <div className={`p-3.5 rounded-xl border text-center transition-all ${
-                tokenStatus === 'expired' ? 'bg-rose-950/40 border-rose-400' : 'bg-slate-950/60 border-slate-800'
-              }`}>
-                <div className="text-xs font-mono text-rose-400 font-bold mb-1">2. 401 Interception</div>
-                <div className="text-[11px] text-slate-400">Axios Interceptor catches error</div>
-                <div className="mt-2 text-[10px] font-mono text-rose-300">Original req queued</div>
-              </div>
-
-              <div className={`p-3.5 rounded-xl border text-center transition-all ${
-                tokenStatus === 'refreshing' ? 'bg-cyan-950/40 border-cyan-400' : 'bg-slate-950/60 border-slate-800'
-              }`}>
-                <div className="text-xs font-mono text-cyan-400 font-bold mb-1">3. Silent Refresh</div>
-                <div className="text-[11px] text-slate-400">POST /refresh with HttpOnly cookie</div>
-                <div className="mt-2 text-[10px] font-mono text-cyan-300">New Access Token</div>
-              </div>
-
-              <div className={`p-3.5 rounded-xl border text-center transition-all ${
-                tokenStatus === 'replayed' ? 'bg-emerald-950/40 border-emerald-400' : 'bg-slate-950/60 border-slate-800'
-              }`}>
-                <div className="text-xs font-mono text-emerald-400 font-bold mb-1">4. Replay Request</div>
-                <div className="text-[11px] text-slate-400">Invoice saved without logging out!</div>
-                <div className="mt-2 text-[10px] font-mono text-emerald-300">Zero UX friction</div>
+                <button
+                  onClick={handleDispatchOrder}
+                  disabled={isProcessingOrder}
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-500 text-slate-950 text-xs sm:text-sm font-bold hover:brightness-110 active:scale-95 transition-all disabled:opacity-50 shadow-md shadow-emerald-500/20"
+                >
+                  <Package className={`w-3.5 h-3.5 ${isProcessingOrder ? 'animate-bounce' : ''}`} />
+                  <span>{isProcessingOrder ? 'Deducting Stock...' : 'Dispatch B2B Bill & Deduct'}</span>
+                </button>
               </div>
             </div>
 
-            {/* Live Terminal Log */}
+            {/* Warehouse Inventory Stock Level Matrix */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 my-6">
+              {erpProducts.map((p) => {
+                const isSelected = p.id === selectedProductId;
+                const isLowStock = p.stock <= p.minThreshold;
+
+                return (
+                  <div
+                    key={p.id}
+                    onClick={() => setSelectedProductId(p.id)}
+                    className={`p-4 rounded-xl border cursor-pointer transition-all ${
+                      isSelected
+                        ? 'bg-emerald-950/40 border-emerald-400 shadow-md shadow-emerald-500/10'
+                        : 'bg-slate-950/70 border-slate-800 hover:border-slate-700'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-2 mb-1.5">
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">
+                        {p.category} • {p.sku}
+                      </span>
+                      {isLowStock ? (
+                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30 font-bold animate-pulse flex items-center gap-1">
+                          <AlertTriangle className="w-2.5 h-2.5" /> LOW STOCK
+                        </span>
+                      ) : (
+                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold">
+                          IN STOCK
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="text-sm font-bold text-white truncate">{p.name}</div>
+                    <div className="flex items-baseline justify-between mt-2 pt-2 border-t border-slate-800/80">
+                      <div>
+                        <div className="text-[10px] text-slate-400 font-mono">Wholesale Price</div>
+                        <div className="text-xs font-mono font-bold text-slate-200">₹{p.unitPrice.toLocaleString()} / unit</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-[10px] text-slate-400 font-mono">Available Stock</div>
+                        <div className={`text-base font-mono font-extrabold ${isLowStock ? 'text-rose-400' : 'text-emerald-400'}`}>
+                          {p.stock} units
+                        </div>
+                      </div>
+                    </div>
+
+                    {isLowStock && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRestock(p.id);
+                        }}
+                        className="w-full mt-3 py-1 rounded-lg bg-rose-500/10 text-rose-300 border border-rose-500/30 hover:bg-rose-500 hover:text-slate-950 text-[10px] font-mono font-bold transition-all"
+                      >
+                        + Restock Batch (+100 Units)
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Visual 4-Stage Transaction Pipeline */}
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-6">
+              <div className={`p-3.5 rounded-xl border text-center transition-all ${
+                billingStage === 'pricing' ? 'bg-emerald-500/20 border-emerald-400 scale-[1.02]' : 'bg-slate-950/60 border-slate-800'
+              }`}>
+                <div className="text-xs font-mono text-emerald-400 font-bold mb-1">1. Pricing & GST</div>
+                <div className="text-[11px] text-slate-400">Multi-tier wholesale calculation + 18% GST</div>
+                <div className="mt-2 text-[10px] font-mono text-slate-300">
+                  {billingStage === 'pricing' ? 'COMPUTING TAX...' : 'State: Ready'}
+                </div>
+              </div>
+
+              <div className={`p-3.5 rounded-xl border text-center transition-all ${
+                billingStage === 'stock' ? 'bg-cyan-500/20 border-cyan-400 scale-[1.02]' : 'bg-slate-950/60 border-slate-800'
+              }`}>
+                <div className="text-xs font-mono text-cyan-400 font-bold mb-1">2. Atomic Stock Deduct</div>
+                <div className="text-[11px] text-slate-400">Prevents overselling & checks min-threshold</div>
+                <div className="mt-2 text-[10px] font-mono text-slate-300">
+                  {billingStage === 'stock' ? 'LOCKING BIN...' : 'Bin Lock: Free'}
+                </div>
+              </div>
+
+              <div className={`p-3.5 rounded-xl border text-center transition-all ${
+                billingStage === 'ledger' ? 'bg-indigo-500/20 border-indigo-400 scale-[1.02]' : 'bg-slate-950/60 border-slate-800'
+              }`}>
+                <div className="text-xs font-mono text-indigo-400 font-bold mb-1">3. Ledger Posting</div>
+                <div className="text-[11px] text-slate-400">Double-entry debit/credit reconciliation</div>
+                <div className="mt-2 text-[10px] font-mono text-slate-300">
+                  {billingStage === 'ledger' ? 'POSTING LEDGER...' : 'Accounts: Balanced'}
+                </div>
+              </div>
+
+              <div className={`p-3.5 rounded-xl border text-center transition-all ${
+                billingStage === 'invoice' ? 'bg-emerald-500/20 border-emerald-400 scale-[1.02]' : 'bg-slate-950/60 border-slate-800'
+              }`}>
+                <div className="text-xs font-mono text-emerald-400 font-bold mb-1">4. Vector jsPDF</div>
+                <div className="text-[11px] text-slate-400">Printable invoice + QR + auto-dispatch</div>
+                <div className="mt-2 text-[10px] font-mono text-slate-300">
+                  {billingStage === 'invoice' ? 'INVOICE ISSUED ✓' : 'Thermal & PDF Ready'}
+                </div>
+              </div>
+            </div>
+
+            {/* Live Terminal / Audit Log */}
             <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs space-y-1 max-h-36 overflow-y-auto">
-              <div className="text-slate-500 font-semibold mb-2"># Axios Auth Interceptor Event Stream:</div>
-              {tokenLog.map((log, index) => (
+              <div className="text-slate-500 font-semibold mb-2 flex items-center justify-between">
+                <span># AgroStock ERP Transaction & Audit Log:</span>
+                <span className="text-[10px] text-emerald-400">Live Stream • Synchronized</span>
+              </div>
+              {erpLogs.map((log, index) => (
                 <div key={index} className="text-slate-300 leading-relaxed">
                   {log}
                 </div>
               ))}
+            </div>
+
+            <div className="mt-4 pt-3 border-t border-slate-800 text-xs font-mono text-slate-400 flex flex-wrap items-center justify-between gap-2">
+              <span>💡 Try dispatching orders to watch stock decrement in real-time. If stock drops below threshold, an automated reorder alert triggers!</span>
+              <span className="text-emerald-400 font-bold">Stock Reconciliation: 100% Atomic</span>
             </div>
           </div>
         )}

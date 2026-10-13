@@ -67,7 +67,7 @@ TAIN ELECT AI (INDEPENDENT CONTRACTOR) - FREELANCE REACT NATIVE DEVELOPER (Aug 2
 NEBULA TECHNOLOGY - SOFTWARE DEVELOPER INTERN (Jan 2026 – Jun 2026)
 • Built the React.js (Vite) frontend of a full-stack agriculture management system ("AgroStock") using Tailwind CSS, SCSS, and Material UI.
 • Integrated Chart.js dashboards and automated PDF export/printing via jsPDF/AutoTable and react-to-print.
-• Implemented Redux Toolkit state management, Axios API integration with cookie-based token refresh, and role-based access.
+• Implemented Redux Toolkit state management, dynamic inventory stock deduction pipelines, and role-based access.
 
 KNOWLEDGE KEEN - WEB DEVELOPMENT INTERN (May 2025 – Jul 2025)
 • Developed full-stack business management modules ("Greentop") using Next.js (App Router), React.js, TypeScript, HeroUI, and Tailwind CSS.
@@ -118,7 +118,7 @@ TAIN ELECT AI (INDEPENDENT CONTRACTOR) - FREELANCE REACT NATIVE DEVELOPER (Aug 2
 NEBULA TECHNOLOGY - SOFTWARE DEVELOPER INTERN (Jan 2026 – Jun 2026)
 • Built the React.js (Vite) frontend of a full-stack agriculture management system ("AgroStock") using Tailwind CSS, SCSS, and Material UI.
 • Integrated Chart.js dashboards and automated PDF export/printing via jsPDF/AutoTable and react-to-print.
-• Implemented Redux Toolkit state management, Axios API integration with cookie-based token refresh, and role-based access.
+• Implemented Redux Toolkit state management, dynamic inventory stock deduction pipelines, and role-based access.
 
 KNOWLEDGE KEEN - WEB DEVELOPMENT INTERN (May 2025 – Jul 2025)
 • Developed full-stack business management modules ("Greentop") using Next.js (App Router), React.js, TypeScript, HeroUI, and Tailwind CSS.
@@ -410,7 +410,7 @@ EDUCATION
                 <div className="text-[10px] text-slate-500 italic mb-1 font-mono">Jan 2026 – Jun 2026</div>
                 <ul className="list-disc pl-4 space-y-1 text-[10.5px] text-slate-700 leading-normal">
                   <li>Built the React.js (Vite) frontend of a full-stack agriculture management system using Tailwind CSS, SCSS, and Material UI, covering product catalog, purchase, stock, sales billing, ledger, and returns, with Chart.js dashboards and automated PDF export/printing via jsPDF/AutoTable and react-to-print.</li>
-                  <li>Implemented Redux Toolkit state management, Axios API integration with cookie-based token refresh, and role-based access (Super Admin/Sub Admin) with protected routes and validated forms (React Hook Form, Yup).</li>
+                  <li>Implemented Redux Toolkit state management, dynamic inventory stock deduction with low-stock alerts, and role-based access (Super Admin/Sub Admin) with protected routes and validated forms (React Hook Form, Yup).</li>
                 </ul>
               </div>
 
