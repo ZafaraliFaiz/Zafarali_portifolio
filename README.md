@@ -70,8 +70,8 @@ This repository houses the modern, high-performance portfolio website of **Zafar
 
 | Company / Role | Focus & Stack | Key Highlights |
 | :--- | :--- | :--- |
-| **Tain ElectAI**<br><sub>Freelance React Native Developer (Aug 2026 – Present)</sub> | React Native, Expo Router, Supabase, Zustand, TanStack Query | Offline-first field-ops app, local write queue with background sync, Apple Unlisted & Google Play testing rollout. |
-| **Nebula Technology**<br><sub>Software Developer Intern (Jan 2026 – Jun 2026)</sub> | React.js, Vite, Tailwind, SCSS, Redux Toolkit, Chart.js, jsPDF | Full-stack agriculture system ("Krushi") covering sales billing, ledgers, inventory, and automated PDF reporting. |
+| **TAIN Elect AI**<br><sub>Freelance React Native Developer (Aug 2026 – Present)</sub> | React Native, Expo Router, Supabase, Zustand, TanStack Query | Offline-first field-ops app, local write queue with background sync, Apple Unlisted & Google Play testing rollout. |
+| **Nebula Technology**<br><sub>Software Developer Intern (Jan 2026 – Jun 2026)</sub> | React.js, Vite, Tailwind, SCSS, Redux Toolkit, Chart.js, jsPDF | Full-stack agriculture system ("AgroStock") covering sales billing, ledgers, inventory, and automated PDF reporting. |
 | **Knowledge Keen**<br><sub>Web Development Intern (May 2025 – Jul 2025)</sub> | Next.js, React, TypeScript, HeroUI, Express.js, MySQL | Full-stack modules ("Greentop") with parameterized MySQL pooling, PM2 process management, and Winston logging. |
 
 ---

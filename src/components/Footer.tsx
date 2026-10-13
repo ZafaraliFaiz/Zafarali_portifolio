@@ -24,7 +24,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenTerminal, onOpenResume }) 
             </span>
           </div>
           <p className="text-slate-400 text-xs">
-            Architecting Krushi ERP, Greentop B2B, BEMS Mobile, and Gen-AI Platforms.
+            Architecting AgroStock ERP, Greentop B2B, TAIN Elect AI Mobile, and Gen-AI Platforms.
           </p>
           <div className="flex items-center justify-center md:justify-start gap-3 pt-2 text-slate-400">
             <a href={`mailto:${PERSONAL_INFO.email}`} className="hover:text-cyan-400 transition-colors">

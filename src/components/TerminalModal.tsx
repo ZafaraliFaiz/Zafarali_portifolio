@@ -58,9 +58,9 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
   const quickCommands = [
     'help',
     'projects',
-    'krushi',
+    'agrostock',
     'greentop',
-    'bems',
+    'tain',
     'cat resume',
     'skills',
     'sudo hire zafarali',
@@ -83,9 +83,9 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 font-mono">
               <div><span className="text-emerald-400">whoami</span> - Developer bio & credentials</div>
               <div><span className="text-emerald-400">projects</span> - List flagship projects</div>
-              <div><span className="text-emerald-400">krushi</span> - Deep dive into Krushi ERP (Nebula)</div>
+              <div><span className="text-emerald-400">agrostock</span> - Deep dive into AgroStock ERP (Nebula)</div>
               <div><span className="text-emerald-400">greentop</span> - Deep dive into Greentop B2B Suite</div>
-              <div><span className="text-emerald-400">bems</span> - Deep dive into BEMS Mobile App</div>
+              <div><span className="text-emerald-400">tain</span> - Deep dive into TAIN Elect AI Mobile App</div>
               <div><span className="text-emerald-400">skills</span> - Full technical skill tree</div>
               <div><span className="text-emerald-400">experience</span> - Work & internships history</div>
               <div><span className="text-emerald-400">education</span> - Academic scores (9.05 CGPA)</div>
@@ -134,10 +134,10 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
         );
         break;
 
-      case 'krushi':
+      case 'agrostock':
         outputNode = (
           <div className="space-y-2 text-xs">
-            <p className="text-emerald-400 font-bold">Krushi - Agriculture ERP (Nebula Technology)</p>
+            <p className="text-emerald-400 font-bold">AgroStock - Agriculture ERP (Nebula Technology)</p>
             <p className="text-slate-300">
               Frontend architected in React.js (Vite), Tailwind, SCSS, and Material UI. Built 7+ modules:
               Catalog, Purchasing, Stock tracking, Sales billing, Financial ledger, Returns, and automated PDF reporting (jsPDF).
@@ -164,10 +164,11 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
         );
         break;
 
-      case 'bems':
+      case 'tain':
+      case 'tain-electai':
         outputNode = (
           <div className="space-y-2 text-xs">
-            <p className="text-sky-400 font-bold">BEMS - Field Operations & Voter Suite (Tain ElectAI)</p>
+            <p className="text-sky-400 font-bold">TAIN Elect AI - Field Operations & Voter Suite</p>
             <p className="text-slate-300">
               Cross-platform React Native (Expo Router) app with custom offline-first AsyncStorage write-queue,
               NetInfo connectivity listeners, and automatic background sync with exponential backoff.
@@ -441,7 +442,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
             value={inputVal}
             onChange={(e) => setInputVal(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Type a command (e.g. 'help', 'krushi', 'skills', 'sudo hire zafarali')..."
+            placeholder="Type a command (e.g. 'help', 'agrostock', 'tain', 'skills', 'sudo hire zafarali')..."
             className="flex-1 bg-transparent border-none text-slate-100 font-mono text-xs focus:outline-none placeholder:text-slate-600"
           />
           <button

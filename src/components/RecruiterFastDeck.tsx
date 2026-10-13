@@ -57,7 +57,7 @@ export const RecruiterFastDeck: React.FC<RecruiterFastDeckProps> = ({
                 <span>Enterprise Full-Stack</span>
               </div>
               <p className="text-slate-300 text-xs mt-1.5 leading-relaxed">
-                Proven developer behind <strong>Krushi ERP</strong> (Nebula Tech) and <strong>Greentop</strong> (Knowledge Keen) using React, Next.js App Router, Express, and transactional MySQL.
+                Proven developer behind <strong>AgroStock ERP</strong> (Nebula Tech) and <strong>Greentop</strong> (Knowledge Keen) using React, Next.js App Router, Express, and transactional MySQL.
               </p>
             </div>
 
@@ -67,7 +67,7 @@ export const RecruiterFastDeck: React.FC<RecruiterFastDeckProps> = ({
                 <span>Offline-First Mobile App</span>
               </div>
               <p className="text-slate-300 text-xs mt-1.5 leading-relaxed">
-                Built and distributed <strong>BEMS</strong> on React Native (Expo Router) with custom local write-queue, NetInfo, and Supabase sync for Apple & Google Play store tracks.
+                Built and distributed <strong>TAIN Elect AI</strong> on React Native (Expo Router) with custom local write-queue, NetInfo, and Supabase sync for Apple & Google Play store tracks.
               </p>
             </div>
 

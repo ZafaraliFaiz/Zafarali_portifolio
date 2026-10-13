@@ -47,7 +47,7 @@ export const ContactSection: React.FC = () => {
         email: '',
         company: '',
         roleType: 'Technical Interview / Screening',
-        message: 'Hi Zafarali, we reviewed your work on Krushi and BEMS and would love to schedule a technical screening interview for a Software Engineer position.',
+        message: 'Hi Zafarali, we reviewed your work on AgroStock and TAIN Elect AI and would love to schedule a technical screening interview for a Software Engineer position.',
       });
     } else if (type === 'fullstack') {
       setFormData({
@@ -63,7 +63,7 @@ export const ContactSection: React.FC = () => {
         email: '',
         company: '',
         roleType: 'Freelance / Contract Project',
-        message: 'Hi Zafarali, we have a project requiring offline-first React Native (Expo) architecture similar to your work on BEMS. Are you available for a brief call?',
+        message: 'Hi Zafarali, we have a project requiring offline-first React Native (Expo) architecture similar to your work on TAIN Elect AI. Are you available for a brief call?',
       });
     }
   };

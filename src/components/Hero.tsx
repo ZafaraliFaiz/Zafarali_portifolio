@@ -33,10 +33,22 @@ export const Hero: React.FC<HeroProps> = ({
   onOpenRecruiterDeck,
 }) => {
   const roles = [
-    'Full-Stack Web Architect (React & Next.js)',
-    'React Native Mobile Engineer (Expo & Offline-First)',
-    'Enterprise ERP Developer (Krushi & Greentop)',
-    'Gen-AI Systems & LangChain Engineer',
+    {
+      full: 'Full-Stack Web Architect (React & Next.js)',
+      short: 'React & Next.js',
+    },
+    {
+      full: 'React Native Mobile Engineer (Expo & Offline-First)',
+      short: 'React Native Mobile',
+    },
+    {
+      full: 'Enterprise ERP Developer (AgroStock & Greentop)',
+      short: 'Enterprise ERP',
+    },
+    {
+      full: 'Gen-AI Systems & LangChain Engineer',
+      short: 'Gen-AI & LangChain',
+    },
   ];
 
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
@@ -47,26 +59,42 @@ export const Hero: React.FC<HeroProps> = ({
   const { scrollY } = useScrollParallax();
 
   useEffect(() => {
-    const fullText = roles[currentRoleIndex];
-    const typingSpeed = isDeleting ? 30 : 65;
+    let timer: NodeJS.Timeout;
+    const fullText = roles[currentRoleIndex].full;
 
-    const timer = setTimeout(() => {
-      if (!isDeleting) {
-        setDisplayedText(fullText.substring(0, displayedText.length + 1));
-        if (displayedText.length === fullText.length) {
-          setTimeout(() => setIsDeleting(true), 1800);
-        }
+    if (!isDeleting) {
+      if (displayedText.length < fullText.length) {
+        // Smooth, natural typing speed (36ms per character)
+        timer = setTimeout(() => {
+          setDisplayedText(fullText.substring(0, displayedText.length + 1));
+        }, 36);
       } else {
-        setDisplayedText(fullText.substring(0, displayedText.length - 1));
-        if (displayedText.length === 0) {
-          setIsDeleting(false);
-          setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
-        }
+        // Comfortable hold time to read role (1600ms)
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, 1600);
       }
-    }, typingSpeed);
+    } else {
+      if (displayedText.length > 0) {
+        // Smooth erase speed (18ms per character)
+        timer = setTimeout(() => {
+          setDisplayedText(fullText.substring(0, displayedText.length - 1));
+        }, 18);
+      } else {
+        // Advance to next role
+        setIsDeleting(false);
+        setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+      }
+    }
 
     return () => clearTimeout(timer);
-  }, [displayedText, isDeleting, currentRoleIndex, roles]);
+  }, [displayedText, isDeleting, currentRoleIndex]);
+
+  const handleSelectRole = (index: number) => {
+    setCurrentRoleIndex(index);
+    setDisplayedText(roles[index].full);
+    setIsDeleting(false);
+  };
 
   // Mouse Parallax Offsets
   const mx = mouse.x;
@@ -161,20 +189,43 @@ export const Hero: React.FC<HeroProps> = ({
           </h1>
 
           {/* Subtitle / Interactive Typewriter */}
-          <div className="h-10 flex items-center justify-center">
-            <p className="text-lg sm:text-2xl font-mono text-cyan-300 font-semibold tracking-wide flex items-center">
+          <div className="min-h-11 flex items-center justify-center">
+            <p className="text-lg sm:text-2xl font-mono text-cyan-300 font-semibold tracking-wide flex items-center flex-wrap justify-center text-center">
               <span>&gt; </span>
               <span className="mx-2 text-slate-100">{displayedText}</span>
-              <span className="w-2.5 h-6 bg-cyan-400 animate-pulse ml-0.5 inline-block"></span>
+              <span className="w-2.5 h-6 bg-cyan-400 animate-pulse ml-0.5 inline-block shrink-0"></span>
             </p>
+          </div>
+
+          {/* Quick Interactive Role Switcher Chips */}
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-1 pb-1">
+            {roles.map((role, idx) => (
+              <button
+                key={role.short}
+                onClick={() => handleSelectRole(idx)}
+                className={`px-3 py-1 rounded-full text-xs font-mono transition-all border flex items-center gap-1.5 ${
+                  currentRoleIndex === idx
+                    ? 'bg-cyan-500/20 text-cyan-300 border-cyan-400 font-bold shadow-sm shadow-cyan-500/30 scale-105'
+                    : 'bg-slate-950/60 text-slate-400 border-slate-800/80 hover:border-slate-700 hover:text-slate-200'
+                }`}
+                title={`Switch directly to: ${role.full}`}
+              >
+                <span
+                  className={`w-1.5 h-1.5 rounded-full ${
+                    currentRoleIndex === idx ? 'bg-cyan-400 animate-ping' : 'bg-slate-600'
+                  }`}
+                />
+                <span>{role.short}</span>
+              </button>
+            ))}
           </div>
 
           <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed pt-2">
             Hi, I&apos;m <strong className="text-white font-semibold">Zafarali Faizahmed Inamdar</strong>. 
             Full-stack software developer with production delivery across 
-            <span className="text-cyan-300 font-medium"> Krushi ERP</span>, 
+            <span className="text-cyan-300 font-medium"> AgroStock ERP</span>, 
             <span className="text-emerald-300 font-medium"> Greentop B2B</span>, and 
-            <span className="text-sky-300 font-medium"> BEMS offline-first mobile app</span>. 
+            <span className="text-sky-300 font-medium"> TAIN Elect AI offline-first mobile app</span>. 
             Published Gen-AI researcher with a 9.05 CGPA in both M.Sc. & B.Sc.
           </p>
         </div>
@@ -193,7 +244,7 @@ export const Hero: React.FC<HeroProps> = ({
                 <span>3+</span>
               </div>
               <div className="text-xs font-semibold text-slate-200 mt-1">Enterprise Systems</div>
-              <div className="text-[11px] text-slate-400">Krushi, Greentop & BEMS</div>
+              <div className="text-[11px] text-slate-400">AgroStock, Greentop & TAIN Elect AI</div>
             </div>
           </TiltCard>
 

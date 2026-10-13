@@ -58,14 +58,14 @@ TECHNICAL SKILLS
 • AI, Tools & Practices: LangChain, OpenAI API, Gemini API, Prompt Engineering, Postman, VS Code, OOP, Agile/Scrum, Code Reviews
 
 PROFESSIONAL EXPERIENCE
-TAIN ELECTAI (INDEPENDENT CONTRACTOR) - FREELANCE REACT NATIVE DEVELOPER (Aug 2026 – Present)
+TAIN ELECT AI (INDEPENDENT CONTRACTOR) - FREELANCE REACT NATIVE DEVELOPER (Aug 2026 – Present)
 • Built a cross-platform (iOS/Android) field-operations app in React Native (Expo, Expo Router) for election canvassing agents.
 • Designed an offline-first architecture with a local AsyncStorage write-queue, automatic background sync, retry-with-backoff, and NetInfo.
 • Integrated Supabase (Auth, Postgres, Storage) with TanStack React Query and Zustand, plus expo-camera and role-based PII masking.
 • Owned iOS/Android releases via EAS Build/Submit: Apple Unlisted App Distribution and Google Play Closed Testing rollout.
 
 NEBULA TECHNOLOGY - SOFTWARE DEVELOPER INTERN (Jan 2026 – Jun 2026)
-• Built the React.js (Vite) frontend of a full-stack agriculture management system ("Krushi") using Tailwind CSS, SCSS, and Material UI.
+• Built the React.js (Vite) frontend of a full-stack agriculture management system ("AgroStock") using Tailwind CSS, SCSS, and Material UI.
 • Integrated Chart.js dashboards and automated PDF export/printing via jsPDF/AutoTable and react-to-print.
 • Implemented Redux Toolkit state management, Axios API integration with cookie-based token refresh, and role-based access.
 
@@ -109,14 +109,14 @@ TECHNICAL SKILLS
 • AI, Tools & Practices: LangChain, OpenAI API, Gemini API, Prompt Engineering, Postman, VS Code, OOP, Agile/Scrum, Code Reviews
 
 PROFESSIONAL EXPERIENCE
-TAIN ELECTAI (INDEPENDENT CONTRACTOR) - FREELANCE REACT NATIVE DEVELOPER (Aug 2026 – Present)
+TAIN ELECT AI (INDEPENDENT CONTRACTOR) - FREELANCE REACT NATIVE DEVELOPER (Aug 2026 – Present)
 • Built a cross-platform (iOS/Android) field-operations app in React Native (Expo, Expo Router) for election canvassing agents.
 • Designed an offline-first architecture with a local AsyncStorage write-queue, automatic background sync, retry-with-backoff, and NetInfo.
 • Integrated Supabase (Auth, Postgres, Storage) with TanStack React Query and Zustand, plus expo-camera and role-based PII masking.
 • Owned iOS/Android releases via EAS Build/Submit: Apple Unlisted App Distribution and Google Play Closed Testing rollout.
 
 NEBULA TECHNOLOGY - SOFTWARE DEVELOPER INTERN (Jan 2026 – Jun 2026)
-• Built the React.js (Vite) frontend of a full-stack agriculture management system ("Krushi") using Tailwind CSS, SCSS, and Material UI.
+• Built the React.js (Vite) frontend of a full-stack agriculture management system ("AgroStock") using Tailwind CSS, SCSS, and Material UI.
 • Integrated Chart.js dashboards and automated PDF export/printing via jsPDF/AutoTable and react-to-print.
 • Implemented Redux Toolkit state management, Axios API integration with cookie-based token refresh, and role-based access.
 
@@ -386,10 +386,10 @@ EDUCATION
                 Professional Experience
               </h2>
 
-              {/* Tain ElectAI */}
+              {/* TAIN Elect AI */}
               <div className="mb-3 print-section">
                 <div className="flex justify-between items-baseline font-bold text-slate-900 text-[11px]">
-                  <span>TAIN ELECTAI (INDEPENDENT CONTRACTOR)</span>
+                  <span>TAIN ELECT AI (INDEPENDENT CONTRACTOR)</span>
                   <span className="font-semibold text-slate-700">FREELANCE REACT NATIVE DEVELOPER</span>
                 </div>
                 <div className="text-[10px] text-slate-500 italic mb-1 font-mono">Aug 2026 – Present</div>

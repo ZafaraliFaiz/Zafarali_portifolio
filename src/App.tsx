@@ -84,7 +84,7 @@ export default function App() {
           onOpenTerminal={() => setIsTerminalOpen(true)}
         />
 
-        {/* Interactive Architecture Visualizer (Krushi, BEMS, AI Engine, DevOps) */}
+        {/* Interactive Architecture Visualizer (AgroStock, TAIN Elect AI, AI Engine, DevOps) */}
         <ArchitectureVisualizer />
 
         {/* Flagship Production Projects */}

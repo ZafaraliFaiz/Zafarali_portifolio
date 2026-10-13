@@ -44,7 +44,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
   const [tokenSimStatus, setTokenSimStatus] = useState<'valid' | 'expired' | 'refreshing'>('valid');
   const [tokenLog, setTokenLog] = useState('Session active. Refresh token queued.');
 
-  // Chapter 3 interactive simulation: BEMS offline state
+  // Chapter 3 interactive simulation: TAIN Elect AI offline state
   const [simOnline, setSimOnline] = useState(false);
   const [offlineQueueCount, setOfflineQueueCount] = useState(3);
 
@@ -64,7 +64,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
       title: 'Enterprise ERP & Token Interceptor Architecture',
       shortTitle: 'Enterprise ERP',
       theme: 'cyan',
-      tag: 'Krushi & Greentop Systems',
+      tag: 'AgroStock & Greentop Systems',
     },
     {
       id: 'mobile',
@@ -72,7 +72,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
       title: 'Offline-First Mobile Resilience & Local Sync',
       shortTitle: 'Offline Mobile',
       theme: 'sky',
-      tag: 'BEMS React Native / Expo',
+      tag: 'TAIN Elect AI React Native / Expo',
     },
     {
       id: 'genai',
@@ -348,7 +348,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                       CHAPTER 02 // ENTERPRISE ARCHITECTURE
                     </span>
                     <span className="text-xs font-mono text-cyan-400">
-                      Krushi ERP & Greentop Systems
+                      AgroStock ERP & Greentop Systems
                     </span>
                   </div>
 
@@ -417,7 +417,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                       CHAPTER 03 // MOBILE ENGINEERING
                     </span>
                     <span className="text-xs font-mono text-sky-400">
-                      BEMS (Tain ElectAI)
+                      TAIN Elect AI
                     </span>
                   </div>
 

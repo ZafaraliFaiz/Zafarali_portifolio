@@ -20,9 +20,9 @@ import {
 } from 'lucide-react';
 
 export const ArchitectureVisualizer: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'bems' | 'krushi' | 'ai-engine' | 'devops'>('bems');
+  const [activeTab, setActiveTab] = useState<'tain-electai' | 'agrostock' | 'ai-engine' | 'devops'>('tain-electai');
 
-  // BEMS Simulation State
+  // TAIN Elect AI Simulation State
   const [isOnline, setIsOnline] = useState(false);
   const [offlineQueue, setOfflineQueue] = useState<string[]>([
     'Voter #4092: Survey Recorded (Ward 12)',
@@ -34,7 +34,7 @@ export const ArchitectureVisualizer: React.FC = () => {
   ]);
   const [isSyncing, setIsSyncing] = useState(false);
 
-  // Krushi Simulation State
+  // AgroStock Simulation State
   const [tokenStatus, setTokenStatus] = useState<'valid' | 'expired' | 'refreshing' | 'replayed'>('valid');
   const [tokenLog, setTokenLog] = useState<string[]>(['Session initiated with secure HTTP-only refresh cookie.']);
 
@@ -49,7 +49,7 @@ export const ArchitectureVisualizer: React.FC = () => {
   const [pipelineStep, setPipelineStep] = useState<number>(0);
   const [pipelineActive, setPipelineActive] = useState<boolean>(false);
 
-  // Handle BEMS Add Queue
+  // Handle TAIN Elect AI Add Queue
   const handleAddVoteRecord = () => {
     const id = Math.floor(1000 + Math.random() * 9000);
     const newRecord = `Voter #${id}: Booth ${Math.floor(Math.random() * 10) + 1} Record`;
@@ -61,7 +61,7 @@ export const ArchitectureVisualizer: React.FC = () => {
     }
   };
 
-  // Handle BEMS Toggle Online
+  // Handle TAIN Elect AI Toggle Online
   const handleToggleOnline = () => {
     const nextState = !isOnline;
     setIsOnline(nextState);
@@ -76,7 +76,7 @@ export const ArchitectureVisualizer: React.FC = () => {
     }
   };
 
-  // Handle Krushi Token Simulation
+  // Handle AgroStock Token Simulation
   const handleSimulateTokenExpiry = () => {
     setTokenStatus('expired');
     setTokenLog((prev) => [
@@ -153,27 +153,27 @@ export const ArchitectureVisualizer: React.FC = () => {
         {/* System Architecture Tabs */}
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8">
           <button
-            onClick={() => setActiveTab('bems')}
+            onClick={() => setActiveTab('tain-electai')}
             className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
-              activeTab === 'bems'
+              activeTab === 'tain-electai'
                 ? 'bg-sky-500 text-slate-950 shadow-lg shadow-sky-500/25 scale-105'
                 : 'bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-slate-700'
             }`}
           >
             <Smartphone className="w-4 h-4" />
-            <span>BEMS Offline-First Queue</span>
+            <span>TAIN Elect AI Offline-First Queue</span>
           </button>
 
           <button
-            onClick={() => setActiveTab('krushi')}
+            onClick={() => setActiveTab('agrostock')}
             className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
-              activeTab === 'krushi'
+              activeTab === 'agrostock'
                 ? 'bg-emerald-500 text-slate-950 shadow-lg shadow-emerald-500/25 scale-105'
                 : 'bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-slate-700'
             }`}
           >
             <RefreshCw className="w-4 h-4" />
-            <span>Krushi Silent Auth Refresh</span>
+            <span>AgroStock Silent Auth Refresh</span>
           </button>
 
           <button
@@ -201,14 +201,14 @@ export const ArchitectureVisualizer: React.FC = () => {
           </button>
         </div>
 
-        {/* Tab 1: BEMS Offline-First Architecture */}
-        {activeTab === 'bems' && (
+        {/* Tab 1: TAIN Elect AI Offline-First Architecture */}
+        {activeTab === 'tain-electai' && (
           <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-sky-500/25 shadow-2xl relative overflow-hidden">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-800">
               <div>
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-mono uppercase bg-sky-500/20 text-sky-300 px-2.5 py-1 rounded-md border border-sky-500/40">
-                    Tain ElectAI • React Native + Supabase
+                    TAIN Elect AI • React Native + Supabase
                   </span>
                   <span className="text-xs text-slate-400 font-mono">AsyncStorage + NetInfo + Exponential Backoff</span>
                 </div>
@@ -325,8 +325,8 @@ export const ArchitectureVisualizer: React.FC = () => {
           </div>
         )}
 
-        {/* Tab 2: Krushi Silent Token Refresh */}
-        {activeTab === 'krushi' && (
+        {/* Tab 2: AgroStock Silent Token Refresh */}
+        {activeTab === 'agrostock' && (
           <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-emerald-500/25 shadow-2xl relative overflow-hidden">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-800">
               <div>

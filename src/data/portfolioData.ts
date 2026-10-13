@@ -22,9 +22,9 @@ export const PERSONAL_INFO = {
 
 export const PROJECTS: Project[] = [
   {
-    id: 'bems',
-    title: 'BEMS - Booth & Election Field Operations Suite',
-    clientOrOrg: 'Tain ElectAI (Independent Contractor)',
+    id: 'tain-electai',
+    title: 'TAIN Elect AI - Mobile Field Operations & Election Suite',
+    clientOrOrg: 'TAIN Elect AI (Independent Contractor)',
     tagline: 'Offline-First React Native Mobile Suite with Local Write-Queue & Zero-Downtime Sync',
     category: 'Mobile',
     period: 'Aug 2026 – Present',
@@ -68,8 +68,8 @@ export const PROJECTS: Project[] = [
     demoType: 'simulation'
   },
   {
-    id: 'krushi',
-    title: 'Krushi - Full-Stack AgriTech ERP & Commerce System',
+    id: 'agrostock',
+    title: 'AgroStock - Full-Stack AgriTech ERP & Commerce System',
     clientOrOrg: 'Nebula Technology',
     tagline: 'Comprehensive Agricultural Enterprise Management System with Real-Time Financial Billing',
     category: 'Full Stack',
@@ -256,12 +256,12 @@ export const EXPERIENCES: Experience[] = [
   {
     id: 'tain-electai',
     role: 'Freelance React Native Developer (Independent Contractor)',
-    company: 'TAIN ELECTAI',
+    company: 'TAIN ELECT AI',
     period: 'Aug 2026 – Present',
     location: 'Pune, Maharashtra (Remote / Hybrid)',
     type: 'Contract / Freelance',
     summary:
-      'Building a production-grade, offline-first mobile application (BEMS) for field operations, election canvassing, voter counselling, and polling management across iOS and Android.',
+      'Building a production-grade, offline-first mobile application (TAIN Elect AI) for field operations, election canvassing, voter counselling, and polling management across iOS and Android.',
     highlights: [
       'Built a cross-platform (iOS/Android) field-operations app in React Native (Expo, Expo Router) for election canvassing agents, covering member management, voter counselling, and live election-day polling.',
       'Designed an offline-first architecture with a local AsyncStorage write-queue, automatic background sync, retry-with-backoff, and live connection-state feedback via NetInfo.',
@@ -281,7 +281,7 @@ export const EXPERIENCES: Experience[] = [
       'Expo SecureStore',
       'EAS Build'
     ],
-    associatedProject: 'bems',
+    associatedProject: 'tain-electai',
     accentColor: '#38bdf8'
   },
   {
@@ -292,7 +292,7 @@ export const EXPERIENCES: Experience[] = [
     location: 'Pune, Maharashtra',
     type: 'Internship',
     summary:
-      'Spearheaded frontend architecture for "Krushi", a full-scale agriculture management ERP covering products, purchasing, stock, billing, ledgers, and automated reporting.',
+      'Spearheaded frontend architecture for "AgroStock", a full-scale agriculture management ERP covering products, purchasing, stock, billing, ledgers, and automated reporting.',
     highlights: [
       'Built the React.js (Vite) frontend of a full-stack agriculture management system using Tailwind CSS, SCSS, and Material UI, covering product catalog, purchase, stock, sales billing, ledger, and returns.',
       'Designed and integrated responsive Chart.js dashboards for sales and inventory analytics.',
@@ -312,7 +312,7 @@ export const EXPERIENCES: Experience[] = [
       'React Hook Form',
       'Yup'
     ],
-    associatedProject: 'krushi',
+    associatedProject: 'agrostock',
     accentColor: '#10b981'
   },
   {
