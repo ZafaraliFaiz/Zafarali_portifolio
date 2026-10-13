@@ -201,85 +201,87 @@ export const ArchitectureVisualizer: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-mono uppercase tracking-wider mb-3 font-semibold">
-            <Cpu className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 border-2 border-sky-300 text-sky-800 text-xs font-mono uppercase tracking-wider mb-3 font-bold shadow-sm">
+            <Cpu className="w-4 h-4 text-sky-600 stroke-[2.5]" />
             <span>Interactive Engineering Visualizer</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 font-display tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight">
             How I Architect{' '}
             <span className="bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
               Mission-Critical Systems
             </span>
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base mt-3">
+          <p className="text-slate-700 text-sm sm:text-base mt-3 leading-relaxed font-medium">
             Interact with live simulations of the key engineering patterns I designed across my projects: 
             Offline-first queues, atomic warehouse stock deductions, multi-provider Gen-AI orchestration, and automated CI/CD pipelines.
           </p>
         </div>
 
         {/* System Architecture Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8">
+        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-8">
           <button
             onClick={() => setActiveTab('tain-electai')}
-            className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 shadow-sm ${
+            className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all flex items-center gap-2 border-2 ${
               activeTab === 'tain-electai'
-                ? 'bg-sky-600 text-white shadow-md shadow-sky-500/25 scale-105'
-                : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'
+                ? 'bg-sky-600 text-white border-sky-600 shadow-lg shadow-sky-500/30 scale-105'
+                : 'bg-white text-slate-800 border-slate-300 hover:border-sky-400 hover:text-sky-700 shadow-sm'
             }`}
           >
-            <Smartphone className="w-4 h-4" />
-            <span>TAIN Elect AI Offline-First Queue</span>
+            <Smartphone className="w-4 h-4 stroke-[2.5]" />
+            <span>TAIN Elect AI Offline-First</span>
           </button>
 
           <button
             onClick={() => setActiveTab('agrostock')}
-            className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 shadow-sm ${
+            className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all flex items-center gap-2 border-2 ${
               activeTab === 'agrostock'
-                ? 'bg-emerald-600 text-white shadow-md shadow-emerald-500/25 scale-105'
-                : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'
+                ? 'bg-emerald-600 text-white border-emerald-600 shadow-lg shadow-emerald-500/30 scale-105'
+                : 'bg-white text-slate-800 border-slate-300 hover:border-emerald-400 hover:text-emerald-700 shadow-sm'
             }`}
           >
-            <Layers className="w-4 h-4" />
-            <span>AgroStock Inventory & Billing Pipeline</span>
+            <Layers className="w-4 h-4 stroke-[2.5]" />
+            <span>AgroStock ERP Inventory</span>
           </button>
 
           <button
             onClick={() => setActiveTab('ai-engine')}
-            className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 shadow-sm ${
+            className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all flex items-center gap-2 border-2 ${
               activeTab === 'ai-engine'
-                ? 'bg-purple-600 text-white shadow-md shadow-purple-500/25 scale-105'
-                : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'
+                ? 'bg-purple-600 text-white border-purple-600 shadow-lg shadow-purple-500/30 scale-105'
+                : 'bg-white text-slate-800 border-slate-300 hover:border-purple-400 hover:text-purple-700 shadow-sm'
             }`}
           >
-            <Cpu className="w-4 h-4" />
+            <Cpu className="w-4 h-4 stroke-[2.5]" />
             <span>AI Multi-LLM Engine</span>
           </button>
 
           <button
             onClick={() => setActiveTab('devops')}
-            className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 shadow-sm ${
+            className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all flex items-center gap-2 border-2 ${
               activeTab === 'devops'
-                ? 'bg-amber-600 text-white shadow-md shadow-amber-500/25 scale-105'
-                : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'
+                ? 'bg-amber-600 text-white border-amber-600 shadow-lg shadow-amber-500/30 scale-105'
+                : 'bg-white text-slate-800 border-slate-300 hover:border-amber-400 hover:text-amber-700 shadow-sm'
             }`}
           >
-            <GitBranch className="w-4 h-4" />
+            <GitBranch className="w-4 h-4 stroke-[2.5]" />
             <span>House Rent DevOps Pipeline</span>
           </button>
         </div>
 
         {/* Tab 1: TAIN Elect AI Offline-First Architecture */}
         {activeTab === 'tain-electai' && (
-          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-sky-200 shadow-xl relative overflow-hidden bg-white/95">
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+          <div className="p-6 sm:p-8 rounded-3xl border-2 border-sky-400/90 shadow-2xl relative overflow-hidden bg-white">
+            <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600" />
+            
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b-2 border-slate-200 mt-1">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono uppercase bg-sky-50 text-sky-800 px-2.5 py-1 rounded-md border border-sky-200 font-semibold">
+                  <span className="text-xs font-mono uppercase bg-sky-100 text-sky-900 px-3 py-1 rounded-lg border-2 border-sky-300 font-extrabold shadow-sm">
                     TAIN Elect AI • React Native + Supabase
                   </span>
-                  <span className="text-xs text-slate-500 font-mono">AsyncStorage + NetInfo + Exponential Backoff</span>
+                  <span className="text-xs text-slate-600 font-mono font-medium">AsyncStorage + NetInfo + Exponential Backoff</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mt-1">
+                <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display mt-2 tracking-tight">
                   Offline-First Local Write-Queue & Background Sync
                 </h3>
               </div>
@@ -288,21 +290,21 @@ export const ArchitectureVisualizer: React.FC = () => {
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleToggleOnline}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-mono font-bold transition-all shadow-sm ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-mono font-extrabold transition-all border-2 shadow-sm ${
                     isOnline
-                      ? 'bg-emerald-50 text-emerald-800 border border-emerald-300'
-                      : 'bg-rose-50 text-rose-800 border border-rose-300'
+                      ? 'bg-emerald-100 text-emerald-900 border-emerald-300 hover:bg-emerald-200'
+                      : 'bg-rose-100 text-rose-900 border-rose-300 hover:bg-rose-200'
                   }`}
                 >
-                  {isOnline ? <Wifi className="w-4 h-4 text-emerald-600" /> : <WifiOff className="w-4 h-4 text-rose-600" />}
+                  {isOnline ? <Wifi className="w-4 h-4 text-emerald-600 stroke-[2.5]" /> : <WifiOff className="w-4 h-4 text-rose-600 stroke-[2.5]" />}
                   <span>Status: {isOnline ? 'ONLINE' : 'OFFLINE (Simulated)'}</span>
                 </button>
 
                 <button
                   onClick={handleAddVoteRecord}
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-sky-600 text-white text-xs sm:text-sm font-bold hover:bg-sky-500 active:scale-95 transition-all shadow-sm"
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs sm:text-sm font-bold active:scale-95 transition-all shadow-md shadow-sky-600/30 border-2 border-sky-500"
                 >
-                  <Send className="w-3.5 h-3.5" />
+                  <Send className="w-3.5 h-3.5 stroke-[2.5]" />
                   <span>Record Voter Action</span>
                 </button>
               </div>
@@ -311,45 +313,45 @@ export const ArchitectureVisualizer: React.FC = () => {
             {/* Architecture Flow Diagram */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
               {/* Step 1: React Native UI */}
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+              <div className="p-4 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col justify-between shadow-sm">
                 <div>
-                  <div className="text-xs font-mono text-sky-700 font-semibold flex items-center gap-1.5 mb-1">
-                    <Smartphone className="w-4 h-4" />
+                  <div className="text-xs font-mono text-sky-800 font-extrabold flex items-center gap-1.5 mb-1.5">
+                    <Smartphone className="w-4 h-4 text-sky-600 stroke-[2.5]" />
                     <span>01. React Native Device UI</span>
                   </div>
-                  <p className="text-xs text-slate-600">
+                  <p className="text-xs text-slate-700 leading-relaxed font-medium">
                     Field agents record voter counseling, unlisted app forms, and camera captures on iOS/Android.
                   </p>
                 </div>
-                <div className="mt-4 pt-3 border-t border-slate-200 text-[11px] font-mono text-slate-600">
-                  Write latency: <span className="text-emerald-600 font-bold">&lt; 4ms</span> (Optimistic UI)
+                <div className="mt-4 pt-3 border-t-2 border-slate-200 text-[11px] font-mono text-slate-700">
+                  Write latency: <span className="text-emerald-700 font-black">&lt; 4ms</span> (Optimistic UI)
                 </div>
               </div>
 
               {/* Step 2: Local AsyncStorage Write-Queue */}
-              <div className={`p-4 rounded-xl border transition-all ${
-                offlineQueue.length > 0 ? 'bg-sky-50/70 border-sky-300' : 'bg-slate-50 border border-slate-200'
+              <div className={`p-4 rounded-2xl border-2 transition-all shadow-sm ${
+                offlineQueue.length > 0 ? 'bg-sky-50/80 border-sky-400' : 'bg-slate-50 border-slate-200'
               }`}>
-                <div className="text-xs font-mono text-sky-800 font-semibold flex items-center justify-between mb-1">
+                <div className="text-xs font-mono text-sky-900 font-extrabold flex items-center justify-between mb-1.5">
                   <div className="flex items-center gap-1.5">
-                    <Database className="w-4 h-4 text-sky-600" />
+                    <Database className="w-4 h-4 text-sky-600 stroke-[2.5]" />
                     <span>02. AsyncStorage Write-Queue</span>
                   </div>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-sky-100 text-sky-800 font-bold">
+                  <span className="text-[10px] px-2 py-0.5 rounded-md bg-sky-200 text-sky-900 font-black border border-sky-300">
                     {offlineQueue.length} queued
                   </span>
                 </div>
-                <p className="text-xs text-slate-600 mb-2">
+                <p className="text-xs text-slate-700 mb-2 leading-relaxed font-medium">
                   Writes persist safely in local sandbox memory. If NetInfo is offline, items wait with retry backoff.
                 </p>
                 <div className="space-y-1.5 max-h-24 overflow-y-auto pr-1">
                   {offlineQueue.length === 0 ? (
-                    <div className="text-[11px] text-slate-400 italic">Queue empty (All records synchronized)</div>
+                    <div className="text-[11px] text-slate-500 italic">Queue empty (All records synchronized)</div>
                   ) : (
                     offlineQueue.map((item, idx) => (
-                      <div key={idx} className="text-[11px] font-mono bg-white text-slate-800 p-1.5 rounded border border-slate-200 flex items-center justify-between shadow-sm">
-                        <span className="truncate">{item}</span>
-                        <span className="text-[9px] text-amber-600 font-bold">QUEUED</span>
+                      <div key={idx} className="text-[11px] font-mono bg-white text-slate-900 p-2 rounded-lg border-2 border-slate-200 flex items-center justify-between shadow-sm">
+                        <span className="truncate font-semibold">{item}</span>
+                        <span className="text-[9px] text-amber-800 bg-amber-100 px-1.5 py-0.5 rounded border border-amber-300 font-black">QUEUED</span>
                       </div>
                     ))
                   )}
@@ -357,65 +359,67 @@ export const ArchitectureVisualizer: React.FC = () => {
               </div>
 
               {/* Step 3: Supabase Cloud Postgres */}
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+              <div className="p-4 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col justify-between shadow-sm">
                 <div>
-                  <div className="text-xs font-mono text-emerald-700 font-semibold flex items-center justify-between mb-1">
+                  <div className="text-xs font-mono text-emerald-800 font-extrabold flex items-center justify-between mb-1.5">
                     <div className="flex items-center gap-1.5">
-                      <Server className="w-4 h-4 text-emerald-600" />
+                      <Server className="w-4 h-4 text-emerald-600 stroke-[2.5]" />
                       <span>03. Supabase Postgres & Auth</span>
                     </div>
                     {isSyncing && (
-                      <span className="text-[10px] text-sky-600 flex items-center gap-1 animate-pulse">
-                        <RefreshCw className="w-3 h-3 animate-spin" /> Syncing...
+                      <span className="text-[10px] text-sky-700 flex items-center gap-1 animate-pulse font-bold">
+                        <RefreshCw className="w-3 h-3 animate-spin stroke-[2.5]" /> Syncing...
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-slate-600 mb-2">
+                  <p className="text-xs text-slate-700 mb-2 leading-relaxed font-medium">
                     Synced records reconciled with role-based PII masking and hardened security policies.
                   </p>
                 </div>
-                <div className="space-y-1 max-h-24 overflow-y-auto pr-1">
+                <div className="space-y-1.5 max-h-24 overflow-y-auto pr-1">
                   {syncedRecords.slice(0, 3).map((item, idx) => (
-                    <div key={idx} className="text-[11px] font-mono bg-emerald-50 text-emerald-800 p-1 rounded border border-emerald-200 flex items-center justify-between">
+                    <div key={idx} className="text-[11px] font-mono bg-emerald-100 text-emerald-900 p-1.5 rounded-lg border border-emerald-300 flex items-center justify-between font-semibold">
                       <span className="truncate">{item}</span>
-                      <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700 shrink-0 stroke-[2.5]" />
                     </div>
                   ))}
                 </div>
               </div>
             </div>
 
-            <div className="text-xs text-slate-600 font-mono bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center justify-between">
-              <span>💡 <strong className="text-slate-800">How to test:</strong> Click &quot;Record Voter Action&quot; while OFFLINE to see the queue grow. Toggle to &quot;ONLINE&quot; to witness automatic queue sync!</span>
-              <span className="text-sky-700 font-bold">Resilience: 100% Zero-Loss</span>
+            <div className="text-xs text-slate-700 font-mono bg-sky-50/70 p-3.5 rounded-2xl border-2 border-sky-200 flex items-center justify-between">
+              <span>💡 <strong className="text-slate-900">How to test:</strong> Click &quot;Record Voter Action&quot; while OFFLINE to see the queue grow. Toggle to &quot;ONLINE&quot; to witness automatic queue sync!</span>
+              <span className="text-sky-800 font-black">Resilience: 100% Zero-Loss</span>
             </div>
           </div>
         )}
 
         {/* Tab 2: AgroStock Inventory & Billing Pipeline */}
         {activeTab === 'agrostock' && (
-          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-emerald-200 shadow-xl relative overflow-hidden bg-white/95">
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+          <div className="p-6 sm:p-8 rounded-3xl border-2 border-emerald-400/90 shadow-2xl relative overflow-hidden bg-white">
+            <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500" />
+
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b-2 border-slate-200 mt-1">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono uppercase bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-md border border-emerald-200 font-semibold">
+                  <span className="text-xs font-mono uppercase bg-emerald-100 text-emerald-900 px-3 py-1 rounded-lg border-2 border-emerald-300 font-extrabold shadow-sm">
                     Nebula Technology • React Vite + Redux Toolkit + Node.js
                   </span>
-                  <span className="text-xs text-slate-500 font-mono">Atomic Stock Reconciliation + GST Billing + jsPDF Invoicing</span>
+                  <span className="text-xs text-slate-600 font-mono font-medium">Atomic Stock Reconciliation + GST Billing + jsPDF Invoicing</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mt-1">
+                <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display mt-2 tracking-tight">
                   High-Throughput ERP Sales Billing & Batch Inventory Pipeline
                 </h3>
               </div>
 
               {/* Order Controls */}
               <div className="flex flex-wrap items-center gap-3">
-                <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 shadow-sm">
-                  <span className="text-xs font-mono text-slate-600 font-semibold">Product:</span>
+                <div className="flex items-center gap-2 bg-slate-50 border-2 border-slate-300 rounded-xl px-3 py-1.5 shadow-sm">
+                  <span className="text-xs font-mono text-slate-700 font-bold">Product:</span>
                   <select
                     value={selectedProductId}
                     onChange={(e) => setSelectedProductId(e.target.value)}
-                    className="bg-transparent text-xs font-mono text-emerald-800 font-bold focus:outline-none cursor-pointer"
+                    className="bg-transparent text-xs font-mono text-emerald-800 font-black focus:outline-none cursor-pointer"
                   >
                     {erpProducts.map((p) => (
                       <option key={p.id} value={p.id} className="bg-white text-slate-900">
@@ -425,25 +429,25 @@ export const ArchitectureVisualizer: React.FC = () => {
                   </select>
                 </div>
 
-                <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 shadow-sm">
-                  <span className="text-xs font-mono text-slate-600 font-semibold">Qty:</span>
+                <div className="flex items-center gap-2 bg-slate-50 border-2 border-slate-300 rounded-xl px-3 py-1.5 shadow-sm">
+                  <span className="text-xs font-mono text-slate-700 font-bold">Qty:</span>
                   <input
                     type="number"
                     min="1"
                     max="50"
                     value={orderQuantity}
                     onChange={(e) => setOrderQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                    className="w-12 bg-transparent text-xs font-mono text-slate-900 font-bold text-center focus:outline-none border-b border-slate-300"
+                    className="w-12 bg-transparent text-xs font-mono text-slate-900 font-black text-center focus:outline-none border-b-2 border-slate-400"
                   />
-                  <span className="text-[10px] text-slate-500">units</span>
+                  <span className="text-[10px] text-slate-600 font-bold">units</span>
                 </div>
 
                 <button
                   onClick={handleDispatchOrder}
                   disabled={isProcessingOrder}
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs sm:text-sm font-bold hover:bg-emerald-500 active:scale-95 transition-all disabled:opacity-50 shadow-md shadow-emerald-500/20"
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-bold active:scale-95 transition-all disabled:opacity-50 shadow-md shadow-emerald-600/30 border-2 border-emerald-500"
                 >
-                  <Package className={`w-3.5 h-3.5 ${isProcessingOrder ? 'animate-bounce' : ''}`} />
+                  <Package className={`w-3.5 h-3.5 stroke-[2.5] ${isProcessingOrder ? 'animate-bounce' : ''}`} />
                   <span>{isProcessingOrder ? 'Deducting Stock...' : 'Dispatch B2B Bill & Deduct'}</span>
                 </button>
               </div>
@@ -459,36 +463,36 @@ export const ArchitectureVisualizer: React.FC = () => {
                   <div
                     key={p.id}
                     onClick={() => setSelectedProductId(p.id)}
-                    className={`p-4 rounded-xl border cursor-pointer transition-all ${
+                    className={`p-4 rounded-2xl border-2 cursor-pointer transition-all ${
                       isSelected
-                        ? 'bg-emerald-50/60 border-emerald-400 shadow-md ring-2 ring-emerald-400/20'
+                        ? 'bg-emerald-50/80 border-emerald-500 shadow-md ring-2 ring-emerald-500/30'
                         : 'bg-white border-slate-200 hover:border-slate-300 shadow-sm'
                     }`}
                   >
                     <div className="flex items-center justify-between gap-2 mb-1.5">
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-700">
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 font-bold border border-slate-200">
                         {p.category} • {p.sku}
                       </span>
                       {isLowStock ? (
-                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 font-bold animate-pulse flex items-center gap-1">
-                          <AlertTriangle className="w-2.5 h-2.5" /> LOW STOCK
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-rose-100 text-rose-900 border-2 border-rose-300 font-black animate-pulse flex items-center gap-1 shadow-sm">
+                          <AlertTriangle className="w-3 h-3 stroke-[2.5]" /> LOW STOCK
                         </span>
                       ) : (
-                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-900 border-2 border-emerald-300 font-black">
                           IN STOCK
                         </span>
                       )}
                     </div>
 
-                    <div className="text-sm font-bold text-slate-900 truncate">{p.name}</div>
-                    <div className="flex items-baseline justify-between mt-2 pt-2 border-t border-slate-200">
+                    <div className="text-sm font-black text-slate-900 truncate font-display">{p.name}</div>
+                    <div className="flex items-baseline justify-between mt-2 pt-2 border-t-2 border-slate-100">
                       <div>
-                        <div className="text-[10px] text-slate-500 font-mono">Wholesale Price</div>
-                        <div className="text-xs font-mono font-bold text-slate-800">₹{p.unitPrice.toLocaleString()} / unit</div>
+                        <div className="text-[10px] text-slate-600 font-mono font-medium">Wholesale Price</div>
+                        <div className="text-xs font-mono font-black text-slate-900">₹{p.unitPrice.toLocaleString()} / unit</div>
                       </div>
                       <div className="text-right">
-                        <div className="text-[10px] text-slate-500 font-mono">Available Stock</div>
-                        <div className={`text-base font-mono font-extrabold ${isLowStock ? 'text-rose-600' : 'text-emerald-600'}`}>
+                        <div className="text-[10px] text-slate-600 font-mono font-medium">Available Stock</div>
+                        <div className={`text-base font-mono font-black ${isLowStock ? 'text-rose-700' : 'text-emerald-700'}`}>
                           {p.stock} units
                         </div>
                       </div>
@@ -500,7 +504,7 @@ export const ArchitectureVisualizer: React.FC = () => {
                           e.stopPropagation();
                           handleRestock(p.id);
                         }}
-                        className="w-full mt-3 py-1 rounded-lg bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 text-[10px] font-mono font-bold transition-all"
+                        className="w-full mt-3 py-1.5 rounded-xl bg-rose-100 text-rose-900 border-2 border-rose-300 hover:bg-rose-200 text-[11px] font-mono font-black transition-all shadow-sm"
                       >
                         + Restock Batch (+100 Units)
                       </button>
@@ -512,52 +516,52 @@ export const ArchitectureVisualizer: React.FC = () => {
 
             {/* Visual 4-Stage Transaction Pipeline */}
             <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-6">
-              <div className={`p-3.5 rounded-xl border text-center transition-all ${
-                billingStage === 'pricing' ? 'bg-emerald-50 border-emerald-400 scale-[1.02]' : 'bg-slate-50 border-slate-200'
+              <div className={`p-4 rounded-2xl border-2 text-center transition-all ${
+                billingStage === 'pricing' ? 'bg-emerald-100 border-emerald-500 scale-[1.02] shadow-md' : 'bg-slate-50 border-slate-200'
               }`}>
-                <div className="text-xs font-mono text-emerald-800 font-bold mb-1">1. Pricing & GST</div>
-                <div className="text-[11px] text-slate-600">Multi-tier wholesale calculation + 18% GST</div>
-                <div className="mt-2 text-[10px] font-mono text-slate-700 font-semibold">
+                <div className="text-xs font-mono text-emerald-900 font-black mb-1">1. Pricing & GST</div>
+                <div className="text-[11px] text-slate-700 font-medium">Multi-tier wholesale calculation + 18% GST</div>
+                <div className="mt-2 text-[10px] font-mono text-slate-800 font-extrabold">
                   {billingStage === 'pricing' ? 'COMPUTING TAX...' : 'State: Ready'}
                 </div>
               </div>
 
-              <div className={`p-3.5 rounded-xl border text-center transition-all ${
-                billingStage === 'stock' ? 'bg-sky-50 border-sky-400 scale-[1.02]' : 'bg-slate-50 border-slate-200'
+              <div className={`p-4 rounded-2xl border-2 text-center transition-all ${
+                billingStage === 'stock' ? 'bg-sky-100 border-sky-500 scale-[1.02] shadow-md' : 'bg-slate-50 border-slate-200'
               }`}>
-                <div className="text-xs font-mono text-sky-800 font-bold mb-1">2. Atomic Stock Deduct</div>
-                <div className="text-[11px] text-slate-600">Prevents overselling & checks min-threshold</div>
-                <div className="mt-2 text-[10px] font-mono text-slate-700 font-semibold">
+                <div className="text-xs font-mono text-sky-900 font-black mb-1">2. Atomic Stock Deduct</div>
+                <div className="text-[11px] text-slate-700 font-medium">Prevents overselling & checks min-threshold</div>
+                <div className="mt-2 text-[10px] font-mono text-slate-800 font-extrabold">
                   {billingStage === 'stock' ? 'LOCKING BIN...' : 'Bin Lock: Free'}
                 </div>
               </div>
 
-              <div className={`p-3.5 rounded-xl border text-center transition-all ${
-                billingStage === 'ledger' ? 'bg-indigo-50 border-indigo-400 scale-[1.02]' : 'bg-slate-50 border-slate-200'
+              <div className={`p-4 rounded-2xl border-2 text-center transition-all ${
+                billingStage === 'ledger' ? 'bg-indigo-100 border-indigo-500 scale-[1.02] shadow-md' : 'bg-slate-50 border-slate-200'
               }`}>
-                <div className="text-xs font-mono text-indigo-800 font-bold mb-1">3. Ledger Posting</div>
-                <div className="text-[11px] text-slate-600">Double-entry debit/credit reconciliation</div>
-                <div className="mt-2 text-[10px] font-mono text-slate-700 font-semibold">
+                <div className="text-xs font-mono text-indigo-900 font-black mb-1">3. Ledger Posting</div>
+                <div className="text-[11px] text-slate-700 font-medium">Double-entry debit/credit reconciliation</div>
+                <div className="mt-2 text-[10px] font-mono text-slate-800 font-extrabold">
                   {billingStage === 'ledger' ? 'POSTING LEDGER...' : 'Accounts: Balanced'}
                 </div>
               </div>
 
-              <div className={`p-3.5 rounded-xl border text-center transition-all ${
-                billingStage === 'invoice' ? 'bg-emerald-50 border-emerald-400 scale-[1.02]' : 'bg-slate-50 border-slate-200'
+              <div className={`p-4 rounded-2xl border-2 text-center transition-all ${
+                billingStage === 'invoice' ? 'bg-emerald-100 border-emerald-500 scale-[1.02] shadow-md' : 'bg-slate-50 border-slate-200'
               }`}>
-                <div className="text-xs font-mono text-emerald-800 font-bold mb-1">4. Vector jsPDF</div>
-                <div className="text-[11px] text-slate-600">Printable invoice + QR + auto-dispatch</div>
-                <div className="mt-2 text-[10px] font-mono text-emerald-700 font-bold">
+                <div className="text-xs font-mono text-emerald-900 font-black mb-1">4. Vector jsPDF</div>
+                <div className="text-[11px] text-slate-700 font-medium">Printable invoice + QR + auto-dispatch</div>
+                <div className="mt-2 text-[10px] font-mono text-emerald-800 font-black">
                   {billingStage === 'invoice' ? 'INVOICE ISSUED ✓' : 'Thermal & PDF Ready'}
                 </div>
               </div>
             </div>
 
             {/* Live Terminal / Audit Log */}
-            <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs space-y-1 max-h-36 overflow-y-auto">
-              <div className="text-slate-400 font-semibold mb-2 flex items-center justify-between">
+            <div className="bg-slate-950 p-4 rounded-2xl border-2 border-slate-800 font-mono text-xs space-y-1.5 max-h-36 overflow-y-auto shadow-inner">
+              <div className="text-slate-300 font-bold mb-2 flex items-center justify-between border-b border-slate-800 pb-1">
                 <span># AgroStock ERP Transaction & Audit Log:</span>
-                <span className="text-[10px] text-emerald-400">Live Stream • Synchronized</span>
+                <span className="text-[10px] text-emerald-400 font-black">Live Stream • Synchronized</span>
               </div>
               {erpLogs.map((log, index) => (
                 <div key={index} className="text-slate-200 leading-relaxed">
@@ -566,36 +570,38 @@ export const ArchitectureVisualizer: React.FC = () => {
               ))}
             </div>
 
-            <div className="mt-4 pt-3 border-t border-slate-200 text-xs font-mono text-slate-600 flex flex-wrap items-center justify-between gap-2">
+            <div className="mt-4 pt-3 border-t-2 border-slate-200 text-xs font-mono text-slate-700 flex flex-wrap items-center justify-between gap-2">
               <span>💡 Try dispatching orders to watch stock decrement in real-time. If stock drops below threshold, an automated reorder alert triggers!</span>
-              <span className="text-emerald-700 font-bold">Stock Reconciliation: 100% Atomic</span>
+              <span className="text-emerald-800 font-black">Stock Reconciliation: 100% Atomic</span>
             </div>
           </div>
         )}
 
         {/* Tab 3: AI Multi-LLM Engine */}
         {activeTab === 'ai-engine' && (
-          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-purple-200 shadow-xl relative overflow-hidden bg-white/95">
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+          <div className="p-6 sm:p-8 rounded-3xl border-2 border-purple-400/90 shadow-2xl relative overflow-hidden bg-white">
+            <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500" />
+            
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b-2 border-slate-200 mt-1">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono uppercase bg-purple-50 text-purple-800 px-2.5 py-1 rounded-md border border-purple-200 font-semibold">
+                  <span className="text-xs font-mono uppercase bg-purple-100 text-purple-900 px-3 py-1 rounded-lg border-2 border-purple-300 font-extrabold shadow-sm">
                     Gen-AI Platform • FastAPI + LangChain + Gemini
                   </span>
-                  <span className="text-xs text-slate-500 font-mono">Dynamic Tone Adaptation & Multi-Provider Fallback</span>
+                  <span className="text-xs text-slate-600 font-mono font-medium">Dynamic Tone Adaptation & Multi-Provider Fallback</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mt-1">
+                <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display mt-2 tracking-tight">
                   Context-Preserving Tone Transformation Engine
                 </h3>
               </div>
 
               {/* Model Provider Picker */}
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono text-slate-600 font-semibold">Primary Provider:</span>
+                <span className="text-xs font-mono text-slate-700 font-bold">Primary Provider:</span>
                 <select
                   value={selectedProvider}
                   onChange={(e) => setSelectedProvider(e.target.value as any)}
-                  className="bg-white border border-purple-300 text-purple-800 text-xs font-mono rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-purple-400 shadow-sm"
+                  className="bg-white border-2 border-purple-300 text-purple-900 text-xs font-mono font-bold rounded-xl px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm cursor-pointer"
                 >
                   <option value="Gemini 2.5 Flash">Google Gemini 2.5 Flash</option>
                   <option value="OpenAI GPT-4o">OpenAI GPT-4o (Dual Routing)</option>
@@ -604,16 +610,16 @@ export const ArchitectureVisualizer: React.FC = () => {
             </div>
 
             {/* Tone Selector Pills */}
-            <div className="flex flex-wrap items-center gap-2 my-5">
-              <span className="text-xs font-mono text-slate-600 font-semibold mr-2">Select Target Tone:</span>
+            <div className="flex flex-wrap items-center gap-2.5 my-5">
+              <span className="text-xs font-mono text-slate-700 font-bold mr-2">Select Target Tone:</span>
               {(['Executive', 'Diplomatic', 'Concise', 'Persuasive'] as const).map((tone) => (
                 <button
                   key={tone}
                   onClick={() => setSelectedTone(tone)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-mono transition-all ${
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold font-mono transition-all border-2 ${
                     selectedTone === tone
-                      ? 'bg-purple-600 text-white font-bold shadow-md shadow-purple-500/25'
-                      : 'bg-white text-slate-700 border border-slate-200 hover:border-purple-300 shadow-sm'
+                      ? 'bg-purple-600 text-white border-purple-600 shadow-md shadow-purple-500/30'
+                      : 'bg-white text-slate-800 border-slate-300 hover:border-purple-400 hover:text-purple-700 shadow-sm'
                   }`}
                 >
                   {tone} Tone
@@ -623,48 +629,50 @@ export const ArchitectureVisualizer: React.FC = () => {
 
             {/* Input vs Output Comparison */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                <div className="text-xs font-mono text-slate-500 mb-2 flex items-center justify-between">
+              <div className="p-4 rounded-2xl bg-slate-50 border-2 border-slate-200 shadow-sm">
+                <div className="text-xs font-mono text-slate-700 font-bold mb-2 flex items-center justify-between">
                   <span>Input Draft (Raw context):</span>
-                  <span className="text-[10px] bg-slate-200 px-1.5 py-0.5 rounded text-slate-700">Original</span>
+                  <span className="text-[10px] bg-slate-200 px-2 py-0.5 rounded text-slate-800 font-bold">Original</span>
                 </div>
-                <div className="text-sm text-slate-700 font-sans p-3 rounded-lg bg-white border border-slate-200 shadow-sm">
+                <div className="text-sm text-slate-800 font-sans p-3.5 rounded-xl bg-white border-2 border-slate-200 shadow-sm leading-relaxed font-medium">
                   {simulatedAIText}
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-purple-50/50 border border-purple-200">
-                <div className="text-xs font-mono text-purple-800 font-semibold mb-2 flex items-center justify-between">
+              <div className="p-4 rounded-2xl bg-purple-50/80 border-2 border-purple-300 shadow-sm">
+                <div className="text-xs font-mono text-purple-900 font-extrabold mb-2 flex items-center justify-between">
                   <span>AI Transformed ({selectedTone} tone):</span>
-                  <span className="text-[10px] bg-purple-100 px-1.5 py-0.5 rounded text-purple-800 border border-purple-200">
+                  <span className="text-[10px] bg-purple-200 px-2 py-0.5 rounded-md text-purple-900 border border-purple-300 font-black">
                     Engine: {selectedProvider}
                   </span>
                 </div>
-                <div className="text-sm text-purple-950 font-sans p-3 rounded-lg bg-white border border-purple-200 shadow-sm font-medium">
+                <div className="text-sm text-purple-950 font-sans p-3.5 rounded-xl bg-white border-2 border-purple-200 shadow-sm leading-relaxed font-bold">
                   {toneSamples[selectedTone]}
                 </div>
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-slate-200 text-xs font-mono text-slate-600 flex flex-wrap items-center justify-between gap-2">
+            <div className="mt-4 pt-3 border-t-2 border-slate-200 text-xs font-mono text-slate-700 flex flex-wrap items-center justify-between gap-2">
               <span>LangChain Fallback Strategy: If provider rate-limit occurs, automatic zero-loss switch to secondary LLM in &lt; 200ms.</span>
-              <span className="text-purple-700 font-semibold">MySQL translation history cached</span>
+              <span className="text-purple-800 font-black">MySQL translation history cached</span>
             </div>
           </div>
         )}
 
         {/* Tab 4: DevOps & Cloud Pipeline */}
         {activeTab === 'devops' && (
-          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-amber-200 shadow-xl relative overflow-hidden bg-white/95">
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+          <div className="p-6 sm:p-8 rounded-3xl border-2 border-amber-400/90 shadow-2xl relative overflow-hidden bg-white">
+            <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500" />
+            
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b-2 border-slate-200 mt-1">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono uppercase bg-amber-50 text-amber-800 px-2.5 py-1 rounded-md border border-amber-200 font-semibold">
+                  <span className="text-xs font-mono uppercase bg-amber-100 text-amber-900 px-3 py-1 rounded-lg border-2 border-amber-300 font-extrabold shadow-sm">
                     House Rent Admin • Cloud Infrastructure
                   </span>
-                  <span className="text-xs text-slate-500 font-mono">Docker + NGINX + Jenkins CI/CD + AWS EC2</span>
+                  <span className="text-xs text-slate-600 font-mono font-medium">Docker + NGINX + Jenkins CI/CD + AWS EC2</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mt-1">
+                <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display mt-2 tracking-tight">
                   Automated CI/CD Pipeline to AWS Cloud
                 </h3>
               </div>
@@ -672,9 +680,9 @@ export const ArchitectureVisualizer: React.FC = () => {
               <button
                 onClick={handleRunDevOpsPipeline}
                 disabled={pipelineActive}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-600 text-white text-xs sm:text-sm font-bold hover:bg-amber-500 active:scale-95 transition-all disabled:opacity-50 shadow-md shadow-amber-500/20"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-xs sm:text-sm font-bold active:scale-95 transition-all disabled:opacity-50 shadow-md shadow-amber-600/30 border-2 border-amber-500"
               >
-                <Play className="w-3.5 h-3.5 fill-current" />
+                <Play className="w-3.5 h-3.5 fill-current stroke-[2.5]" />
                 <span>{pipelineActive ? 'Pipeline Running...' : 'Trigger Git Push CI/CD'}</span>
               </button>
             </div>
@@ -695,32 +703,32 @@ export const ArchitectureVisualizer: React.FC = () => {
                 return (
                   <div
                     key={item.step}
-                    className={`p-3.5 rounded-xl border text-center transition-all ${
+                    className={`p-3.5 rounded-2xl border-2 text-center transition-all ${
                       isCurrent
-                        ? 'bg-amber-100 border-amber-400 scale-105 shadow-md'
+                        ? 'bg-amber-100 border-amber-500 scale-105 shadow-md'
                         : isPassed
-                        ? 'bg-emerald-50 border-emerald-300'
+                        ? 'bg-emerald-50 border-emerald-400'
                         : 'bg-slate-50 border-slate-200'
                     }`}
                   >
                     <div className="flex justify-center mb-1.5">
                       <IconComponent
-                        className={`w-5 h-5 ${
+                        className={`w-5 h-5 stroke-[2.5] ${
                           isCurrent
-                            ? 'text-amber-600 animate-bounce'
+                            ? 'text-amber-700 animate-bounce'
                             : isPassed
-                            ? 'text-emerald-600'
+                            ? 'text-emerald-700'
                             : 'text-slate-400'
                         }`}
                       />
                     </div>
-                    <div className="text-xs font-mono font-bold text-slate-800">{item.title}</div>
-                    <div className="text-[10px] text-slate-500 mt-0.5">{item.desc}</div>
-                    <div className="mt-2 text-[9px] font-mono font-bold uppercase">
+                    <div className="text-xs font-mono font-black text-slate-900">{item.title}</div>
+                    <div className="text-[10px] text-slate-600 mt-0.5 font-medium">{item.desc}</div>
+                    <div className="mt-2 text-[10px] font-mono font-black uppercase">
                       {isCurrent ? (
-                        <span className="text-amber-700">RUNNING...</span>
+                        <span className="text-amber-800">RUNNING...</span>
                       ) : isPassed ? (
-                        <span className="text-emerald-700">PASSED ✓</span>
+                        <span className="text-emerald-800">PASSED ✓</span>
                       ) : (
                         <span className="text-slate-400">PENDING</span>
                       )}
@@ -730,9 +738,9 @@ export const ArchitectureVisualizer: React.FC = () => {
               })}
             </div>
 
-            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs font-mono text-slate-600 flex items-center justify-between">
+            <div className="bg-amber-50/70 p-3.5 rounded-2xl border-2 border-amber-200 text-xs font-mono text-slate-700 flex items-center justify-between">
               <span>Docker footprint optimized through Alpine bases and layer caching. Continuous deployment straight to AWS EC2 cluster.</span>
-              <span className="text-amber-700 font-bold">100% Automated</span>
+              <span className="text-amber-800 font-black">100% Automated</span>
             </div>
           </div>
         )}

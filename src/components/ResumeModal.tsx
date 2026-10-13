@@ -154,29 +154,34 @@ EDUCATION
         isOpen ? 'flex' : 'hidden print:block'
       }`}
     >
-      <div className="resume-modal-box relative w-full max-w-4xl bg-white border border-slate-200 rounded-2xl shadow-2xl flex flex-col h-[92vh] overflow-hidden">
+      <div className="resume-modal-box relative w-full max-w-4xl bg-white border-2 border-slate-300 rounded-3xl shadow-2xl flex flex-col h-[92vh] overflow-hidden">
+        {/* Top Accent Gradient Bar */}
+        <div className="h-2 w-full bg-gradient-to-r from-emerald-500 via-sky-500 to-indigo-600 shrink-0" />
+
         {/* Top Control Bar (Never Printed) */}
-        <div className="no-print flex flex-wrap items-center justify-between p-3 sm:p-4 bg-slate-50 border-b border-slate-200 gap-2 sm:gap-3">
+        <div className="no-print flex flex-wrap items-center justify-between p-3 sm:p-4 bg-slate-50 border-b-2 border-slate-200 gap-2 sm:gap-3 shrink-0">
           <div className="flex flex-wrap items-center gap-2">
-            <FileText className="w-5 h-5 text-sky-600 shrink-0" />
+            <div className="w-8 h-8 rounded-lg bg-sky-100 border-2 border-sky-300 flex items-center justify-center text-sky-700">
+              <FileText className="w-4 h-4" />
+            </div>
             <div className="flex items-center gap-2">
-              <span className="font-bold text-slate-900 text-sm sm:text-base font-display">
+              <span className="font-black text-slate-900 text-sm sm:text-base font-display tracking-tight">
                 Official Resume
               </span>
-              <span className="text-[10px] font-mono bg-sky-50 text-sky-700 px-2 py-0.5 rounded border border-sky-200 font-semibold">
+              <span className="text-[10px] font-mono bg-sky-100 text-sky-900 px-2 py-0.5 rounded-full border-2 border-sky-300 font-black">
                 Verified 2026
               </span>
             </div>
 
             {/* View Mode Toggle */}
-            <div className="flex items-center bg-slate-200/80 p-0.5 rounded-lg border border-slate-300 ml-1 sm:ml-2">
+            <div className="flex items-center bg-slate-200 p-0.5 rounded-xl border-2 border-slate-300 ml-1 sm:ml-2">
               <button
                 type="button"
                 onClick={() => setViewMode('pdf')}
-                className={`px-2.5 py-1 rounded text-xs font-mono font-semibold transition-all ${
+                className={`px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all ${
                   viewMode === 'pdf'
-                    ? 'bg-sky-500 text-white font-bold shadow-sm'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-sky-600 text-white font-black shadow-sm'
+                    : 'text-slate-700 hover:text-slate-900'
                 }`}
                 title="Preview original Google Drive PDF"
               >
@@ -185,10 +190,10 @@ EDUCATION
               <button
                 type="button"
                 onClick={() => setViewMode('ats')}
-                className={`px-2.5 py-1 rounded text-xs font-mono font-semibold transition-all ${
+                className={`px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all ${
                   viewMode === 'ats'
-                    ? 'bg-sky-500 text-white font-bold shadow-sm'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-sky-600 text-white font-black shadow-sm'
+                    : 'text-slate-700 hover:text-slate-900'
                 }`}
                 title="View ATS structured readable text layout"
               >
@@ -203,7 +208,7 @@ EDUCATION
               href="/Zafarali_Inamdar_Resume.pdf"
               download="Zafarali_Inamdar_Resume.pdf"
               id="resume-download-official-btn"
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-bold hover:brightness-110 active:scale-95 transition-all shadow-sm"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-black hover:bg-emerald-500 active:scale-95 transition-all shadow-md shadow-emerald-600/20"
               title="Download official 1-page PDF directly"
             >
               <Download className="w-4 h-4" />
@@ -215,7 +220,7 @@ EDUCATION
               href="https://drive.google.com/file/d/1zJbDNuuUu1DTW65sB7WTlAqmrysI2cPM/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 text-xs font-semibold transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-50 text-blue-800 border-2 border-blue-300 hover:bg-blue-100 text-xs font-bold transition-colors"
               title="Open in Google Drive in new tab"
             >
               <ExternalLink className="w-3.5 h-3.5 text-blue-600" />
@@ -225,7 +230,7 @@ EDUCATION
             <button
               onClick={handlePrint}
               id="resume-print-pdf-btn"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-slate-700 border border-slate-200 hover:border-slate-300 text-xs font-medium transition-colors shadow-sm"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white text-slate-800 border-2 border-slate-300 hover:border-slate-400 text-xs font-bold transition-colors shadow-sm"
               title="Print directly or save clean 2-page PDF"
             >
               <Printer className="w-4 h-4" />
@@ -238,7 +243,7 @@ EDUCATION
               rel="noopener noreferrer"
               download="GenAI_Research_Paper_Inamdar_2026.pdf"
               id="modal-download-research-paper-btn"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-purple-50 text-purple-700 border border-purple-200 hover:bg-purple-100 text-xs font-medium transition-all"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-50 text-purple-800 border-2 border-purple-300 hover:bg-purple-100 text-xs font-bold transition-all"
               title="Download published Gen-AI research paper PDF (030117.pdf)"
             >
               <BookOpen className="w-4 h-4 text-purple-600" />
@@ -247,7 +252,7 @@ EDUCATION
 
             <button
               onClick={handleDownloadTxt}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-slate-700 border border-slate-200 hover:border-slate-300 text-xs font-medium transition-colors shadow-sm"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white text-slate-800 border-2 border-slate-300 hover:border-slate-400 text-xs font-bold transition-colors shadow-sm"
               title="Download text resume"
             >
               <FileDown className="w-4 h-4" />
@@ -256,7 +261,7 @@ EDUCATION
 
             <button
               onClick={handleCopyText}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-slate-700 border border-slate-200 hover:border-slate-300 text-xs font-medium transition-colors shadow-sm"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white text-slate-800 border-2 border-slate-300 hover:border-slate-400 text-xs font-bold transition-colors shadow-sm"
               title="Copy entire text to clipboard"
             >
               {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
@@ -265,7 +270,7 @@ EDUCATION
 
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg bg-slate-200/80 text-slate-600 hover:text-slate-900 hover:bg-slate-300 transition-colors"
+              className="p-1.5 rounded-xl border-2 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>

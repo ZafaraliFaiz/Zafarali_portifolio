@@ -167,54 +167,54 @@ export const BackgroundCanvas: React.FC = () => {
       {!mouse.isTouch && mouse.rawX > 0 && (
         <div
           aria-hidden="true"
-          className="absolute rounded-full transition-opacity duration-500 pointer-events-none"
+          className="absolute rounded-full transition-opacity duration-300 pointer-events-none"
           style={{
             left: `${mouse.rawX}px`,
             top: `${mouse.rawY}px`,
-            width: '720px',
-            height: '720px',
+            width: '800px',
+            height: '800px',
             transform: 'translate(-50%, -50%)',
-            background: 'radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, rgba(99, 102, 241, 0.06) 45%, transparent 75%)',
+            background: 'radial-gradient(circle, rgba(14, 165, 233, 0.22) 0%, rgba(99, 102, 241, 0.12) 40%, rgba(217, 70, 239, 0.05) 60%, transparent 75%)',
           }}
         />
       )}
 
       {/* 2. Parallax Nebula Glows reacting to scroll & mouse depth */}
-      {/* Top Left Cyan Glow */}
+      {/* Top Left Electric Blue Glow */}
       <div
-        className="absolute -top-40 -left-40 w-[38rem] h-[38rem] bg-sky-400/22 rounded-full blur-[120px] pointer-events-none will-change-transform"
+        className="absolute -top-40 -left-40 w-[44rem] h-[44rem] bg-gradient-to-br from-cyan-400/35 via-sky-500/30 to-blue-600/20 rounded-full blur-[110px] pointer-events-none will-change-transform"
         style={{
-          transform: `translate3d(${-mouseXOffset * 1.2}px, ${(-scrollY * 0.12) - mouseYOffset * 1.1}px, 0)`,
+          transform: `translate3d(${-mouseXOffset * 1.3}px, ${(-scrollY * 0.12) - mouseYOffset * 1.1}px, 0)`,
         }}
       />
 
-      {/* Top Right Violet Glow */}
+      {/* Top Right Royal Violet Glow */}
       <div
-        className="absolute top-20 -right-40 w-[36rem] h-[36rem] bg-indigo-400/18 rounded-full blur-[130px] pointer-events-none will-change-transform"
+        className="absolute top-20 -right-40 w-[42rem] h-[42rem] bg-gradient-to-bl from-indigo-500/35 via-purple-500/30 to-pink-500/20 rounded-full blur-[120px] pointer-events-none will-change-transform"
         style={{
-          transform: `translate3d(${mouseXOffset * 1.5}px, ${(-scrollY * 0.18) + mouseYOffset * 1.3}px, 0)`,
+          transform: `translate3d(${mouseXOffset * 1.6}px, ${(-scrollY * 0.18) + mouseYOffset * 1.3}px, 0)`,
         }}
       />
 
-      {/* Mid-Page Purple / Sky Glow */}
+      {/* Mid-Page Vibrant Azure Glow */}
       <div
-        className="absolute top-1/2 left-1/3 w-[42rem] h-[42rem] bg-purple-400/15 rounded-full blur-[140px] pointer-events-none will-change-transform"
+        className="absolute top-1/2 left-1/4 w-[48rem] h-[48rem] bg-gradient-to-r from-blue-400/30 via-indigo-400/25 to-sky-300/25 rounded-full blur-[130px] pointer-events-none will-change-transform"
         style={{
-          transform: `translate3d(${-mouseXOffset * 0.8}px, ${(-scrollY * 0.25) - mouseYOffset * 0.9}px, 0)`,
+          transform: `translate3d(${-mouseXOffset * 0.9}px, ${(-scrollY * 0.25) - mouseYOffset * 0.9}px, 0)`,
         }}
       />
 
-      {/* Bottom Emerald Glow */}
+      {/* Bottom Emerald & Cyan Glow */}
       <div
-        className="absolute bottom-10 right-1/4 w-[34rem] h-[34rem] bg-emerald-400/16 rounded-full blur-[120px] pointer-events-none will-change-transform"
+        className="absolute bottom-10 right-1/4 w-[40rem] h-[40rem] bg-gradient-to-tr from-emerald-400/35 via-teal-400/30 to-cyan-400/25 rounded-full blur-[110px] pointer-events-none will-change-transform"
         style={{
-          transform: `translate3d(${mouseXOffset * 1.1}px, ${(-scrollY * 0.2) + mouseYOffset}px, 0)`,
+          transform: `translate3d(${mouseXOffset * 1.2}px, ${(-scrollY * 0.2) + mouseYOffset}px, 0)`,
         }}
       />
 
       {/* 3. Parallax Floating Cyber Crosshairs & Tech Glyphs */}
       <div
-        className="absolute top-28 left-16 text-sky-700/35 font-mono text-sm select-none will-change-transform hidden sm:block"
+        className="absolute top-28 left-16 text-sky-700/60 font-mono text-xs font-bold tracking-wider select-none will-change-transform hidden sm:block bg-sky-100/60 px-2 py-0.5 rounded border border-sky-300/60"
         style={{
           transform: `translate3d(${-mouseXOffset * 1.8}px, ${(-scrollY * 0.35) - mouseYOffset * 1.5}px, 0)`,
         }}
@@ -223,7 +223,7 @@ export const BackgroundCanvas: React.FC = () => {
       </div>
 
       <div
-        className="absolute top-1/3 right-24 text-indigo-700/35 font-mono text-xs select-none will-change-transform hidden sm:block"
+        className="absolute top-1/3 right-24 text-indigo-700/60 font-mono text-xs font-bold tracking-wider select-none will-change-transform hidden sm:block bg-indigo-100/60 px-2 py-0.5 rounded border border-indigo-300/60"
         style={{
           transform: `translate3d(${mouseXOffset * 2.2}px, ${(-scrollY * 0.4) + mouseYOffset * 1.8}px, 0)`,
         }}
@@ -232,7 +232,7 @@ export const BackgroundCanvas: React.FC = () => {
       </div>
 
       <div
-        className="absolute top-2/3 left-1/4 text-emerald-700/35 font-mono text-xs select-none will-change-transform hidden sm:block"
+        className="absolute top-2/3 left-1/4 text-emerald-700/60 font-mono text-xs font-bold tracking-wider select-none will-change-transform hidden sm:block bg-emerald-100/60 px-2 py-0.5 rounded border border-emerald-300/60"
         style={{
           transform: `translate3d(${-mouseXOffset * 1.4}px, ${(-scrollY * 0.3) - mouseYOffset * 1.2}px, 0)`,
         }}

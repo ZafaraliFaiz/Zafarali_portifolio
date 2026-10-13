@@ -34,31 +34,31 @@ export const SkillsSection: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-mono uppercase tracking-wider mb-3">
-            <Zap className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 border-2 border-sky-300 text-sky-800 text-xs font-mono uppercase tracking-wider mb-3 font-bold shadow-sm">
+            <Zap className="w-4 h-4 text-sky-600 stroke-[2.5]" />
             <span>Technical Capabilities</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 font-display tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight">
             Engineered For{' '}
             <span className="bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
               High Complexity
             </span>
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base mt-2">
+          <p className="text-slate-700 text-sm sm:text-base mt-2 font-medium leading-relaxed">
             Languages, frameworks, architecture paradigms, and cloud infrastructure verified across production deployments.
           </p>
         </div>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10">
+        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-10">
           {SKILL_CATEGORIES.map((cat) => (
             <button
               key={cat.category}
               onClick={() => setActiveCategory(cat.category)}
-              className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
+              className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all flex items-center gap-2 border-2 ${
                 activeCategory === cat.category
-                  ? 'bg-sky-500 text-white shadow-lg shadow-sky-500/25 scale-105'
-                  : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:text-slate-900 shadow-sm'
+                  ? 'bg-sky-600 text-white border-sky-600 shadow-lg shadow-sky-500/30 scale-105'
+                  : 'bg-white text-slate-800 border-slate-300 hover:border-sky-400 hover:text-sky-700 shadow-sm'
               }`}
             >
               {getCategoryIcon(cat.iconName)}
@@ -77,33 +77,33 @@ export const SkillsSection: React.FC = () => {
               glareOpacity={0.1}
               className="h-full"
             >
-              <div className="bg-white/95 p-5 rounded-xl border border-slate-200/90 hover:border-sky-400 hover:shadow-lg transition-all h-full flex flex-col justify-between group shadow-md">
+              <div className="bg-white p-5 sm:p-6 rounded-2xl border-2 border-slate-200/90 hover:border-sky-500 hover:shadow-xl transition-all h-full flex flex-col justify-between group shadow-md">
                 <div>
                   <div className="flex items-center justify-between gap-3 mb-1.5">
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-slate-900 text-sm sm:text-base group-hover:text-sky-600 transition-colors">
+                      <span className="font-black text-slate-900 text-sm sm:text-base group-hover:text-sky-600 transition-colors font-display">
                         {skill.name}
                       </span>
                       {skill.highlight && (
-                        <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-sky-50 text-sky-700 border border-sky-200">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-sky-100 text-sky-900 border-2 border-sky-300 font-extrabold shadow-sm">
                           Core
                         </span>
                       )}
                     </div>
-                    <span className="text-xs font-mono text-sky-600 font-bold">
+                    <span className="text-sm font-mono text-sky-700 font-black">
                       {skill.level}%
                     </span>
                   </div>
 
                   {/* Progress bar */}
-                  <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden my-2 border border-slate-200">
+                  <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden my-2.5 border border-slate-300">
                     <div
-                      className="h-full bg-gradient-to-r from-sky-500 via-blue-500 to-indigo-500 rounded-full transition-all duration-700 ease-out"
+                      className="h-full bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 rounded-full transition-all duration-700 ease-out"
                       style={{ width: `${skill.level}%` }}
                     />
                   </div>
 
-                  <p className="text-xs text-slate-600 leading-relaxed">
+                  <p className="text-xs text-slate-700 leading-relaxed font-medium">
                     {skill.description}
                   </p>
                 </div>
@@ -113,9 +113,9 @@ export const SkillsSection: React.FC = () => {
         </div>
 
         {/* Core Languages Strip */}
-        <div className="mt-12 p-6 rounded-2xl bg-white/95 border border-slate-200/90 shadow-md">
-          <div className="text-xs font-mono text-slate-500 uppercase tracking-wider mb-3">
-            Core Programming Languages:
+        <div className="mt-12 p-6 sm:p-7 rounded-3xl bg-white border-2 border-slate-200/90 shadow-xl">
+          <div className="text-xs font-mono text-slate-700 uppercase tracking-wider mb-3.5 font-bold">
+            Core Programming Languages & Paradigms:
           </div>
           <div className="flex flex-wrap items-center gap-3">
             {[
@@ -128,11 +128,11 @@ export const SkillsSection: React.FC = () => {
             ].map((lang) => (
               <div
                 key={lang.name}
-                className="px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs font-mono flex items-center gap-2"
+                className="px-3.5 py-2 rounded-xl bg-slate-50 border-2 border-slate-200 text-xs font-mono flex items-center gap-2 shadow-sm"
               >
-                <span className="w-2 h-2 rounded-full bg-sky-500"></span>
-                <span className="text-slate-800 font-semibold">{lang.name}</span>
-                <span className="text-[10px] text-slate-500">({lang.type})</span>
+                <span className="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
+                <span className="text-slate-900 font-black">{lang.name}</span>
+                <span className="text-[10px] text-slate-600 font-semibold">({lang.type})</span>
               </div>
             ))}
           </div>
