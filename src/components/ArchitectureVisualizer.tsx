@@ -387,9 +387,22 @@ export const ArchitectureVisualizer: React.FC = () => {
               </div>
             </div>
 
-            <div className="text-xs text-slate-700 font-mono bg-sky-50/70 p-3.5 rounded-2xl border-2 border-sky-200 flex items-center justify-between">
+            <div className="text-xs text-slate-700 font-mono bg-sky-50/70 p-3.5 rounded-2xl border-2 border-sky-200 flex flex-col sm:flex-row items-center justify-between gap-2">
               <span>💡 <strong className="text-slate-900">How to test:</strong> Click &quot;Record Voter Action&quot; while OFFLINE to see the queue grow. Toggle to &quot;ONLINE&quot; to witness automatic queue sync!</span>
-              <span className="text-sky-800 font-black">Resilience: 100% Zero-Loss</span>
+              <span className="text-sky-800 font-black shrink-0">Resilience: 100% Zero-Loss</span>
+            </div>
+
+            {/* Production Store Distribution Banner */}
+            <div className="mt-3 p-4 rounded-2xl bg-slate-900 text-white border-2 border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-md">
+              <div className="flex items-center gap-2.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping shrink-0" />
+                <span className="text-xs font-mono">
+                  <strong className="text-emerald-400">Live Production Status:</strong> Published via <strong className="text-white">Apple iOS Unlisted App Distribution</strong> &amp; live on the <strong className="text-white">Google Play Store via Google Play Console</strong> after Closed Testing tracks.
+                </span>
+              </div>
+              <span className="px-3 py-1 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-500/50 text-[11px] font-mono font-black shrink-0">
+                Live on iOS &amp; Android ✓
+              </span>
             </div>
           </div>
         )}

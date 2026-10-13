@@ -134,7 +134,7 @@ export const Hero: React.FC<HeroProps> = ({
         }}
       >
         <Smartphone className="w-4 h-4 text-emerald-600" />
-        <span>Offline-First (Expo Router)</span>
+        <span>Apple Unlisted &amp; Play Store Live</span>
       </div>
 
       <div 
@@ -301,9 +301,9 @@ export const Hero: React.FC<HeroProps> = ({
               <div className="w-9 h-9 rounded-xl bg-blue-100 border border-blue-300 text-blue-700 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform shadow-sm">
                 <Smartphone className="w-5 h-5 text-blue-600" />
               </div>
-              <div className="text-2xl sm:text-3xl font-black font-display text-blue-600">100%</div>
-              <div className="text-xs font-bold text-slate-900 mt-1">Offline-First Mobile</div>
-              <div className="text-[11px] text-slate-500 font-medium">React Native, Expo & EAS</div>
+              <div className="text-2xl sm:text-3xl font-black font-display text-blue-600">iOS &amp; Android</div>
+              <div className="text-xs font-bold text-slate-900 mt-1">Live Store Releases</div>
+              <div className="text-[11px] text-slate-500 font-medium">Apple Unlisted &amp; Play Store</div>
             </div>
           </TiltCard>
         </div>

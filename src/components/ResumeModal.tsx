@@ -62,7 +62,7 @@ TAIN ELECT AI (INDEPENDENT CONTRACTOR) - FREELANCE REACT NATIVE DEVELOPER (Aug 2
 • Built a cross-platform (iOS/Android) field-operations app in React Native (Expo, Expo Router) for election canvassing agents.
 • Designed an offline-first architecture with a local AsyncStorage write-queue, automatic background sync, retry-with-backoff, and NetInfo.
 • Integrated Supabase (Auth, Postgres, Storage) with TanStack React Query and Zustand, plus expo-camera and role-based PII masking.
-• Owned iOS/Android releases via EAS Build/Submit: Apple Unlisted App Distribution and Google Play Closed Testing rollout.
+• Owned end-to-end iOS/Android release lifecycle via EAS Build & Submit: successfully published under Apple iOS Unlisted App Distribution, completed Google Play Closed Testing tracks, and published to production on the Google Play Store through Google Play Console.
 
 NEBULA TECHNOLOGY - SOFTWARE DEVELOPER INTERN (Jan 2026 – Jun 2026)
 • Built the React.js (Vite) frontend of a full-stack agriculture management system ("AgroStock") using Tailwind CSS, SCSS, and Material UI.
@@ -113,7 +113,7 @@ TAIN ELECT AI (INDEPENDENT CONTRACTOR) - FREELANCE REACT NATIVE DEVELOPER (Aug 2
 • Built a cross-platform (iOS/Android) field-operations app in React Native (Expo, Expo Router) for election canvassing agents.
 • Designed an offline-first architecture with a local AsyncStorage write-queue, automatic background sync, retry-with-backoff, and NetInfo.
 • Integrated Supabase (Auth, Postgres, Storage) with TanStack React Query and Zustand, plus expo-camera and role-based PII masking.
-• Owned iOS/Android releases via EAS Build/Submit: Apple Unlisted App Distribution and Google Play Closed Testing rollout.
+• Owned end-to-end iOS/Android release lifecycle via EAS Build & Submit: successfully published under Apple iOS Unlisted App Distribution, completed Google Play Closed Testing tracks, and published to production on the Google Play Store through Google Play Console.
 
 NEBULA TECHNOLOGY - SOFTWARE DEVELOPER INTERN (Jan 2026 – Jun 2026)
 • Built the React.js (Vite) frontend of a full-stack agriculture management system ("AgroStock") using Tailwind CSS, SCSS, and Material UI.
@@ -402,7 +402,7 @@ EDUCATION
                   <li>Built a cross-platform (iOS/Android) field-operations app in React Native (Expo, Expo Router) for election canvassing agents, covering member management, voter counselling, and live election-day polling.</li>
                   <li>Designed an offline-first architecture with a local AsyncStorage write-queue, automatic background sync, retry-with-backoff, and live connection-state feedback via NetInfo.</li>
                   <li>Integrated Supabase (Auth, Postgres, Storage) with TanStack React Query and Zustand, plus expo-camera for compressed photo capture; implemented a permission-driven UI with role-based PII masking and a hardened, role-restricted auth flow (expo-secure-store).</li>
-                  <li>Owned iOS/Android releases via EAS Build/Submit: resolved App Store Review compliance issues, secured Apple approval for Unlisted App Distribution, and managed TestFlight and Google Play Closed Testing rollout.</li>
+                  <li>Owned end-to-end iOS/Android release lifecycle via EAS Build & Submit: successfully published under Apple iOS Unlisted App Distribution, completed Google Play Closed Testing tracks, and published to production on the Google Play Store through Google Play Console.</li>
                 </ul>
               </div>
 

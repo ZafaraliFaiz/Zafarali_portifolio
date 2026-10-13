@@ -443,12 +443,14 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                   </div>
 
                   <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-display tracking-tight">
-                    Offline-First Field Resilience & SQLite Sync
+                    Offline-First Field Resilience & Published Mobile App
                   </h3>
                   <p className="text-slate-700 text-xs sm:text-sm mt-2 leading-relaxed">
                     Designed for field election teams operating in zero-connectivity rural zones. Built on React Native
-                    (Expo Router) with a local SQLite transactional store. Field workers log surveys, voter verifications,
-                    and polling updates without lag; changes auto-sync in batches the instant network connects.
+                    (Expo Router) with a local SQLite/AsyncStorage write-queue. Successfully published live under 
+                    <strong className="text-slate-900 font-bold"> Apple iOS Unlisted App Distribution</strong> and orchestrated 
+                    <strong className="text-slate-900 font-bold"> Google Play Closed Testing</strong> through to production release on the 
+                    <strong className="text-slate-900 font-bold"> Google Play Store via Google Play Console</strong>.
                   </p>
 
                   {/* Interactive Network Simulator */}
@@ -489,16 +491,16 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mt-5">
                     <div className="p-3.5 rounded-xl bg-slate-50 border-2 border-slate-200">
-                      <div className="text-xs font-medium text-slate-600">Offline Availability</div>
-                      <div className="text-lg font-black text-sky-600 font-mono mt-0.5">100% Operational</div>
+                      <div className="text-xs font-medium text-slate-600">iOS Distribution</div>
+                      <div className="text-lg font-black text-sky-600 font-mono mt-0.5">Apple Unlisted Live</div>
                     </div>
                     <div className="p-3.5 rounded-xl bg-slate-50 border-2 border-slate-200">
-                      <div className="text-xs font-medium text-slate-600">Data Loss Rate</div>
-                      <div className="text-lg font-black text-emerald-600 font-mono mt-0.5">0% Guaranteed</div>
+                      <div className="text-xs font-medium text-slate-600">Android Release</div>
+                      <div className="text-lg font-black text-emerald-600 font-mono mt-0.5">Play Console Live</div>
                     </div>
                     <div className="p-3.5 rounded-xl bg-slate-50 border-2 border-slate-200">
-                      <div className="text-xs font-medium text-slate-600">Stack</div>
-                      <div className="text-lg font-black text-indigo-600 font-mono mt-0.5">Expo + SQLite</div>
+                      <div className="text-xs font-medium text-slate-600">Architecture</div>
+                      <div className="text-lg font-black text-indigo-600 font-mono mt-0.5">Expo + Offline Sync</div>
                     </div>
                   </div>
                 </div>

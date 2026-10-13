@@ -70,7 +70,7 @@ export const RecruiterFastDeck: React.FC<RecruiterFastDeckProps> = ({
                 <span className="font-display font-black text-slate-900 text-sm">Offline-First Mobile App</span>
               </div>
               <p className="text-slate-600 text-xs mt-2 leading-relaxed">
-                Built and distributed <strong className="text-slate-900 font-bold">TAIN Elect AI</strong> on React Native (Expo Router) with custom local write-queue, NetInfo, and Supabase sync for Apple & Google Play store tracks.
+                Built and published <strong className="text-slate-900 font-bold">TAIN Elect AI</strong> on React Native (Expo Router) with custom local write-queue and Supabase sync. Successfully published under <strong className="text-slate-900 font-bold">Apple iOS Unlisted App Distribution</strong> and live on <strong className="text-slate-900 font-bold">Google Play Store via Google Play Console</strong> after Closed Testing.
               </p>
             </div>
 

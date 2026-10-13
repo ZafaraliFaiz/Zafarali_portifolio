@@ -36,19 +36,19 @@ export const PROJECTS: Project[] = [
     title: "TAIN Elect AI - Mobile Field Operations & Election Suite",
     clientOrOrg: "TAIN Elect AI (Independent Contractor)",
     tagline:
-      "Offline-First React Native Mobile Suite with Local Write-Queue & Zero-Downtime Sync",
+      "Offline-First React Native Mobile Suite with Local Write-Queue & Live Store Distribution",
     category: "Mobile",
     period: "Aug 2026 – Present",
-    badge: "Production Mobile",
+    badge: "Published iOS & Android",
     featured: true,
     description:
-      "Cross-platform (iOS/Android) mobile field-operations application built in React Native (Expo, Expo Router) for election canvassing agents. Designed to operate reliably in challenging rural network connectivity scenarios during voter counselling and live election-day polling.",
+      "Cross-platform (iOS/Android) mobile field-operations application built in React Native (Expo, Expo Router) for election canvassing agents. Designed to operate reliably in challenging rural network connectivity scenarios during voter counselling and live election-day polling. Successfully published on iOS via Apple Unlisted App Distribution and through Google Play Closed Testing into live production on the Google Play Store via Google Play Console.",
     keyHighlights: [
       "Engineered an offline-first architecture utilizing a custom local AsyncStorage write-queue with NetInfo network listeners and automatic exponential backoff retry algorithms.",
       "Integrated Supabase (Auth, Postgres, Storage) with TanStack React Query and Zustand state management for reactive UI updates and cached data synchronization.",
       "Implemented hardware-level camera integration using expo-camera with client-side image compression and secure storage with expo-secure-store.",
       "Architected permission-driven UI with role-based PII masking to strictly guard sensitive constituent information.",
-      "Owned complete release lifecycle via EAS Build & Submit, resolved App Store review compliance, secured Apple Unlisted App Distribution approval, and orchestrated Google Play Closed Testing rollouts.",
+      "Owned complete release lifecycle via EAS Build & Submit: successfully secured Apple approval for iOS Unlisted App Distribution, navigated Google Play Closed Testing requirements, and published live on the Google Play Store via Google Play Console.",
     ],
     technologies: [
       "React Native",
@@ -61,15 +61,17 @@ export const PROJECTS: Project[] = [
       "Expo Camera",
       "Expo SecureStore",
       "EAS Build",
+      "Google Play Console",
+      "Apple App Store Connect",
     ],
     metrics: [
-      { label: "Network Uptime Requirement", value: "0% (Offline-First)" },
-      { label: "Mobile Platforms", value: "iOS & Android" },
+      { label: "iOS Publication", value: "Apple Unlisted Live" },
+      { label: "Android Publication", value: "Play Store Live" },
+      { label: "Network Requirement", value: "0% (Offline-First)" },
       { label: "Sync Resilience", value: "Auto-Retry Backoff" },
-      { label: "App Distribution", value: "Apple & Google Play" },
     ],
     architectureOverview:
-      "Client Layer (React Native + Expo Router) -> Local Storage Write-Queue (AsyncStorage + Zustand) -> Network Observer (NetInfo) -> Sync Worker with Exponential Backoff -> Supabase Edge / Postgres DB.",
+      "Client Layer (React Native + Expo Router) -> Local Storage Write-Queue (AsyncStorage + Zustand) -> Network Observer (NetInfo) -> Sync Worker with Exponential Backoff -> Supabase Edge / Postgres DB -> EAS Production Build -> Apple Unlisted & Play Store Tracks.",
     architectureNodes: [
       {
         title: "Local Write-Queue",
@@ -87,8 +89,8 @@ export const PROJECTS: Project[] = [
         icon: "shield",
       },
       {
-        title: "EAS Production Pipelines",
-        desc: "Unlisted distribution for Apple iOS enterprise & Android Closed Testing tracks.",
+        title: "EAS & Store Release Pipelines",
+        desc: "Published under Apple iOS Unlisted App Distribution and live on Google Play Store via Play Console after Closed Testing.",
         icon: "smartphone",
       },
     ],
@@ -401,7 +403,7 @@ export const EXPERIENCES: Experience[] = [
       "Built a cross-platform (iOS/Android) field-operations app in React Native (Expo, Expo Router) for election canvassing agents, covering member management, voter counselling, and live election-day polling.",
       "Designed an offline-first architecture with a local AsyncStorage write-queue, automatic background sync, retry-with-backoff, and live connection-state feedback via NetInfo.",
       "Integrated Supabase (Auth, Postgres, Storage) with TanStack React Query and Zustand, plus expo-camera for compressed photo capture; implemented a permission-driven UI with role-based PII masking and a hardened, role-restricted auth flow (expo-secure-store).",
-      "Owned iOS/Android releases via EAS Build/Submit: resolved App Store Review compliance issues, secured Apple approval for Unlisted App Distribution, and managed TestFlight and Google Play Closed Testing rollout.",
+      "Owned end-to-end iOS/Android release lifecycle via EAS Build & Submit: successfully published under Apple iOS Unlisted App Distribution, completed Google Play Closed Testing tracks, and published to production on the Google Play Store through Google Play Console.",
     ],
     technologies: [
       "React Native",

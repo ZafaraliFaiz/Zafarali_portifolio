@@ -92,15 +92,51 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
                   {project.imageUrl && (
                     <div 
                       onClick={() => onSelectProject(project)}
-                      className="relative w-full h-44 sm:h-48 rounded-2xl overflow-hidden mb-4 border-2 border-slate-200 group-hover:border-sky-400 group/img cursor-pointer bg-slate-100 shadow-inner"
+                      className={`relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden mb-4 border-2 border-slate-200 group-hover:border-sky-400 group/img cursor-pointer shadow-inner ${
+                        project.category === 'Mobile'
+                          ? 'bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-2.5 flex items-center justify-center'
+                          : 'bg-slate-100'
+                      }`}
                     >
-                      <img
-                        src={project.imageUrl}
-                        alt={project.title}
-                        className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-60" />
+                      {project.category === 'Mobile' ? (
+                        <div className="relative h-full w-full flex items-center justify-center gap-2 overflow-hidden">
+                          {/* Ambient background glow */}
+                          <div 
+                            className="absolute inset-0 bg-cover bg-center opacity-30 blur-xl scale-125 pointer-events-none"
+                            style={{ backgroundImage: `url(${project.imageUrl})` }}
+                          />
+                          {/* Primary Phone Frame */}
+                          <div className="relative z-10 h-full aspect-[9/19.5] rounded-xl overflow-hidden border-2 border-slate-700 bg-black shadow-2xl group-hover/img:scale-105 transition-transform duration-300">
+                            <img
+                              src={project.imageUrl}
+                              alt={project.title}
+                              className="w-full h-full object-cover object-top"
+                              loading="lazy"
+                            />
+                          </div>
+                          {/* Secondary Peeking Phone Frame */}
+                          {project.previewImages && project.previewImages[1] && (
+                            <div className="relative z-0 h-[86%] aspect-[9/19.5] rounded-xl overflow-hidden border border-slate-700/80 bg-black shadow-xl opacity-60 hidden sm:block -ml-5 group-hover/img:translate-x-2 transition-transform duration-300">
+                              <img
+                                src={project.previewImages[1]}
+                                alt={project.title}
+                                className="w-full h-full object-cover object-top"
+                                loading="lazy"
+                              />
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <>
+                          <img
+                            src={project.imageUrl}
+                            alt={project.title}
+                            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-60" />
+                        </>
+                      )}
                       
                       {/* Floating App Icon / Client Tag */}
                       {project.logoUrl && (
