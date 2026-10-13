@@ -13,6 +13,7 @@ interface ScrollAssembleProps {
   distance?: number;
   rotation?: number;
   scaleInitial?: number;
+  once?: boolean;
 }
 
 export const ScrollAssemble: React.FC<ScrollAssembleProps> = ({
@@ -25,10 +26,11 @@ export const ScrollAssemble: React.FC<ScrollAssembleProps> = ({
   distance = 50,
   rotation = 4,
   scaleInitial = 0.94,
+  once = true,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
-    once: false,
+    once,
     amount: threshold,
   });
 

@@ -79,9 +79,6 @@ const ARCHITECTURE_TABS: {
 
 export const ArchitectureVisualizer: React.FC = () => {
   const [activeTab, setActiveTab] = useState<ArchitectureTabId>("tain-electai");
-  const [isAutoPlay, setIsAutoPlay] = useState<boolean>(true);
-  const [isInteracting, setIsInteracting] = useState<boolean>(false);
-  const inactivityTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Switch to next card
   const handleNextTab = useCallback(() => {
@@ -92,35 +89,8 @@ export const ArchitectureVisualizer: React.FC = () => {
     });
   }, []);
 
-  // Register user activity: halts carousel immediately and sets 8-second inactivity timer
   const registerUserActivity = useCallback(() => {
-    setIsInteracting(true);
-
-    if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
-
-    inactivityTimerRef.current = setTimeout(() => {
-      setIsInteracting(false);
-    }, 8000);
-  }, []);
-
-  // Auto-play runner (6s interval, pauses on interaction)
-  useEffect(() => {
-    if (!isAutoPlay || isInteracting) {
-      return;
-    }
-
-    const timer = setInterval(() => {
-      handleNextTab();
-    }, 3500);
-
-    return () => clearInterval(timer);
-  }, [isAutoPlay, isInteracting, handleNextTab]);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
-    };
+    // Activity tracking preserved for interactive state
   }, []);
 
   // TAIN Elect AI Simulation State
@@ -422,6 +392,7 @@ export const ArchitectureVisualizer: React.FC = () => {
 
         <ScrollFocusZoom maxScale={1.015}>
           <div
+            className="min-h-[640px]"
             onPointerDown={registerUserActivity}
             onKeyDown={registerUserActivity}
           >

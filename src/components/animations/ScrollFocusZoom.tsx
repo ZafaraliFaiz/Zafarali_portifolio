@@ -35,11 +35,12 @@ export const ScrollFocusZoom: React.FC<ScrollFocusZoomProps> = ({
     [minScale, 1.0, maxScale, 1.0, minScale * 1.02]
   );
 
-  // Smooth spring physics for organic, non-linear feel
+  // Smooth spring physics with rapid settling to eliminate residual drift
   const scale = useSpring(rawScale, {
-    stiffness: 120,
-    damping: 24,
-    mass: 0.8,
+    stiffness: 260,
+    damping: 32,
+    mass: 0.6,
+    restDelta: 0.001,
   });
 
   // Dynamic opacity curve
@@ -50,8 +51,10 @@ export const ScrollFocusZoom: React.FC<ScrollFocusZoomProps> = ({
   );
 
   const opacity = useSpring(rawOpacity, {
-    stiffness: 120,
-    damping: 24,
+    stiffness: 260,
+    damping: 32,
+    mass: 0.6,
+    restDelta: 0.001,
   });
 
   return (
