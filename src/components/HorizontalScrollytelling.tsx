@@ -22,6 +22,7 @@ import {
   Terminal
 } from 'lucide-react';
 import { TiltCard } from './TiltCard';
+import { StoreBadges } from './StoreBadges';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
 interface HorizontalScrollytellingProps {
@@ -502,6 +503,18 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                       <div className="text-xs font-medium text-slate-600">Architecture</div>
                       <div className="text-lg font-black text-indigo-600 font-mono mt-0.5">Expo + Offline Sync</div>
                     </div>
+                  </div>
+
+                  {/* Direct Store Download Badges */}
+                  <div className="mt-4 p-3 rounded-2xl bg-blue-50/70 border-2 border-blue-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div className="text-xs font-mono font-bold text-slate-800">
+                      Official Store Publications:
+                    </div>
+                    <StoreBadges
+                      appStoreUrl="https://apps.apple.com/us/app/tain-electai/id6807301293"
+                      playStoreUrl="https://play.google.com/store/apps/details?id=com.elitespro.BEMS&pcampaignid=web_share"
+                      variant="pill"
+                    />
                   </div>
                 </div>
               </TiltCard>

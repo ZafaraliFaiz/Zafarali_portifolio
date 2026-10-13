@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, CheckCircle2, Cpu, Database, ExternalLink, Github, Layers, ShieldCheck, Sparkles, Smartphone, Server, Eye, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Project } from '../types/portfolio';
+import { StoreBadges } from './StoreBadges';
 
 interface ProjectDetailModalProps {
   project: Project | null;
@@ -66,6 +67,15 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             <p className="text-slate-700 text-sm mt-1 font-bold">
               {project.tagline}
             </p>
+            {(project.appStoreUrl || project.playStoreUrl) && (
+              <div className="mt-3">
+                <StoreBadges
+                  appStoreUrl={project.appStoreUrl}
+                  playStoreUrl={project.playStoreUrl}
+                  variant="pill"
+                />
+              </div>
+            )}
           </div>
 
           <button
@@ -151,6 +161,21 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                         <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />
                       </button>
                     </div>
+
+                    {/* Live Store Download Action Bar */}
+                    {(project.appStoreUrl || project.playStoreUrl) && (
+                      <div className="relative z-10 w-full max-w-lg mt-5 p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xl">
+                        <div className="text-left text-white text-xs font-mono">
+                          <div className="font-black text-sky-300">Live Production Mobile App</div>
+                          <div className="text-[11px] text-slate-300">Approved &amp; distributed on iOS &amp; Android</div>
+                        </div>
+                        <StoreBadges
+                          appStoreUrl={project.appStoreUrl}
+                          playStoreUrl={project.playStoreUrl}
+                          variant="pill"
+                        />
+                      </div>
+                    )}
                   </div>
 
                   {/* Portrait Mobile Thumbnails Strip */}
@@ -320,8 +345,17 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
         {/* Modal Footer */}
         <div className="p-4 sm:p-5 bg-slate-50 border-t-2 border-slate-200 flex flex-wrap items-center justify-between gap-3">
-          <div className="text-xs text-slate-700 font-mono">
-            Candidate: <strong className="text-slate-900 font-black">Zafarali Faizahmed Inamdar</strong>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2.5">
+            <div className="text-xs text-slate-700 font-mono">
+              Candidate: <strong className="text-slate-900 font-black">Zafarali Faizahmed Inamdar</strong>
+            </div>
+            {(project.appStoreUrl || project.playStoreUrl) && (
+              <StoreBadges
+                appStoreUrl={project.appStoreUrl}
+                playStoreUrl={project.playStoreUrl}
+                variant="pill"
+              />
+            )}
           </div>
 
           <div className="flex items-center gap-2">

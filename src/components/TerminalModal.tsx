@@ -176,6 +176,25 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
             <p className="text-slate-400">
               Backend: Supabase Postgres & Auth | Native: Expo Camera, SecureStore | Release: EAS Build, Apple Unlisted & Google Closed Testing.
             </p>
+            <div className="pt-1 flex flex-wrap items-center gap-3">
+              <a
+                href="https://apps.apple.com/us/app/tain-electai/id6807301293"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sky-400 hover:text-sky-300 underline font-mono flex items-center gap-1 font-bold"
+              >
+                <span> Apple App Store (iOS)</span>
+              </a>
+              <span className="text-slate-600">•</span>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.elitespro.BEMS&pcampaignid=web_share"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-400 hover:text-emerald-300 underline font-mono flex items-center gap-1 font-bold"
+              >
+                <span>▶ Google Play Store (Android)</span>
+              </a>
+            </div>
           </div>
         );
         break;

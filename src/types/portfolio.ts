@@ -16,6 +16,8 @@ export interface Project {
   demoType?: 'interactive-flow' | 'simulation' | 'preview';
   githubUrl?: string;
   liveUrl?: string;
+  appStoreUrl?: string;
+  playStoreUrl?: string;
   imageUrl?: string;
   logoUrl?: string;
   previewImages?: string[];

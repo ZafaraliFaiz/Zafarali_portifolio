@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, Sparkles, CheckCircle2, FileDown, Phone, Mail, Award, Clock, ArrowRight } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { StoreBadges } from './StoreBadges';
 
 interface RecruiterFastDeckProps {
   isOpen: boolean;
@@ -72,6 +73,13 @@ export const RecruiterFastDeck: React.FC<RecruiterFastDeckProps> = ({
               <p className="text-slate-600 text-xs mt-2 leading-relaxed">
                 Built and published <strong className="text-slate-900 font-bold">TAIN Elect AI</strong> on React Native (Expo Router) with custom local write-queue and Supabase sync. Successfully published under <strong className="text-slate-900 font-bold">Apple iOS Unlisted App Distribution</strong> and live on <strong className="text-slate-900 font-bold">Google Play Store via Google Play Console</strong> after Closed Testing.
               </p>
+              <div className="mt-2.5">
+                <StoreBadges
+                  appStoreUrl="https://apps.apple.com/us/app/tain-electai/id6807301293"
+                  playStoreUrl="https://play.google.com/store/apps/details?id=com.elitespro.BEMS&pcampaignid=web_share"
+                  variant="pill"
+                />
+              </div>
             </div>
 
             <div className="p-4 rounded-2xl bg-white border-2 border-slate-200/90 hover:border-purple-500 shadow-md transition-all">

@@ -14,6 +14,7 @@ import {
 import { PROJECTS } from '../data/portfolioData';
 import { Project } from '../types/portfolio';
 import { TiltCard } from './TiltCard';
+import { StoreBadges } from './StoreBadges';
 
 interface ProjectsSectionProps {
   onSelectProject: (project: Project) => void;
@@ -219,6 +220,17 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
                       </span>
                     )}
                   </div>
+
+                  {(project.appStoreUrl || project.playStoreUrl) && (
+                    <div className="mb-3">
+                      <StoreBadges
+                        appStoreUrl={project.appStoreUrl}
+                        playStoreUrl={project.playStoreUrl}
+                        variant="compact"
+                        onLinkClick={(e) => e.stopPropagation()}
+                      />
+                    </div>
+                  )}
 
                   <button
                     onClick={() => onSelectProject(project)}

@@ -95,6 +95,9 @@ export const PROJECTS: Project[] = [
       },
     ],
     demoType: "simulation",
+    appStoreUrl: "https://apps.apple.com/us/app/tain-electai/id6807301293",
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.elitespro.BEMS&pcampaignid=web_share",
+    liveUrl: "https://play.google.com/store/apps/details?id=com.elitespro.BEMS&pcampaignid=web_share",
     imageUrl: "/images/projects/tain-elect-ai/1.jpeg",
     logoUrl: "/images/projects/tain-elect-ai-icon.png",
     previewImages: [

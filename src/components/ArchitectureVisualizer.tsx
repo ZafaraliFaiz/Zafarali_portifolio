@@ -22,6 +22,7 @@ import {
   FileText,
   AlertTriangle
 } from 'lucide-react';
+import { StoreBadges } from './StoreBadges';
 
 export const ArchitectureVisualizer: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'tain-electai' | 'agrostock' | 'ai-engine' | 'devops'>('tain-electai');
@@ -393,16 +394,20 @@ export const ArchitectureVisualizer: React.FC = () => {
             </div>
 
             {/* Production Store Distribution Banner */}
-            <div className="mt-3 p-4 rounded-2xl bg-slate-900 text-white border-2 border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-md">
+            <div className="mt-3 p-4 rounded-2xl bg-slate-900 text-white border-2 border-slate-700 flex flex-col lg:flex-row items-center justify-between gap-4 shadow-md">
               <div className="flex items-center gap-2.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping shrink-0" />
-                <span className="text-xs font-mono">
+                <span className="text-xs font-mono leading-relaxed">
                   <strong className="text-emerald-400">Live Production Status:</strong> Published via <strong className="text-white">Apple iOS Unlisted App Distribution</strong> &amp; live on the <strong className="text-white">Google Play Store via Google Play Console</strong> after Closed Testing tracks.
                 </span>
               </div>
-              <span className="px-3 py-1 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-500/50 text-[11px] font-mono font-black shrink-0">
-                Live on iOS &amp; Android ✓
-              </span>
+              <div className="flex items-center gap-2 shrink-0">
+                <StoreBadges
+                  appStoreUrl="https://apps.apple.com/us/app/tain-electai/id6807301293"
+                  playStoreUrl="https://play.google.com/store/apps/details?id=com.elitespro.BEMS&pcampaignid=web_share"
+                  variant="pill"
+                />
+              </div>
             </div>
           </div>
         )}

@@ -402,7 +402,7 @@ EDUCATION
                   <li>Built a cross-platform (iOS/Android) field-operations app in React Native (Expo, Expo Router) for election canvassing agents, covering member management, voter counselling, and live election-day polling.</li>
                   <li>Designed an offline-first architecture with a local AsyncStorage write-queue, automatic background sync, retry-with-backoff, and live connection-state feedback via NetInfo.</li>
                   <li>Integrated Supabase (Auth, Postgres, Storage) with TanStack React Query and Zustand, plus expo-camera for compressed photo capture; implemented a permission-driven UI with role-based PII masking and a hardened, role-restricted auth flow (expo-secure-store).</li>
-                  <li>Owned end-to-end iOS/Android release lifecycle via EAS Build & Submit: successfully published under Apple iOS Unlisted App Distribution, completed Google Play Closed Testing tracks, and published to production on the Google Play Store through Google Play Console.</li>
+                  <li>Owned end-to-end iOS/Android release lifecycle via EAS Build &amp; Submit: successfully published under <a href="https://apps.apple.com/us/app/tain-electai/id6807301293" target="_blank" rel="noopener noreferrer" className="text-sky-700 underline font-bold hover:text-sky-900">Apple iOS Unlisted App Distribution</a>, completed Google Play Closed Testing tracks, and published to production on the <a href="https://play.google.com/store/apps/details?id=com.elitespro.BEMS&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" className="text-emerald-700 underline font-bold hover:text-emerald-900">Google Play Store via Google Play Console</a>.</li>
                 </ul>
               </div>
 
