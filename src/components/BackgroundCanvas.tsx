@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { useMouseParallax, useScrollParallax } from '../hooks/useParallax';
+import React, { useEffect, useRef } from "react";
+import { useMouseParallax, useScrollParallax } from "../hooks/useParallax";
 
 export const BackgroundCanvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -10,7 +10,7 @@ export const BackgroundCanvas: React.FC = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     let animationFrameId: number;
@@ -23,7 +23,7 @@ export const BackgroundCanvas: React.FC = () => {
       height = canvas.height = window.innerHeight;
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Particle nodes for cyber constellation
     const particleCount = Math.min(Math.floor((width * height) / 20000), 65);
@@ -61,7 +61,7 @@ export const BackgroundCanvas: React.FC = () => {
       mouseY = e.clientY;
     };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
     let lastScrollY = window.scrollY;
 
@@ -73,8 +73,8 @@ export const BackgroundCanvas: React.FC = () => {
       lastScrollY = currentScrollY;
 
       // Smooth mouse normalized coordinates for multi-plane parallax drift
-      const targetNormX = (mouseX > 0 ? (mouseX / width) - 0.5 : 0) * 2;
-      const targetNormY = (mouseY > 0 ? (mouseY / height) - 0.5 : 0) * 2;
+      const targetNormX = (mouseX > 0 ? mouseX / width - 0.5 : 0) * 2;
+      const targetNormY = (mouseY > 0 ? mouseY / height - 0.5 : 0) * 2;
       smoothMouseNormX += (targetNormX - smoothMouseNormX) * 0.05;
       smoothMouseNormY += (targetNormY - smoothMouseNormY) * 0.05;
 
@@ -107,9 +107,10 @@ export const BackgroundCanvas: React.FC = () => {
         // Draw particle node with vivid depth coloring for bright background
         ctx.beginPath();
         ctx.arc(p1.px, p1.py, p1.radius * p1.depth, 0, Math.PI * 2);
-        ctx.fillStyle = p1.depth > 0.6 
-          ? `rgba(2, 132, 199, ${clampedAlpha * 1.35})` 
-          : `rgba(99, 102, 241, ${clampedAlpha * 1.25})`;
+        ctx.fillStyle =
+          p1.depth > 0.6
+            ? `rgba(2, 132, 199, ${clampedAlpha * 1.35})`
+            : `rgba(99, 102, 241, ${clampedAlpha * 1.25})`;
         ctx.fill();
 
         // Connect nearby particles
@@ -151,8 +152,8 @@ export const BackgroundCanvas: React.FC = () => {
     render();
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -171,10 +172,11 @@ export const BackgroundCanvas: React.FC = () => {
           style={{
             left: `${mouse.rawX}px`,
             top: `${mouse.rawY}px`,
-            width: '800px',
-            height: '800px',
-            transform: 'translate(-50%, -50%)',
-            background: 'radial-gradient(circle, rgba(14, 165, 233, 0.22) 0%, rgba(99, 102, 241, 0.12) 40%, rgba(217, 70, 239, 0.05) 60%, transparent 75%)',
+            width: "800px",
+            height: "800px",
+            transform: "translate(-50%, -50%)",
+            background:
+              "radial-gradient(circle, rgba(14, 165, 233, 0.22) 0%, rgba(99, 102, 241, 0.12) 40%, rgba(217, 70, 239, 0.05) 60%, transparent 75%)",
           }}
         />
       )}
@@ -184,7 +186,7 @@ export const BackgroundCanvas: React.FC = () => {
       <div
         className="absolute -top-40 -left-40 w-[44rem] h-[44rem] bg-gradient-to-br from-cyan-400/35 via-sky-500/30 to-blue-600/20 rounded-full blur-[110px] pointer-events-none will-change-transform"
         style={{
-          transform: `translate3d(${-mouseXOffset * 1.3}px, ${(-scrollY * 0.12) - mouseYOffset * 1.1}px, 0)`,
+          transform: `translate3d(${-mouseXOffset * 1.3}px, ${-scrollY * 0.12 - mouseYOffset * 1.1}px, 0)`,
         }}
       />
 
@@ -192,7 +194,7 @@ export const BackgroundCanvas: React.FC = () => {
       <div
         className="absolute top-20 -right-40 w-[42rem] h-[42rem] bg-gradient-to-bl from-indigo-500/35 via-purple-500/30 to-pink-500/20 rounded-full blur-[120px] pointer-events-none will-change-transform"
         style={{
-          transform: `translate3d(${mouseXOffset * 1.6}px, ${(-scrollY * 0.18) + mouseYOffset * 1.3}px, 0)`,
+          transform: `translate3d(${mouseXOffset * 1.6}px, ${-scrollY * 0.18 + mouseYOffset * 1.3}px, 0)`,
         }}
       />
 
@@ -200,7 +202,7 @@ export const BackgroundCanvas: React.FC = () => {
       <div
         className="absolute top-1/2 left-1/4 w-[48rem] h-[48rem] bg-gradient-to-r from-blue-400/30 via-indigo-400/25 to-sky-300/25 rounded-full blur-[130px] pointer-events-none will-change-transform"
         style={{
-          transform: `translate3d(${-mouseXOffset * 0.9}px, ${(-scrollY * 0.25) - mouseYOffset * 0.9}px, 0)`,
+          transform: `translate3d(${-mouseXOffset * 0.9}px, ${-scrollY * 0.25 - mouseYOffset * 0.9}px, 0)`,
         }}
       />
 
@@ -208,24 +210,24 @@ export const BackgroundCanvas: React.FC = () => {
       <div
         className="absolute bottom-10 right-1/4 w-[40rem] h-[40rem] bg-gradient-to-tr from-emerald-400/35 via-teal-400/30 to-cyan-400/25 rounded-full blur-[110px] pointer-events-none will-change-transform"
         style={{
-          transform: `translate3d(${mouseXOffset * 1.2}px, ${(-scrollY * 0.2) + mouseYOffset}px, 0)`,
+          transform: `translate3d(${mouseXOffset * 1.2}px, ${-scrollY * 0.2 + mouseYOffset}px, 0)`,
         }}
       />
 
       {/* 3. Parallax Floating Cyber Crosshairs & Tech Glyphs */}
       <div
-        className="absolute top-28 left-16 text-sky-700/60 font-mono text-xs font-bold tracking-wider select-none will-change-transform hidden sm:block bg-sky-100/60 px-2 py-0.5 rounded border border-sky-300/60"
+        className="absolute top-80 sm:top-50 left-4 lg:left-8 text-sky-700/60 font-mono text-[11px] font-bold tracking-wider select-none will-change-transform hidden sm:block bg-sky-100/60 px-2 py-0.5 rounded border border-sky-300/60"
         style={{
-          transform: `translate3d(${-mouseXOffset * 1.8}px, ${(-scrollY * 0.35) - mouseYOffset * 1.5}px, 0)`,
+          transform: `translate3d(${-mouseXOffset * 1.5}px, ${-scrollY * 0.28 - mouseYOffset * 1.2}px, 0)`,
         }}
       >
         + 01_PARALLAX_GRID
       </div>
 
       <div
-        className="absolute top-1/3 right-24 text-indigo-700/60 font-mono text-xs font-bold tracking-wider select-none will-change-transform hidden sm:block bg-indigo-100/60 px-2 py-0.5 rounded border border-indigo-300/60"
+        className="absolute top-1/2 right-6 lg:right-12 text-indigo-700/60 font-mono text-[11px] font-bold tracking-wider select-none will-change-transform hidden sm:block bg-indigo-100/60 px-2 py-0.5 rounded border border-indigo-300/60"
         style={{
-          transform: `translate3d(${mouseXOffset * 2.2}px, ${(-scrollY * 0.4) + mouseYOffset * 1.8}px, 0)`,
+          transform: `translate3d(${mouseXOffset * 1.5}px, ${-scrollY * 0.32 + mouseYOffset * 1.2}px, 0)`,
         }}
       >
         ◈ // REACT_19_ENGINE
@@ -234,17 +236,17 @@ export const BackgroundCanvas: React.FC = () => {
       <div
         className="absolute top-2/3 left-1/4 text-emerald-700/60 font-mono text-xs font-bold tracking-wider select-none will-change-transform hidden sm:block bg-emerald-100/60 px-2 py-0.5 rounded border border-emerald-300/60"
         style={{
-          transform: `translate3d(${-mouseXOffset * 1.4}px, ${(-scrollY * 0.3) - mouseYOffset * 1.2}px, 0)`,
+          transform: `translate3d(${-mouseXOffset * 1.4}px, ${-scrollY * 0.3 - mouseYOffset * 1.2}px, 0)`,
         }}
       >
         ◆ OFFLINE_FIRST_ACTIVE
       </div>
 
       {/* 4. Subtle Cyber Grid with Mouse Tilt */}
-      <div 
+      <div
         className="absolute inset-0 bg-grid-pattern opacity-65 pointer-events-none will-change-transform"
         style={{
-          transform: `translate3d(${mouseXOffset * 0.3}px, ${(scrollY * 0.05) + mouseYOffset * 0.3}px, 0)`,
+          transform: `translate3d(${mouseXOffset * 0.3}px, ${scrollY * 0.05 + mouseYOffset * 0.3}px, 0)`,
         }}
       />
 

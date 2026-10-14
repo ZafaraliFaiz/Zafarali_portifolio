@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { 
   Briefcase, 
   Calendar, 
@@ -40,8 +40,12 @@ interface ExperienceSectionProps {
 }
 
 export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProject }) => {
+  const sectionRef = useRef<HTMLElement | null>(null);
   const [activeTabId, setActiveTabId] = useState<string>('tain-electai');
   const [viewLayout, setViewLayout] = useState<'command-deck' | 'all-deployments'>('command-deck');
+  const [isInteracting, setIsInteracting] = useState<boolean>(false);
+  const [isSectionInView, setIsSectionInView] = useState<boolean>(false);
+  const inactivityTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Interactive Live Telemetry Simulation States for TAIN Elect AI
   const [tainOnline, setTainOnline] = useState(false);
@@ -59,12 +63,65 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
 
   const activeExp = EXPERIENCES.find((e) => e.id === activeTabId) || EXPERIENCES[0];
 
+  // Pause carousel immediately on user interaction and resume after 8 seconds of inactivity
+  const registerUserActivity = useCallback(() => {
+    setIsInteracting(true);
+    if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
+    inactivityTimerRef.current = setTimeout(() => {
+      setIsInteracting(false);
+    }, 8000);
+  }, []);
+
+  // Switch to next experience
+  const handleNextExperience = useCallback(() => {
+    setActiveTabId((curr) => {
+      const idx = EXPERIENCES.findIndex((e) => e.id === curr);
+      const nextIdx = (idx + 1) % EXPERIENCES.length;
+      return EXPERIENCES[nextIdx].id;
+    });
+  }, []);
+
+  // Track if section is in viewport
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsSectionInView(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  // 3500ms carousel auto-advance (only when in command-deck mode, in view, and not interacting)
+  useEffect(() => {
+    if (viewLayout !== 'command-deck' || isInteracting || !isSectionInView) {
+      return;
+    }
+
+    const timer = setInterval(() => {
+      handleNextExperience();
+    }, 3500);
+
+    return () => clearInterval(timer);
+  }, [viewLayout, isInteracting, isSectionInView, handleNextExperience]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
+    };
+  }, []);
+
   // Simulation Handlers
   const handleTainAddSurvey = () => {
+    registerUserActivity();
     setTainQueue((prev) => prev + 1);
   };
 
   const handleTainToggleNetwork = () => {
+    registerUserActivity();
     const nextState = !tainOnline;
     setTainOnline(nextState);
     if (nextState && tainQueue > 0) {
@@ -78,6 +135,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
   };
 
   const handleErpDispatch = () => {
+    registerUserActivity();
     setErpStatus('processing');
     setTimeout(() => {
       setErpStock((prev) => Math.max(0, prev - 20));
@@ -88,6 +146,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
   };
 
   const handleTestAcid = () => {
+    registerUserActivity();
     setAcidRunning(true);
     setAcidLog('START TRANSACTION → Checking supplier inventory lock...');
     setTimeout(() => {
@@ -100,7 +159,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
   };
 
   return (
-    <section id="experience" className="py-28 px-4 sm:px-6 lg:px-8 relative z-10 scroll-mt-20 overflow-hidden">
+    <section id="experience" ref={sectionRef} className="py-28 px-4 sm:px-6 lg:px-8 relative z-10 scroll-mt-20 overflow-hidden">
       
       {/* Background Architectural Grid Lines */}
       <div 
@@ -134,7 +193,10 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
             {/* View Mode Toggle: Command Deck vs Panoramic Timeline */}
             <div className="mt-8 inline-flex items-center p-1 rounded-2xl bg-slate-200/90 border border-slate-300 shadow-inner">
               <button
-                onClick={() => setViewLayout('command-deck')}
+                onClick={() => {
+                  registerUserActivity();
+                  setViewLayout('command-deck');
+                }}
                 className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all ${
                   viewLayout === 'command-deck'
                     ? 'bg-white text-slate-900 shadow-md border border-slate-200'
@@ -146,7 +208,10 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
               </button>
 
               <button
-                onClick={() => setViewLayout('all-deployments')}
+                onClick={() => {
+                  registerUserActivity();
+                  setViewLayout('all-deployments');
+                }}
                 className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all ${
                   viewLayout === 'all-deployments'
                     ? 'bg-white text-slate-900 shadow-md border border-slate-200'
@@ -175,11 +240,14 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
                 return (
                   <ScrollAssemble key={exp.id} direction={scatterDir} delay={idx * 0.1} distance={45}>
                     <button
-                      onClick={() => setActiveTabId(exp.id)}
-                      className={`w-full text-left p-5 rounded-3xl border-2 transition-all relative overflow-hidden group ${
+                      onClick={() => {
+                        registerUserActivity();
+                        setActiveTabId(exp.id);
+                      }}
+                      className={`w-full text-left p-5 rounded-3xl border transition-all duration-300 relative overflow-hidden group ${
                         isActive
-                          ? 'bg-white border-slate-900 shadow-2xl ring-4 ring-slate-900/5 -translate-y-1'
-                          : 'bg-white/80 border-slate-200 hover:border-slate-400 hover:bg-white hover:shadow-lg'
+                          ? 'bg-gradient-to-b from-white via-white to-slate-50 border-slate-900 shadow-xl ring-2 ring-slate-900/10 -translate-y-1'
+                          : 'bg-gradient-to-b from-white via-white to-slate-50/60 border-slate-200/90 hover:border-slate-300 hover:bg-white hover:shadow-lg hover:-translate-y-0.5'
                       }`}
                     >
                       {/* Accent Glow Strip */}
@@ -239,25 +307,30 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
               })}
             </div>
 
-            {/* Active Mission Architectural Showcase Stage */}
-            <ScrollFocusZoom maxScale={1.015} enableGlow glowColor={`${activeExp.accentColor}25`}>
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeExp.id}
-                  initial={{ opacity: 0, y: 30, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -20, scale: 0.98 }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  className="bg-white rounded-3xl border-2 border-slate-200/90 shadow-2xl p-6 sm:p-10 relative overflow-hidden"
-                >
-                  {/* Top Ambient Banner */}
-                  <div 
-                    className="absolute top-0 left-0 right-0 h-3"
-                    style={{ backgroundColor: activeExp.accentColor }}
+            {/* Active Mission Architectural Showcase Stage with Stable Min-Height */}
+            <div 
+              className="min-h-[920px] lg:min-h-[720px] relative"
+              onMouseEnter={registerUserActivity}
+              onTouchStart={registerUserActivity}
+            >
+              <ScrollFocusZoom maxScale={1.015} enableGlow glowColor={`${activeExp.accentColor}25`}>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeExp.id}
+                    initial={{ opacity: 0, y: 30, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -20, scale: 0.98 }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                    className="bg-gradient-to-b from-white via-white to-slate-50/80 rounded-3xl border border-slate-200/90 shadow-xl p-6 sm:p-10 relative overflow-hidden"
+                  >
+                    {/* Top Ambient Banner */}
+                    <div 
+                      className="absolute top-0 left-0 right-0 h-2.5 transition-all opacity-90"
+                      style={{ backgroundColor: activeExp.accentColor }}
                   />
 
                   {/* Header Dossier */}
-                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b-2 border-slate-100">
+                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-slate-100">
                     <div>
                       <div className="flex flex-wrap items-center gap-2 mb-2">
                         <span 
@@ -266,11 +339,11 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
                         >
                           {activeExp.type}
                         </span>
-                        <span className="text-xs font-mono text-slate-600 font-bold flex items-center gap-1.5">
+                        <span className="text-xs font-mono text-slate-600 font-bold flex items-center gap-1.5 bg-slate-100/80 px-2.5 py-0.5 rounded-md border border-slate-200/70">
                           <Calendar className="w-3.5 h-3.5 text-slate-400" />
                           {activeExp.period}
                         </span>
-                        <span className="text-xs font-mono text-slate-600 font-bold flex items-center gap-1.5">
+                        <span className="text-xs font-mono text-slate-600 font-bold flex items-center gap-1.5 bg-slate-100/80 px-2.5 py-0.5 rounded-md border border-slate-200/70">
                           <MapPin className="w-3.5 h-3.5 text-slate-400" />
                           {activeExp.location}
                         </span>
@@ -300,8 +373,11 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
 
                       {activeExp.associatedProject && (
                         <button
-                          onClick={() => onOpenProject(activeExp.associatedProject!)}
-                          className="flex items-center gap-2 px-5 py-3 rounded-2xl text-xs font-mono font-black text-white shadow-lg hover:shadow-xl transition-all active:scale-95 group"
+                          onClick={() => {
+                            registerUserActivity();
+                            onOpenProject(activeExp.associatedProject!);
+                          }}
+                          className="flex items-center gap-2 px-5 py-3 rounded-2xl text-xs font-mono font-black text-white shadow-md hover:shadow-xl transition-all active:scale-95 group"
                           style={{ backgroundColor: activeExp.accentColor }}
                         >
                           <span>Inspect System Architecture</span>
@@ -318,7 +394,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
                     <div className="lg:col-span-7 space-y-6">
                       
                       {/* Summary Quote */}
-                      <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                      <div className="p-5 rounded-2xl bg-slate-50/80 border border-slate-200/90 shadow-2xs">
                         <div className="text-[11px] font-mono uppercase tracking-wider text-slate-500 font-bold mb-1 flex items-center gap-1.5">
                           <Zap className="w-3.5 h-3.5 text-sky-500" />
                           <span>Engineering Mandate & Core Focus</span>
@@ -336,9 +412,9 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
                         </h4>
                         <ul className="space-y-3">
                           {activeExp.highlights.map((h, i) => (
-                            <li key={i} className="flex items-start gap-3 text-sm text-slate-800 font-medium">
+                            <li key={i} className="flex items-start gap-3 text-sm text-slate-800 font-medium p-2 rounded-xl hover:bg-slate-50/80 transition-colors">
                               <span 
-                                className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-white font-bold text-xs"
+                                className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-white font-bold text-xs shadow-xs"
                                 style={{ backgroundColor: activeExp.accentColor }}
                               >
                                 ✓
@@ -360,7 +436,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
                             {activeExp.keyPillars.map((p, idx) => (
                               <div 
                                 key={idx}
-                                className="p-4 rounded-2xl bg-white border border-slate-200 hover:border-slate-400 transition-all shadow-sm"
+                                className="p-4 rounded-2xl bg-white border border-slate-200/90 hover:border-slate-400 hover:shadow-md transition-all shadow-2xs"
                               >
                                 <h5 className="text-xs font-mono font-black text-slate-900 mb-1">
                                   {p.title}
@@ -605,6 +681,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
                 </motion.div>
               </AnimatePresence>
             </ScrollFocusZoom>
+            </div>
 
           </div>
         )}

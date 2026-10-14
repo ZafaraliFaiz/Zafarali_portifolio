@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   ArrowRight,
   Play,
+  Pause,
   AlertCircle,
   FileCheck,
   Send,
@@ -78,7 +79,12 @@ const ARCHITECTURE_TABS: {
 ];
 
 export const ArchitectureVisualizer: React.FC = () => {
+  const sectionRef = useRef<HTMLElement | null>(null);
   const [activeTab, setActiveTab] = useState<ArchitectureTabId>("tain-electai");
+  const [isAutoPlay, setIsAutoPlay] = useState<boolean>(true);
+  const [isInteracting, setIsInteracting] = useState<boolean>(false);
+  const [isSectionInView, setIsSectionInView] = useState<boolean>(false);
+  const inactivityTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Switch to next card
   const handleNextTab = useCallback(() => {
@@ -89,8 +95,48 @@ export const ArchitectureVisualizer: React.FC = () => {
     });
   }, []);
 
+  // Track if section is in viewport so auto-carousel only runs when user is looking at this section
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsSectionInView(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  // Pause carousel immediately on user interaction and resume after 8 seconds of inactivity
   const registerUserActivity = useCallback(() => {
-    // Activity tracking preserved for interactive state
+    setIsInteracting(true);
+
+    if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
+
+    inactivityTimerRef.current = setTimeout(() => {
+      setIsInteracting(false);
+    }, 8000);
+  }, []);
+
+  // 3500ms carousel auto-advance (only runs when section is in view, not interacting, and auto-play enabled)
+  useEffect(() => {
+    if (!isAutoPlay || isInteracting || !isSectionInView) {
+      return;
+    }
+
+    const timer = setInterval(() => {
+      handleNextTab();
+    }, 3500);
+
+    return () => clearInterval(timer);
+  }, [isAutoPlay, isInteracting, isSectionInView, handleNextTab]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
+    };
   }, []);
 
   // TAIN Elect AI Simulation State
@@ -306,12 +352,13 @@ export const ArchitectureVisualizer: React.FC = () => {
   return (
     <section
       id="architecture"
+      ref={sectionRef}
       className="py-20 px-4 sm:px-6 lg:px-8 relative z-10"
     >
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <ScrollAssemble direction="top" distance={35}>
-          <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="text-center max-w-3xl mx-auto mb-10">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 border-2 border-sky-300 text-sky-800 text-xs font-mono uppercase tracking-wider mb-3 font-bold shadow-sm">
               <Cpu className="w-4 h-4 text-sky-600 stroke-[2.5]" />
               <span>Interactive Engineering Visualizer</span>
@@ -343,16 +390,16 @@ export const ArchitectureVisualizer: React.FC = () => {
                     setActiveTab(tab.id);
                     registerUserActivity();
                   }}
-                  className={`p-3 sm:p-3.5 rounded-2xl font-mono text-left transition-all border-2 flex flex-col justify-between relative overflow-hidden group shadow-sm ${
+                  className={`p-3 sm:p-3.5 rounded-2xl font-mono text-left transition-all duration-300 border flex flex-col justify-between relative overflow-hidden group shadow-sm ${
                     isActive
                       ? tab.id === "tain-electai"
-                        ? "bg-sky-600 text-white border-sky-600 shadow-lg shadow-sky-500/25 scale-[1.02]"
+                        ? "bg-gradient-to-r from-sky-600 to-blue-600 text-white border-sky-600 shadow-md shadow-sky-500/20 scale-[1.02]"
                         : tab.id === "agrostock"
-                          ? "bg-emerald-600 text-white border-emerald-600 shadow-lg shadow-emerald-500/25 scale-[1.02]"
+                          ? "bg-gradient-to-r from-emerald-600 to-teal-600 text-white border-emerald-600 shadow-md shadow-emerald-500/20 scale-[1.02]"
                           : tab.id === "ai-engine"
-                            ? "bg-purple-600 text-white border-purple-600 shadow-lg shadow-purple-500/25 scale-[1.02]"
-                            : "bg-amber-600 text-white border-amber-600 shadow-lg shadow-amber-500/25 scale-[1.02]"
-                      : "bg-white text-slate-800 border-slate-200 hover:border-slate-300 hover:bg-slate-50/80"
+                            ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white border-purple-600 shadow-md shadow-purple-500/20 scale-[1.02]"
+                            : "bg-gradient-to-r from-amber-600 to-orange-600 text-white border-amber-600 shadow-md shadow-amber-500/20 scale-[1.02]"
+                      : "bg-gradient-to-b from-white to-slate-50/70 text-slate-800 border-slate-200/90 hover:border-slate-300 hover:bg-white hover:shadow-md hover:-translate-y-0.5"
                   }`}
                 >
                   <div className="flex items-center justify-between w-full mb-1.5">
@@ -392,7 +439,7 @@ export const ArchitectureVisualizer: React.FC = () => {
 
         <ScrollFocusZoom maxScale={1.015}>
           <div
-            className="min-h-[640px]"
+            className="min-h-[860px] relative transition-[min-height] duration-300"
             onPointerDown={registerUserActivity}
             onKeyDown={registerUserActivity}
           >
@@ -406,10 +453,10 @@ export const ArchitectureVisualizer: React.FC = () => {
                   exit={{ opacity: 0, y: -16 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="p-6 sm:p-8 rounded-3xl border-2 border-sky-400/90 shadow-2xl relative overflow-hidden bg-white">
-                    <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600" />
+                  <div className="p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-xl relative overflow-hidden bg-gradient-to-b from-white via-white to-slate-50/80">
+                    <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 opacity-90" />
 
-                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b-2 border-slate-200 mt-1">
+                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-100 mt-1">
                       <div>
                         <div className="flex items-center gap-2">
                           <span className="text-xs font-mono uppercase bg-sky-100 text-sky-900 px-3 py-1 rounded-lg border-2 border-sky-300 font-extrabold shadow-sm">
@@ -609,10 +656,10 @@ export const ArchitectureVisualizer: React.FC = () => {
                   exit={{ opacity: 0, y: -16 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="p-6 sm:p-8 rounded-3xl border-2 border-emerald-400/90 shadow-2xl relative overflow-hidden bg-white">
-                    <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500" />
+                  <div className="p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-xl relative overflow-hidden bg-gradient-to-b from-white via-white to-slate-50/80">
+                    <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 opacity-90" />
 
-                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b-2 border-slate-200 mt-1">
+                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-100 mt-1">
                       <div>
                         <div className="flex items-center gap-2">
                           <span className="text-xs font-mono uppercase bg-emerald-100 text-emerald-900 px-3 py-1 rounded-lg border-2 border-emerald-300 font-extrabold shadow-sm">
@@ -890,10 +937,10 @@ export const ArchitectureVisualizer: React.FC = () => {
                   exit={{ opacity: 0, y: -16 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="p-6 sm:p-8 rounded-3xl border-2 border-purple-400/90 shadow-2xl relative overflow-hidden bg-white">
-                    <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500" />
+                  <div className="p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-xl relative overflow-hidden bg-gradient-to-b from-white via-white to-slate-50/80">
+                    <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 opacity-90" />
 
-                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b-2 border-slate-200 mt-1">
+                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-100 mt-1">
                       <div>
                         <div className="flex items-center gap-2">
                           <span className="text-xs font-mono uppercase bg-purple-100 text-purple-900 px-3 py-1 rounded-lg border-2 border-purple-300 font-extrabold shadow-sm">
@@ -1007,10 +1054,10 @@ export const ArchitectureVisualizer: React.FC = () => {
                   exit={{ opacity: 0, y: -16 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="p-6 sm:p-8 rounded-3xl border-2 border-amber-400/90 shadow-2xl relative overflow-hidden bg-white">
-                    <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500" />
+                  <div className="p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-xl relative overflow-hidden bg-gradient-to-b from-white via-white to-slate-50/80">
+                    <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 opacity-90" />
 
-                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b-2 border-slate-200 mt-1">
+                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-100 mt-1">
                       <div>
                         <div className="flex items-center gap-2">
                           <span className="text-xs font-mono uppercase bg-amber-100 text-amber-900 px-3 py-1 rounded-lg border-2 border-amber-300 font-extrabold shadow-sm">

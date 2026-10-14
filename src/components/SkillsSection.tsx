@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { 
   Code2, 
   Smartphone, 
   Server, 
   Cloud, 
   Cpu, 
-  CheckCircle2, 
-  Sparkles,
-  Zap
+  Zap,
+  Terminal
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import { SKILL_CATEGORIES } from '../data/portfolioData';
 import { TiltCard } from './TiltCard';
 import { ScrollAssemble } from './animations/ScrollAssemble';
 import { ScrollFocusZoom } from './animations/ScrollFocusZoom';
 
 export const SkillsSection: React.FC = () => {
+  const sectionRef = useRef<HTMLElement | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>('Frontend & Mobile');
+  const [isInteracting, setIsInteracting] = useState<boolean>(false);
+  const [isSectionInView, setIsSectionInView] = useState<boolean>(false);
+  const inactivityTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const selectedCategoryData = SKILL_CATEGORIES.find(
     (c) => c.category === activeCategory
@@ -31,123 +35,288 @@ export const SkillsSection: React.FC = () => {
     }
   };
 
+  const getCategoryTheme = (category: string) => {
+    switch (category) {
+      case 'Frontend & Mobile':
+        return {
+          accent: '#0284c7',
+          borderHover: 'hover:border-sky-500',
+          barGradient: 'from-sky-500 via-blue-600 to-indigo-600',
+          shadowHover: 'hover:shadow-sky-500/15',
+        };
+      case 'Backend & Systems':
+      case 'Backend, APIs & Databases':
+        return {
+          accent: '#059669',
+          borderHover: 'hover:border-emerald-500',
+          barGradient: 'from-emerald-500 via-teal-600 to-cyan-600',
+          shadowHover: 'hover:shadow-emerald-500/15',
+        };
+      case 'Cloud & DevOps':
+      case 'DevOps, Cloud & Infrastructure':
+        return {
+          accent: '#d97706',
+          borderHover: 'hover:border-amber-500',
+          barGradient: 'from-amber-500 via-orange-600 to-rose-600',
+          shadowHover: 'hover:shadow-amber-500/15',
+        };
+      case 'AI & Data Science':
+      case 'AI, Gen-AI & Research':
+      default:
+        return {
+          accent: '#7c3aed',
+          borderHover: 'hover:border-purple-500',
+          barGradient: 'from-purple-500 via-indigo-600 to-sky-600',
+          shadowHover: 'hover:shadow-purple-500/15',
+        };
+    }
+  };
+
+  // Next category handler for auto-carousel
+  const handleNextCategory = useCallback(() => {
+    setActiveCategory((curr) => {
+      const idx = SKILL_CATEGORIES.findIndex((c) => c.category === curr);
+      const nextIdx = (idx + 1) % SKILL_CATEGORIES.length;
+      return SKILL_CATEGORIES[nextIdx].category;
+    });
+  }, []);
+
+  // Viewport tracking: auto-carousel only runs when user is looking at this section
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsSectionInView(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  // Pause carousel immediately on user interaction and resume after 8 seconds of inactivity
+  const registerUserActivity = useCallback(() => {
+    setIsInteracting(true);
+    if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
+    inactivityTimerRef.current = setTimeout(() => {
+      setIsInteracting(false);
+    }, 8000);
+  }, []);
+
+  // 3500ms auto-advance carousel (only when in view and not interacting)
+  useEffect(() => {
+    if (isInteracting || !isSectionInView) {
+      return;
+    }
+
+    const timer = setInterval(() => {
+      handleNextCategory();
+    }, 3500);
+
+    return () => clearInterval(timer);
+  }, [isInteracting, isSectionInView, handleNextCategory]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
+    };
+  }, []);
+
+  const activeTheme = getCategoryTheme(activeCategory);
+
   return (
-    <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="skills" ref={sectionRef} className="py-24 px-4 sm:px-6 lg:px-8 relative z-10 scroll-mt-20 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         {/* Header & Category Tabs */}
         <ScrollAssemble direction="top" distance={35}>
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 border-2 border-sky-300 text-sky-800 text-xs font-mono uppercase tracking-wider mb-3 font-bold shadow-sm">
-              <Zap className="w-4 h-4 text-sky-600 stroke-[2.5]" />
-              <span>Technical Capabilities</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 text-sky-400 border border-sky-500/30 text-xs font-mono uppercase tracking-wider mb-4 font-bold shadow-md shadow-sky-500/10">
+              <Zap className="w-4 h-4 text-sky-400 animate-pulse stroke-[2.5]" />
+              <span>Verified Technical Capabilities</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight leading-none">
               Engineered For{' '}
               <span className="bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
                 High Complexity
               </span>
             </h2>
-            <p className="text-slate-700 text-sm sm:text-base mt-2 font-medium leading-relaxed">
+            <p className="text-slate-600 text-sm sm:text-base mt-4 font-medium leading-relaxed max-w-2xl mx-auto">
               Languages, frameworks, architecture paradigms, and cloud infrastructure verified across production deployments.
             </p>
           </div>
 
-          {/* Category Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-10">
-            {SKILL_CATEGORIES.map((cat) => (
-              <button
-                key={cat.category}
-                onClick={() => setActiveCategory(cat.category)}
-                className={`px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all flex items-center gap-2 border-2 ${
-                  activeCategory === cat.category
-                    ? 'bg-sky-600 text-white border-sky-600 shadow-lg shadow-sky-500/30 scale-105'
-                    : 'bg-white text-slate-800 border-slate-300 hover:border-sky-400 hover:text-sky-700 shadow-sm'
-                }`}
-              >
-                {getCategoryIcon(cat.iconName)}
-                <span>{cat.category}</span>
-              </button>
-            ))}
+          {/* Category Tabs (Without HUD - native tabs serving as indicators) */}
+          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-12">
+            {SKILL_CATEGORIES.map((cat) => {
+              const isSelected = activeCategory === cat.category;
+
+              return (
+                <button
+                  key={cat.category}
+                  onClick={() => {
+                    registerUserActivity();
+                    setActiveCategory(cat.category);
+                  }}
+                  className={`px-4 sm:px-5 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all flex items-center gap-2 border-2 active:scale-95 ${
+                    isSelected
+                      ? 'bg-sky-600 text-white border-sky-600 shadow-lg shadow-sky-500/30 scale-105'
+                      : 'bg-white text-slate-800 border-slate-300 hover:border-sky-400 hover:text-sky-700 shadow-sm'
+                  }`}
+                >
+                  {getCategoryIcon(cat.iconName)}
+                  <span>{cat.category}</span>
+                </button>
+              );
+            })}
           </div>
         </ScrollAssemble>
 
-        {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-          {selectedCategoryData.skills.map((skill, idx) => (
-            <ScrollAssemble
-              key={skill.name}
-              direction={idx % 2 === 0 ? 'tilt-left' : 'tilt-right'}
-              delay={(idx % 4) * 0.08}
-              distance={40}
-              className="h-full"
+        {/* Skills Grid with AnimatePresence & Stable Min-Height */}
+        <div 
+          className="min-h-[760px] md:min-h-[420px] relative"
+          onMouseEnter={registerUserActivity}
+          onTouchStart={registerUserActivity}
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeCategory}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5"
             >
-              <ScrollFocusZoom maxScale={1.015} className="h-full">
-                <TiltCard
-                  maxTilt={5}
-                  scale={1.01}
-                  glareOpacity={0.1}
-                  className="h-full"
-                >
-                  <div className="bg-white p-5 sm:p-6 rounded-2xl border-2 border-slate-200/90 hover:border-sky-500 hover:shadow-xl transition-all h-full flex flex-col justify-between group shadow-md">
-                    <div>
-                      <div className="flex items-center justify-between gap-3 mb-1.5">
-                        <div className="flex items-center gap-2">
-                          <span className="font-black text-slate-900 text-sm sm:text-base group-hover:text-sky-600 transition-colors font-display">
-                            {skill.name}
-                          </span>
-                          {skill.highlight && (
-                            <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-sky-100 text-sky-900 border-2 border-sky-300 font-extrabold shadow-sm">
-                              Core
+              {selectedCategoryData.skills.map((skill) => (
+                <div key={skill.name} className="h-full">
+                  <TiltCard
+                    maxTilt={4}
+                    scale={1.01}
+                    glareOpacity={0.1}
+                    className="h-full"
+                  >
+                    <div className={`relative bg-gradient-to-b from-white via-white to-slate-50/80 backdrop-blur-md p-5 sm:p-6 rounded-3xl border border-slate-200/90 ${activeTheme.borderHover} hover:shadow-xl ${activeTheme.shadowHover} hover:-translate-y-1 transition-all duration-300 h-full flex flex-col justify-between group shadow-md overflow-hidden`}>
+                      
+                      {/* Dynamic Top Ambient Highlight Line */}
+                      <div 
+                        className="absolute top-0 left-0 right-0 h-1.5 transition-all duration-300 opacity-80 group-hover:opacity-100 group-hover:h-2"
+                        style={{ backgroundColor: activeTheme.accent }}
+                      />
+
+                      {/* Subtle Corner Watermark Glow */}
+                      <div 
+                        className="absolute -top-12 -right-12 w-28 h-28 rounded-full blur-2xl opacity-15 pointer-events-none group-hover:opacity-30 transition-opacity"
+                        style={{ backgroundColor: activeTheme.accent }}
+                      />
+
+                      <div>
+                        {/* Title, Core Badge & Level % */}
+                        <div className="flex items-center justify-between gap-3 mb-2.5">
+                          <div className="flex items-center gap-2">
+                            <span className="font-black text-slate-900 text-sm sm:text-base group-hover:text-sky-600 transition-colors font-display tracking-tight">
+                              {skill.name}
                             </span>
-                          )}
+                            {skill.highlight && (
+                              <span 
+                                className="inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-full font-black shadow-2xs border"
+                                style={{ 
+                                  backgroundColor: `${activeTheme.accent}14`, 
+                                  color: activeTheme.accent, 
+                                  borderColor: `${activeTheme.accent}35` 
+                                }}
+                              >
+                                <span 
+                                  className="w-1.5 h-1.5 rounded-full animate-pulse" 
+                                  style={{ backgroundColor: activeTheme.accent }} 
+                                />
+                                Core
+                              </span>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-[10px] font-mono uppercase font-bold text-slate-600 bg-slate-100/80 px-1.5 py-0.5 rounded border border-slate-200/70">
+                              {skill.level >= 90 ? 'Expert' : skill.level >= 80 ? 'Advanced' : 'Proficient'}
+                            </span>
+                            <span className="text-sm font-mono font-black" style={{ color: activeTheme.accent }}>
+                              {skill.level}%
+                            </span>
+                          </div>
                         </div>
-                        <span className="text-sm font-mono text-sky-700 font-black">
-                          {skill.level}%
-                        </span>
-                      </div>
 
-                      {/* Progress bar */}
-                      <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden my-2.5 border border-slate-300">
-                        <div
-                          className="h-full bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 rounded-full transition-all duration-700 ease-out"
-                          style={{ width: `${skill.level}%` }}
-                        />
-                      </div>
+                        {/* Progress Bar with illuminated pip */}
+                        <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden my-3 border border-slate-200/80 relative p-0.5 shadow-inner">
+                          <div
+                            className={`h-full rounded-full bg-gradient-to-r ${activeTheme.barGradient} transition-all duration-700 ease-out relative`}
+                            style={{ width: `${skill.level}%` }}
+                          >
+                            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-white shadow-xs animate-pulse" />
+                          </div>
+                        </div>
 
-                      <p className="text-xs text-slate-700 leading-relaxed font-medium">
-                        {skill.description}
-                      </p>
+                        {/* Clean Skill Description */}
+                        <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed font-medium">
+                          {skill.description}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </TiltCard>
-              </ScrollFocusZoom>
-            </ScrollAssemble>
-          ))}
+                  </TiltCard>
+                </div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         {/* Core Languages Strip */}
-        <ScrollAssemble direction="bottom" distance={45} delay={0.15}>
+        <ScrollAssemble direction="bottom" distance={45} delay={0.12}>
           <ScrollFocusZoom maxScale={1.015}>
-            <div className="mt-12 p-6 sm:p-7 rounded-3xl bg-white border-2 border-slate-200/90 shadow-xl">
-              <div className="text-xs font-mono text-slate-700 uppercase tracking-wider mb-3.5 font-bold">
-                Core Programming Languages & Paradigms:
+            <div className="mt-14 p-6 sm:p-8 rounded-3xl bg-white/95 backdrop-blur-md border-2 border-slate-200/90 shadow-xl relative overflow-hidden">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 pb-4 border-b border-slate-100">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-sky-50 border border-sky-200 flex items-center justify-center text-sky-600 shadow-2xs">
+                    <Terminal className="w-4 h-4 stroke-[2.5]" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold">
+                      Foundational Stack
+                    </h4>
+                    <span className="text-sm sm:text-base font-black font-display text-slate-900">
+                      Core Programming Languages & Paradigms
+                    </span>
+                  </div>
+                </div>
+                <span className="text-xs font-mono text-slate-600 font-bold bg-slate-100 px-3 py-1 rounded-full w-fit">
+                  Type-Safe • Concurrent • Relational
+                </span>
               </div>
-              <div className="flex flex-wrap items-center gap-3">
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
                 {[
-                  { name: 'JavaScript (ESNext)', type: 'Primary' },
-                  { name: 'TypeScript', type: 'Primary' },
-                  { name: 'Python', type: 'Primary' },
-                  { name: 'Java', type: 'Academic / Core' },
-                  { name: 'C', type: 'Foundational' },
-                  { name: 'SQL', type: 'Relational / ACID' },
+                  { name: 'JavaScript', sub: 'ESNext / Async', type: 'Primary', color: '#eab308' },
+                  { name: 'TypeScript', sub: 'Strict Generics', type: 'Primary', color: '#0284c7' },
+                  { name: 'Python', sub: 'Async / FastAPI', type: 'Primary', color: '#3b82f6' },
+                  { name: 'Java', sub: 'Core OOP / JVM', type: 'Academic', color: '#ea580c' },
+                  { name: 'C', sub: 'Memory / OS', type: 'Foundational', color: '#64748b' },
+                  { name: 'SQL', sub: 'ACID / MySQL', type: 'Relational', color: '#059669' },
                 ].map((lang) => (
                   <div
                     key={lang.name}
-                    className="px-3.5 py-2 rounded-xl bg-slate-50 border-2 border-slate-200 text-xs font-mono flex items-center gap-2 shadow-sm"
+                    className="p-3.5 rounded-2xl bg-slate-50/80 hover:bg-white border-2 border-slate-200/80 hover:border-slate-400 hover:shadow-md transition-all duration-200 group text-left"
                   >
-                    <span className="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
-                    <span className="text-slate-900 font-black">{lang.name}</span>
-                    <span className="text-[10px] text-slate-600 font-semibold">({lang.type})</span>
+                    <div className="flex items-center justify-between mb-2">
+                      <span
+                        className="w-2.5 h-2.5 rounded-full transition-transform group-hover:scale-125 shadow-2xs"
+                        style={{ backgroundColor: lang.color }}
+                      />
+                      <span className="text-[10px] font-mono text-slate-500 font-bold uppercase">
+                        {lang.type}
+                      </span>
+                    </div>
+                    <div className="text-sm font-black font-display text-slate-900 group-hover:text-sky-600 transition-colors">
+                      {lang.name}
+                    </div>
+                    <div className="text-[11px] font-mono text-slate-500 font-medium truncate mt-0.5">
+                      {lang.sub}
+                    </div>
                   </div>
                 ))}
               </div>

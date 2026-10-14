@@ -111,23 +111,24 @@ export const Hero: React.FC<HeroProps> = ({
       id="hero"
       className="relative min-h-[94vh] flex items-center justify-center pt-36 sm:pt-44 pb-20 sm:pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
-      {/* Dynamic Floating 3D Parallax Badges (Desktop Depth Layers) */}
+      {/* Dynamic Floating 3D Parallax Badges (Organically Scattered Depth Layers) */}
       <div
         aria-hidden="true"
-        className="absolute top-36 left-8 lg:left-14 hidden lg:flex items-center gap-2 px-4 py-2 rounded-2xl bg-sky-50/95 border-2 border-sky-400 text-sky-800 text-xs font-mono font-bold shadow-lg shadow-sky-500/15 backdrop-blur-md pointer-events-none will-change-transform z-20"
+        className="absolute top-42 lg:top-120 left-4 sm:left-6 lg:left-10 xl:left-14 hidden lg:flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-sky-50/95 border-2 border-sky-400 text-sky-900 text-xs font-mono font-bold shadow-xl shadow-sky-500/20 backdrop-blur-xl pointer-events-none will-change-transform z-20 animate-float-subtle"
         style={{
-          transform: `translate3d(${-mx * 26}px, ${-scrollY * 0.2 - my * 20}px, 0)`,
+          transform: `translate3d(${-mx * 24}px, ${-scrollY * 0.18 - my * 16}px, 0) rotate(${-4 - mx * 4}deg)`,
         }}
       >
         <Zap className="w-4 h-4 text-sky-600 animate-pulse" />
-        <span>Next.js 15 & React 19</span>
+        <span>Next.js 15 &amp; React 19</span>
       </div>
 
       <div
         aria-hidden="true"
-        className="absolute top-44 right-8 lg:right-16 hidden lg:flex items-center gap-2 px-4 py-2 rounded-2xl bg-purple-50/95 border-2 border-purple-400 text-purple-800 text-xs font-mono font-bold shadow-lg shadow-purple-500/15 backdrop-blur-md pointer-events-none will-change-transform z-20"
+        className="absolute top-36 lg:top-50
+         right-4 sm:right-6 lg:right-12 xl:right-16 hidden lg:flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-purple-50/95 border-2 border-purple-400 text-purple-900 text-xs font-mono font-bold shadow-xl shadow-purple-500/20 backdrop-blur-xl pointer-events-none will-change-transform z-20 animate-float-delayed"
         style={{
-          transform: `translate3d(${mx * 30}px, ${-scrollY * 0.28 + my * 24}px, 0)`,
+          transform: `translate3d(${mx * 26}px, ${-scrollY * 0.22 + my * 18}px, 0) rotate(${5 + mx * 4}deg)`,
         }}
       >
         <Cpu className="w-4 h-4 text-purple-600" />
@@ -136,9 +137,9 @@ export const Hero: React.FC<HeroProps> = ({
 
       <div
         aria-hidden="true"
-        className="absolute bottom-28 left-10 lg:left-20 hidden lg:flex items-center gap-2 px-4 py-2 rounded-2xl bg-emerald-50/95 border-2 border-emerald-400 text-emerald-800 text-xs font-mono font-bold shadow-lg shadow-emerald-500/15 backdrop-blur-md pointer-events-none will-change-transform z-20"
+        className="absolute bottom-32 left-6 lg:left-14 hidden lg:flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-emerald-50/95 border-2 border-emerald-400 text-emerald-900 text-xs font-mono font-bold shadow-xl shadow-emerald-500/20 backdrop-blur-xl pointer-events-none will-change-transform z-20 animate-float-delayed"
         style={{
-          transform: `translate3d(${-mx * 22}px, ${-scrollY * 0.15 - my * 18}px, 0)`,
+          transform: `translate3d(${-mx * 20}px, ${-scrollY * 0.15 - my * 14}px, 0) rotate(${2.5 - mx * 3}deg)`,
         }}
       >
         <Smartphone className="w-4 h-4 text-emerald-600" />
@@ -147,9 +148,9 @@ export const Hero: React.FC<HeroProps> = ({
 
       <div
         aria-hidden="true"
-        className="absolute bottom-32 right-12 lg:right-24 hidden lg:flex items-center gap-2 px-4 py-2 rounded-2xl bg-amber-50/95 border-2 border-amber-400 text-amber-800 text-xs font-mono font-bold shadow-lg shadow-amber-500/15 backdrop-blur-md pointer-events-none will-change-transform z-20"
+        className="absolute bottom-28 right-8 lg:right-20 hidden lg:flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-amber-50/95 border-2 border-amber-400 text-amber-900 text-xs font-mono font-bold shadow-xl shadow-amber-500/20 backdrop-blur-xl pointer-events-none will-change-transform z-20 animate-float-subtle"
         style={{
-          transform: `translate3d(${mx * 24}px, ${-scrollY * 0.22 + my * 20}px, 0)`,
+          transform: `translate3d(${mx * 22}px, ${-scrollY * 0.2 + my * 16}px, 0) rotate(${-3 + mx * 3}deg)`,
         }}
       >
         <GraduationCap className="w-4 h-4 text-amber-600" />
@@ -279,15 +280,15 @@ export const Hero: React.FC<HeroProps> = ({
         >
           {/* Card 1: Enterprise Systems */}
           <TiltCard
-            maxTilt={10}
-            scale={1.03}
-            glareOpacity={0.16}
+            maxTilt={8}
+            scale={1.02}
+            glareOpacity={0.14}
             className="h-full"
           >
-            <div className="bg-white/95 p-4 sm:p-5 rounded-2xl border-2 border-slate-200/90 text-center hover:border-2 hover:border-sky-500 transition-all h-full flex flex-col justify-center shadow-lg hover:shadow-xl hover:shadow-sky-500/15 group relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-sky-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="w-9 h-9 rounded-xl bg-sky-100 border border-sky-300 text-sky-700 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform shadow-sm">
-                <Layers className="w-5 h-5 text-sky-600" />
+            <div className="bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-3xl border-2 border-slate-200/90 text-center hover:border-sky-500 transition-all h-full flex flex-col justify-center shadow-lg hover:shadow-2xl hover:shadow-sky-500/15 group relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-500 opacity-80 group-hover:opacity-100 transition-opacity" />
+              <div className="w-10 h-10 rounded-2xl bg-sky-100/80 border border-sky-300 text-sky-700 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform shadow-2xs">
+                <Layers className="w-5 h-5 text-sky-600 stroke-[2.2]" />
               </div>
               <div className="text-2xl sm:text-3xl font-black font-display text-sky-600 flex items-center justify-center">
                 <AnimatedCounter from={0} to={3} duration={1800} suffix="+" />
@@ -295,23 +296,23 @@ export const Hero: React.FC<HeroProps> = ({
               <div className="text-xs font-bold text-slate-900 mt-1">
                 Enterprise Systems
               </div>
-              <div className="text-[11px] text-slate-500 font-medium">
-                AgroStock, Greentop &amp; TAIN Elect AI
+              <div className="text-[11px] text-slate-500 font-medium truncate">
+                AgroStock, Greentop &amp; TAIN
               </div>
             </div>
           </TiltCard>
 
           {/* Card 2: Double 9.05 CGPA */}
           <TiltCard
-            maxTilt={10}
-            scale={1.03}
-            glareOpacity={0.16}
+            maxTilt={8}
+            scale={1.02}
+            glareOpacity={0.14}
             className="h-full"
           >
-            <div className="bg-white/95 p-4 sm:p-5 rounded-2xl border-2 border-slate-200/90 text-center hover:border-2 hover:border-emerald-500 transition-all h-full flex flex-col justify-center shadow-lg hover:shadow-xl hover:shadow-emerald-500/15 group relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-400 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="w-9 h-9 rounded-xl bg-emerald-100 border border-emerald-300 text-emerald-700 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform shadow-sm">
-                <GraduationCap className="w-5 h-5 text-emerald-600" />
+            <div className="bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-3xl border-2 border-slate-200/90 text-center hover:border-emerald-500 transition-all h-full flex flex-col justify-center shadow-lg hover:shadow-2xl hover:shadow-emerald-500/15 group relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-400 via-teal-500 to-cyan-500 opacity-80 group-hover:opacity-100 transition-opacity" />
+              <div className="w-10 h-10 rounded-2xl bg-emerald-100/80 border border-emerald-300 text-emerald-700 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform shadow-2xs">
+                <GraduationCap className="w-5 h-5 text-emerald-600 stroke-[2.2]" />
               </div>
               <div className="text-2xl sm:text-3xl font-black font-display text-emerald-600 flex items-center justify-center">
                 <AnimatedCounter
@@ -324,7 +325,7 @@ export const Hero: React.FC<HeroProps> = ({
               <div className="text-xs font-bold text-slate-900 mt-1">
                 Double 9.05 CGPA
               </div>
-              <div className="text-[11px] text-slate-500 font-medium">
+              <div className="text-[11px] text-slate-500 font-medium truncate">
                 M.Sc. &amp; B.Sc. Comp Sci
               </div>
             </div>
@@ -332,19 +333,19 @@ export const Hero: React.FC<HeroProps> = ({
 
           {/* Card 3: Published Research Paper */}
           <TiltCard
-            maxTilt={10}
-            scale={1.03}
-            glareOpacity={0.16}
+            maxTilt={8}
+            scale={1.02}
+            glareOpacity={0.14}
             className="h-full"
           >
             <a
               href="#research"
-              className="bg-white/95 p-4 sm:p-5 rounded-2xl border-2 border-slate-200/90 text-center hover:border-2 hover:border-purple-500 hover:bg-purple-50/40 transition-all block group h-full flex flex-col justify-center shadow-lg hover:shadow-xl hover:shadow-purple-500/15 relative overflow-hidden"
+              className="bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-3xl border-2 border-slate-200/90 text-center hover:border-purple-500 hover:bg-purple-50/20 transition-all block group h-full flex flex-col justify-center shadow-lg hover:shadow-2xl hover:shadow-purple-500/15 relative overflow-hidden"
               title="Read published research & download paper PDF"
             >
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-400 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="w-9 h-9 rounded-xl bg-purple-100 border border-purple-300 text-purple-700 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform shadow-sm">
-                <Cpu className="w-5 h-5 text-purple-600 group-hover:rotate-12 transition-transform" />
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-400 via-pink-500 to-indigo-500 opacity-80 group-hover:opacity-100 transition-opacity" />
+              <div className="w-10 h-10 rounded-2xl bg-purple-100/80 border border-purple-300 text-purple-700 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-2xs">
+                <Cpu className="w-5 h-5 text-purple-600 stroke-[2.2]" />
               </div>
               <div className="text-2xl sm:text-3xl font-black font-display text-purple-600 flex items-center justify-center">
                 <AnimatedCounter
@@ -366,24 +367,24 @@ export const Hero: React.FC<HeroProps> = ({
 
           {/* Card 4: Interactive Live Store Release Card */}
           <TiltCard
-            maxTilt={10}
-            scale={1.03}
-            glareOpacity={0.16}
+            maxTilt={8}
+            scale={1.02}
+            glareOpacity={0.14}
             className="h-full"
           >
             <div
               onClick={() => setIsStoreModalOpen(true)}
-              className="bg-white/95 p-4 sm:p-5 rounded-2xl border-2 border-slate-200/90 text-center hover:border-2 hover:border-blue-500 transition-all h-full flex flex-col justify-between shadow-lg hover:shadow-xl hover:shadow-blue-500/15 group cursor-pointer relative overflow-hidden"
+              className="bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-3xl border-2 border-slate-200/90 text-center hover:border-blue-500 transition-all h-full flex flex-col justify-between shadow-lg hover:shadow-2xl hover:shadow-blue-500/15 group cursor-pointer relative overflow-hidden"
               title="Click to view verified store builds & downloads"
             >
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-sky-500 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-sky-500 to-emerald-500 opacity-80 group-hover:opacity-100 transition-opacity" />
 
               {/* Header with live pulsing beacon */}
               <div className="flex items-center justify-between mb-1">
-                <div className="w-8 h-8 rounded-xl bg-blue-100 border border-blue-300 text-blue-700 flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
-                  <Smartphone className="w-4 h-4 text-blue-600" />
+                <div className="w-9 h-9 rounded-2xl bg-blue-100/80 border border-blue-300 text-blue-700 flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xs">
+                  <Smartphone className="w-4 h-4 text-blue-600 stroke-[2.2]" />
                 </div>
-                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-300 text-[10px] font-mono text-emerald-800 font-bold shadow-xs">
+                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-300 text-[10px] font-mono text-emerald-800 font-bold shadow-2xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
                   <span>LIVE IN PROD</span>
                 </div>
@@ -394,12 +395,12 @@ export const Hero: React.FC<HeroProps> = ({
                 <div className="text-xl sm:text-2xl font-black font-display text-blue-600 flex items-center justify-center gap-1">
                   <AnimatedCounter
                     from={0}
-                    to={150}
+                    to={650}
                     duration={2000}
-                    suffix="k+"
+                    suffix="+"
                   />
                   <span className="text-sm font-sans font-bold text-slate-700">
-                    Voters
+                    Agents
                   </span>
                 </div>
 
