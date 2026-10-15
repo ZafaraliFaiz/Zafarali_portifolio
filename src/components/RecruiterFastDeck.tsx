@@ -17,10 +17,24 @@ export const RecruiterFastDeck: React.FC<RecruiterFastDeckProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div data-lenis-prevent className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/60 backdrop-blur-md">
-      <div className="relative w-full max-w-2xl bg-white border-2 border-slate-300 rounded-3xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
+    <div
+      data-lenis-prevent
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+      className="fixed inset-0 z-[60] flex items-center justify-center p-0 sm:p-3 md:p-4 bg-slate-950/70 backdrop-blur-2xl transition-all"
+    >
+      {/* Generated Dynamic Ambient Glow Backdrop */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-b from-indigo-500/25 via-sky-500/15 to-transparent rounded-full blur-3xl opacity-80" />
+      </div>
+
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full h-full sm:h-auto sm:max-h-[96vh] max-w-3xl bg-white border-0 sm:border-2 border-slate-300/90 sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden"
+      >
         {/* Top Accent Gradient Bar */}
-        <div className="h-2 w-full bg-gradient-to-r from-sky-500 via-indigo-600 to-purple-600" />
+        <div className="h-2 w-full bg-gradient-to-r from-sky-500 via-indigo-600 to-purple-600 shrink-0" />
         
         {/* Header */}
         <div className="p-5 sm:p-6 bg-gradient-to-r from-indigo-50/80 via-sky-50/50 to-slate-50 border-b-2 border-slate-200 flex items-start justify-between">

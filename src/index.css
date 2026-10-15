@@ -2,9 +2,9 @@
 
 @layer base {
   :root {
-    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, monospace;
-    --font-display: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    --font-mono: "Fira Code", ui-monospace, SFMono-Regular, monospace;
+    --font-display: "Outfit", "Plus Jakarta Sans", sans-serif;
   }
 
   html {
@@ -40,12 +40,17 @@
     overflow-x: hidden;
   }
 
-  h1, h2, h3, .font-display {
+  h1,
+  h2,
+  h3,
+  .font-display {
     font-family: var(--font-display);
     letter-spacing: -0.025em;
   }
 
-  code, pre, .font-mono {
+  code,
+  pre,
+  .font-mono {
     font-family: var(--font-mono);
   }
 }
@@ -68,13 +73,16 @@
 /* Custom Cyber/Luxury Glows and Grids */
 .bg-grid-pattern {
   background-size: 36px 36px;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(14, 165, 233, 0.08) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(99, 102, 241, 0.06) 1px, transparent 1px);
 }
 
 .bg-dots-pattern {
-  background-image: radial-gradient(rgba(14, 165, 233, 0.22) 1.2px, transparent 1.2px);
+  background-image: radial-gradient(
+    rgba(14, 165, 233, 0.22) 1.2px,
+    transparent 1.2px
+  );
   background-size: 24px 24px;
 }
 
@@ -83,7 +91,9 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 2px solid #e2e8f0;
-  box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+  box-shadow:
+    0 12px 32px -4px rgba(15, 23, 42, 0.08),
+    0 4px 12px -2px rgba(15, 23, 42, 0.04);
 }
 
 .glass-card-hover {
@@ -93,7 +103,9 @@
 .glass-card-hover:hover {
   transform: translateY(-4px);
   border-color: rgba(14, 165, 233, 0.45);
-  box-shadow: 0 16px 36px -8px rgba(14, 165, 233, 0.14), 0 4px 12px -2px rgba(99, 102, 241, 0.06);
+  box-shadow:
+    0 16px 36px -8px rgba(14, 165, 233, 0.14),
+    0 4px 12px -2px rgba(99, 102, 241, 0.06);
 }
 
 /* Custom scrollbars */
@@ -117,9 +129,31 @@
 }
 
 /* Scanline and glowing effects */
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+
 @keyframes pulse-subtle {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
 }
 
 .animate-pulse-subtle {
@@ -127,7 +161,8 @@
 }
 
 @keyframes float-subtle {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
@@ -155,7 +190,8 @@
   }
 
   /* Reset document root */
-  html, body {
+  html,
+  body {
     background: #ffffff !important;
     background-color: #ffffff !important;
     color: #111827 !important;

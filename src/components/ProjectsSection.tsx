@@ -7,14 +7,20 @@ import {
   Cpu, 
   ShieldCheck, 
   Database, 
-  Sparkles,
-  ExternalLink,
-  ChevronRight,
-  GitBranch,
-  Terminal,
-  Activity
+  Sparkles, 
+  ExternalLink, 
+  ChevronRight, 
+  GitBranch, 
+  Terminal, 
+  Activity,
+  Award,
+  BookOpen,
+  FileDown,
+  GraduationCap,
+  CheckCircle2,
+  Code2
 } from 'lucide-react';
-import { PROJECTS } from '../data/portfolioData';
+import { PROJECTS, RESEARCH_PAPER, EDUCATION_LIST, SKILL_CATEGORIES } from '../data/portfolioData';
 import { Project } from '../types/portfolio';
 import { TiltCard } from './TiltCard';
 import { StoreBadges } from './StoreBadges';
@@ -25,7 +31,36 @@ interface ProjectsSectionProps {
   onSelectProject: (project: Project) => void;
 }
 
+// Tech Stack Brand Color Mapping for FEAT-07
+const TECH_BRAND_COLORS: Record<string, string> = {
+  'React.js': '#61DAFB',
+  'React Native & Expo': '#61DAFB',
+  'Next.js (App Router)': '#0284c7',
+  'TypeScript & JavaScript': '#3178C6',
+  'Tailwind CSS & HeroUI': '#06B6D4',
+  'Redux Toolkit & Zustand': '#764ABC',
+  'React Hook Form & Yup': '#EC5990',
+  'TanStack React Query': '#FF4154',
+  'Node.js & Express.js': '#339933',
+  'FastAPI & Python': '#3776AB',
+  'MySQL & Relational Design': '#4479A1',
+  'Supabase (Postgres & Auth)': '#3ECF8E',
+  'Offline-First Architectures': '#0284C7',
+  'Docker & Containerization': '#2496ED',
+  'NGINX Reverse Proxy': '#009639',
+  'Jenkins CI/CD': '#D24939',
+  'AWS (EC2, IAM, S3)': '#FF9900',
+  'EAS Build & App Distribution': '#4630EB',
+  'Git, GitHub & CI/CD': '#F05032',
+  'LangChain Orchestration': '#7C3AED',
+  'OpenAI & Gemini APIs': '#10A37F',
+  'Prompt Engineering': '#8B5CF6',
+  'Scientific Research Methodology': '#EC4899',
+};
+
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProject }) => {
+  // FEAT-06: Segmented Multi-Tab Controller
+  const [showcaseTab, setShowcaseTab] = useState<'projects' | 'credentials' | 'tech-stack'>('projects');
   const [filter, setFilter] = useState<'All' | 'Full Stack' | 'Mobile' | 'AI & Gen-AI' | 'DevOps & Cloud'>('All');
 
   const filteredProjects = filter === 'All'
@@ -78,264 +113,401 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
     }
   };
 
-  return (
-    <section id="projects" className="py-24 px-4 sm:px-6 lg:px-8 relative z-10 scroll-mt-20">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <ScrollAssemble direction="top" distance={35}>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 text-sky-400 border border-sky-500/30 text-xs font-mono uppercase tracking-wider mb-4 font-bold shadow-md shadow-sky-500/10">
-                <FolderGit2 className="w-4 h-4 text-sky-400 stroke-[2.5]" />
-                <span>Production Systems & Architecture</span>
-              </div>
-              <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight leading-none">
-                Featured{' '}
-                <span className="bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                  Engineering Projects
-                </span>
-              </h2>
-              <p className="text-slate-600 text-sm sm:text-base mt-4 max-w-xl font-medium leading-relaxed">
-                High-concurrency web platforms, offline-first mobile apps, and Gen-AI integrated systems built for real-world enterprise operations.
-              </p>
-            </div>
+  // Flattened all skills for Tech Stack Tab
+  const allSkills = SKILL_CATEGORIES.flatMap((cat) =>
+    cat.skills.map((s) => ({
+      ...s,
+      categoryName: cat.category,
+      brandColor: TECH_BRAND_COLORS[s.name] || '#0284c7',
+    }))
+  );
 
-            {/* Filter Pills */}
-            <div className="flex flex-wrap items-center gap-2 bg-white/95 backdrop-blur-md p-1.5 rounded-2xl border-2 border-slate-200/90 shadow-md">
+  return (
+    <section id="projects" className="pt-8 sm:pt-10 pb-20 px-4 sm:px-6 lg:px-8 relative z-10 scroll-mt-20">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Section Header */}
+        <ScrollAssemble direction="top" distance={35}>
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 text-sky-400 border border-sky-500/30 text-xs font-mono uppercase tracking-wider mb-3 font-bold shadow-md shadow-sky-500/10">
+              <FolderGit2 className="w-4 h-4 text-sky-400 stroke-[2.5]" />
+              <span>Production Systems &amp; Technical Showcase</span>
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight leading-none">
+              Engineering{' '}
+              <span className="bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                Portfolio Showcase
+              </span>
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base mt-3 max-w-xl mx-auto font-medium leading-relaxed">
+              Explore flagship production architectures, published academic research, and verified daily technology proficiencies.
+            </p>
+          </div>
+
+          {/* FEAT-06: Segmented Multi-Tab Controller */}
+          <div className="flex justify-center mb-10">
+            <div
+              role="tablist"
+              aria-label="Portfolio Showcase Views"
+              className="inline-flex items-center p-1.5 rounded-2xl bg-white/95 border-2 border-slate-200/90 shadow-lg backdrop-blur-md gap-1.5 max-w-full overflow-x-auto"
+            >
+              <button
+                role="tab"
+                id="tab-projects"
+                aria-selected={showcaseTab === 'projects'}
+                aria-controls="panel-projects"
+                onClick={() => setShowcaseTab('projects')}
+                className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-black transition-all ${
+                  showcaseTab === 'projects'
+                    ? 'bg-slate-900 text-white shadow-md shadow-slate-900/20 scale-[1.02]'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                }`}
+              >
+                <FolderGit2 className="w-4 h-4 text-sky-400" />
+                <span>Projects ({PROJECTS.length})</span>
+              </button>
+
+              <button
+                role="tab"
+                id="tab-credentials"
+                aria-selected={showcaseTab === 'credentials'}
+                aria-controls="panel-credentials"
+                onClick={() => setShowcaseTab('credentials')}
+                className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-black transition-all ${
+                  showcaseTab === 'credentials'
+                    ? 'bg-purple-900 text-white shadow-md shadow-purple-900/20 scale-[1.02]'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                }`}
+              >
+                <Award className="w-4 h-4 text-purple-400" />
+                <span>Credentials &amp; Research</span>
+              </button>
+
+              <button
+                role="tab"
+                id="tab-tech-stack"
+                aria-selected={showcaseTab === 'tech-stack'}
+                aria-controls="panel-tech-stack"
+                onClick={() => setShowcaseTab('tech-stack')}
+                className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-black transition-all ${
+                  showcaseTab === 'tech-stack'
+                    ? 'bg-sky-900 text-white shadow-md shadow-sky-900/20 scale-[1.02]'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                }`}
+              >
+                <Code2 className="w-4 h-4 text-sky-400" />
+                <span>Tech Stack ({allSkills.length})</span>
+              </button>
+            </div>
+          </div>
+        </ScrollAssemble>
+
+        {/* TAB 1: PROJECTS GRID */}
+        {showcaseTab === 'projects' && (
+          <div id="panel-projects" role="tabpanel" aria-labelledby="tab-projects" className="space-y-8 animate-fadeIn">
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap items-center justify-center gap-2">
               {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setFilter(cat)}
                   className={`px-4 py-2 rounded-xl text-xs font-mono transition-all font-bold ${
                     filter === cat
-                      ? 'bg-slate-900 text-white shadow-md scale-[1.02]'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                      ? 'bg-sky-600 text-white shadow-md shadow-sky-500/25 scale-[1.02]'
+                      : 'bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200/90 shadow-2xs'
                   }`}
                 >
                   {cat}
                 </button>
               ))}
             </div>
-          </div>
-        </ScrollAssemble>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
-          {filteredProjects.map((project, idx) => {
-            const scatterDir = idx % 3 === 0 ? 'tilt-left' : idx % 3 === 1 ? 'bottom' : 'tilt-right';
-            const theme = getCategoryTheme(project.category);
-            const CategoryIcon = theme.icon;
+            {/* Projects Card Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+              {filteredProjects.map((project, idx) => {
+                const scatterDir = idx % 3 === 0 ? 'left' : idx % 3 === 1 ? 'bottom' : 'tilt-right';
+                const theme = getCategoryTheme(project.category);
+                const CategoryIcon = theme.icon;
 
-            return (
-              <ScrollAssemble
-                key={project.id}
-                direction={scatterDir}
-                delay={(idx % 3) * 0.08}
-                distance={45}
-                className="h-full"
-              >
-                <ScrollFocusZoom maxScale={1.018} enableGlow glowColor={`${theme.accent}15`} className="h-full">
-                  <TiltCard
-                    maxTilt={5}
-                    scale={1.01}
-                    glareOpacity={0.12}
+                return (
+                  <ScrollAssemble
+                    key={project.id}
+                    direction={scatterDir}
+                    delay={(idx % 3) * 0.08}
+                    distance={45}
                     className="h-full"
                   >
-                    <div className="bg-gradient-to-b from-white via-white to-slate-50/80 backdrop-blur-md rounded-3xl border border-slate-200/90 hover:border-slate-400/80 p-6 sm:p-7 flex flex-col justify-between h-full group relative overflow-hidden transition-all duration-300 shadow-lg hover:shadow-2xl hover:-translate-y-1">
-                      
-                      {/* Top Specular Accent Gradient Line */}
-                      <div 
-                        className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${theme.gradient} transition-all duration-300 opacity-90 group-hover:opacity-100 group-hover:h-2`}
-                      />
-
-                      {/* Ambient Glow Aura */}
-                      <div 
-                        className="absolute -top-16 -right-16 w-40 h-40 rounded-full blur-3xl opacity-15 pointer-events-none group-hover:opacity-30 transition-opacity"
-                        style={{ backgroundColor: theme.accent }}
-                      />
-
-                      <div>
-                        {/* Top Developer Meta Row: Sys ID, Live Ping & Period */}
-                        <div className="flex items-center justify-between gap-2 mb-4">
-                          <div className="flex items-center gap-2">
-                            <span className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full border font-black flex items-center gap-1.5 shadow-2xs ${theme.badgeBg}`}>
-                              <CategoryIcon className="w-3 h-3 stroke-[2.5]" />
-                              <span>{project.badge}</span>
-                            </span>
-                            <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-slate-500 bg-slate-100/80 px-2 py-0.5 rounded-md border border-slate-200/70">
-                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                              PROD
-                            </span>
-                          </div>
-                          <span className="text-[11px] font-mono font-bold text-slate-500 bg-slate-100/70 px-2 py-0.5 rounded-md border border-slate-200/60">
-                            {project.period}
-                          </span>
-                        </div>
-
-                        {/* Interactive Screenshot Preview */}
-                        {project.imageUrl && (
+                    <ScrollFocusZoom maxScale={1.018} enableGlow glowColor={`${theme.accent}15`} className="h-full">
+                      <TiltCard
+                        maxTilt={5}
+                        scale={1.01}
+                        glareOpacity={0.12}
+                        className="h-full"
+                      >
+                        <div className="bg-gradient-to-b from-white via-white to-slate-50/80 backdrop-blur-md rounded-3xl border border-slate-200/90 hover:border-slate-400/80 p-6 sm:p-7 flex flex-col justify-between h-full group relative overflow-hidden transition-all duration-300 shadow-lg hover:shadow-2xl hover:-translate-y-1">
+                          
+                          {/* Top Specular Accent Gradient Line */}
                           <div 
-                            onClick={() => onSelectProject(project)}
-                            className={`relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden mb-5 border border-slate-200/90 group-hover:border-slate-300 group/img cursor-pointer shadow-sm hover:shadow-md transition-all ${
-                              project.category === 'Mobile'
-                                ? 'bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-2.5 flex items-center justify-center'
-                                : 'bg-slate-100'
-                            }`}
-                          >
-                            {project.category === 'Mobile' ? (
-                              <div className="relative h-full w-full flex items-center justify-center gap-2 overflow-hidden">
-                                {/* Ambient background glow */}
-                                <div 
-                                  className="absolute inset-0 bg-cover bg-center opacity-35 blur-xl scale-125 pointer-events-none"
-                                  style={{ backgroundImage: `url(${project.imageUrl})` }}
-                                />
-                                {/* Primary Phone Frame */}
-                                <div className="relative z-10 h-full aspect-[9/19.5] rounded-xl overflow-hidden border-2 border-slate-700 bg-black shadow-2xl group-hover/img:scale-105 transition-transform duration-300">
-                                  <img
-                                    src={project.imageUrl}
-                                    alt={project.title}
-                                    className="w-full h-full object-cover object-top"
-                                    loading="lazy"
-                                  />
-                                </div>
-                                {/* Secondary Peeking Phone Frame */}
-                                {project.previewImages && project.previewImages[1] && (
-                                  <div className="relative z-0 h-[86%] aspect-[9/19.5] rounded-xl overflow-hidden border border-slate-700/80 bg-black shadow-xl opacity-60 hidden sm:block -ml-5 group-hover/img:translate-x-2 transition-transform duration-300">
-                                    <img
-                                      src={project.previewImages[1]}
-                                      alt={project.title}
-                                      className="w-full h-full object-cover object-top"
-                                      loading="lazy"
-                                    />
-                                  </div>
-                                )}
+                            className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${theme.gradient} transition-all duration-300 opacity-90 group-hover:opacity-100 group-hover:h-2`}
+                          />
+
+                          {/* Ambient Glow Aura */}
+                          <div 
+                            className="absolute -top-16 -right-16 w-40 h-40 rounded-full blur-3xl opacity-15 pointer-events-none group-hover:opacity-30 transition-opacity"
+                            style={{ backgroundColor: theme.accent }}
+                          />
+
+                          <div>
+                            {/* Top Developer Meta Row: Category Badge & Period */}
+                            <div className="flex items-center justify-between gap-2 mb-4">
+                              <div className="flex items-center gap-2">
+                                <span className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full border font-black flex items-center gap-1.5 shadow-2xs ${theme.badgeBg}`}>
+                                  <CategoryIcon className="w-3 h-3 stroke-[2.5]" />
+                                  <span>{project.badge}</span>
+                                </span>
+                                <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-slate-500 bg-slate-100/80 px-2 py-0.5 rounded-md border border-slate-200/70">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                  PROD
+                                </span>
                               </div>
-                            ) : (
-                              <>
-                                {/* Browser Mockup Header */}
-                                <div className="absolute top-0 left-0 right-0 h-6 bg-slate-900/85 backdrop-blur-xs px-2.5 flex items-center justify-between z-10 border-b border-white/10">
-                                  <div className="flex items-center gap-1.5">
-                                    <div className="w-2 h-2 rounded-full bg-rose-500/80" />
-                                    <div className="w-2 h-2 rounded-full bg-amber-500/80" />
-                                    <div className="w-2 h-2 rounded-full bg-emerald-500/80" />
-                                  </div>
-                                  <span className="text-[9px] font-mono text-slate-300 truncate max-w-[150px]">
-                                    {project.id}.production // sys
-                                  </span>
-                                  <div className="w-3" />
-                                </div>
+                              <span className="text-[11px] font-mono font-bold text-slate-500 bg-slate-100/70 px-2 py-0.5 rounded-md border border-slate-200/60">
+                                {project.period}
+                              </span>
+                            </div>
+
+                            {/* Interactive Screenshot Preview */}
+                            {project.imageUrl && (
+                              <div 
+                                onClick={() => onSelectProject(project)}
+                                className={`relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden mb-5 border border-slate-200/90 group-hover:border-slate-300 group/img cursor-pointer shadow-sm hover:shadow-md transition-all ${
+                                  project.category === 'Mobile'
+                                    ? 'bg-gradient-to-b from-sky-50 via-slate-100 to-slate-200 flex items-center justify-center p-3'
+                                    : 'bg-slate-100'
+                                }`}
+                              >
                                 <img
                                   src={project.imageUrl}
                                   alt={project.title}
-                                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/img:scale-105 pt-6"
                                   loading="lazy"
+                                  className={`w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-105 ${
+                                    project.category === 'Mobile' ? 'object-contain max-h-full drop-shadow-lg' : 'object-cover'
+                                  }`}
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent opacity-60 pointer-events-none" />
-                              </>
-                            )}
-                            
-                            {/* Floating App Icon / Client Tag */}
-                            {project.logoUrl && (
-                              <div className="absolute top-3 left-3 z-20">
-                                <img
-                                  src={project.logoUrl}
-                                  alt="app-icon"
-                                  className="w-8 h-8 rounded-xl object-contain bg-white p-1 border border-slate-200 shadow-md"
-                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity flex items-end p-4">
+                                  <span className="text-white text-xs font-mono font-bold flex items-center gap-1">
+                                    <span>Explore System Architecture</span>
+                                    <ChevronRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                                  </span>
+                                </div>
                               </div>
                             )}
 
-                            {/* Interactive Hover CTA Overlay */}
-                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity bg-slate-950/60 backdrop-blur-[2px] z-20">
-                              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-slate-900 font-mono text-xs font-black shadow-xl transform translate-y-1 group-hover/img:translate-y-0 transition-transform border border-slate-200">
-                                <Sparkles className="w-3.5 h-3.5 text-sky-600 stroke-[2.5]" />
-                                <span>Inspect Architecture & Specs</span>
-                              </span>
+                            {/* Title & Tagline */}
+                            <h3 
+                              onClick={() => onSelectProject(project)}
+                              className="text-lg sm:text-xl font-black text-slate-900 group-hover:text-sky-600 transition-colors font-display tracking-tight leading-snug cursor-pointer mb-2"
+                            >
+                              {project.title}
+                            </h3>
+
+                            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-5 line-clamp-3 font-medium">
+                              {project.description}
+                            </p>
+
+                            {/* Key Highlights Pill */}
+                            <div className="space-y-1.5 mb-5 border-y border-slate-100 py-3">
+                              {project.keyHighlights.slice(0, 2).map((h, i) => (
+                                <div key={i} className="flex items-start gap-2 text-[11px] font-mono text-slate-700 leading-snug">
+                                  <span className="text-sky-600 font-bold shrink-0 mt-0.5">▹</span>
+                                  <span className="line-clamp-2">{h}</span>
+                                </div>
+                              ))}
                             </div>
                           </div>
-                        )}
 
-                        {/* Title & Organization */}
-                        <div className="flex items-baseline justify-between gap-2">
-                          <h3 className="text-xl sm:text-2xl font-black text-slate-900 group-hover:text-sky-600 transition-colors font-display tracking-tight">
-                            {project.title}
-                          </h3>
-                        </div>
-                        {project.clientOrOrg && (
-                          <div className="text-xs font-mono font-bold mt-1 flex items-center gap-1.5" style={{ color: theme.accent }}>
-                            <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: theme.accent }} />
-                            <span>{project.clientOrOrg}</span>
-                          </div>
-                        )}
+                          {/* Tech Stack Pills & CTA */}
+                          <div>
+                            <div className="flex flex-wrap gap-1.5 mb-5">
+                              {project.technologies.slice(0, 4).map((tech) => (
+                                <span
+                                  key={tech}
+                                  className="text-[11px] font-mono px-2.5 py-1 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200/90 font-semibold shadow-2xs transition-colors"
+                                >
+                                  {tech}
+                                </span>
+                              ))}
+                              {project.technologies.length > 4 && (
+                                <span className="text-[11px] font-mono px-2 py-1 rounded-xl bg-slate-100 text-slate-600 border border-slate-200 font-bold">
+                                  +{project.technologies.length - 4}
+                                </span>
+                              )}
+                            </div>
 
-                        {/* Tagline */}
-                        <p className="text-xs text-slate-800 font-bold mt-2 leading-relaxed">
-                          {project.tagline}
-                        </p>
-
-                        {/* Brief description */}
-                        <p className="text-xs text-slate-600 mt-2 line-clamp-3 leading-relaxed font-medium">
-                          {project.description}
-                        </p>
-
-                        {/* Key Metric Highlights (Clean Recruiter Data Cards) */}
-                        {project.metrics && (
-                          <div className="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-slate-100">
-                            {project.metrics.slice(0, 2).map((m, mIdx) => (
-                              <div key={mIdx} className="bg-slate-50/90 group-hover:bg-sky-50/30 p-2.5 rounded-2xl border border-slate-200/80 group-hover:border-sky-200/70 text-center shadow-2xs transition-colors">
-                                <div className="text-[10px] font-mono text-slate-500 uppercase font-bold truncate">{m.label}</div>
-                                <div className="text-xs sm:text-sm font-black font-mono mt-0.5 truncate" style={{ color: theme.accent }}>{m.value}</div>
+                            {(project.appStoreUrl || project.playStoreUrl) && (
+                              <div className="mb-3">
+                                <StoreBadges
+                                  appStoreUrl={project.appStoreUrl}
+                                  playStoreUrl={project.playStoreUrl}
+                                  variant="compact"
+                                  onLinkClick={(e) => e.stopPropagation()}
+                                />
                               </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
+                            )}
 
-                      {/* Bottom Tech Tags & Action */}
-                      <div className="mt-6 pt-4 border-t border-slate-100">
-                        <div className="flex flex-wrap gap-1.5 mb-4">
-                          {project.technologies.slice(0, 4).map((tech) => (
-                            <span
-                              key={tech}
-                              className="text-[11px] font-mono px-2.5 py-1 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200/90 font-semibold shadow-2xs transition-colors"
+                            <button
+                              onClick={() => onSelectProject(project)}
+                              className="w-full flex items-center justify-between py-3 px-4 rounded-2xl bg-slate-900 hover:bg-sky-600 text-white font-mono text-xs font-black transition-all shadow-md group/btn active:scale-98"
                             >
-                              {tech}
-                            </span>
-                          ))}
-                          {project.technologies.length > 4 && (
-                            <span className="text-[11px] font-mono px-2 py-1 rounded-xl bg-slate-100 text-slate-600 border border-slate-200 font-bold">
-                              +{project.technologies.length - 4}
-                            </span>
-                          )}
-                        </div>
-
-                        {(project.appStoreUrl || project.playStoreUrl) && (
-                          <div className="mb-3">
-                            <StoreBadges
-                              appStoreUrl={project.appStoreUrl}
-                              playStoreUrl={project.playStoreUrl}
-                              variant="compact"
-                              onLinkClick={(e) => e.stopPropagation()}
-                            />
+                              <span>System Architecture Deep Dive</span>
+                              <ArrowUpRight className="w-4 h-4 stroke-[2.5] transition-transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" />
+                            </button>
                           </div>
-                        )}
 
-                        <button
-                          onClick={() => onSelectProject(project)}
-                          className="w-full flex items-center justify-between py-3 px-4 rounded-2xl bg-slate-900 hover:bg-sky-600 text-white font-mono text-xs font-black transition-all shadow-md group/btn active:scale-98"
-                        >
-                          <span>System Architecture Deep Dive</span>
-                          <ArrowUpRight className="w-4 h-4 stroke-[2.5] transition-transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" />
-                        </button>
-                      </div>
+                        </div>
+                      </TiltCard>
+                    </ScrollFocusZoom>
+                  </ScrollAssemble>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
+        {/* TAB 2: CREDENTIALS & RESEARCH */}
+        {showcaseTab === 'credentials' && (
+          <div id="panel-credentials" role="tabpanel" aria-labelledby="tab-credentials" className="space-y-8 animate-fadeIn">
+            {/* Gen-AI Research Publication Card */}
+            <div className="p-7 sm:p-9 rounded-3xl bg-white border-2 border-purple-200 shadow-xl relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-600" />
+              <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-100">
+                <span className="text-xs font-mono px-3.5 py-1 rounded-full bg-purple-100 text-purple-900 border border-purple-300 font-black flex items-center gap-1.5">
+                  <Award className="w-4 h-4 text-purple-700 stroke-[2.5]" />
+                  <span>Peer-Reviewed Publication • {RESEARCH_PAPER.year}</span>
+                </span>
+                <span className="text-xs font-mono font-bold text-slate-500 bg-slate-100 px-3 py-1 rounded-xl">
+                  ISSN: {RESEARCH_PAPER.issn}
+                </span>
+              </div>
+
+              <h3 className="text-xl sm:text-2xl font-black font-display text-slate-900 mt-4 leading-snug">
+                &ldquo;{RESEARCH_PAPER.title}&rdquo;
+              </h3>
+              <p className="text-xs sm:text-sm font-mono text-purple-700 font-bold mt-1">
+                Journal: {RESEARCH_PAPER.journal} ({RESEARCH_PAPER.volume}, {RESEARCH_PAPER.page})
+              </p>
+
+              <p className="text-slate-700 text-sm mt-3 leading-relaxed font-medium">
+                {RESEARCH_PAPER.abstract}
+              </p>
+
+              <div className="flex flex-wrap gap-3 mt-6 pt-4 border-t border-slate-100">
+                <a
+                  href={RESEARCH_PAPER.pdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 text-white font-mono font-bold text-xs shadow-md hover:bg-purple-700 transition-all"
+                >
+                  <FileDown className="w-4 h-4 stroke-[2.5]" />
+                  <span>Download Published Paper (PDF)</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Academic Degrees & CGPA Distinction */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {EDUCATION_LIST.map((edu, idx) => (
+                <div key={idx} className="p-6 rounded-3xl bg-white border-2 border-slate-200/90 shadow-md">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs font-mono font-bold text-slate-500">{edu.year}</span>
+                    <span className="text-xs font-mono font-black text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300">
+                      {edu.scoreType}: {edu.score}
+                    </span>
+                  </div>
+                  <h4 className="text-lg font-black font-display text-slate-900">{edu.degree}</h4>
+                  <p className="text-xs font-medium text-slate-600 mt-1">{edu.institution}, {edu.location}</p>
+                  <p className="text-xs text-slate-700 mt-3 font-mono">{edu.notes}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 3: TECH STACK WITH FEAT-07 BRAND GLOW HOVER CARDS */}
+        {showcaseTab === 'tech-stack' && (
+          <div id="panel-tech-stack" role="tabpanel" aria-labelledby="tab-tech-stack" className="space-y-6 animate-fadeIn">
+            {/* Header Count */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+              <span className="text-xs sm:text-sm font-mono font-black text-slate-800 uppercase tracking-wider flex items-center gap-2">
+                <Code2 className="w-4 h-4 text-sky-600" />
+                <span>{allSkills.length} TECHNOLOGIES · DAILY PRODUCTION STACK</span>
+              </span>
+              <span className="text-xs font-mono text-slate-500 font-bold hidden sm:inline">
+                Hover to illuminate brand radial glow
+              </span>
+            </div>
+
+            {/* Brand Glow Tech Grid (FEAT-07) */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5 sm:gap-4">
+              {allSkills.map((skill, idx) => (
+                <div
+                  key={idx}
+                  style={
+                    {
+                      '--tech-glow-color': skill.brandColor,
+                    } as React.CSSProperties
+                  }
+                  className="relative p-4 rounded-2xl bg-white border-2 border-slate-200/90 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl group overflow-hidden flex flex-col justify-between"
+                >
+                  {/* Radial Spotlight Gradient (FEAT-07) */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{
+                      background: `radial-gradient(circle at 50% 0%, ${skill.brandColor}35 0%, transparent 75%)`,
+                    }}
+                  />
+
+                  {/* Brand Colored Border on Hover (FEAT-07) */}
+                  <div
+                    className="absolute inset-0 rounded-2xl border-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{ borderColor: skill.brandColor }}
+                  />
+
+                  {/* Tech Content */}
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-2">
+                      <span
+                        className="w-3 h-3 rounded-full border shadow-2xs"
+                        style={{ backgroundColor: skill.brandColor, borderColor: '#ffffff' }}
+                      />
+                      <span className="text-[10px] font-mono font-bold text-slate-500">
+                        {skill.level}%
+                      </span>
                     </div>
-                  </TiltCard>
-                </ScrollFocusZoom>
-              </ScrollAssemble>
-            );
-          })}
-        </div>
+
+                    <h4 className="text-xs sm:text-sm font-black font-display text-slate-900 group-hover:text-slate-950 transition-colors leading-tight">
+                      {skill.name}
+                    </h4>
+                    <span className="text-[10px] font-mono text-slate-500 truncate block mt-0.5">
+                      {skill.categoryName}
+                    </span>
+                  </div>
+
+                  {/* Level Progress Bar in Brand Color */}
+                  <div className="relative z-10 w-full h-1.5 bg-slate-100 rounded-full overflow-hidden mt-3">
+                    <div
+                      className="h-full rounded-full transition-all duration-500"
+                      style={{
+                        width: `${skill.level}%`,
+                        backgroundColor: skill.brandColor,
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
       </div>
     </section>
   );

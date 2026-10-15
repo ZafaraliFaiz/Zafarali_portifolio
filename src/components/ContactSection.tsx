@@ -215,10 +215,10 @@ export const ContactSection: React.FC = () => {
                   </button>
                 </div>
 
-                {/* Phone */}
-                <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border-2 border-slate-200 shadow-sm">
+                {/* Phone & WhatsApp (FEAT-08 with green outer glow on hover) */}
+                <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border-2 border-slate-200 shadow-sm transition-all duration-300 hover:shadow-[0_0_24px_rgba(16,185,129,0.30)] hover:border-emerald-400 group">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-emerald-100 border-2 border-emerald-300 flex items-center justify-center text-emerald-800 shadow-sm">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-100 border-2 border-emerald-300 flex items-center justify-center text-emerald-800 shadow-sm group-hover:scale-105 transition-transform">
                       <Phone className="w-4 h-4 stroke-[2.5]" />
                     </div>
                     <div>
@@ -239,7 +239,7 @@ export const ContactSection: React.FC = () => {
                       href="https://wa.me/919860800543?text=Hi%20Zafarali,%20I%20would%20like%20to%20connect%20with%20you."
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-3 py-1.5 rounded-xl bg-emerald-100 text-emerald-900 hover:bg-emerald-200 text-xs font-mono font-black transition-colors flex items-center gap-1 border-2 border-emerald-300 shadow-sm"
+                      className="px-3 py-1.5 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 text-xs font-mono font-black transition-all flex items-center gap-1 border-2 border-emerald-500 shadow-md shadow-emerald-500/20 active:scale-95"
                       title="Direct WhatsApp Chat"
                     >
                       <MessageCircle className="w-3.5 h-3.5 stroke-[2.5]" />
@@ -334,8 +334,8 @@ export const ContactSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Destination Notice */}
-              <div className="mb-5 p-3.5 rounded-2xl bg-emerald-50 border-2 border-emerald-300 flex items-center justify-between gap-3 shadow-sm">
+              {/* Destination Notice & Status Indicator (FEAT-08) */}
+              <div className="mb-5 p-3.5 rounded-2xl bg-emerald-50 border-2 border-emerald-300 flex flex-wrap items-center justify-between gap-3 shadow-sm">
                 <div className="flex items-center gap-2.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
                   <span className="text-xs text-slate-800 font-medium">
@@ -343,9 +343,10 @@ export const ContactSection: React.FC = () => {
                     <strong className="text-emerald-800 font-mono font-black">+91 9860800543 (WhatsApp)</strong>
                   </span>
                 </div>
-                <span className="text-[11px] font-mono text-emerald-800 font-black hidden sm:inline">
-                  Instant Direct Chat
-                </span>
+                <div className="flex items-center gap-1.5 text-[11px] font-mono text-emerald-800 font-black">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                  <span>Usually replies within a few hours</span>
+                </div>
               </div>
 
               {submitted ? (

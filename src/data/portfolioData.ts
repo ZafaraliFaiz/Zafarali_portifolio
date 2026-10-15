@@ -28,6 +28,7 @@ export const PERSONAL_INFO = {
   resumeDownloadUrl: "/Zafarali_Inamdar_Resume.pdf",
   resumeDriveDirectDownload:
     "https://drive.google.com/uc?export=download&id=1zJbDNuuUu1DTW65sB7WTlAqmrysI2cPM",
+  profilePicUrl: "/images/profilepic2.jpeg",
 };
 
 export const PROJECTS: Project[] = [

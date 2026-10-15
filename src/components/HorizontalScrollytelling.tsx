@@ -194,7 +194,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
       style={{ height: '420vh' }}
     >
       {/* Sticky Fullscreen Stage */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between py-5 sm:py-7 px-4 sm:px-8 z-20">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between pt-28 sm:pt-32 pb-4 sm:pb-6 px-4 sm:px-8 z-20">
          {/* Scrollytelling Top HUD Header */}
         <div className="w-full max-w-7xl mx-auto z-30">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b-2 border-slate-200">

@@ -7,7 +7,10 @@ import React, { useState, useEffect } from 'react';
 import { BackgroundCanvas } from './components/BackgroundCanvas';
 import { ScrollProgress } from './components/ScrollProgress';
 import { Navbar } from './components/Navbar';
+import { SplashPreloader } from './components/SplashPreloader';
 import { Hero } from './components/Hero';
+import { KeywordMarquee } from './components/KeywordMarquee';
+import { HangingIdCardSection } from './components/HangingIdCardSection';
 import { HorizontalScrollytelling } from './components/HorizontalScrollytelling';
 import { ArchitectureVisualizer } from './components/ArchitectureVisualizer';
 import { ProjectsSection } from './components/ProjectsSection';
@@ -21,18 +24,25 @@ import { Footer } from './components/Footer';
 import { TerminalModal } from './components/TerminalModal';
 import { ResumeModal } from './components/ResumeModal';
 import { RecruiterFastDeck } from './components/RecruiterFastDeck';
+import { AboutMyselfModal } from './components/AboutMyselfModal';
 import { SmoothScroll } from './components/SmoothScroll';
 import { Project } from './types/portfolio';
 import { PROJECTS } from './data/portfolioData';
 
 export default function App() {
+  const [showPreloader, setShowPreloader] = useState(true);
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const [isRecruiterDeckOpen, setIsRecruiterDeckOpen] = useState(false);
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const isAnyModalOpen =
-    isTerminalOpen || isResumeOpen || isRecruiterDeckOpen || selectedProject !== null;
+    isTerminalOpen ||
+    isResumeOpen ||
+    isRecruiterDeckOpen ||
+    isAboutModalOpen ||
+    selectedProject !== null;
 
   // Global hotkeys (Cmd/Ctrl + K for Terminal, Escape to close modals)
   useEffect(() => {
@@ -44,6 +54,7 @@ export default function App() {
         setIsTerminalOpen(false);
         setIsResumeOpen(false);
         setIsRecruiterDeckOpen(false);
+        setIsAboutModalOpen(false);
         setSelectedProject(null);
       }
     };
@@ -61,6 +72,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#f8fafc] text-slate-900 relative selection:bg-sky-500 selection:text-white">
+      {/* FEAT-01: Animated Splash Preloader */}
+      {showPreloader && (
+        <SplashPreloader onComplete={() => setShowPreloader(false)} />
+      )}
+
       {/* Lenis Smooth Scrolling Engine */}
       <SmoothScroll isModalOpen={isAnyModalOpen} />
 
@@ -70,7 +86,7 @@ export default function App() {
       {/* Dynamic Scroll Progress & HUD */}
       <ScrollProgress />
 
-      {/* Navigation */}
+      {/* FEAT-02: Fixed Glassmorphic Navigation with Live System Clock */}
       <Navbar
         onOpenTerminal={() => setIsTerminalOpen(true)}
         onOpenResume={() => setIsResumeOpen(true)}
@@ -78,11 +94,20 @@ export default function App() {
       />
 
       {/* Main Content Layout */}
-      <main className="relative z-10 space-y-12">
+      <main className="relative z-10">
+        {/* Hero Section */}
         <Hero
           onOpenTerminal={() => setIsTerminalOpen(true)}
           onOpenResume={() => setIsResumeOpen(true)}
           onOpenRecruiterDeck={() => setIsRecruiterDeckOpen(true)}
+        />
+
+        {/* FEAT-03: Infinite Horizontal Keyword Marquee Ticker */}
+        <KeywordMarquee />
+
+        {/* FEAT-04: Developer Intro & Interactive Physics-Based 3D Hanging ID Card */}
+        <HangingIdCardSection
+          onOpenAboutModal={() => setIsAboutModalOpen(true)}
         />
 
         {/* Pinned Horizontal Scrollytelling Journey */}
@@ -94,7 +119,7 @@ export default function App() {
         {/* Interactive Architecture Visualizer (AgroStock, TAIN Elect AI, AI Engine, DevOps) */}
         <ArchitectureVisualizer />
 
-        {/* Flagship Production Projects */}
+        {/* FEAT-06 & FEAT-07: Segmented Multi-Tab Portfolio Showcase & Brand Glow Tech Grid */}
         <ProjectsSection
           onSelectProject={(project) => setSelectedProject(project)}
         />
@@ -113,14 +138,20 @@ export default function App() {
         {/* Academic Excellence & 9.05 CGPA Education */}
         <EducationSection />
 
-        {/* Direct Contact Form & Recruiter Fast-Track */}
+        {/* FEAT-08: Direct Contact Form & WhatsApp Quick-Action Channels */}
         <ContactSection />
       </main>
 
-      {/* Footer */}
+      {/* FEAT-09: Interactive Social Footer with Circular Glassmorphic Buttons */}
       <Footer
         onOpenTerminal={() => setIsTerminalOpen(true)}
         onOpenResume={() => setIsResumeOpen(true)}
+      />
+
+      {/* FEAT-05: Dedicated "About Myself" Full-Screen Modal Overlay */}
+      <AboutMyselfModal
+        isOpen={isAboutModalOpen}
+        onClose={() => setIsAboutModalOpen(false)}
       />
 
       {/* Modals & Overlays */}

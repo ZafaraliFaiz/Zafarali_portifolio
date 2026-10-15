@@ -151,16 +151,28 @@ EDUCATION
   return (
     <div
       data-lenis-prevent
-      className={`resume-modal-overlay fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-slate-900/60 backdrop-blur-md ${
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+      className={`resume-modal-overlay fixed inset-0 z-[60] flex items-center justify-center p-0 sm:p-2.5 md:p-3.5 bg-slate-950/70 backdrop-blur-2xl transition-all duration-300 ${
         isOpen ? 'flex' : 'hidden print:block'
       }`}
     >
-      <div className="resume-modal-box relative w-full max-w-4xl bg-white border-2 border-slate-300 rounded-3xl shadow-2xl flex flex-col h-[92vh] overflow-hidden">
+      {/* Generated Dynamic Ambient Glow Backdrop (Removes dull grey, generates subtle radiant cosmic aura) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[550px] bg-gradient-to-b from-sky-500/25 via-indigo-500/15 to-transparent rounded-full blur-3xl opacity-80 animate-pulse" />
+        <div className="absolute -bottom-32 left-1/4 w-[750px] h-[450px] bg-gradient-to-t from-emerald-500/20 via-sky-500/10 to-transparent rounded-full blur-3xl opacity-70" />
+      </div>
+
+      <div 
+        onClick={(e) => e.stopPropagation()}
+        className="resume-modal-box relative w-full h-full sm:h-[98vh] max-w-6xl xl:max-w-7xl bg-white border-0 sm:border-2 border-slate-300/90 sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden"
+      >
         {/* Top Accent Gradient Bar */}
         <div className="h-2 w-full bg-gradient-to-r from-emerald-500 via-sky-500 to-indigo-600 shrink-0" />
 
         {/* Top Control Bar (Never Printed) */}
-        <div className="no-print flex flex-wrap items-center justify-between p-3 sm:p-4 bg-slate-50 border-b-2 border-slate-200 gap-2 sm:gap-3 shrink-0">
+        <div className="no-print flex flex-wrap items-center justify-between p-3 sm:p-4 bg-white/95 backdrop-blur-md border-b-2 border-slate-200 gap-2 sm:gap-3 shrink-0">
           <div className="flex flex-wrap items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-sky-100 border-2 border-sky-300 flex items-center justify-center text-sky-700">
               <FileText className="w-4 h-4" />
@@ -169,8 +181,8 @@ EDUCATION
               <span className="font-black text-slate-900 text-sm sm:text-base font-display tracking-tight">
                 Official Resume
               </span>
-              <span className="text-[10px] font-mono bg-sky-100 text-sky-900 px-2 py-0.5 rounded-full border-2 border-sky-300 font-black">
-                Verified 2026
+              <span className="text-[10px] font-mono bg-sky-100 text-sky-900 px-2.5 py-0.5 rounded-full border-2 border-sky-300 font-black shadow-2xs">
+                v2026 Verified
               </span>
             </div>
 
@@ -280,8 +292,8 @@ EDUCATION
 
         {/* PDF Viewer Container (Visible when viewMode === 'pdf') */}
         {viewMode === 'pdf' && (
-          <div className="no-print flex-1 w-full h-full p-2 sm:p-4 bg-slate-100 flex flex-col overflow-hidden">
-            <div className="w-full h-full flex flex-col rounded-xl overflow-hidden border border-slate-200 bg-white shadow-xl">
+          <div className="no-print flex-1 w-full h-full p-2 sm:p-3 bg-slate-50 flex flex-col overflow-hidden">
+            <div className="w-full h-full flex flex-col rounded-2xl overflow-hidden border-2 border-slate-200 bg-white shadow-lg">
               <div className="flex items-center justify-between px-3 sm:px-4 py-2 bg-slate-50 border-b border-slate-200 text-xs">
                 <div className="flex items-center gap-2 text-slate-700">
                   <FileText className="w-4 h-4 text-sky-600" />
@@ -310,7 +322,7 @@ EDUCATION
                   </a>
                 </div>
               </div>
-              <div className="flex-1 w-full h-full relative bg-slate-100">
+              <div className="flex-1 w-full h-full relative bg-white">
                 <iframe
                   src="/Zafarali_Inamdar_Resume.pdf#toolbar=1"
                   className="w-full h-full border-none"
@@ -323,7 +335,7 @@ EDUCATION
 
         {/* Resume Scrollable Document Canvas (Always printed via @media print, visible on screen when viewMode === 'ats') */}
         <div
-          className={`resume-scroll-canvas flex-1 overflow-y-auto p-4 sm:p-8 bg-slate-100 ${
+          className={`resume-scroll-canvas flex-1 overflow-y-auto p-4 sm:p-8 bg-slate-50/80 ${
             viewMode === 'ats' ? 'block' : 'hidden print:block'
           }`}
         >

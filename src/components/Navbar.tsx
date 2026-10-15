@@ -1,5 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Terminal, FileDown, Send, Menu, X, Sparkles, Code2, Briefcase } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import {
+  Terminal,
+  FileDown,
+  Send,
+  Menu,
+  X,
+  Sparkles,
+  Code2,
+  Briefcase,
+  Clock,
+} from "lucide-react";
 
 interface NavbarProps {
   onOpenTerminal: () => void;
@@ -14,71 +24,109 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [currentTime, setCurrentTime] = useState<string>("");
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Live system clock updated dynamically every second
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date();
+      setCurrentTime(
+        now.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        }),
+      );
+    };
+    updateClock();
+    const timer = setInterval(updateClock, 1000);
+    return () => clearInterval(timer);
   }, []);
 
   const navLinks = [
-    { label: 'Journey', href: '#journey' },
-    { label: 'Architecture', href: '#architecture' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Experience', href: '#experience' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Research', href: '#research' },
-    { label: 'Education', href: '#education' },
-    { label: 'Contact', href: '#contact' },
+    { label: "About", href: "#intro" },
+    { label: "Journey", href: "#journey" },
+    { label: "Architecture", href: "#architecture" },
+    { label: "Projects", href: "#projects" },
+    { label: "Experience", href: "#experience" },
+    { label: "Skills", href: "#skills" },
+    { label: "Research", href: "#research" },
+    { label: "Education", href: "#education" },
+    { label: "Contact", href: "#contact" },
   ];
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 no-print ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-xl border-b-2 border-slate-200 py-3.5 sm:py-4 shadow-md shadow-slate-200/60'
-          : 'bg-transparent py-5 sm:py-6'
+          ? "bg-white/95 backdrop-blur-xl border-b-2 border-slate-200 py-3.5 sm:py-4 shadow-md shadow-slate-200/60"
+          : "bg-transparent py-5 sm:py-6"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand */}
-        <a
-          href="#"
-          className="group flex items-center gap-3.5 text-left focus:outline-none focus:ring-2 focus:ring-sky-500 rounded-2xl px-2.5 py-1.5 hover:bg-slate-100/70 transition-all"
-        >
-          <div className="relative w-10 h-10 rounded-2xl bg-gradient-to-br from-sky-500 via-indigo-600 to-purple-600 p-[2px] transition-transform duration-300 group-hover:scale-105 shadow-md shrink-0">
-            <div className="w-full h-full bg-white rounded-[14px] flex items-center justify-center font-mono font-black text-sky-700 text-sm">
-              ZI
-            </div>
-            <span className="absolute -top-1 -right-1 flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border-2 border-white"></span>
-            </span>
+        {/* Brand Area: Standalone Sui GIF (shifted left) + Clean Anchor */}
+        <div className="flex items-center gap-1.5 sm:gap-2 -ml-2 sm:-ml-4 lg:-ml-6 shrink-0">
+          {/* Sui One GIF (Positioned to the left of ZI, shifted into the left gutter) */}
+          <div
+            className={`transition-all duration-300 ease-out flex items-center justify-center shrink-0 ${
+              scrolled
+                ? "opacity-100 scale-100 max-w-[70px] sm:max-w-[85px] pointer-events-auto"
+                : "opacity-0 scale-75 max-w-0 pointer-events-none overflow-hidden"
+            }`}
+            title="Cristiano Ronaldo SIUUU Celebration"
+          >
+            <img
+              src="/images/sui%20one.gif"
+              alt="SIUUU"
+              className="h-16 sm:h-20 w-auto object-contain pointer-events-none select-none"
+            />
           </div>
-          <div>
-            <div className="flex items-center gap-2.5">
-              <span className="font-display font-black text-lg sm:text-xl tracking-tight text-slate-900 group-hover:text-sky-600 transition-colors">
-                Zafarali Inamdar
-              </span>
-              <span className="hidden sm:inline-block text-[10px] uppercase font-mono px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-900 border-2 border-sky-300 font-black shadow-sm">
-                v2026
+
+          <a
+            href="#"
+            className="group flex items-center gap-2.5 sm:gap-3 text-left focus:outline-none focus:ring-2 focus:ring-sky-500 rounded-2xl px-2 py-1.5 hover:bg-slate-100/70 transition-all shrink-0"
+          >
+            <div className="relative w-10 h-10 rounded-2xl bg-gradient-to-br from-sky-500 via-indigo-600 to-purple-600 p-[2px] transition-transform duration-300 group-hover:scale-105 shadow-md shrink-0">
+              <div className="w-full h-full bg-white rounded-[14px] flex items-center justify-center font-mono font-black text-sky-700 text-sm">
+                ZI
+              </div>
+              <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border-2 border-white"></span>
               </span>
             </div>
-            <p className="text-xs text-slate-600 font-mono tracking-wide font-bold">
-              Full Stack • Mobile • Gen-AI
-            </p>
-          </div>
-        </a>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="font-display font-black text-base sm:text-lg xl:text-xl tracking-tight text-slate-900 group-hover:text-sky-600 transition-colors">
+                  Zafarali Inamdar
+                </span>
+                <span className="hidden xl:inline-block text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-sky-100 text-sky-900 border-2 border-sky-300 font-black shadow-sm">
+                  v2026
+                </span>
+              </div>
+              <p className="text-[11px] sm:text-xs text-slate-600 font-mono tracking-wide font-bold">
+                Full Stack • Mobile • Gen-AI
+              </p>
+            </div>
+          </a>
+        </div>
 
         {/* Desktop Nav Links */}
-        <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+        <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-xs xl:text-sm font-bold text-slate-700 hover:text-sky-600 px-3 py-1.5 rounded-xl hover:bg-slate-100 transition-all"
+              className="text-xs xl:text-sm font-bold text-slate-700 hover:text-sky-600 px-2 xl:px-3 py-1.5 rounded-xl hover:bg-slate-100 transition-all whitespace-nowrap"
             >
               {link.label}
             </a>
@@ -86,7 +134,16 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* Right Action Buttons */}
-        <div className="hidden sm:flex items-center gap-2.5">
+        <div className="hidden sm:flex items-center gap-2 xl:gap-2.5">
+          {/* Live System Clock (FEAT-02) */}
+          <div
+            className="hidden 2xl:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100/90 border-2 border-slate-200/90 text-xs font-mono font-bold text-slate-800 shadow-2xs"
+            title="Local System Time"
+          >
+            <Clock className="w-3.5 h-3.5 text-sky-600 stroke-[2.5]" />
+            <span>{currentTime || "LIVE CLOCK"}</span>
+          </div>
+
           {/* Dev Mode Terminal Button */}
           <button
             onClick={onOpenTerminal}
@@ -96,7 +153,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <Terminal className="w-3.5 h-3.5 text-sky-600 group-hover:animate-pulse stroke-[2.5]" />
             <span>Dev CLI</span>
-            <span className="text-[10px] bg-sky-100 text-sky-800 px-1 rounded font-black">~</span>
+            <span className="text-[10px] bg-sky-100 text-sky-800 px-1 rounded font-black">
+              ~
+            </span>
           </button>
 
           {/* Quick 30s Pitch Deck for Recruiters */}
@@ -144,7 +203,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="p-2 rounded-lg bg-white text-slate-700 border border-slate-200 hover:text-slate-900 shadow-sm"
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? (
+              <X className="w-5 h-5" />
+            ) : (
+              <Menu className="w-5 h-5" />
+            )}
           </button>
         </div>
       </div>
@@ -152,6 +215,15 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white/98 border-b border-slate-200 px-4 pt-3 pb-6 space-y-3 shadow-xl">
+          {/* Mobile Live Clock */}
+          <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 text-xs font-mono font-bold text-slate-700">
+            <span className="flex items-center gap-1.5 text-sky-600">
+              <Clock className="w-3.5 h-3.5 stroke-[2.5]" />
+              <span>SYSTEM CLOCK</span>
+            </span>
+            <span className="text-slate-900">{currentTime || "LIVE"}</span>
+          </div>
+
           <div className="grid grid-cols-2 gap-2 pb-2">
             {navLinks.map((link) => (
               <a

@@ -40,10 +40,24 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
   };
 
   return (
-    <div data-lenis-prevent className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/60 backdrop-blur-md">
-      <div className="relative w-full max-w-4xl bg-white border-2 border-slate-300 rounded-3xl shadow-2xl flex flex-col max-h-[92vh] overflow-hidden">
+    <div
+      data-lenis-prevent
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+      className="fixed inset-0 z-[60] flex items-center justify-center p-0 sm:p-2.5 md:p-3.5 bg-slate-950/70 backdrop-blur-2xl transition-all"
+    >
+      {/* Generated Dynamic Ambient Glow Backdrop */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[550px] bg-gradient-to-b from-sky-500/25 via-blue-500/15 to-transparent rounded-full blur-3xl opacity-80" />
+      </div>
+
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full h-full sm:h-[98vh] max-w-6xl xl:max-w-7xl bg-white border-0 sm:border-2 border-slate-300/90 sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden"
+      >
         {/* Top Accent Line */}
-        <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 z-10" />
+        <div className="h-2 w-full bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 shrink-0" />
 
         {/* Header */}
         <div className="flex items-start justify-between p-5 sm:p-6 bg-slate-50 border-b-2 border-slate-200 mt-1 shrink-0">

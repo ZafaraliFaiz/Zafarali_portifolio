@@ -398,8 +398,22 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
   };
 
   return (
-    <div data-lenis-prevent className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md">
-      <div className="relative w-full max-w-3xl bg-[#070b14] border border-cyan-500/40 rounded-2xl shadow-2xl flex flex-col h-[80vh] max-h-[640px] overflow-hidden">
+    <div
+      data-lenis-prevent
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+      className="fixed inset-0 z-[60] flex items-center justify-center p-0 sm:p-3 md:p-4 bg-slate-950/80 backdrop-blur-2xl transition-all"
+    >
+      {/* Generated Dynamic Ambient Glow Backdrop */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-b from-cyan-500/20 via-sky-500/10 to-transparent rounded-full blur-3xl opacity-80" />
+      </div>
+
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full h-full sm:h-[90vh] max-w-4xl max-h-[760px] bg-[#070b14] border-0 sm:border border-cyan-500/40 sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+      >
         {/* Terminal Header */}
         <div className="flex items-center justify-between px-4 py-3 bg-[#0c1222] border-b border-cyan-500/20">
           <div className="flex items-center gap-2">

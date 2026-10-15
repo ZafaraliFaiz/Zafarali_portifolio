@@ -1,22 +1,38 @@
-import React, { useState } from 'react';
-import { BookOpen, Copy, Check, Sparkles, FileText, ExternalLink, Award, FileDown, CheckCircle2 } from 'lucide-react';
-import { RESEARCH_PAPER } from '../data/portfolioData';
-import { TiltCard } from './TiltCard';
-import { ScrollAssemble } from './animations/ScrollAssemble';
-import { ScrollFocusZoom } from './animations/ScrollFocusZoom';
+import React, { useState } from "react";
+import {
+  BookOpen,
+  Copy,
+  Check,
+  Sparkles,
+  FileText,
+  ExternalLink,
+  Award,
+  FileDown,
+  CheckCircle2,
+} from "lucide-react";
+import { RESEARCH_PAPER } from "../data/portfolioData";
+import { TiltCard } from "./TiltCard";
+import { ScrollAssemble } from "./animations/ScrollAssemble";
+import { ScrollFocusZoom } from "./animations/ScrollFocusZoom";
 
 export const ResearchPaperSection: React.FC = () => {
-  const [copiedType, setCopiedType] = useState<'apa' | 'bibtex' | null>(null);
+  const [copiedType, setCopiedType] = useState<"apa" | "bibtex" | null>(null);
 
-  const handleCopyCitation = (type: 'apa' | 'bibtex') => {
-    const text = type === 'apa' ? RESEARCH_PAPER.citationApa : RESEARCH_PAPER.citationBibtex;
+  const handleCopyCitation = (type: "apa" | "bibtex") => {
+    const text =
+      type === "apa"
+        ? RESEARCH_PAPER.citationApa
+        : RESEARCH_PAPER.citationBibtex;
     navigator.clipboard.writeText(text);
     setCopiedType(type);
     setTimeout(() => setCopiedType(null), 2000);
   };
 
   return (
-    <section id="research" className="py-24 px-4 sm:px-6 lg:px-8 relative z-10 scroll-mt-20 overflow-hidden">
+    <section
+      id="research"
+      className="py-24 px-4 sm:px-6 lg:px-8 relative z-10 scroll-mt-20 overflow-hidden"
+    >
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <ScrollAssemble direction="top" distance={35}>
@@ -26,23 +42,28 @@ export const ResearchPaperSection: React.FC = () => {
               <span>Academic Publication & Empirical Research</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight leading-none">
-              Peer-Reviewed{' '}
+              Peer-Reviewed{" "}
               <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 bg-clip-text text-transparent">
                 Gen-AI Research
               </span>
             </h2>
             <p className="text-slate-600 text-sm sm:text-base mt-4 font-medium leading-relaxed max-w-2xl mx-auto">
-              Bridging modern software engineering industry paradigms with academic empirical rigor, evaluating LLM integration and developer throughput.
+              Bridging modern software engineering industry paradigms with
+              academic empirical rigor, evaluating LLM integration and developer
+              throughput.
             </p>
           </div>
         </ScrollAssemble>
 
         {/* Paper Showcase Card */}
         <ScrollAssemble direction="bottom" distance={45}>
-          <ScrollFocusZoom maxScale={1.018} enableGlow glowColor="rgba(168, 85, 247, 0.2)">
+          <ScrollFocusZoom
+            maxScale={1.018}
+            enableGlow
+            glowColor="rgba(168, 85, 247, 0.2)"
+          >
             <TiltCard maxTilt={4} scale={1.01} glareOpacity={0.12}>
               <div className="bg-gradient-to-b from-white via-white to-slate-50/80 backdrop-blur-md p-7 sm:p-10 rounded-3xl border border-slate-200/90 shadow-xl relative overflow-hidden transition-all duration-300 hover:border-purple-400/80 hover:shadow-2xl hover:-translate-y-0.5 group">
-                
                 {/* Top Saturated Color Stripe */}
                 <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-600 transition-all duration-300 opacity-90 group-hover:opacity-100 group-hover:h-2" />
                 <div className="absolute top-0 right-0 w-80 h-80 bg-purple-200/20 rounded-full blur-3xl pointer-events-none" />
@@ -88,11 +109,17 @@ export const ResearchPaperSection: React.FC = () => {
                 {/* Authors & Journal */}
                 <div className="mt-3 flex flex-wrap items-center gap-4 text-xs sm:text-sm font-mono">
                   <div className="text-slate-600">
-                    Lead Author: <strong className="text-purple-700 font-black">{RESEARCH_PAPER.authors[0]}</strong>
+                    Lead Author:{" "}
+                    <strong className="text-purple-700 font-black">
+                      {RESEARCH_PAPER.authors[0]}
+                    </strong>
                   </div>
                   <span className="text-slate-300">•</span>
                   <div className="text-slate-600">
-                    Journal: <span className="text-slate-900 font-black">{RESEARCH_PAPER.journal}</span>
+                    Journal:{" "}
+                    <span className="text-slate-900 font-black">
+                      {RESEARCH_PAPER.journal}
+                    </span>
                   </div>
                 </div>
 
@@ -139,7 +166,9 @@ export const ResearchPaperSection: React.FC = () => {
                         </span>
                       </h4>
                       <p className="text-xs text-slate-300 mt-1 leading-relaxed max-w-xl font-medium">
-                        Get the complete published paper: empirical methodology, 35%+ productivity evaluations, LLM hallucination guardrails, and developer workflow benchmarks.
+                        Get the complete published paper: empirical methodology,
+                        35%+ productivity evaluations, LLM hallucination
+                        guardrails, and developer workflow benchmarks.
                       </p>
                       <div className="text-[11px] font-mono text-purple-300 mt-2 flex flex-wrap items-center gap-2 font-bold">
                         <span>File: 030117.pdf</span>
@@ -179,15 +208,16 @@ export const ResearchPaperSection: React.FC = () => {
                 {/* Citation Generator Buttons */}
                 <div className="mt-6 pt-5 border-t-2 border-slate-100 flex flex-wrap items-center justify-between gap-3">
                   <div className="text-xs font-mono text-slate-500 font-medium">
-                    Need to cite this paper in research or technical due diligence?
+                    Need to cite this paper in research or technical due
+                    diligence?
                   </div>
 
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={() => handleCopyCitation('apa')}
+                      onClick={() => handleCopyCitation("apa")}
                       className="px-3 py-1.5 rounded-xl border border-slate-200 hover:border-purple-400 bg-slate-50 hover:bg-white text-xs font-mono text-slate-700 font-bold transition-all flex items-center gap-1.5 active:scale-95"
                     >
-                      {copiedType === 'apa' ? (
+                      {copiedType === "apa" ? (
                         <>
                           <Check className="w-3.5 h-3.5 text-emerald-600" />
                           <span className="text-emerald-700">Copied APA!</span>
@@ -201,13 +231,15 @@ export const ResearchPaperSection: React.FC = () => {
                     </button>
 
                     <button
-                      onClick={() => handleCopyCitation('bibtex')}
+                      onClick={() => handleCopyCitation("bibtex")}
                       className="px-3 py-1.5 rounded-xl border border-slate-200 hover:border-purple-400 bg-slate-50 hover:bg-white text-xs font-mono text-slate-700 font-bold transition-all flex items-center gap-1.5 active:scale-95"
                     >
-                      {copiedType === 'bibtex' ? (
+                      {copiedType === "bibtex" ? (
                         <>
                           <Check className="w-3.5 h-3.5 text-emerald-600" />
-                          <span className="text-emerald-700">Copied BibTeX!</span>
+                          <span className="text-emerald-700">
+                            Copied BibTeX!
+                          </span>
                         </>
                       ) : (
                         <>
@@ -218,7 +250,6 @@ export const ResearchPaperSection: React.FC = () => {
                     </button>
                   </div>
                 </div>
-
               </div>
             </TiltCard>
           </ScrollFocusZoom>

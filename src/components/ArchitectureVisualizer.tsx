@@ -102,7 +102,7 @@ export const ArchitectureVisualizer: React.FC = () => {
       ([entry]) => {
         setIsSectionInView(entry.isIntersecting);
       },
-      { threshold: 0.15 }
+      { threshold: 0.15 },
     );
     observer.observe(sectionRef.current);
     return () => observer.disconnect();
@@ -353,7 +353,7 @@ export const ArchitectureVisualizer: React.FC = () => {
     <section
       id="architecture"
       ref={sectionRef}
-      className="py-20 px-4 sm:px-6 lg:px-8 relative z-10"
+      className="pt-16 pb-4 sm:pb-6 px-4 sm:px-6 lg:px-8 relative z-10"
     >
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
@@ -439,7 +439,7 @@ export const ArchitectureVisualizer: React.FC = () => {
 
         <ScrollFocusZoom maxScale={1.015}>
           <div
-            className="min-h-[860px] relative transition-[min-height] duration-300"
+            className="min-h-[560px] lg:min-h-[580px] relative transition-[min-height] duration-300"
             onPointerDown={registerUserActivity}
             onKeyDown={registerUserActivity}
           >
