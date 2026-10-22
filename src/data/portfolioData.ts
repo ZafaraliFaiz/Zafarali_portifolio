@@ -254,7 +254,10 @@ export const PROJECTS: Project[] = [
     ],
     demoType: "interactive-flow",
     imageUrl: "/images/projects/greentop-preview.jpg",
-    previewImages: ["/images/projects/greentop-preview.jpg"],
+    previewImages: [
+      "/images/projects/greentop-preview.jpg",
+      "/images/projects/agrostock-shop.png",
+    ],
   },
   {
     id: "email-translator",

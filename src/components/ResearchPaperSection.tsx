@@ -58,44 +58,44 @@ export const ResearchPaperSection: React.FC = () => {
         {/* Paper Showcase Card */}
         <ScrollAssemble direction="bottom" distance={45}>
           <ScrollFocusZoom
-            maxScale={1.018}
+            maxScale={1.012}
             enableGlow
-            glowColor="rgba(168, 85, 247, 0.2)"
+            glowColor="rgba(168, 85, 247, 0.12)"
           >
-            <TiltCard maxTilt={4} scale={1.01} glareOpacity={0.12}>
-              <div className="bg-gradient-to-b from-white via-white to-slate-50/80 backdrop-blur-md p-7 sm:p-10 rounded-3xl border border-slate-200/90 shadow-xl relative overflow-hidden transition-all duration-300 hover:border-purple-400/80 hover:shadow-2xl hover:-translate-y-0.5 group">
-                {/* Top Saturated Color Stripe */}
-                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-600 transition-all duration-300 opacity-90 group-hover:opacity-100 group-hover:h-2" />
-                <div className="absolute top-0 right-0 w-80 h-80 bg-purple-200/20 rounded-full blur-3xl pointer-events-none" />
+            <TiltCard maxTilt={3} scale={1.008} glareOpacity={0.06}>
+              <div className="bg-white/95 backdrop-blur-xl p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-[0_4px_24px_-6px_rgba(15,23,42,0.06)] relative overflow-hidden transition-all duration-300 hover:border-purple-300 hover:shadow-[0_16px_36px_-10px_rgba(15,23,42,0.12)] group">
+                {/* Hairline Accent */}
+                <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-purple-500 via-pink-400 to-indigo-500 transition-opacity duration-300 opacity-80 group-hover:opacity-100" />
+                <div className="absolute top-0 right-0 w-64 h-64 bg-purple-200/15 rounded-full blur-3xl pointer-events-none" />
 
                 {/* Meta header */}
-                <div className="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-slate-100 mt-1">
+                <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-100">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-xs font-mono px-3.5 py-1 rounded-full bg-purple-100/80 text-purple-900 border border-purple-300 font-extrabold flex items-center gap-1.5 shadow-2xs">
-                      <Award className="w-3.5 h-3.5 text-purple-700 stroke-[2.5]" />
+                    <span className="text-xs font-mono px-2.5 py-0.5 rounded-md bg-purple-50 text-purple-900 border border-purple-200/70 font-bold flex items-center gap-1.5 shadow-2xs">
+                      <Award className="w-3.5 h-3.5 text-purple-600 stroke-[2.2]" />
                       International Research Journal
                     </span>
-                    <span className="text-xs font-mono text-slate-500 font-bold bg-slate-100/80 px-2.5 py-1 rounded-xl border border-slate-200/70">
+                    <span className="text-xs font-mono text-slate-500 font-medium bg-slate-50 px-2.5 py-0.5 rounded-md border border-slate-200/60">
                       ISSN: {RESEARCH_PAPER.issn}
                     </span>
-                    <span className="text-xs font-mono text-slate-500 font-bold bg-slate-100/80 px-2.5 py-1 rounded-xl border border-slate-200/70">
+                    <span className="text-xs font-mono text-slate-500 font-medium bg-slate-50 px-2.5 py-0.5 rounded-md border border-slate-200/60">
                       {RESEARCH_PAPER.volume}, {RESEARCH_PAPER.page}
                     </span>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono text-purple-900 font-black bg-purple-50 px-3 py-1 rounded-xl border border-purple-200">
-                      Published: {RESEARCH_PAPER.year}
+                    <span className="text-xs font-mono text-purple-900 font-bold bg-purple-50 px-2.5 py-0.5 rounded-md border border-purple-200/60">
+                      {RESEARCH_PAPER.year}
                     </span>
                     <a
                       href={RESEARCH_PAPER.pdfUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       download="GenAI_Research_Paper_Inamdar_2026.pdf"
-                      className="inline-flex items-center gap-1.5 text-xs font-mono text-purple-900 bg-purple-100/80 hover:bg-purple-200 px-3.5 py-1 rounded-xl border border-purple-300 transition-all font-black shadow-2xs"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono text-purple-900 bg-purple-50 hover:bg-purple-100 px-3 py-1 rounded-md border border-purple-200 transition-all font-bold shadow-2xs active:scale-98"
                       title="Download official PDF from journal (030117.pdf)"
                     >
-                      <FileDown className="w-3.5 h-3.5 text-purple-700 stroke-[2.5]" />
+                      <FileDown className="w-3.5 h-3.5 text-purple-700 stroke-[2.2]" />
                       <span>PDF (030117.pdf)</span>
                     </a>
                   </div>

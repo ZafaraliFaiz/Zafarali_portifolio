@@ -280,145 +280,170 @@ export const Hero: React.FC<HeroProps> = ({
         >
           {/* Card 1: Enterprise Systems */}
           <TiltCard
-            maxTilt={8}
-            scale={1.02}
-            glareOpacity={0.14}
+            maxTilt={4}
+            scale={1.01}
+            glareOpacity={0.08}
             className="h-full"
           >
-            <div className="bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-3xl border-2 border-slate-200/90 text-center hover:border-sky-500 transition-all h-full flex flex-col justify-center shadow-lg hover:shadow-2xl hover:shadow-sky-500/15 group relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-500 opacity-80 group-hover:opacity-100 transition-opacity" />
-              <div className="w-10 h-10 rounded-2xl bg-sky-100/80 border border-sky-300 text-sky-700 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform shadow-2xs">
-                <Layers className="w-5 h-5 text-sky-600 stroke-[2.2]" />
+            <div className="bg-white/85 backdrop-blur-xl p-4 sm:p-5 rounded-2xl border border-slate-200/75 hover:border-sky-300 text-left transition-all duration-300 h-full flex flex-col justify-between shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-[0_16px_32px_-8px_rgba(15,23,42,0.1)] group relative overflow-hidden">
+              {/* Subtle Hairline Gradient Top */}
+              <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-sky-500 via-blue-500 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
+              
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-8 h-8 rounded-xl bg-sky-50/80 border border-sky-100 text-sky-700 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <Layers className="w-4 h-4 text-sky-600 stroke-[2.2]" />
+                </div>
+                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">
+                  PROD // B2B
+                </span>
               </div>
-              <div className="text-2xl sm:text-3xl font-black font-display text-sky-600 flex items-center justify-center">
-                <AnimatedCounter from={0} to={3} duration={1800} suffix="+" />
-              </div>
-              <div className="text-xs font-bold text-slate-900 mt-1">
-                Enterprise Systems
-              </div>
-              <div className="text-[11px] text-slate-500 font-medium truncate">
-                AgroStock, Greentop &amp; TAIN
+
+              <div>
+                <div className="text-2xl sm:text-3xl font-black font-display text-slate-900 group-hover:text-sky-600 transition-colors flex items-center">
+                  <AnimatedCounter from={0} to={3} duration={1800} suffix="+" />
+                </div>
+                <div className="text-xs font-bold text-slate-800 mt-0.5">
+                  Enterprise Systems
+                </div>
+                <div className="text-[11px] text-slate-500 font-mono mt-0.5 truncate">
+                  AgroStock, Greentop &amp; TAIN
+                </div>
               </div>
             </div>
           </TiltCard>
 
           {/* Card 2: Double 9.05 CGPA */}
           <TiltCard
-            maxTilt={8}
-            scale={1.02}
-            glareOpacity={0.14}
+            maxTilt={4}
+            scale={1.01}
+            glareOpacity={0.08}
             className="h-full"
           >
-            <div className="bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-3xl border-2 border-slate-200/90 text-center hover:border-emerald-500 transition-all h-full flex flex-col justify-center shadow-lg hover:shadow-2xl hover:shadow-emerald-500/15 group relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-400 via-teal-500 to-cyan-500 opacity-80 group-hover:opacity-100 transition-opacity" />
-              <div className="w-10 h-10 rounded-2xl bg-emerald-100/80 border border-emerald-300 text-emerald-700 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform shadow-2xs">
-                <GraduationCap className="w-5 h-5 text-emerald-600 stroke-[2.2]" />
+            <div className="bg-white/85 backdrop-blur-xl p-4 sm:p-5 rounded-2xl border border-slate-200/75 hover:border-emerald-300 text-left transition-all duration-300 h-full flex flex-col justify-between shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-[0_16px_32px_-8px_rgba(15,23,42,0.1)] group relative overflow-hidden">
+              {/* Subtle Hairline Gradient Top */}
+              <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-emerald-500 via-teal-400 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
+
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-8 h-8 rounded-xl bg-emerald-50/80 border border-emerald-100 text-emerald-700 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <GraduationCap className="w-4 h-4 text-emerald-600 stroke-[2.2]" />
+                </div>
+                <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60 font-bold">
+                  GOLD MEDAL
+                </span>
               </div>
-              <div className="text-2xl sm:text-3xl font-black font-display text-emerald-600 flex items-center justify-center">
-                <AnimatedCounter
-                  from={0}
-                  to={9.05}
-                  decimals={2}
-                  duration={2200}
-                />
-              </div>
-              <div className="text-xs font-bold text-slate-900 mt-1">
-                Double 9.05 CGPA
-              </div>
-              <div className="text-[11px] text-slate-500 font-medium truncate">
-                M.Sc. &amp; B.Sc. Comp Sci
+
+              <div>
+                <div className="text-2xl sm:text-3xl font-black font-display text-slate-900 group-hover:text-emerald-600 transition-colors flex items-center">
+                  <AnimatedCounter
+                    from={0}
+                    to={9.05}
+                    decimals={2}
+                    duration={2200}
+                  />
+                  <span className="text-xs font-mono text-slate-400 ml-1.5 font-bold">CGPA</span>
+                </div>
+                <div className="text-xs font-bold text-slate-800 mt-0.5">
+                  Double 9.05 CGPA
+                </div>
+                <div className="text-[11px] text-slate-500 font-mono mt-0.5 truncate">
+                  M.Sc. &amp; B.Sc. SPPU Pune
+                </div>
               </div>
             </div>
           </TiltCard>
 
           {/* Card 3: Published Research Paper */}
           <TiltCard
-            maxTilt={8}
-            scale={1.02}
-            glareOpacity={0.14}
+            maxTilt={4}
+            scale={1.01}
+            glareOpacity={0.08}
             className="h-full"
           >
             <a
               href="#research"
-              className="bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-3xl border-2 border-slate-200/90 text-center hover:border-purple-500 hover:bg-purple-50/20 transition-all block group h-full flex flex-col justify-center shadow-lg hover:shadow-2xl hover:shadow-purple-500/15 relative overflow-hidden"
+              className="bg-white/85 backdrop-blur-xl p-4 sm:p-5 rounded-2xl border border-slate-200/75 hover:border-purple-300 text-left transition-all duration-300 block group h-full flex flex-col justify-between shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-[0_16px_32px_-8px_rgba(15,23,42,0.1)] relative overflow-hidden"
               title="Read published research & download paper PDF"
             >
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-400 via-pink-500 to-indigo-500 opacity-80 group-hover:opacity-100 transition-opacity" />
-              <div className="w-10 h-10 rounded-2xl bg-purple-100/80 border border-purple-300 text-purple-700 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-2xs">
-                <Cpu className="w-5 h-5 text-purple-600 stroke-[2.2]" />
+              {/* Subtle Hairline Gradient Top */}
+              <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-purple-500 via-pink-400 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
+
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-8 h-8 rounded-xl bg-purple-50/80 border border-purple-100 text-purple-700 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <Cpu className="w-4 h-4 text-purple-600 stroke-[2.2]" />
+                </div>
+                <span className="text-[10px] font-mono uppercase tracking-wider text-purple-700 bg-purple-50 px-2 py-0.5 rounded-full border border-purple-200/60 font-bold">
+                  PEER-REVIEWED
+                </span>
               </div>
-              <div className="text-2xl sm:text-3xl font-black font-display text-purple-600 flex items-center justify-center">
-                <AnimatedCounter
-                  from={0}
-                  to={1}
-                  duration={1400}
-                  suffix=" Paper"
-                />
-              </div>
-              <div className="text-xs font-bold text-slate-900 mt-1">
-                Published Research
-              </div>
-              <div className="text-[11px] text-purple-700 font-bold flex items-center justify-center gap-1">
-                <span>Read &amp; Download PDF</span>
-                <ExternalLink className="w-2.5 h-2.5" />
+
+              <div>
+                <div className="text-2xl sm:text-3xl font-black font-display text-slate-900 group-hover:text-purple-600 transition-colors flex items-center">
+                  <AnimatedCounter
+                    from={0}
+                    to={1}
+                    duration={1400}
+                    suffix=" Paper"
+                  />
+                </div>
+                <div className="text-xs font-bold text-slate-800 mt-0.5">
+                  Published Gen-AI Paper
+                </div>
+                <div className="text-[11px] text-purple-700 font-mono mt-0.5 flex items-center gap-1 font-semibold">
+                  <span>Read Paper PDF</span>
+                  <ExternalLink className="w-2.5 h-2.5" />
+                </div>
               </div>
             </a>
           </TiltCard>
 
           {/* Card 4: Interactive Live Store Release Card */}
           <TiltCard
-            maxTilt={8}
-            scale={1.02}
-            glareOpacity={0.14}
+            maxTilt={4}
+            scale={1.01}
+            glareOpacity={0.08}
             className="h-full"
           >
             <div
               onClick={() => setIsStoreModalOpen(true)}
-              className="bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-3xl border-2 border-slate-200/90 text-center hover:border-blue-500 transition-all h-full flex flex-col justify-between shadow-lg hover:shadow-2xl hover:shadow-blue-500/15 group cursor-pointer relative overflow-hidden"
+              className="bg-white/85 backdrop-blur-xl p-4 sm:p-5 rounded-2xl border border-slate-200/75 hover:border-blue-300 text-left transition-all duration-300 h-full flex flex-col justify-between shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-[0_16px_32px_-8px_rgba(15,23,42,0.1)] group cursor-pointer relative overflow-hidden"
               title="Click to view verified store builds & downloads"
             >
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-sky-500 to-emerald-500 opacity-80 group-hover:opacity-100 transition-opacity" />
+              {/* Subtle Hairline Gradient Top */}
+              <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-blue-500 via-sky-400 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
 
-              {/* Header with live pulsing beacon */}
-              <div className="flex items-center justify-between mb-1">
-                <div className="w-9 h-9 rounded-2xl bg-blue-100/80 border border-blue-300 text-blue-700 flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xs">
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-8 h-8 rounded-xl bg-blue-50/80 border border-blue-100 text-blue-700 flex items-center justify-center group-hover:scale-105 transition-transform">
                   <Smartphone className="w-4 h-4 text-blue-600 stroke-[2.2]" />
                 </div>
-                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-300 text-[10px] font-mono text-emerald-800 font-bold shadow-2xs">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
-                  <span>LIVE IN PROD</span>
+                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/60 text-[10px] font-mono text-emerald-800 font-bold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>STORES LIVE</span>
                 </div>
               </div>
 
-              {/* Dynamic Counter & Store Icons */}
-              <div className="my-1">
-                <div className="text-xl sm:text-2xl font-black font-display text-blue-600 flex items-center justify-center gap-1">
+              <div>
+                <div className="text-2xl sm:text-3xl font-black font-display text-slate-900 group-hover:text-blue-600 transition-colors flex items-center gap-1.5">
                   <AnimatedCounter
                     from={0}
                     to={650}
                     duration={2000}
                     suffix="+"
                   />
-                  <span className="text-sm font-sans font-bold text-slate-700">
+                  <span className="text-xs font-mono font-bold text-slate-400">
                     Agents
                   </span>
                 </div>
-
-                {/* Store Platform Badges */}
-                <div className="flex items-center justify-center gap-1.5 mt-1">
-                  <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-900 text-white text-[10px] font-mono font-bold">
+                <div className="text-xs font-bold text-slate-800 mt-0.5">
+                  Production Mobile App
+                </div>
+                <div className="flex items-center gap-1.5 mt-1">
+                  <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[10px] font-mono font-bold border border-slate-200/60">
                     <AppleIcon className="w-2.5 h-2.5" /> iOS
                   </span>
-                  <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-300 text-[10px] font-mono font-bold">
+                  <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[10px] font-mono font-bold border border-slate-200/60">
                     <GooglePlayIcon className="w-2.5 h-2.5" /> Play
                   </span>
                 </div>
-              </div>
-
-              {/* Action hint */}
-              <div className="text-[11px] font-mono text-blue-600 font-bold group-hover:underline flex items-center justify-center gap-1 mt-1 pt-1 border-t border-slate-100">
-                <span>Inspect Releases</span>
-                <ExternalLink className="w-2.5 h-2.5 stroke-[2.5]" />
               </div>
             </div>
           </TiltCard>
