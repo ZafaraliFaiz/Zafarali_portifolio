@@ -288,7 +288,7 @@ export const Hero: React.FC<HeroProps> = ({
             <div className="bg-white/85 backdrop-blur-xl p-4 sm:p-5 rounded-2xl border border-slate-200/75 hover:border-sky-300 text-left transition-all duration-300 h-full flex flex-col justify-between shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-[0_16px_32px_-8px_rgba(15,23,42,0.1)] group relative overflow-hidden">
               {/* Subtle Hairline Gradient Top */}
               <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-sky-500 via-blue-500 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
-              
+
               <div className="flex items-center justify-between mb-3">
                 <div className="w-8 h-8 rounded-xl bg-sky-50/80 border border-sky-100 text-sky-700 flex items-center justify-center group-hover:scale-105 transition-transform">
                   <Layers className="w-4 h-4 text-sky-600 stroke-[2.2]" />
@@ -340,7 +340,9 @@ export const Hero: React.FC<HeroProps> = ({
                     decimals={2}
                     duration={2200}
                   />
-                  <span className="text-xs font-mono text-slate-400 ml-1.5 font-bold">CGPA</span>
+                  <span className="text-xs font-mono text-slate-400 ml-1.5 font-bold">
+                    CGPA
+                  </span>
                 </div>
                 <div className="text-xs font-bold text-slate-800 mt-0.5">
                   Double 9.05 CGPA
@@ -417,7 +419,7 @@ export const Hero: React.FC<HeroProps> = ({
                 </div>
                 <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/60 text-[10px] font-mono text-emerald-800 font-bold">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>STORES LIVE</span>
+                  <span>AGENTS LIVE</span>
                 </div>
               </div>
 
