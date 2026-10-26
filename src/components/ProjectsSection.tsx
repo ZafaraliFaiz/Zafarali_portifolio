@@ -36,7 +36,6 @@ import { ScrollAssemble } from "./animations/ScrollAssemble";
 import { ScrollFocusZoom } from "./animations/ScrollFocusZoom";
 import { ProjectCardFlip } from "./ui/ProjectCardFlip";
 import { StackingSlider } from "./ui/StackingSlider";
-import { ParallaxCarousel } from "./ui/ParallaxCarousel";
 
 interface ProjectsSectionProps {
   onSelectProject: (project: Project) => void;
@@ -77,9 +76,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     "projects" | "credentials" | "tech-stack"
   >("projects");
 
-  // Showcasing Template Mode: Card Deck Flip | Stacking Slider | Parallax Carousel | Architectural Grid
+  // Showcasing Template Mode: Card Deck Flip | Stacking Slider | Architectural Grid
   const [templateMode, setTemplateMode] = useState<
-    "deck-flip" | "stacking" | "parallax" | "grid"
+    "deck-flip" | "stacking" | "grid"
   >("deck-flip");
 
   // Master Flip State for 3D Deck Flip
@@ -212,13 +211,13 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         {/* Section Header */}
         <ScrollAssemble direction="top" distance={35}>
           <div className="text-center max-w-3xl mx-auto mb-10">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 text-sky-400 border border-sky-500/30 text-xs font-mono uppercase tracking-wider mb-3 font-bold shadow-md shadow-sky-500/10">
-              <FolderGit2 className="w-4 h-4 text-sky-400 stroke-[2.5]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0] text-xs font-mono uppercase tracking-wider mb-3 font-bold shadow-sm">
+              <FolderGit2 className="w-4 h-4 text-[#059669] stroke-[2.5]" />
               <span>Production Systems &amp; Technical Showcase</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight leading-none">
               Engineering{" "}
-              <span className="bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#059669] via-[#10B981] to-[#E34234] bg-clip-text text-transparent">
                 Portfolio Showcase
               </span>
             </h2>
@@ -233,7 +232,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             <div
               role="tablist"
               aria-label="Portfolio Showcase Views"
-              className="inline-flex items-center p-1.5 rounded-2xl bg-white/95 border border-slate-200/90 shadow-md backdrop-blur-md gap-1.5 max-w-full overflow-x-auto"
+              className="inline-flex items-center p-1.5 rounded-2xl bg-[#FFFDF9] border border-[#EADBCA] shadow-md backdrop-blur-md gap-1.5 max-w-full overflow-x-auto"
             >
               <button
                 role="tab"
@@ -243,11 +242,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 onClick={() => setShowcaseTab("projects")}
                 className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-black transition-all ${
                   showcaseTab === "projects"
-                    ? "bg-slate-900 text-white shadow-md shadow-slate-900/20 scale-[1.02]"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                    ? "bg-gradient-to-r from-[#059669] to-[#047857] text-white shadow-md shadow-emerald-600/25 scale-[1.02]"
+                    : "text-stone-600 hover:text-[#065F46] hover:bg-[#FAF3E7]"
                 }`}
               >
-                <FolderGit2 className="w-4 h-4 text-sky-400" />
+                <FolderGit2 className="w-4 h-4 text-white" />
                 <span>Projects ({PROJECTS.length})</span>
               </button>
 
@@ -259,11 +258,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 onClick={() => setShowcaseTab("credentials")}
                 className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-black transition-all ${
                   showcaseTab === "credentials"
-                    ? "bg-purple-900 text-white shadow-md shadow-purple-900/20 scale-[1.02]"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                    ? "bg-gradient-to-r from-[#059669] to-[#047857] text-white shadow-md shadow-emerald-600/25 scale-[1.02]"
+                    : "text-stone-600 hover:text-[#065F46] hover:bg-[#FAF3E7]"
                 }`}
               >
-                <Award className="w-4 h-4 text-purple-400" />
+                <Award className="w-4 h-4" />
                 <span>Credentials &amp; Research</span>
               </button>
 
@@ -275,11 +274,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 onClick={() => setShowcaseTab("tech-stack")}
                 className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-black transition-all ${
                   showcaseTab === "tech-stack"
-                    ? "bg-sky-900 text-white shadow-md shadow-sky-900/20 scale-[1.02]"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                    ? "bg-gradient-to-r from-[#059669] to-[#047857] text-white shadow-md shadow-emerald-600/25 scale-[1.02]"
+                    : "text-stone-600 hover:text-[#065F46] hover:bg-[#FAF3E7]"
                 }`}
               >
-                <Code2 className="w-4 h-4 text-sky-400" />
+                <Code2 className="w-4 h-4" />
                 <span>Tech Stack ({allSkills.length})</span>
               </button>
             </div>
@@ -295,7 +294,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             className="space-y-6 animate-fadeIn"
           >
             {/* Template Selector & Category Filter Toolbar */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-3 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-sm">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-3 rounded-2xl bg-[#FFFDF9] backdrop-blur-md border border-[#EADBCA] shadow-sm">
               {/* Category Filter Pills */}
               <div className="flex flex-wrap items-center justify-center gap-1.5">
                 {categories.map((cat) => (
@@ -304,8 +303,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     onClick={() => setFilter(cat)}
                     className={`px-3 py-1.5 rounded-xl text-xs font-mono transition-all font-semibold ${
                       filter === cat
-                        ? "bg-sky-600 text-white shadow-xs scale-[1.02]"
-                        : "bg-slate-50 text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200/70"
+                        ? "bg-[#059669] text-white shadow-xs scale-[1.02]"
+                        : "bg-[#FAF3E7] text-stone-600 hover:text-stone-900 hover:bg-[#F5ECE0] border border-[#EADBCA]"
                     }`}
                   >
                     {cat}
@@ -314,17 +313,17 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               </div>
 
               {/* Showcasing Template Mode Switcher */}
-              <div className="flex items-center gap-1 p-1 rounded-xl bg-slate-100/90 border border-slate-200/80 overflow-x-auto self-stretch md:self-auto justify-center">
+              <div className="flex items-center gap-1 p-1 rounded-xl bg-[#FAF3E7] border border-[#EADBCA] overflow-x-auto self-stretch md:self-auto justify-center">
                 <button
                   onClick={() => setTemplateMode("deck-flip")}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all whitespace-nowrap ${
                     templateMode === "deck-flip"
-                      ? "bg-white text-slate-900 shadow-xs border border-slate-200/60"
-                      : "text-slate-600 hover:text-slate-900"
+                      ? "bg-[#FFFDF9] text-stone-900 shadow-xs border border-[#EADBCA]"
+                      : "text-stone-600 hover:text-stone-900"
                   }`}
                   title="Card Deck Flip: 3D interactive flip revealing architectural blueprints"
                 >
-                  <RotateCcw className="w-3.5 h-3.5 text-sky-600" />
+                  <RotateCcw className="w-3.5 h-3.5 text-[#059669]" />
                   <span>3D Deck Flip</span>
                 </button>
 
@@ -332,38 +331,25 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                   onClick={() => setTemplateMode("stacking")}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all whitespace-nowrap ${
                     templateMode === "stacking"
-                      ? "bg-white text-slate-900 shadow-xs border border-slate-200/60"
-                      : "text-slate-600 hover:text-slate-900"
+                      ? "bg-[#FFFDF9] text-stone-900 shadow-xs border border-[#EADBCA]"
+                      : "text-stone-600 hover:text-stone-900"
                   }`}
                   title="Stacking Slider: 3D stacked cards with swipe depth"
                 >
-                  <Layers className="w-3.5 h-3.5 text-indigo-600" />
+                  <Layers className="w-3.5 h-3.5 text-[#047857]" />
                   <span>Stacking Deck</span>
-                </button>
-
-                <button
-                  onClick={() => setTemplateMode("parallax")}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all whitespace-nowrap ${
-                    templateMode === "parallax"
-                      ? "bg-white text-slate-900 shadow-xs border border-slate-200/60"
-                      : "text-slate-600 hover:text-slate-900"
-                  }`}
-                  title="Parallax Interaction Carousel: Horizontal perspective track"
-                >
-                  <Compass className="w-3.5 h-3.5 text-purple-600" />
-                  <span>Parallax Carousel</span>
                 </button>
 
                 <button
                   onClick={() => setTemplateMode("grid")}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all whitespace-nowrap ${
                     templateMode === "grid"
-                      ? "bg-white text-slate-900 shadow-xs border border-slate-200/60"
-                      : "text-slate-600 hover:text-slate-900"
+                      ? "bg-[#FFFDF9] text-stone-900 shadow-xs border border-[#EADBCA]"
+                      : "text-stone-600 hover:text-stone-900"
                   }`}
                   title="Architectural Grid: Standard multi-column overview"
                 >
-                  <LayoutGrid className="w-3.5 h-3.5 text-emerald-600" />
+                  <LayoutGrid className="w-3.5 h-3.5 text-[#059669]" />
                   <span>Grid</span>
                 </button>
               </div>
@@ -381,34 +367,38 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               </div>
             )}
 
-            {/* TEMPLATE 2: PARALLAX INTERACTION CAROUSEL */}
-            {templateMode === "parallax" && (
-              <div className="py-2 animate-fadeIn">
-                <ParallaxCarousel
-                  projects={filteredProjects}
-                  getCategoryTheme={getCategoryTheme}
-                  getProjectTheme={getProjectTheme}
-                  onSelectProject={onSelectProject}
-                />
-              </div>
-            )}
-
-            {/* TEMPLATE 3 & 4: CARD DECK FLIP & ARCHITECTURAL GRID */}
+            {/* TEMPLATE 2 & 3: CARD DECK FLIP & ARCHITECTURAL GRID */}
             {(templateMode === "deck-flip" || templateMode === "grid") && (
               <div className="space-y-4 animate-fadeIn">
                 {/* Deck Flip Quick Master Controls */}
                 {templateMode === "deck-flip" && (
-                  <div className="flex items-center justify-between px-2 pt-1 text-xs font-mono">
-                    <span className="text-slate-500 flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                      <span>Every card is interactive with 3D 180° Flip: Front = Live Product Carousel | Back = System Blueprint</span>
+                  <div className="flex flex-wrap items-center justify-between gap-3 px-3.5 py-2.5 rounded-2xl bg-white border border-slate-200/90 shadow-xs text-xs font-mono">
+                    <span className="text-slate-600 font-semibold flex items-center gap-2">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-600" />
+                      </span>
+                      <span>
+                        {masterFlip
+                          ? "Architecture Blueprints Active (Showing Backend / Flow / Specs)"
+                          : "Live Product Showcases (Showing Front Interfaces & Carousels)"}
+                      </span>
                     </span>
                     <button
                       onClick={() => setMasterFlip((prev) => !prev)}
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-slate-900 hover:bg-sky-600 text-white font-mono text-xs font-semibold transition-all shadow-xs active:scale-95"
+                      className={`group relative inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl font-mono text-xs font-bold transition-all shadow-xs active:scale-95 ${
+                        masterFlip
+                          ? "bg-sky-600 hover:bg-sky-500 text-white shadow-sky-600/25 ring-2 ring-sky-300"
+                          : "bg-slate-900 hover:bg-slate-800 text-white shadow-slate-900/10"
+                      }`}
+                      title={masterFlip ? "Flip all cards back to product showcase" : "Flip all cards in 3D to reveal architecture blueprints"}
                     >
-                      <RotateCcw className="w-3.5 h-3.5" />
-                      <span>{masterFlip ? "Flip All to Product" : "Flip All to Blueprint"}</span>
+                      <RotateCcw
+                        className={`w-3.5 h-3.5 transition-transform duration-700 ease-out ${
+                          masterFlip ? "-rotate-180 text-sky-200" : "text-sky-400 group-hover:-rotate-90"
+                        }`}
+                      />
+                      <span>{masterFlip ? "Flip All to Product View" : "Flip All to Blueprint"}</span>
                     </button>
                   </div>
                 )}
@@ -427,11 +417,12 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                         className="h-full"
                       >
                         <ProjectCardFlip
-                          key={`${project.id}-${masterFlip}`}
+                          key={project.id}
                           project={project}
                           theme={theme}
                           onSelectProject={onSelectProject}
                           defaultFlipped={masterFlip}
+                          flipDelay={idx * 75}
                           className="h-full"
                         />
                       </ScrollAssemble>
@@ -452,14 +443,14 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             className="space-y-6 animate-fadeIn"
           >
             {/* Gen-AI Research Publication Card */}
-            <div className="p-6 sm:p-8 rounded-2xl bg-white/95 border border-purple-200/80 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.06)] relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-600" />
-              <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
-                <span className="text-xs font-mono px-3 py-0.5 rounded-full bg-purple-50 text-purple-900 border border-purple-200/80 font-bold flex items-center gap-1.5">
-                  <Award className="w-3.5 h-3.5 text-purple-700 stroke-[2.2]" />
+            <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] border border-[#EADBCA] shadow-[0_8px_30px_-6px_rgba(180,120,60,0.08)] relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#059669] via-[#10B981] to-[#E34234]" />
+              <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[#EADBCA]/70">
+                <span className="text-xs font-mono px-3 py-0.5 rounded-full bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0] font-bold flex items-center gap-1.5">
+                  <Award className="w-3.5 h-3.5 text-[#059669] stroke-[2.2]" />
                   <span>Peer-Reviewed Publication • {RESEARCH_PAPER.year}</span>
                 </span>
-                <span className="text-xs font-mono font-bold text-slate-500 bg-slate-50 px-2.5 py-0.5 rounded-md border border-slate-200/60">
+                <span className="text-xs font-mono font-bold text-[#78350F] bg-[#FAF3E7] px-2.5 py-0.5 rounded-md border border-[#EADBCA]">
                   ISSN: {RESEARCH_PAPER.issn}
                 </span>
               </div>
@@ -467,21 +458,21 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               <h3 className="text-xl sm:text-2xl font-black font-display text-slate-900 mt-4 leading-snug">
                 &ldquo;{RESEARCH_PAPER.title}&rdquo;
               </h3>
-              <p className="text-xs sm:text-sm font-mono text-purple-700 font-bold mt-1">
+              <p className="text-xs sm:text-sm font-mono text-[#059669] font-bold mt-1">
                 Journal: {RESEARCH_PAPER.journal} ({RESEARCH_PAPER.volume},{" "}
                 {RESEARCH_PAPER.page})
               </p>
 
-              <p className="text-slate-700 text-sm mt-3 leading-relaxed font-medium">
+              <p className="text-stone-700 text-sm mt-3 leading-relaxed font-medium">
                 {RESEARCH_PAPER.abstract}
               </p>
 
-              <div className="flex flex-wrap gap-3 mt-5 pt-3 border-t border-slate-100">
+              <div className="flex flex-wrap gap-3 mt-5 pt-3 border-t border-[#EADBCA]/70">
                 <a
                   href={RESEARCH_PAPER.pdfUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 text-white font-mono font-semibold text-xs shadow-sm hover:bg-purple-700 transition-all active:scale-98"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#059669] via-[#047857] to-[#E34234] text-white font-mono font-semibold text-xs shadow-md shadow-emerald-600/25 hover:brightness-105 transition-all active:scale-98"
                 >
                   <FileDown className="w-4 h-4 stroke-[2.2]" />
                   <span>Download Published Paper (PDF)</span>
@@ -494,25 +485,25 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               {EDUCATION_LIST.map((edu, idx) => (
                 <div
                   key={idx}
-                  className="p-5 sm:p-6 rounded-2xl bg-white/95 border border-slate-200/80 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.05)] flex flex-col justify-between"
+                  className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] border border-[#EADBCA] shadow-[0_8px_24px_-6px_rgba(180,120,60,0.08)] hover:border-[#059669] flex flex-col justify-between transition-all"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-2.5">
-                      <span className="text-xs font-mono font-bold text-slate-400">
+                      <span className="text-xs font-mono font-bold text-stone-500">
                         {edu.year}
                       </span>
-                      <span className="text-xs font-mono font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200/80">
+                      <span className="text-xs font-mono font-bold text-[#065F46] bg-[#ECFDF5] px-2.5 py-0.5 rounded-md border border-[#A7F3D0]">
                         {edu.scoreType}: {edu.score}
                       </span>
                     </div>
                     <h4 className="text-lg font-black font-display text-slate-900">
                       {edu.degree}
                     </h4>
-                    <p className="text-xs font-medium text-slate-500 mt-0.5">
+                    <p className="text-xs font-medium text-stone-500 mt-0.5">
                       {edu.institution}, {edu.location}
                     </p>
                   </div>
-                  <p className="text-xs text-slate-600 mt-3 font-mono pt-2 border-t border-slate-100">
+                  <p className="text-xs text-stone-600 mt-3 font-mono pt-2 border-t border-[#EADBCA]/70">
                     {edu.notes}
                   </p>
                 </div>
@@ -530,14 +521,14 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             className="space-y-6 animate-fadeIn"
           >
             {/* Header Count */}
-            <div className="flex items-center justify-between pb-3 border-b border-slate-200">
-              <span className="text-xs sm:text-sm font-mono font-black text-slate-800 uppercase tracking-wider flex items-center gap-2">
-                <Code2 className="w-4 h-4 text-sky-600" />
+            <div className="flex items-center justify-between pb-3 border-b border-[#EADBCA]">
+              <span className="text-xs sm:text-sm font-mono font-black text-stone-800 uppercase tracking-wider flex items-center gap-2">
+                <Code2 className="w-4 h-4 text-[#059669]" />
                 <span>
                   {allSkills.length} TECHNOLOGIES · DAILY PRODUCTION STACK
                 </span>
               </span>
-              <span className="text-xs font-mono text-slate-500 font-bold hidden sm:inline">
+              <span className="text-xs font-mono text-stone-500 font-bold hidden sm:inline">
                 Hover to illuminate brand radial glow
               </span>
             </div>
@@ -552,7 +543,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                       "--tech-glow-color": skill.brandColor,
                     } as React.CSSProperties
                   }
-                  className="relative p-3.5 rounded-xl bg-white border border-slate-200/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group overflow-hidden flex flex-col justify-between"
+                  className="relative p-3.5 rounded-xl bg-gradient-to-br from-[#FFFDF9] to-[#FAF5EB] border border-[#EADBCA] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group overflow-hidden flex flex-col justify-between"
                 >
                   {/* Radial Spotlight Gradient (FEAT-07) */}
                   <div
@@ -578,7 +569,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                           borderColor: "#ffffff",
                         }}
                       />
-                      <span className="text-[10px] font-mono font-bold text-slate-500">
+                      <span className="text-[10px] font-mono font-bold text-stone-500">
                         {skill.level}%
                       </span>
                     </div>
@@ -586,13 +577,13 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     <h4 className="text-xs sm:text-sm font-black font-display text-slate-900 group-hover:text-slate-950 transition-colors leading-tight">
                       {skill.name}
                     </h4>
-                    <span className="text-[10px] font-mono text-slate-500 truncate block mt-0.5">
+                    <span className="text-[10px] font-mono text-stone-500 truncate block mt-0.5">
                       {skill.categoryName}
                     </span>
                   </div>
 
                   {/* Level Progress Bar in Brand Color */}
-                  <div className="relative z-10 w-full h-1.5 bg-slate-100 rounded-full overflow-hidden mt-3">
+                  <div className="relative z-10 w-full h-1.5 bg-[#FAF1E3] border border-[#EADFCB]/60 rounded-full overflow-hidden mt-3">
                     <div
                       className="h-full rounded-full transition-all duration-500"
                       style={{

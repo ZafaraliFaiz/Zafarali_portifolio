@@ -277,22 +277,22 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             {/* ======================================================== */}
             <div className="w-[86vw] max-w-[900px] min-w-[320px] shrink-0">
               <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06}>
-                <div className="relative rounded-2xl bg-white/95 backdrop-blur-xl border border-slate-200/75 hover:border-slate-300 shadow-[0_4px_24px_-4px_rgba(15,23,42,0.06),0_1px_3px_rgba(15,23,42,0.04)] hover:shadow-[0_20px_40px_-12px_rgba(15,23,42,0.12)] overflow-hidden transition-all duration-300 group">
-                  {/* Slender Top Gradient Hairline */}
-                  <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-emerald-500/80 via-teal-400/60 to-transparent" />
-                  <div className="absolute -top-16 -right-16 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
+                <div className="relative rounded-2xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] backdrop-blur-xl border border-[#EADBCA] hover:border-[#059669] shadow-[0_8px_30px_-6px_rgba(180,120,60,0.08),0_1px_3px_rgba(180,120,60,0.04)] hover:shadow-[0_20px_45px_-10px_rgba(5,150,105,0.16)] overflow-hidden transition-all duration-300 group">
+                  {/* Top Specular Dual Hairline: Emerald to Vermillion */}
+                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#059669] via-[#10B981] to-[#E34234] opacity-90 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute -top-16 -right-16 w-64 h-64 bg-[#059669]/5 rounded-full blur-3xl pointer-events-none" />
 
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-7 items-center">
                     {/* Left Column: Narrative & Credentials */}
                     <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
                       <div>
                         <div className="flex items-center gap-2 mb-2.5">
-                          <span className="text-[10px] font-mono tracking-widest uppercase font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200/80 flex items-center gap-1.5 shadow-2xs">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                          <span className="text-[10px] font-mono tracking-widest uppercase font-bold px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0] flex items-center gap-1.5 shadow-2xs">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
                             <span>CH-01 · FOUNDATIONS</span>
                           </span>
-                          <span className="text-slate-300 font-mono text-xs">•</span>
-                          <span className="text-[11px] font-mono text-slate-500 font-medium truncate">
+                          <span className="text-[#C4B5A5] font-mono text-xs">•</span>
+                          <span className="text-[11px] font-mono text-[#D9381E] bg-[#FFF1EE] border border-[#FDCAC1] px-2 py-0.5 rounded-md font-bold truncate">
                             SPPU Pune
                           </span>
                         </div>
@@ -301,22 +301,22 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                           Algorithmic Rigor &amp; Double 9.05 CGPA
                         </h3>
 
-                        <p className="text-slate-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                        <p className="text-[#5C574F] text-xs sm:text-sm mt-2 leading-relaxed font-medium">
                           Engineering resilience begins with computer science fundamentals.
-                          Secured a <strong className="text-emerald-700 font-bold">9.05 CGPA in M.Sc. Computer Science</strong> and a{" "}
-                          <strong className="text-emerald-700 font-bold">9.05 CGPA in B.Sc. Computer Science</strong>, mastering computational complexity,
+                          Secured a <strong className="text-[#059669] font-bold">9.05 CGPA in M.Sc. Computer Science</strong> and a{" "}
+                          <strong className="text-[#059669] font-bold">9.05 CGPA in B.Sc. Computer Science</strong>, mastering computational complexity,
                           ACID transactional guarantees, OOP design patterns, and distributed architectures.
                         </p>
                       </div>
 
-                      <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-1.5 text-xs font-mono text-slate-500 font-medium">
-                          <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                      <div className="pt-3 border-t border-[#EADBCA]/70 flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-1.5 text-xs font-mono text-[#065F46] font-bold">
+                          <CheckCircle2 className="w-4 h-4 text-[#059669]" />
                           <span>Academic Distinction</span>
                         </div>
                         <button
                           onClick={onOpenResume}
-                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-emerald-600 text-white text-xs font-medium transition-all shadow-sm active:scale-95"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#059669] to-[#047857] hover:to-[#E34234] text-white text-xs font-mono font-bold transition-all shadow-sm active:scale-95"
                         >
                           <FileDown className="w-3.5 h-3.5" />
                           <span>View Transcript</span>
@@ -327,44 +327,44 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                     {/* Right Column: Decent Sleek Metric Pods */}
                     <div className="lg:col-span-6 flex flex-col justify-center space-y-3">
                       <div className="grid grid-cols-2 gap-3">
-                        <div className="p-3.5 rounded-xl bg-slate-50/70 border border-slate-200/70 hover:border-emerald-300/80 transition-colors">
+                        <div className="p-3.5 rounded-xl bg-[#FAF3E7]/90 border border-[#EADFCB] hover:border-[#059669]/70 transition-colors shadow-2xs">
                           <div className="flex items-center justify-between mb-1">
-                            <span className="text-[10px] font-mono text-slate-400 font-bold uppercase tracking-wider">M.SC. COMP SCI</span>
-                            <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                            <span className="text-[10px] font-mono text-[#78716C] font-bold uppercase tracking-wider">M.SC. COMP SCI</span>
+                            <span className="w-2 h-2 rounded-full bg-[#10B981]" />
                           </div>
-                          <div className="text-2xl font-black font-display text-emerald-600">
-                            9.05 <span className="text-xs font-mono text-slate-400 font-medium">CGPA</span>
+                          <div className="text-2xl font-black font-display text-[#059669]">
+                            9.05 <span className="text-xs font-mono text-[#E34234] font-bold">CGPA</span>
                           </div>
-                          <div className="text-[11px] font-medium text-slate-500 mt-0.5">
+                          <div className="text-[11px] font-medium text-[#5C574F] mt-0.5">
                             2023 - 2025 · First Class Distinction
                           </div>
                         </div>
 
-                        <div className="p-3.5 rounded-xl bg-slate-50/70 border border-slate-200/70 hover:border-emerald-300/80 transition-colors">
+                        <div className="p-3.5 rounded-xl bg-[#FAF3E7]/90 border border-[#EADFCB] hover:border-[#059669]/70 transition-colors shadow-2xs">
                           <div className="flex items-center justify-between mb-1">
-                            <span className="text-[10px] font-mono text-slate-400 font-bold uppercase tracking-wider">B.SC. COMP SCI</span>
-                            <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                            <span className="text-[10px] font-mono text-[#78716C] font-bold uppercase tracking-wider">B.SC. COMP SCI</span>
+                            <span className="w-2 h-2 rounded-full bg-[#10B981]" />
                           </div>
-                          <div className="text-2xl font-black font-display text-emerald-600">
-                            9.05 <span className="text-xs font-mono text-slate-400 font-medium">CGPA</span>
+                          <div className="text-2xl font-black font-display text-[#059669]">
+                            9.05 <span className="text-xs font-mono text-[#E34234] font-bold">CGPA</span>
                           </div>
-                          <div className="text-[11px] font-medium text-slate-500 mt-0.5">
+                          <div className="text-[11px] font-medium text-[#5C574F] mt-0.5">
                             2020 - 2023 · First Class Distinction
                           </div>
                         </div>
                       </div>
 
-                      <div className="p-3 rounded-xl bg-slate-50/60 border border-slate-200/60 flex items-center justify-between text-xs">
+                      <div className="p-3 rounded-xl bg-[#FAF3E7]/90 border border-[#EADFCB] flex items-center justify-between text-xs shadow-2xs">
                         <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-xl bg-emerald-100/70 text-emerald-700 flex items-center justify-center font-bold">
+                          <div className="w-8 h-8 rounded-xl bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] flex items-center justify-center font-bold">
                             <Zap className="w-4 h-4" />
                           </div>
                           <div>
-                            <div className="font-bold text-slate-800">Top 1% Theoretical Foundations</div>
-                            <div className="text-[11px] text-slate-500">ACID DBs, Complexity, Data Structures</div>
+                            <div className="font-bold text-slate-900">Top 1% Theoretical Foundations</div>
+                            <div className="text-[11px] text-[#5C574F] font-medium">ACID DBs, Complexity, Data Structures</div>
                           </div>
                         </div>
-                        <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-mono font-bold border border-emerald-200/60">
+                        <span className="px-2 py-0.5 rounded-full bg-[#FFF1EE] text-[#D9381E] text-[10px] font-mono font-bold border border-[#FDCAC1]">
                           VERIFIED
                         </span>
                       </div>
@@ -379,22 +379,22 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             {/* ======================================================== */}
             <div className="w-[86vw] max-w-[900px] min-w-[320px] shrink-0">
               <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06}>
-                <div className="relative rounded-2xl bg-white/95 backdrop-blur-xl border border-slate-200/75 hover:border-slate-300 shadow-[0_4px_24px_-4px_rgba(15,23,42,0.06),0_1px_3px_rgba(15,23,42,0.04)] hover:shadow-[0_20px_40px_-12px_rgba(15,23,42,0.12)] overflow-hidden transition-all duration-300 group">
-                  {/* Slender Top Gradient Hairline */}
-                  <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-cyan-500/80 via-sky-400/60 to-transparent" />
-                  <div className="absolute -top-16 -right-16 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
+                <div className="relative rounded-2xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] backdrop-blur-xl border border-[#EADBCA] hover:border-[#E34234] shadow-[0_8px_30px_-6px_rgba(180,120,60,0.08),0_1px_3px_rgba(180,120,60,0.04)] hover:shadow-[0_20px_45px_-10px_rgba(227,66,52,0.16)] overflow-hidden transition-all duration-300 group">
+                  {/* Top Specular Dual Hairline: Vermillion to Emerald */}
+                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#E34234] via-[#F25430] to-[#059669] opacity-90 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute -top-16 -right-16 w-64 h-64 bg-[#E34234]/5 rounded-full blur-3xl pointer-events-none" />
 
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-7 items-center">
                     {/* Left Column: Narrative & Metrics */}
                     <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
                       <div>
                         <div className="flex items-center gap-2 mb-2.5">
-                          <span className="text-[10px] font-mono tracking-widest uppercase font-bold px-2.5 py-0.5 rounded-full bg-cyan-50 text-cyan-800 border border-cyan-200/80 flex items-center gap-1.5 shadow-2xs">
-                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
+                          <span className="text-[10px] font-mono tracking-widest uppercase font-bold px-2.5 py-0.5 rounded-full bg-[#FFF1EE] text-[#D9381E] border border-[#FDCAC1] flex items-center gap-1.5 shadow-2xs">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#E34234] animate-pulse" />
                             <span>CH-02 · ENTERPRISE</span>
                           </span>
-                          <span className="text-slate-300 font-mono text-xs">•</span>
-                          <span className="text-[11px] font-mono text-slate-500 font-medium truncate">
+                          <span className="text-[#C4B5A5] font-mono text-xs">•</span>
+                          <span className="text-[11px] font-mono text-[#065F46] bg-[#ECFDF5] border border-[#A7F3D0] px-2 py-0.5 rounded-md font-bold truncate">
                             AgroStock ERP
                           </span>
                         </div>
@@ -403,7 +403,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                           High-Throughput ERP &amp; Stock Reconciliation
                         </h3>
 
-                        <p className="text-slate-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                        <p className="text-[#5C574F] text-xs sm:text-sm mt-2 leading-relaxed font-medium">
                           Engineered multi-warehouse inventory pipelines with atomic stock deduction
                           routines that prevent overselling across simultaneous wholesale counters, compute tiered pricing
                           with automated 18% GST calculation, and generate instant client-ready vector PDF invoices.
@@ -411,18 +411,18 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                       </div>
 
                       {/* 3 Clean Metrics */}
-                      <div className="grid grid-cols-3 gap-2.5 pt-3 border-t border-slate-100">
-                        <div className="p-2 rounded-xl bg-slate-50/70 border border-slate-100">
-                          <div className="text-[10px] text-slate-400 font-mono font-medium">CATALOG</div>
-                          <div className="text-sm font-black font-mono text-slate-800">10,000+</div>
+                      <div className="grid grid-cols-3 gap-2.5 pt-3 border-t border-[#EADBCA]/70">
+                        <div className="p-2 rounded-xl bg-[#FAF3E7]/90 border border-[#EADFCB] shadow-2xs">
+                          <div className="text-[10px] text-[#78716C] font-mono font-bold">CATALOG</div>
+                          <div className="text-sm font-black font-mono text-[#E34234]">10,000+</div>
                         </div>
-                        <div className="p-2 rounded-xl bg-slate-50/70 border border-slate-100">
-                          <div className="text-[10px] text-slate-400 font-mono font-medium">DISCREPANCY</div>
-                          <div className="text-sm font-black font-mono text-emerald-600">0.00%</div>
+                        <div className="p-2 rounded-xl bg-[#FAF3E7]/90 border border-[#EADFCB] shadow-2xs">
+                          <div className="text-[10px] text-[#78716C] font-mono font-bold">DISCREPANCY</div>
+                          <div className="text-sm font-black font-mono text-[#059669]">0.00%</div>
                         </div>
-                        <div className="p-2 rounded-xl bg-slate-50/70 border border-slate-100">
-                          <div className="text-[10px] text-slate-400 font-mono font-medium">PDF LATENCY</div>
-                          <div className="text-sm font-black font-mono text-cyan-600">&lt;150ms</div>
+                        <div className="p-2 rounded-xl bg-[#FAF3E7]/90 border border-[#EADFCB] shadow-2xs">
+                          <div className="text-[10px] text-[#78716C] font-mono font-bold">PDF LATENCY</div>
+                          <div className="text-sm font-black font-mono text-slate-900">&lt;150ms</div>
                         </div>
                       </div>
                     </div>
@@ -433,9 +433,9 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                         {/* Terminal Header */}
                         <div className="flex items-center justify-between pb-2.5 border-b border-slate-800">
                           <div className="flex items-center gap-1.5">
-                            <span className="w-2 h-2 rounded-full bg-rose-500/80" />
-                            <span className="w-2 h-2 rounded-full bg-amber-500/80" />
-                            <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
+                            <span className="w-2 h-2 rounded-full bg-[#E34234]" />
+                            <span className="w-2 h-2 rounded-full bg-amber-400" />
+                            <span className="w-2 h-2 rounded-full bg-[#10B981]" />
                             <span className="text-[10px] font-mono text-slate-400 ml-1.5">
                               dispatch-daemon // SKU-WHT-300
                             </span>
@@ -443,7 +443,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                           <span className={`text-[10px] font-mono px-2 py-0.5 rounded-md font-bold ${
                             erpStockCount > 100
                               ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
-                              : "bg-amber-500/20 text-amber-300 border border-amber-500/30"
+                              : "bg-[#E34234]/20 text-[#FDCAC1] border border-[#E34234]/40"
                           }`}>
                             {erpStockCount} Units In Stock
                           </span>
@@ -457,7 +457,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                           </div>
                           <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
                             <div
-                              className="h-full bg-gradient-to-r from-cyan-400 to-emerald-400 transition-all duration-300"
+                              className="h-full bg-gradient-to-r from-[#10B981] to-[#E34234] transition-all duration-300"
                               style={{ width: `${(erpStockCount / 450) * 100}%` }}
                             />
                           </div>
@@ -468,7 +468,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                           <button
                             onClick={handleDispatchOrder}
                             disabled={erpDispatchStatus === "deducting"}
-                            className="w-full py-2 px-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-mono font-bold transition-all disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-sm active:scale-98"
+                            className="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-[#059669] to-[#E34234] hover:opacity-95 text-white text-xs font-mono font-bold transition-all disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md active:scale-98"
                           >
                             <Zap className="w-3.5 h-3.5" />
                             <span>
@@ -478,7 +478,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                         </div>
 
                         {/* Live Telemetry Log */}
-                        <div className="text-[11px] font-mono text-emerald-400 bg-slate-950/80 p-2.5 rounded-lg border border-slate-800/80 truncate">
+                        <div className="text-[11px] font-mono text-[#10B981] bg-slate-950/80 p-2.5 rounded-lg border border-slate-800/80 truncate">
                           &gt; {erpLog}
                         </div>
                       </div>
@@ -491,27 +491,24 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             {/* ======================================================== */}
             {/* CHAPTER 03: Offline-First Mobile Resilience & Published  */}
             {/* ======================================================== */}
-            {/* ======================================================== */}
-            {/* CHAPTER 03: Offline-First Mobile Resilience & Published  */}
-            {/* ======================================================== */}
             <div className="w-[86vw] max-w-[900px] min-w-[320px] shrink-0">
               <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06}>
-                <div className="relative rounded-2xl bg-white/95 backdrop-blur-xl border border-slate-200/75 hover:border-slate-300 shadow-[0_4px_24px_-4px_rgba(15,23,42,0.06),0_1px_3px_rgba(15,23,42,0.04)] hover:shadow-[0_20px_40px_-12px_rgba(15,23,42,0.12)] overflow-hidden transition-all duration-300 group">
-                  {/* Slender Top Gradient Hairline */}
-                  <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-blue-600/80 via-sky-400/60 to-transparent" />
-                  <div className="absolute -top-16 -right-16 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+                <div className="relative rounded-2xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] backdrop-blur-xl border border-[#EADBCA] hover:border-[#059669] shadow-[0_8px_30px_-6px_rgba(180,120,60,0.08),0_1px_3px_rgba(180,120,60,0.04)] hover:shadow-[0_20px_45px_-10px_rgba(5,150,105,0.16)] overflow-hidden transition-all duration-300 group">
+                  {/* Top Specular Dual Hairline: Emerald to Vermillion */}
+                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#059669] via-[#10B981] to-[#E34234] opacity-90 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute -top-16 -right-16 w-64 h-64 bg-[#059669]/5 rounded-full blur-3xl pointer-events-none" />
 
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-7 items-center">
                     {/* Left Column: Narrative & Store Badges */}
                     <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
                       <div>
                         <div className="flex items-center gap-2 mb-2.5">
-                          <span className="text-[10px] font-mono tracking-widest uppercase font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-800 border border-blue-200/80 flex items-center gap-1.5 shadow-2xs">
-                            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                          <span className="text-[10px] font-mono tracking-widest uppercase font-bold px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0] flex items-center gap-1.5 shadow-2xs">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
                             <span>CH-03 · MOBILE</span>
                           </span>
-                          <span className="text-slate-300 font-mono text-xs">•</span>
-                          <span className="text-[11px] font-mono text-slate-500 font-medium truncate">
+                          <span className="text-[#C4B5A5] font-mono text-xs">•</span>
+                          <span className="text-[11px] font-mono text-[#D9381E] bg-[#FFF1EE] border border-[#FDCAC1] px-2 py-0.5 rounded-md font-bold truncate">
                             TAIN Elect AI
                           </span>
                         </div>
@@ -520,17 +517,17 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                           Offline-First Field Resilience &amp; Store Releases
                         </h3>
 
-                        <p className="text-slate-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                        <p className="text-[#5C574F] text-xs sm:text-sm mt-2 leading-relaxed font-medium">
                           Engineered for field operations in zero-connectivity rural zones. Built on React Native
                           (Expo Router) with a deterministic local SQLite write-queue. Published under
                           <strong className="text-slate-900 font-bold"> Apple iOS Unlisted Distribution</strong> and deployed to production via the
-                          <strong className="text-slate-900 font-bold"> Google Play Store</strong>.
+                          <strong className="text-[#059669] font-bold"> Google Play Store</strong>.
                         </p>
                       </div>
 
                       {/* Store Badges Row */}
-                      <div className="pt-3 border-t border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                        <span className="text-xs font-mono text-slate-500 font-medium">Store Publications:</span>
+                      <div className="pt-3 border-t border-[#EADBCA]/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                        <span className="text-xs font-mono text-[#78716C] font-bold">Store Publications:</span>
                         <StoreBadges
                           appStoreUrl="https://apps.apple.com/us/app/tain-electai/id6807301293"
                           playStoreUrl="https://play.google.com/store/apps/details?id=com.elitespro.BEMS&pcampaignid=web_share"
@@ -541,17 +538,17 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
 
                     {/* Right Column: Network Cockpit */}
                     <div className="lg:col-span-6 flex flex-col justify-center space-y-3">
-                      <div className="p-4 rounded-xl bg-slate-50/80 border border-slate-200/80 space-y-3">
+                      <div className="p-4 rounded-xl bg-[#FAF3E7]/90 border border-[#EADFCB] space-y-3 shadow-2xs">
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex items-center gap-2">
                             {simOnline ? (
-                              <div className="flex items-center gap-1.5 text-emerald-700 font-mono text-xs font-bold">
-                                <Wifi className="w-4 h-4 text-emerald-500" />
+                              <div className="flex items-center gap-1.5 text-[#065F46] font-mono text-xs font-bold">
+                                <Wifi className="w-4 h-4 text-[#059669]" />
                                 <span>ONLINE (Cloud Sync Active)</span>
                               </div>
                             ) : (
-                              <div className="flex items-center gap-1.5 text-amber-700 font-mono text-xs font-bold">
-                                <WifiOff className="w-4 h-4 text-amber-500" />
+                              <div className="flex items-center gap-1.5 text-[#D9381E] font-mono text-xs font-bold">
+                                <WifiOff className="w-4 h-4 text-[#E34234]" />
                                 <span>OFFLINE (Local SQLite Active)</span>
                               </div>
                             )}
@@ -559,35 +556,35 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
 
                           <button
                             onClick={handleToggleOnline}
-                            className={`px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all border ${
+                            className={`px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all border shadow-2xs active:scale-95 ${
                               simOnline
-                                ? "bg-amber-50 text-amber-800 border-amber-200 hover:bg-amber-100"
-                                : "bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100"
+                                ? "bg-[#FFF1EE] text-[#D9381E] border-[#FDCAC1] hover:bg-[#FEE2DC]"
+                                : "bg-[#ECFDF5] text-[#065F46] border-[#A7F3D0] hover:bg-[#D1FAE5]"
                             }`}
                           >
                             {simOnline ? "Cut Network" : "Restore Network"}
                           </button>
                         </div>
 
-                        <div className="p-2.5 rounded-lg bg-white border border-slate-200/80 flex items-center justify-between text-xs font-mono">
-                          <span className="text-slate-600">Pending Write Queue:</span>
-                          <span className={`font-bold ${offlineQueueCount === 0 ? "text-emerald-600" : "text-blue-600"}`}>
+                        <div className="p-2.5 rounded-lg bg-[#FFFDF8] border border-[#EADBCA] flex items-center justify-between text-xs font-mono">
+                          <span className="text-[#5C574F] font-medium">Pending Write Queue:</span>
+                          <span className={`font-bold ${offlineQueueCount === 0 ? "text-[#059669]" : "text-[#E34234]"}`}>
                             {offlineQueueCount === 0 ? "✓ 0 Records (Synced)" : `${offlineQueueCount} updates buffered`}
                           </span>
                         </div>
 
                         <div className="grid grid-cols-3 gap-2 text-center text-xs">
-                          <div className="p-2 rounded-lg bg-white border border-slate-200/60">
-                            <div className="text-[10px] text-slate-400 font-mono">IOS</div>
-                            <div className="font-bold text-slate-800 mt-0.5">Apple Unlisted</div>
+                          <div className="p-2 rounded-lg bg-[#FFFDF8] border border-[#EADBCA]">
+                            <div className="text-[10px] text-[#78716C] font-mono font-bold">IOS</div>
+                            <div className="font-bold text-[#059669] mt-0.5">Apple Unlisted</div>
                           </div>
-                          <div className="p-2 rounded-lg bg-white border border-slate-200/60">
-                            <div className="text-[10px] text-slate-400 font-mono">ANDROID</div>
-                            <div className="font-bold text-emerald-700 mt-0.5">Play Console</div>
+                          <div className="p-2 rounded-lg bg-[#FFFDF8] border border-[#EADBCA]">
+                            <div className="text-[10px] text-[#78716C] font-mono font-bold">ANDROID</div>
+                            <div className="font-bold text-[#E34234] mt-0.5">Play Console</div>
                           </div>
-                          <div className="p-2 rounded-lg bg-white border border-slate-200/60">
-                            <div className="text-[10px] text-slate-400 font-mono">STACK</div>
-                            <div className="font-bold text-slate-800 mt-0.5">Expo + SQLite</div>
+                          <div className="p-2 rounded-lg bg-[#FFFDF8] border border-[#EADBCA]">
+                            <div className="text-[10px] text-[#78716C] font-mono font-bold">STACK</div>
+                            <div className="font-bold text-slate-900 mt-0.5">Expo + SQLite</div>
                           </div>
                         </div>
                       </div>
@@ -602,22 +599,22 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             {/* ======================================================== */}
             <div className="w-[86vw] max-w-[900px] min-w-[320px] shrink-0">
               <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06}>
-                <div className="relative rounded-2xl bg-white/95 backdrop-blur-xl border border-slate-200/75 hover:border-slate-300 shadow-[0_4px_24px_-4px_rgba(15,23,42,0.06),0_1px_3px_rgba(15,23,42,0.04)] hover:shadow-[0_20px_40px_-12px_rgba(15,23,42,0.12)] overflow-hidden transition-all duration-300 group">
-                  {/* Slender Top Gradient Hairline */}
-                  <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-purple-500/80 via-pink-400/60 to-transparent" />
-                  <div className="absolute -top-16 -right-16 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
+                <div className="relative rounded-2xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] backdrop-blur-xl border border-[#EADBCA] hover:border-[#E34234] shadow-[0_8px_30px_-6px_rgba(180,120,60,0.08),0_1px_3px_rgba(180,120,60,0.04)] hover:shadow-[0_20px_45px_-10px_rgba(227,66,52,0.16)] overflow-hidden transition-all duration-300 group">
+                  {/* Top Specular Dual Hairline: Vermillion to Emerald */}
+                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#E34234] via-[#F25430] to-[#059669] opacity-90 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute -top-16 -right-16 w-64 h-64 bg-[#E34234]/5 rounded-full blur-3xl pointer-events-none" />
 
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-7 items-center">
                     {/* Left Column: Narrative & Paper Download */}
                     <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
                       <div>
                         <div className="flex items-center gap-2 mb-2.5">
-                          <span className="text-[10px] font-mono tracking-widest uppercase font-bold px-2.5 py-0.5 rounded-full bg-purple-50 text-purple-800 border border-purple-200/80 flex items-center gap-1.5 shadow-2xs">
-                            <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
+                          <span className="text-[10px] font-mono tracking-widest uppercase font-bold px-2.5 py-0.5 rounded-full bg-[#FFF1EE] text-[#D9381E] border border-[#FDCAC1] flex items-center gap-1.5 shadow-2xs">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#E34234] animate-pulse" />
                             <span>CH-04 · AI RESEARCH</span>
                           </span>
-                          <span className="text-slate-300 font-mono text-xs">•</span>
-                          <span className="text-[11px] font-mono text-slate-500 font-medium truncate">
+                          <span className="text-[#C4B5A5] font-mono text-xs">•</span>
+                          <span className="text-[11px] font-mono text-[#065F46] bg-[#ECFDF5] border border-[#A7F3D0] px-2 py-0.5 rounded-md font-bold truncate">
                             ISSN: 2582-8436
                           </span>
                         </div>
@@ -626,22 +623,22 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                           Peer-Reviewed Gen-AI Research &amp; LangChain Agents
                         </h3>
 
-                        <p className="text-slate-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                        <p className="text-[#5C574F] text-xs sm:text-sm mt-2 leading-relaxed font-medium">
                           Published original empirical research investigating Generative AI systems, prompt optimization,
                           and autonomous reasoning models. Engineered LangChain agent systems with structured JSON schema
                           validation and multi-provider failover routing between Gemini 2.5 and OpenAI GPT-4o.
                         </p>
                       </div>
 
-                      <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-1.5 text-xs font-mono text-slate-500 font-medium">
-                          <BookOpen className="w-4 h-4 text-purple-500" />
+                      <div className="pt-3 border-t border-[#EADBCA]/70 flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-1.5 text-xs font-mono text-[#065F46] font-bold">
+                          <BookOpen className="w-4 h-4 text-[#059669]" />
                           <span>Peer-Reviewed Journal</span>
                         </div>
                         <a
                           href="/research-paper-genai-inamdar-2026.pdf"
                           download="GenAI_Research_Paper_Inamdar_2026.pdf"
-                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-medium transition-all shadow-sm active:scale-95"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#059669] to-[#E34234] hover:opacity-95 text-white text-xs font-mono font-bold transition-all shadow-sm active:scale-95"
                         >
                           <FileDown className="w-3.5 h-3.5" />
                           <span>Download Paper PDF</span>
@@ -651,23 +648,23 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
 
                     {/* Right Column: Decent Scientific Dossier Preview */}
                     <div className="lg:col-span-6 flex flex-col justify-center space-y-3">
-                      <div className="p-4 rounded-xl bg-slate-50/80 border border-slate-200/80 space-y-3">
-                        <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 pb-2 border-b border-slate-200/60">
-                          <span className="uppercase font-bold text-purple-700">CITATION PREVIEW · 030117.PDF</span>
-                          <span>VOL. 13 · ISSUE 1 · 2026</span>
+                      <div className="p-4 rounded-xl bg-[#FAF3E7]/90 border border-[#EADFCB] space-y-3 shadow-2xs">
+                        <div className="flex items-center justify-between text-[10px] font-mono text-[#78716C] pb-2 border-b border-[#EADBCA]">
+                          <span className="uppercase font-bold text-[#E34234]">CITATION PREVIEW · 030117.PDF</span>
+                          <span className="font-bold text-[#059669]">VOL. 13 · ISSUE 1 · 2026</span>
                         </div>
 
                         <div className="text-sm font-display italic font-bold text-slate-900">
                           &ldquo;A Study on Generative AI&rdquo;
                         </div>
 
-                        <div className="text-[11px] font-mono text-slate-600">
+                        <div className="text-[11px] font-mono text-[#5C574F]">
                           Authors: Zafarali Faizahmed Inamdar, Dr. Jyoti Malhotra
                         </div>
 
-                        <div className="p-2.5 rounded-lg bg-white border border-slate-200/60 flex items-center justify-between text-xs">
-                          <span className="font-mono text-slate-500 text-[11px]">Provider Routing:</span>
-                          <span className="px-2 py-0.5 rounded-md bg-purple-50 text-purple-700 font-mono font-bold text-[10px] border border-purple-200/60">
+                        <div className="p-2.5 rounded-lg bg-[#FFFDF8] border border-[#EADBCA] flex items-center justify-between text-xs">
+                          <span className="font-mono text-[#5C574F] text-[11px] font-medium">Provider Routing:</span>
+                          <span className="px-2 py-0.5 rounded-md bg-[#ECFDF5] text-[#065F46] font-mono font-bold text-[10px] border border-[#A7F3D0]">
                             Gemini 2.5 ⇄ GPT-4o
                           </span>
                         </div>
@@ -683,22 +680,22 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             {/* ======================================================== */}
             <div className="w-[86vw] max-w-[900px] min-w-[320px] shrink-0">
               <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06}>
-                <div className="relative rounded-2xl bg-white/95 backdrop-blur-xl border border-slate-200/75 hover:border-slate-300 shadow-[0_4px_24px_-4px_rgba(15,23,42,0.06),0_1px_3px_rgba(15,23,42,0.04)] hover:shadow-[0_20px_40px_-12px_rgba(15,23,42,0.12)] overflow-hidden transition-all duration-300 group">
-                  {/* Slender Top Gradient Hairline */}
-                  <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-indigo-500/80 via-purple-400/60 to-transparent" />
-                  <div className="absolute -top-16 -right-16 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
+                <div className="relative rounded-2xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] backdrop-blur-xl border border-[#EADBCA] hover:border-[#059669] shadow-[0_8px_30px_-6px_rgba(180,120,60,0.08),0_1px_3px_rgba(180,120,60,0.04)] hover:shadow-[0_20px_45px_-10px_rgba(5,150,105,0.16)] overflow-hidden transition-all duration-300 group">
+                  {/* Top Specular Dual Hairline: Emerald to Vermillion */}
+                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#059669] via-[#10B981] to-[#E34234] opacity-90 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute -top-16 -right-16 w-64 h-64 bg-[#059669]/5 rounded-full blur-3xl pointer-events-none" />
 
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-7 items-center">
                     {/* Left Column: Narrative & Action Channels */}
                     <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
                       <div>
                         <div className="flex items-center gap-2 mb-2.5">
-                          <span className="text-[10px] font-mono tracking-widest uppercase font-bold px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-800 border border-indigo-200/80 flex items-center gap-1.5 shadow-2xs">
-                            <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
+                          <span className="text-[10px] font-mono tracking-widest uppercase font-bold px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0] flex items-center gap-1.5 shadow-2xs">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
                             <span>CH-05 · INFRASTRUCTURE</span>
                           </span>
-                          <span className="text-slate-300 font-mono text-xs">•</span>
-                          <span className="text-[11px] font-mono text-slate-500 font-medium truncate">
+                          <span className="text-[#C4B5A5] font-mono text-xs">•</span>
+                          <span className="text-[11px] font-mono text-[#D9381E] bg-[#FFF1EE] border border-[#FDCAC1] px-2 py-0.5 rounded-md font-bold truncate">
                             AWS &amp; Docker
                           </span>
                         </div>
@@ -707,32 +704,32 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                           Cloud DevOps &amp; 99.9% Production Delivery
                         </h3>
 
-                        <p className="text-slate-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                        <p className="text-[#5C574F] text-xs sm:text-sm mt-2 leading-relaxed font-medium">
                           Code creates enterprise value when it reliably runs in production. Deployed on AWS EC2
                           with Docker multi-stage containers, automated GitHub Actions CI/CD pipelines, NGINX SSL,
                           and Prometheus-ready health telemetry. Available for immediate engineering impact.
                         </p>
                       </div>
 
-                      <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
-                        <div className="text-xs text-slate-500 font-mono">
-                          WhatsApp: <strong className="text-emerald-700 font-bold">{PERSONAL_INFO.phone}</strong>
+                      <div className="pt-3 border-t border-[#EADBCA]/70 flex items-center justify-between gap-3">
+                        <div className="text-xs text-[#5C574F] font-mono">
+                          WhatsApp: <strong className="text-[#059669] font-bold">{PERSONAL_INFO.phone}</strong>
                         </div>
                         <div className="flex items-center gap-2">
                           <a
                             href="https://wa.me/919860800543?text=Hi%20Zafarali,%20I%20reviewed%20your%20engineering%20journey%20and%20would%20like%20to%20connect."
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-medium transition-all shadow-sm active:scale-95"
+                            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#059669] to-[#047857] hover:to-[#E34234] text-white text-xs font-mono font-bold transition-all shadow-sm active:scale-95"
                           >
                             <MessageCircle className="w-3.5 h-3.5" />
                             <span>WhatsApp</span>
                           </a>
                           <button
                             onClick={onOpenTerminal}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono transition-all shadow-sm active:scale-95"
+                            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-[#E34234] text-white text-xs font-mono font-bold transition-all shadow-sm active:scale-95"
                           >
-                            <Terminal className="w-3.5 h-3.5 text-sky-400" />
+                            <Terminal className="w-3.5 h-3.5 text-[#10B981]" />
                             <span>CLI</span>
                           </button>
                         </div>
@@ -742,28 +739,28 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                     {/* Right Column: 4 Minimalist Telemetry Tiles */}
                     <div className="lg:col-span-6 flex flex-col justify-center space-y-3">
                       <div className="grid grid-cols-2 gap-3">
-                        <div className="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70 text-center">
-                          <div className="text-[10px] text-slate-400 font-mono font-bold uppercase">AVAILABILITY</div>
-                          <div className="text-lg font-black text-emerald-600 font-mono mt-0.5">99.9% Uptime</div>
-                          <div className="text-[10px] text-slate-500 mt-0.5">SLA Guaranteed</div>
+                        <div className="p-3 rounded-xl bg-[#FAF3E7]/90 border border-[#EADFCB] text-center shadow-2xs">
+                          <div className="text-[10px] text-[#78716C] font-mono font-bold uppercase">AVAILABILITY</div>
+                          <div className="text-lg font-black text-[#059669] font-mono mt-0.5">99.9% Uptime</div>
+                          <div className="text-[10px] text-[#5C574F] mt-0.5 font-medium">SLA Guaranteed</div>
                         </div>
 
-                        <div className="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70 text-center">
-                          <div className="text-[10px] text-slate-400 font-mono font-bold uppercase">CONTAINERS</div>
-                          <div className="text-lg font-black text-sky-600 font-mono mt-0.5">Docker Multi</div>
-                          <div className="text-[10px] text-slate-500 mt-0.5">Minimal Images</div>
+                        <div className="p-3 rounded-xl bg-[#FAF3E7]/90 border border-[#EADFCB] text-center shadow-2xs">
+                          <div className="text-[10px] text-[#78716C] font-mono font-bold uppercase">CONTAINERS</div>
+                          <div className="text-lg font-black text-slate-900 font-mono mt-0.5">Docker Multi</div>
+                          <div className="text-[10px] text-[#5C574F] mt-0.5 font-medium">Minimal Images</div>
                         </div>
 
-                        <div className="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70 text-center">
-                          <div className="text-[10px] text-slate-400 font-mono font-bold uppercase">AUTOMATION</div>
-                          <div className="text-lg font-black text-indigo-600 font-mono mt-0.5">GitHub CI/CD</div>
-                          <div className="text-[10px] text-slate-500 mt-0.5">Zero-Downtime</div>
+                        <div className="p-3 rounded-xl bg-[#FAF3E7]/90 border border-[#EADFCB] text-center shadow-2xs">
+                          <div className="text-[10px] text-[#78716C] font-mono font-bold uppercase">AUTOMATION</div>
+                          <div className="text-lg font-black text-[#E34234] font-mono mt-0.5">GitHub CI/CD</div>
+                          <div className="text-[10px] text-[#5C574F] mt-0.5 font-medium">Zero-Downtime</div>
                         </div>
 
-                        <div className="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70 text-center">
-                          <div className="text-[10px] text-slate-400 font-mono font-bold uppercase">RESPONSE</div>
-                          <div className="text-lg font-black text-purple-600 font-mono mt-0.5">&lt; 24h</div>
-                          <div className="text-[10px] text-slate-500 mt-0.5">Direct Inquiry</div>
+                        <div className="p-3 rounded-xl bg-[#FAF3E7]/90 border border-[#EADFCB] text-center shadow-2xs">
+                          <div className="text-[10px] text-[#78716C] font-mono font-bold uppercase">RESPONSE</div>
+                          <div className="text-lg font-black text-[#059669] font-mono mt-0.5">&lt; 24h</div>
+                          <div className="text-[10px] text-[#5C574F] mt-0.5 font-medium">Direct Inquiry</div>
                         </div>
                       </div>
                     </div>

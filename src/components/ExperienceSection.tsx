@@ -27,13 +27,15 @@ import {
   Layers,
   ChevronRight,
   Sliders,
-  Terminal as TerminalIcon
+  Terminal as TerminalIcon,
+  Compass
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { EXPERIENCES } from '../data/portfolioData';
 import { StoreBadges } from './StoreBadges';
 import { ScrollAssemble } from './animations/ScrollAssemble';
 import { ScrollFocusZoom } from './animations/ScrollFocusZoom';
+import { ExperienceParallaxCarousel } from './ui/ExperienceParallaxCarousel';
 
 interface ExperienceSectionProps {
   onOpenProject: (projectId: string) => void;
@@ -42,7 +44,7 @@ interface ExperienceSectionProps {
 export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProject }) => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [activeTabId, setActiveTabId] = useState<string>('tain-electai');
-  const [viewLayout, setViewLayout] = useState<'command-deck' | 'all-deployments'>('command-deck');
+  const [viewLayout, setViewLayout] = useState<'parallax-deck' | 'command-deck' | 'all-deployments'>('parallax-deck');
   const [isInteracting, setIsInteracting] = useState<boolean>(false);
   const [isSectionInView, setIsSectionInView] = useState<boolean>(false);
   const inactivityTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -94,7 +96,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
     return () => observer.disconnect();
   }, []);
 
-  // 3500ms carousel auto-advance (only when in command-deck mode, in view, and not interacting)
+  // 2800ms carousel auto-advance (only when in command-deck mode, in view, and not interacting)
   useEffect(() => {
     if (viewLayout !== 'command-deck' || isInteracting || !isSectionInView) {
       return;
@@ -102,7 +104,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
 
     const timer = setInterval(() => {
       handleNextExperience();
-    }, 3500);
+    }, 2800);
 
     return () => clearInterval(timer);
   }, [viewLayout, isInteracting, isSectionInView, handleNextExperience]);
@@ -190,21 +192,36 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
               Real-world systems delivery across offline-first mobile apps live on the App Store & Play Store, multi-module agricultural ERP platforms, and transactional B2B engines.
             </p>
 
-            {/* View Mode Toggle: Command Deck vs Panoramic Timeline */}
+            {/* View Mode Toggle: 3D Parallax Deck vs Mission Control Console vs Panoramic Timeline */}
             <div className="mt-8 inline-flex items-center p-1 rounded-2xl bg-slate-200/90 border border-slate-300 shadow-inner">
+              <button
+                onClick={() => {
+                  registerUserActivity();
+                  setViewLayout('parallax-deck');
+                }}
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono transition-all ${
+                  viewLayout === 'parallax-deck'
+                    ? 'bg-white text-slate-900 shadow-md border border-slate-200 font-bold'
+                    : 'text-slate-600 hover:text-slate-900 font-bold'
+                }`}
+              >
+                <Compass className="w-3.5 h-3.5" />
+                <span>3D Parallax Deck</span>
+              </button>
+
               <button
                 onClick={() => {
                   registerUserActivity();
                   setViewLayout('command-deck');
                 }}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono transition-all ${
                   viewLayout === 'command-deck'
-                    ? 'bg-white text-slate-900 shadow-md border border-slate-200'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-white text-slate-900 shadow-md border border-slate-200 font-bold'
+                    : 'text-slate-600 hover:text-slate-900 font-bold'
                 }`}
               >
-                <Sliders className="w-3.5 h-3.5 text-sky-600" />
-                <span>Mission Control Deck</span>
+                <Sliders className="w-3.5 h-3.5" />
+                <span>Mission Console</span>
               </button>
 
               <button
@@ -212,13 +229,13 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
                   registerUserActivity();
                   setViewLayout('all-deployments');
                 }}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono transition-all ${
                   viewLayout === 'all-deployments'
-                    ? 'bg-white text-slate-900 shadow-md border border-slate-200'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-white text-slate-900 shadow-md border border-slate-200 font-bold'
+                    : 'text-slate-600 hover:text-slate-900 font-bold'
                 }`}
               >
-                <GitCommit className="w-3.5 h-3.5 text-emerald-600" />
+                <GitCommit className="w-3.5 h-3.5" />
                 <span>Panoramic Timeline</span>
               </button>
             </div>
@@ -226,7 +243,31 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
         </ScrollAssemble>
 
         {/* =====================================================================
-            LAYOUT 1: MISSION CONTROL DECK (Tactile Architectural Pods)
+            LAYOUT 1: 3D PARALLAX DECK (Infinite Loop Carousel with Left/Right Cards)
+           ===================================================================== */}
+        {viewLayout === 'parallax-deck' && (
+          <div className="py-2 animate-fadeIn">
+            <ExperienceParallaxCarousel
+              experiences={EXPERIENCES}
+              onOpenProject={onOpenProject}
+              tainOnline={tainOnline}
+              tainQueue={tainQueue}
+              tainSyncStatus={tainSyncStatus}
+              onTainAddSurvey={handleTainAddSurvey}
+              onTainToggleNetwork={handleTainToggleNetwork}
+              erpStock={erpStock}
+              erpInvoiceId={erpInvoiceId}
+              erpStatus={erpStatus}
+              onErpDispatch={handleErpDispatch}
+              acidLog={acidLog}
+              acidRunning={acidRunning}
+              onTestAcid={handleTestAcid}
+            />
+          </div>
+        )}
+
+        {/* =====================================================================
+            LAYOUT 2: MISSION CONTROL DECK (Tactile Architectural Pods)
            ===================================================================== */}
         {viewLayout === 'command-deck' && (
           <div className="space-y-8">

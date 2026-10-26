@@ -31,24 +31,24 @@ export const RecruiterFastDeck: React.FC<RecruiterFastDeckProps> = ({
 
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full h-full sm:h-auto sm:max-h-[96vh] max-w-3xl bg-white border-0 sm:border-2 border-slate-300/90 sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden"
+        className="relative w-full h-full sm:h-auto sm:max-h-[96vh] max-w-3xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] border-0 sm:border-2 border-[#EADBCA] sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden"
       >
         {/* Top Accent Gradient Bar */}
-        <div className="h-2 w-full bg-gradient-to-r from-sky-500 via-indigo-600 to-purple-600 shrink-0" />
+        <div className="h-2 w-full bg-gradient-to-r from-[#059669] via-[#10B981] to-[#E34234] shrink-0" />
         
         {/* Header */}
-        <div className="p-5 sm:p-6 bg-gradient-to-r from-indigo-50/80 via-sky-50/50 to-slate-50 border-b-2 border-slate-200 flex items-start justify-between">
+        <div className="p-5 sm:p-6 bg-gradient-to-r from-[#ECFDF5]/80 via-[#FAF6ED]/60 to-[#FFF1EE]/40 border-b-2 border-[#EADBCA] flex items-start justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-indigo-100 border-2 border-indigo-300 flex items-center justify-center text-indigo-700 shadow-sm">
+            <div className="w-11 h-11 rounded-2xl bg-[#ECFDF5] border-2 border-[#A7F3D0] flex items-center justify-center text-[#059669] shadow-sm">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-[10px] font-mono uppercase bg-indigo-100 text-indigo-900 px-2.5 py-0.5 rounded-full border-2 border-indigo-300 font-black">
+                <span className="text-[10px] font-mono uppercase bg-[#FFF1EE] text-[#D9381E] px-2.5 py-0.5 rounded-full border-2 border-[#FDCAC1] font-black">
                   Hiring Manager Briefing
                 </span>
-                <span className="text-xs text-slate-600 font-mono font-bold flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5 text-indigo-600" /> 30-Sec Read
+                <span className="text-xs text-stone-600 font-mono font-bold flex items-center gap-1">
+                  <Clock className="w-3.5 h-3.5 text-[#059669]" /> 30-Sec Read
                 </span>
               </div>
               <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight mt-1">
@@ -59,7 +59,7 @@ export const RecruiterFastDeck: React.FC<RecruiterFastDeckProps> = ({
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-xl border-2 border-slate-200 text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors"
+            className="p-1.5 rounded-xl border-2 border-[#EADBCA] text-stone-400 hover:text-stone-800 hover:bg-[#FAF3E7] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -69,22 +69,22 @@ export const RecruiterFastDeck: React.FC<RecruiterFastDeckProps> = ({
         <div className="p-5 sm:p-6 overflow-y-auto space-y-4 text-xs sm:text-sm">
           {/* Quick Pillars */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-            <div className="p-4 rounded-2xl bg-white border-2 border-slate-200/90 hover:border-sky-500 shadow-md transition-all">
-              <div className="text-sky-700 font-mono font-bold flex items-center gap-1.5 text-xs">
-                <CheckCircle2 className="w-4 h-4 text-sky-600" />
+            <div className="p-4 rounded-2xl bg-[#FFFDF9] border-2 border-[#EADBCA] hover:border-[#059669] shadow-md transition-all">
+              <div className="text-[#059669] font-mono font-bold flex items-center gap-1.5 text-xs">
+                <CheckCircle2 className="w-4 h-4 text-[#059669]" />
                 <span className="font-display font-black text-slate-900 text-sm">Enterprise Full-Stack</span>
               </div>
-              <p className="text-slate-600 text-xs mt-2 leading-relaxed">
+              <p className="text-stone-600 text-xs mt-2 leading-relaxed">
                 Proven developer behind <strong className="text-slate-900 font-bold">AgroStock ERP</strong> (Nebula Tech) and <strong className="text-slate-900 font-bold">Greentop</strong> (Knowledge Keen) using React, Next.js App Router, Express, and transactional MySQL.
               </p>
             </div>
 
-            <div className="p-4 rounded-2xl bg-white border-2 border-slate-200/90 hover:border-blue-500 shadow-md transition-all">
-              <div className="text-blue-700 font-mono font-bold flex items-center gap-1.5 text-xs">
-                <CheckCircle2 className="w-4 h-4 text-blue-600" />
+            <div className="p-4 rounded-2xl bg-[#FFFDF9] border-2 border-[#EADBCA] hover:border-[#E34234] shadow-md transition-all">
+              <div className="text-[#D9381E] font-mono font-bold flex items-center gap-1.5 text-xs">
+                <CheckCircle2 className="w-4 h-4 text-[#E34234]" />
                 <span className="font-display font-black text-slate-900 text-sm">Offline-First Mobile App</span>
               </div>
-              <p className="text-slate-600 text-xs mt-2 leading-relaxed">
+              <p className="text-stone-600 text-xs mt-2 leading-relaxed">
                 Built and published <strong className="text-slate-900 font-bold">TAIN Elect AI</strong> on React Native (Expo Router) with custom local write-queue and Supabase sync. Successfully published under <strong className="text-slate-900 font-bold">Apple iOS Unlisted App Distribution</strong> and live on <strong className="text-slate-900 font-bold">Google Play Store via Google Play Console</strong> after Closed Testing.
               </p>
               <div className="mt-2.5">
@@ -96,12 +96,12 @@ export const RecruiterFastDeck: React.FC<RecruiterFastDeckProps> = ({
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-white border-2 border-slate-200/90 hover:border-purple-500 shadow-md transition-all">
-              <div className="text-purple-700 font-mono font-bold flex items-center gap-1.5 text-xs">
-                <CheckCircle2 className="w-4 h-4 text-purple-600" />
+            <div className="p-4 rounded-2xl bg-[#FFFDF9] border-2 border-[#EADBCA] hover:border-[#059669] shadow-md transition-all">
+              <div className="text-[#059669] font-mono font-bold flex items-center gap-1.5 text-xs">
+                <CheckCircle2 className="w-4 h-4 text-[#059669]" />
                 <span className="font-display font-black text-slate-900 text-sm">Gen-AI & Academic Publication</span>
               </div>
-              <p className="text-slate-600 text-xs mt-2 leading-relaxed">
+              <p className="text-stone-600 text-xs mt-2 leading-relaxed">
                 Co-authored published peer-reviewed research on <strong className="text-slate-900 font-bold">Gen-AI tools in software development</strong> (InSight Bulletin, 2026, ISSN: 3065-7857). Built LangChain + Gemini platforms.
               </p>
               <div className="mt-2.5">
@@ -109,60 +109,60 @@ export const RecruiterFastDeck: React.FC<RecruiterFastDeckProps> = ({
                   href="https://ibrj.us/wp-content/uploads/030117.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[11px] font-mono text-purple-700 hover:text-purple-900 underline font-black"
+                  className="inline-flex items-center gap-1 text-[11px] font-mono text-[#065F46] hover:text-[#047857] underline font-black"
                 >
                   <span>Download Paper PDF (030117.pdf)</span>
                 </a>
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-white border-2 border-slate-200/90 hover:border-emerald-500 shadow-md transition-all">
-              <div className="text-emerald-700 font-mono font-bold flex items-center gap-1.5 text-xs">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <div className="p-4 rounded-2xl bg-[#FFFDF9] border-2 border-[#EADBCA] hover:border-[#E34234] shadow-md transition-all">
+              <div className="text-[#D9381E] font-mono font-bold flex items-center gap-1.5 text-xs">
+                <CheckCircle2 className="w-4 h-4 text-[#E34234]" />
                 <span className="font-display font-black text-slate-900 text-sm">Top Academic Standing</span>
               </div>
-              <p className="text-slate-600 text-xs mt-2 leading-relaxed">
+              <p className="text-stone-600 text-xs mt-2 leading-relaxed">
                 Consistent <strong className="text-slate-900 font-bold">9.05 CGPA in both M.Sc. & B.Sc. Computer Science</strong>, paired with 94% in HSC Electronics Bifocal.
               </p>
             </div>
           </div>
 
           {/* Quick Fit Summary */}
-          <div className="p-4 sm:p-5 rounded-2xl bg-indigo-50/60 border-2 border-indigo-200 shadow-sm">
-            <h4 className="text-xs font-mono uppercase text-indigo-900 font-black mb-1.5">
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#FAF3E7] border-2 border-[#EADBCA] shadow-sm">
+            <h4 className="text-xs font-mono uppercase text-[#065F46] font-black mb-1.5">
               Ideal Roles & Team Impact:
             </h4>
-            <p className="text-slate-800 text-xs sm:text-sm font-medium leading-relaxed">
+            <p className="text-stone-800 text-xs sm:text-sm font-medium leading-relaxed">
               Full-Stack Software Engineer, Frontend Engineer (React/Next.js), Mobile App Developer (React Native/Expo), or AI Solutions Developer. Brings high velocity, clean architecture, automated testing mindset, and zero-compromise product delivery.
             </p>
           </div>
         </div>
 
         {/* Footer Actions */}
-        <div className="p-4 sm:p-5 bg-slate-50 border-t-2 border-slate-200 flex flex-wrap items-center justify-between gap-3">
+        <div className="p-4 sm:p-5 bg-[#FAF6ED] border-t-2 border-[#EADBCA] flex flex-wrap items-center justify-between gap-3">
           <button
             onClick={() => {
               onClose();
               onOpenResume();
             }}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white text-emerald-800 border-2 border-emerald-400 text-xs font-black hover:bg-emerald-50 transition-colors shadow-sm"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#FFFDF9] text-[#065F46] border-2 border-[#A7F3D0] text-xs font-black hover:bg-[#ECFDF5] transition-colors shadow-sm"
           >
-            <FileDown className="w-4 h-4 text-emerald-600" />
+            <FileDown className="w-4 h-4 text-[#059669]" />
             <span>View Full Resume</span>
           </button>
 
           <div className="flex items-center gap-2.5">
             <a
               href={`tel:${PERSONAL_INFO.phone}`}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white text-slate-800 border-2 border-slate-300 text-xs font-bold hover:border-sky-500 hover:text-sky-700 transition-colors shadow-sm"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#FFFDF9] text-stone-800 border-2 border-[#EADBCA] text-xs font-bold hover:border-[#059669] hover:text-[#065F46] transition-colors shadow-sm"
             >
-              <Phone className="w-3.5 h-3.5 text-emerald-600" />
+              <Phone className="w-3.5 h-3.5 text-[#059669]" />
               <span>Call Candidate</span>
             </a>
             <a
               href="#contact"
               onClick={onClose}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 text-white text-xs font-black hover:brightness-110 transition-all shadow-md shadow-sky-500/25"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-[#059669] via-[#047857] to-[#E34234] text-white text-xs font-black hover:brightness-105 transition-all shadow-md shadow-emerald-600/25"
             >
               <span>Schedule Interview</span>
               <ArrowRight className="w-3.5 h-3.5" />

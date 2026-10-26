@@ -83,7 +83,7 @@ export default function App() {
       {/* Dynamic Physics / Constellation Canvas */}
       <BackgroundCanvas />
 
-      {/* Dynamic Scroll Progress & HUD */}
+      {/* Dynamic Scroll Progress */}
       <ScrollProgress />
 
       {/* FEAT-02: Fixed Glassmorphic Navigation with Live System Clock */}

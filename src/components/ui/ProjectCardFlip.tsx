@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   RotateCcw,
   ArrowUpRight,
@@ -33,6 +33,7 @@ interface ProjectCardFlipProps {
   onSelectProject: (project: Project) => void;
   className?: string;
   defaultFlipped?: boolean;
+  flipDelay?: number;
 }
 
 export const ProjectCardFlip: React.FC<ProjectCardFlipProps> = ({
@@ -41,12 +42,21 @@ export const ProjectCardFlip: React.FC<ProjectCardFlipProps> = ({
   onSelectProject,
   className = "",
   defaultFlipped = false,
+  flipDelay = 0,
 }) => {
   const [isFlipped, setIsFlipped] = useState(defaultFlipped);
+  const [currentDelay, setCurrentDelay] = useState(0);
   const CategoryIcon = theme.icon;
+
+  // Synchronize when defaultFlipped changes (e.g., Master "Flip All" triggered)
+  useEffect(() => {
+    setCurrentDelay(flipDelay);
+    setIsFlipped(defaultFlipped);
+  }, [defaultFlipped, flipDelay]);
 
   const handleFlipToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
+    setCurrentDelay(0); // instant response for direct card click
     setIsFlipped((prev) => !prev);
   };
 
@@ -97,10 +107,12 @@ export const ProjectCardFlip: React.FC<ProjectCardFlipProps> = ({
         className="w-full h-full"
       >
         <div
-          className="relative w-full h-full transition-transform duration-700 ease-out"
+          className="relative w-full h-full will-change-transform"
           style={{
             transformStyle: "preserve-3d",
             transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
+            transition: "transform 750ms cubic-bezier(0.34, 1.25, 0.64, 1)",
+            transitionDelay: `${currentDelay}ms`,
           }}
         >
           {/* ======================================================== */}

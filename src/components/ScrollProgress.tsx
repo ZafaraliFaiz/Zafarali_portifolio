@@ -39,35 +39,10 @@ export const ScrollProgress: React.FC = () => {
         <button
           onClick={handleScrollToTop}
           title="Back to Top"
-          className="group flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/95 border-2 border-slate-300 hover:border-sky-400 text-xs font-mono text-slate-700 hover:text-sky-700 shadow-xl shadow-slate-900/10 backdrop-blur-xl transition-all active:scale-95"
+          aria-label="Back to Top"
+          className="group flex items-center justify-center p-3 rounded-full bg-white/95 border-2 border-slate-300 hover:border-sky-500 text-slate-700 hover:text-sky-600 shadow-xl shadow-slate-900/10 backdrop-blur-xl transition-all active:scale-95"
         >
-          {/* Mini circular progress indicator */}
-          <div className="relative w-4 h-4 flex items-center justify-center">
-            <svg className="w-full h-full -rotate-90" viewBox="0 0 24 24">
-              <circle
-                cx="12"
-                cy="12"
-                r="9"
-                className="stroke-slate-200"
-                strokeWidth="2.5"
-                fill="none"
-              />
-              <circle
-                cx="12"
-                cy="12"
-                r="9"
-                className="stroke-sky-600 transition-all duration-75"
-                strokeWidth="2.5"
-                fill="none"
-                strokeDasharray={56.5}
-                strokeDashoffset={56.5 - (scrollProgress * 56.5)}
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
-
-          <span className="text-[11px] font-bold">{percentage}%</span>
-          <ArrowUp className="w-3.5 h-3.5 group-hover:-translate-y-0.5 transition-transform text-sky-600 stroke-[2.5]" />
+          <ArrowUp className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform stroke-[2.5]" />
         </button>
       </div>
     </>
