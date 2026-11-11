@@ -40,41 +40,7 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ isModalOpen = false 
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // Check if the device is a primary touch device (phones & tablets)
-    // Mobile browsers have dedicated hardware compositor momentum scrolling (120Hz/60Hz).
-    // Bypassing JS touch interpolation on mobile eliminates input lag and sudden choppiness.
-    const isTouchOnlyDevice =
-      typeof window !== 'undefined' &&
-      (window.matchMedia('(pointer: coarse) and (hover: none)').matches ||
-        (('ontouchstart' in window || navigator.maxTouchPoints > 0) && window.innerWidth < 1024));
-
-    if (isTouchOnlyDevice) {
-      // Native anchor smooth scroll handling for mobile
-      const handleAnchorClick = (e: MouseEvent) => {
-        const target = e.target as HTMLElement | null;
-        const anchor = target?.closest('a') as HTMLAnchorElement | null;
-        if (!anchor) return;
-
-        const href = anchor.getAttribute('href');
-        if (href && href.startsWith('#') && href.length > 1) {
-          const targetElement = document.querySelector(href);
-          if (targetElement) {
-            e.preventDefault();
-            targetElement.scrollIntoView({ behavior: 'smooth' });
-          }
-        } else if (href === '#') {
-          e.preventDefault();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-      };
-
-      document.addEventListener('click', handleAnchorClick);
-      return () => {
-        document.removeEventListener('click', handleAnchorClick);
-      };
-    }
-
-    // Initialize Lenis for desktop mouse wheel & trackpad physics
+    // Initialize Lenis with tuned physics for both trackpad momentum and mouse wheel increments
     const lenis = new Lenis({
       duration: 1.15, // Perfect sweet spot: not sluggish, yet silky smooth
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential deceleration
@@ -82,8 +48,7 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ isModalOpen = false 
       gestureOrientation: 'vertical',
       smoothWheel: true, // Smooths discrete notched mouse wheel ticks
       wheelMultiplier: 0.95, // Balanced wheel sensitivity
-      touchMultiplier: 1.0,
-      syncTouch: false, // Never hijack native touch momentum
+      touchMultiplier: 1.25, // Natural touchpad gesture response
       infinite: false,
       prevent: (node) => {
         // Prevent smooth scrolling when event is within an element marked with data-lenis-prevent

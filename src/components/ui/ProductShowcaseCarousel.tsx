@@ -91,7 +91,7 @@ export const ProductShowcaseCarousel: React.FC<ProductShowcaseCarouselProps> = (
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       onClick={onSelectProject}
-      className={`relative w-full aspect-[16/10] rounded-xl overflow-hidden mb-4 border border-slate-200/80 bg-slate-950/90 shadow-sm group/carousel select-none cursor-pointer touch-pan-y ${className}`}
+      className={`relative w-full aspect-[16/10] rounded-xl overflow-hidden mb-4 border border-slate-200/80 bg-slate-950/90 shadow-sm group/carousel select-none cursor-pointer ${className}`}
       title="Click to explore interactive architecture & live preview"
     >
       {/* Background Soft Ambient Light */}

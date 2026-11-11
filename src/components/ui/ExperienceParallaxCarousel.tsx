@@ -299,7 +299,7 @@ export const ExperienceParallaxCarousel: React.FC<
           2. 3D PARALLAX STAGE (LEFT CARD + CENTER CARD + RIGHT CARD)
          ===================================================================== */}
       <div
-        className="relative w-full max-w-7xl min-h-[540px] sm:min-h-[660px] lg:min-h-[720px] flex items-center justify-center overflow-visible"
+        className="relative w-full max-w-7xl min-h-[760px] lg:min-h-[720px] flex items-center justify-center overflow-visible"
         style={{ perspective: "1600px" }}
       >
         {/* -----------------------------------------------------------------
@@ -395,7 +395,7 @@ export const ExperienceParallaxCarousel: React.FC<
                 paginate(-1);
               }
             }}
-            className="touch-pan-y w-full max-w-3xl xl:max-w-4xl bg-gradient-to-b from-white via-white to-slate-50/90 rounded-3xl border-2 border-slate-200/90 shadow-2xl p-5 sm:p-9 relative overflow-hidden transition-colors"
+            className="w-full max-w-3xl xl:max-w-4xl bg-gradient-to-b from-white via-white to-slate-50/90 rounded-3xl border-2 border-slate-200/90 shadow-2xl p-6 sm:p-9 relative overflow-hidden transition-colors"
           >
             {/* Top Accent Specular Hairline */}
             <div

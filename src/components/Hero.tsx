@@ -160,42 +160,40 @@ export const Hero: React.FC<HeroProps> = ({
       <div className="max-w-6xl mx-auto w-full z-10 relative">
         {/* Prominent Name & Identity Header with Ample Space and Visibility */}
         <div
-          className="flex items-center justify-center mb-5 will-change-transform px-2"
+          className="flex items-center justify-center mb-5 will-change-transform"
           style={{
             transform: `translate3d(${mx * 10}px, ${my * 8 - scrollY * 0.06}px, 0)`,
           }}
         >
-          <div className="inline-flex flex-wrap sm:flex-nowrap items-center justify-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 rounded-2xl bg-white border-2 border-slate-300 shadow-md hover:border-sky-500 hover:shadow-lg transition-all max-w-full text-center">
-            <div className="flex items-center gap-2 shrink-0">
-              <span className="relative flex h-3 w-3 shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-600"></span>
-              </span>
-              <span className="font-display font-black text-slate-950 text-sm sm:text-base lg:text-lg tracking-tight whitespace-nowrap">
-                Zafarali Inamdar
-              </span>
-            </div>
-            <span className="hidden sm:inline-block text-slate-300 font-bold">•</span>
-            <span className="font-mono text-[11px] sm:text-xs font-black text-sky-700 uppercase tracking-wider">
-              Full-Stack &amp; Mobile Engineer
+          <div className="inline-flex items-center gap-3 px-5 py-2 rounded-2xl bg-white border-2 border-slate-300 shadow-md hover:border-sky-500 hover:shadow-lg transition-all">
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-600"></span>
+            </span>
+            <span className="font-display font-black text-slate-950 text-base sm:text-lg tracking-tight">
+              Zafarali Inamdar
+            </span>
+            <span className="text-slate-300 font-bold">•</span>
+            <span className="font-mono text-xs font-black text-sky-700 uppercase tracking-wider">
+              Full-Stack & Mobile Engineer
             </span>
           </div>
         </div>
 
         {/* Availability Badge */}
         <div
-          className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-6 will-change-transform px-2"
+          className="flex flex-wrap items-center justify-center gap-3 mb-6 will-change-transform"
           style={{
             transform: `translate3d(${mx * 8}px, ${my * 6 - scrollY * 0.05}px, 0)`,
           }}
         >
-          <div className="inline-flex items-center justify-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-emerald-50 border-2 border-emerald-400 text-emerald-800 text-xs font-bold backdrop-blur-md shadow-md shadow-emerald-500/10 text-center max-w-full">
-            <span className="relative flex h-2.5 w-2.5 shrink-0">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border-2 border-emerald-400 text-emerald-800 text-xs font-bold backdrop-blur-md shadow-md shadow-emerald-500/10">
+            <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
             </span>
             <span>
-              Available for Full-Stack, Mobile &amp; Gen-AI Engineering Roles
+              Available for Full-Stack, Mobile & Gen-AI Engineering Roles
             </span>
           </div>
 
@@ -210,24 +208,24 @@ export const Hero: React.FC<HeroProps> = ({
 
         {/* Main Headline with 3D Depth Layering */}
         <div
-          className="text-center max-w-4xl mx-auto space-y-4 will-change-transform select-none px-2"
+          className="text-center max-w-4xl mx-auto space-y-4 will-change-transform"
           style={{
             transform: `translate3d(${mx * 12}px, ${my * 10 - scrollY * 0.08}px, 0)`,
           }}
         >
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight text-slate-900 font-display leading-[1.12] sm:leading-[1.08]">
-            Building Scalable Web, Mobile &amp;{" "}
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 font-display leading-[1.08]">
+            Building Scalable Web, Mobile &{" "}
             <span className="bg-gradient-to-r from-blue-700 via-indigo-600 to-sky-500 bg-clip-text text-transparent drop-shadow-sm">
               Gen-AI Systems
             </span>
           </h1>
 
-          {/* Subtitle / Interactive Typewriter with Stable Height */}
-          <div className="min-h-[4rem] sm:min-h-11 flex items-center justify-center">
-            <p className="text-base sm:text-xl lg:text-2xl font-mono text-sky-700 font-bold tracking-wide flex items-center flex-wrap justify-center text-center">
+          {/* Subtitle / Interactive Typewriter */}
+          <div className="min-h-11 flex items-center justify-center">
+            <p className="text-lg sm:text-2xl font-mono text-sky-700 font-bold tracking-wide flex items-center flex-wrap justify-center text-center">
               <span>&gt; </span>
               <span className="mx-2 text-slate-800">{displayedText}</span>
-              <span className="w-2.5 h-5 sm:h-6 bg-sky-500 animate-pulse ml-0.5 inline-block shrink-0"></span>
+              <span className="w-2.5 h-6 bg-sky-500 animate-pulse ml-0.5 inline-block shrink-0"></span>
             </p>
           </div>
 

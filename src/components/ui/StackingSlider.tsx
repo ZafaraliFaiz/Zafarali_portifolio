@@ -130,7 +130,7 @@ export const StackingSlider: React.FC<StackingSliderProps> = ({
                   }
                 }
               }}
-              className="touch-pan-y absolute inset-0 w-full h-full will-change-transform cursor-grab active:cursor-grabbing"
+              className="absolute inset-0 w-full h-full will-change-transform cursor-grab active:cursor-grabbing"
               style={{
                 transformOrigin: "center bottom",
                 pointerEvents: isTop ? "auto" : "none",

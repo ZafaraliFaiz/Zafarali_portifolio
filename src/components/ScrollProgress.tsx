@@ -28,9 +28,9 @@ export const ScrollProgress: React.FC = () => {
         </div>
       </div>
 
-      {/* Floating Back-to-Top Pill (Positioned cleanly above the Cosmos toggle button) */}
+      {/* Floating Back-to-Top Pill */}
       <div
-        className={`fixed bottom-18 right-5 sm:bottom-20 sm:right-6 z-40 transition-all duration-300 pointer-events-auto no-print ${
+        className={`fixed bottom-6 right-6 z-40 transition-all duration-300 pointer-events-auto no-print ${
           scrollY > 320
             ? 'opacity-100 translate-y-0'
             : 'opacity-0 translate-y-4 pointer-events-none'
