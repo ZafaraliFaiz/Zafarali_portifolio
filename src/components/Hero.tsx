@@ -103,8 +103,9 @@ export const Hero: React.FC<HeroProps> = ({
   };
 
   // Mouse Parallax Offsets
-  const mx = mouse.x;
-  const my = mouse.y;
+  const isMobile = typeof window !== "undefined" && (window.innerWidth < 768 || mouse.isTouch);
+  const mx = isMobile ? 0 : mouse.x;
+  const my = isMobile ? 0 : mouse.y;
 
   return (
     <section
@@ -161,9 +162,13 @@ export const Hero: React.FC<HeroProps> = ({
         {/* Prominent Name & Identity Header with Ample Space and Visibility */}
         <div
           className="flex items-center justify-center mb-5 will-change-transform"
-          style={{
-            transform: `translate3d(${mx * 10}px, ${my * 8 - scrollY * 0.06}px, 0)`,
-          }}
+          style={
+            !isMobile && (mx !== 0 || my !== 0)
+              ? {
+                  transform: `translate3d(${mx * 10}px, ${my * 8 - scrollY * 0.06}px, 0)`,
+                }
+              : undefined
+          }
         >
           <div className="inline-flex items-center gap-3 px-5 py-2 rounded-2xl bg-white border-2 border-slate-300 shadow-md hover:border-sky-500 hover:shadow-lg transition-all">
             <span className="relative flex h-3 w-3">
@@ -183,9 +188,13 @@ export const Hero: React.FC<HeroProps> = ({
         {/* Availability Badge */}
         <div
           className="flex flex-wrap items-center justify-center gap-3 mb-6 will-change-transform"
-          style={{
-            transform: `translate3d(${mx * 8}px, ${my * 6 - scrollY * 0.05}px, 0)`,
-          }}
+          style={
+            !isMobile && (mx !== 0 || my !== 0)
+              ? {
+                  transform: `translate3d(${mx * 8}px, ${my * 6 - scrollY * 0.05}px, 0)`,
+                }
+              : undefined
+          }
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border-2 border-emerald-400 text-emerald-800 text-xs font-bold backdrop-blur-md shadow-md shadow-emerald-500/10">
             <span className="relative flex h-2.5 w-2.5">
@@ -209,12 +218,16 @@ export const Hero: React.FC<HeroProps> = ({
         {/* Main Headline with 3D Depth Layering */}
         <div
           className="text-center max-w-4xl mx-auto space-y-4 will-change-transform"
-          style={{
-            transform: `translate3d(${mx * 12}px, ${my * 10 - scrollY * 0.08}px, 0)`,
-          }}
+          style={
+            !isMobile && (mx !== 0 || my !== 0)
+              ? {
+                  transform: `translate3d(${mx * 12}px, ${my * 10 - scrollY * 0.08}px, 0)`,
+                }
+              : undefined
+          }
         >
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 font-display leading-[1.08]">
-            Building Scalable Web, Mobile &{" "}
+            <span className="ink-adaptive-heading">Building Scalable Web, Mobile &{" "}</span>
             <span className="bg-gradient-to-r from-blue-700 via-indigo-600 to-sky-500 bg-clip-text text-transparent drop-shadow-sm">
               Gen-AI Systems
             </span>
@@ -224,7 +237,7 @@ export const Hero: React.FC<HeroProps> = ({
           <div className="min-h-11 flex items-center justify-center">
             <p className="text-lg sm:text-2xl font-mono text-sky-700 font-bold tracking-wide flex items-center flex-wrap justify-center text-center">
               <span>&gt; </span>
-              <span className="mx-2 text-slate-800">{displayedText}</span>
+              <span className="mx-2 text-slate-800 ink-adaptive-heading">{displayedText}</span>
               <span className="w-2.5 h-6 bg-sky-500 animate-pulse ml-0.5 inline-block shrink-0"></span>
             </p>
           </div>
@@ -254,7 +267,7 @@ export const Hero: React.FC<HeroProps> = ({
             ))}
           </div>
 
-          <p className="text-slate-700 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed pt-2 font-medium">
+          <p className="text-slate-700 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed pt-2 font-medium ink-adaptive-body">
             Hi, I&apos;m{" "}
             <strong className="text-slate-900 font-black">
               Zafarali Faizahmed Inamdar
@@ -274,9 +287,13 @@ export const Hero: React.FC<HeroProps> = ({
         {/* Hero Interactive Quick Stats (Wrapped in 3D TiltCards) */}
         <div
           className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto mt-10 will-change-transform"
-          style={{
-            transform: `translate3d(${mx * 6}px, ${my * 5 - scrollY * 0.04}px, 0)`,
-          }}
+          style={
+            !isMobile && (mx !== 0 || my !== 0)
+              ? {
+                  transform: `translate3d(${mx * 6}px, ${my * 5 - scrollY * 0.04}px, 0)`,
+                }
+              : undefined
+          }
         >
           {/* Card 1: Enterprise Systems */}
           <TiltCard

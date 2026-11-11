@@ -182,13 +182,13 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
             </div>
 
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 font-display tracking-tight leading-none">
-              Professional{' '}
+              <span className="ink-adaptive-heading">Professional </span>
               <span className="bg-gradient-to-r from-sky-600 via-emerald-600 to-indigo-600 bg-clip-text text-transparent">
                 Experience Deck
               </span>
             </h2>
 
-            <p className="text-slate-600 text-sm sm:text-base mt-4 font-medium leading-relaxed max-w-2xl mx-auto">
+            <p className="text-slate-600 text-sm sm:text-base mt-4 font-medium leading-relaxed max-w-2xl mx-auto ink-adaptive-body">
               Real-world systems delivery across offline-first mobile apps live on the App Store & Play Store, multi-module agricultural ERP platforms, and transactional B2B engines.
             </p>
 

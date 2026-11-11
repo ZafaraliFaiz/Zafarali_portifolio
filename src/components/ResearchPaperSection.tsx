@@ -41,13 +41,13 @@ export const ResearchPaperSection: React.FC = () => {
               <BookOpen className="w-4 h-4 text-purple-400 stroke-[2.5]" />
               <span>Academic Publication & Empirical Research</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight leading-none">
+            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight leading-none ink-adaptive-heading">
               Peer-Reviewed{" "}
               <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 bg-clip-text text-transparent">
                 Gen-AI Research
               </span>
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base mt-4 font-medium leading-relaxed max-w-2xl mx-auto">
+            <p className="text-slate-600 text-sm sm:text-base mt-4 font-medium leading-relaxed max-w-2xl mx-auto ink-adaptive-body">
               Bridging modern software engineering industry paradigms with
               academic empirical rigor, evaluating LLM integration and developer
               throughput.

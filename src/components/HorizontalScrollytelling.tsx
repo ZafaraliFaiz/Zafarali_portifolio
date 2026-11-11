@@ -36,8 +36,12 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
+  const progressBarRef = useRef<HTMLDivElement | null>(null);
+  const progressTextRef = useRef<HTMLSpanElement | null>(null);
+  const maxTranslateRef = useRef(0);
+  const activeChapterRef = useRef(0);
+  const touchStartX = useRef<number | null>(null);
 
-  const [progress, setProgress] = useState(0);
   const [activeChapter, setActiveChapter] = useState(0);
   const [maxTranslate, setMaxTranslate] = useState(0);
 
@@ -101,6 +105,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
       const trackWidth = trackRef.current.scrollWidth;
       const viewWidth = window.innerWidth;
       const maxDist = Math.max(0, trackWidth - viewWidth + 60);
+      maxTranslateRef.current = maxDist;
       setMaxTranslate(maxDist);
     };
 
@@ -109,7 +114,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
     return () => window.removeEventListener("resize", measure);
   }, []);
 
-  // Sync vertical scroll to horizontal progress
+  // Sync vertical scroll to horizontal progress via direct DOM transform (ZERO React re-renders during scroll!)
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
@@ -119,10 +124,23 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
 
       const scrolled = -rect.top;
       const normProgress = Math.max(0, Math.min(1, scrolled / scrollableDist));
-      setProgress(normProgress);
+
+      // Direct DOM updates: 120 FPS buttery smooth without triggering React component tree re-renders
+      if (trackRef.current) {
+        trackRef.current.style.transform = `translate3d(-${normProgress * maxTranslateRef.current}px, 0, 0)`;
+      }
+      if (progressBarRef.current) {
+        progressBarRef.current.style.width = `${normProgress * 100}%`;
+      }
+      if (progressTextRef.current) {
+        progressTextRef.current.textContent = `${Math.round(normProgress * 100)}% Narrative Completed`;
+      }
 
       const chapterIdx = Math.min(4, Math.floor(normProgress * 5));
-      setActiveChapter(chapterIdx);
+      if (chapterIdx !== activeChapterRef.current) {
+        activeChapterRef.current = chapterIdx;
+        setActiveChapter(chapterIdx);
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -145,6 +163,24 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
 
   const handleNext = () => {
     if (activeChapter < 4) scrollToChapter(activeChapter + 1);
+  };
+
+  // Touch swipe gesture handling for mobile devices
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX;
+    if (Math.abs(diff) > 45) {
+      if (diff > 0 && activeChapter < 4) {
+        scrollToChapter(activeChapter + 1);
+      } else if (diff < 0 && activeChapter > 0) {
+        scrollToChapter(activeChapter - 1);
+      }
+    }
+    touchStartX.current = null;
   };
 
   // Simulation helpers
@@ -180,8 +216,6 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
     });
   };
 
-  const translateX = progress * maxTranslate;
-
   return (
     <section
       id="journey"
@@ -189,8 +223,8 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
       className="relative w-full"
       style={{ height: "420vh" }}
     >
-      {/* Sticky Fullscreen Scrollytelling Viewport */}
-      <div className="sticky top-0 w-full h-screen overflow-hidden flex flex-col justify-between px-4 sm:px-8 py-5 sm:py-6 bg-[#f8fafc]/95 backdrop-blur-sm z-10">
+      {/* Sticky Fullscreen Scrollytelling Viewport (100dvh for mobile toolbars) */}
+      <div className="sticky top-0 w-full h-screen h-[100dvh] overflow-hidden flex flex-col justify-between px-3 sm:px-8 py-3.5 sm:py-6 bg-[#f8fafc]/95 backdrop-blur-sm z-10">
         
         {/* Scrollytelling Header */}
         <div className="w-full max-w-7xl mx-auto flex flex-col gap-2 z-30">
@@ -206,7 +240,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                   Chapter 0{activeChapter + 1} of 05
                 </span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-display mt-1 tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-display mt-1 tracking-tight ink-adaptive-heading">
                 Architectural Storytelling &amp; Technical Milestones
               </h2>
             </div>
@@ -256,26 +290,31 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
           {/* Slender Progress Track */}
           <div className="w-full h-1 bg-slate-200/80 rounded-full overflow-hidden mt-0.5">
             <div
+              ref={progressBarRef}
               className="h-full bg-gradient-to-r from-emerald-500 via-sky-500 via-blue-500 to-indigo-600 transition-all duration-75"
-              style={{ width: `${progress * 100}%` }}
+              style={{ width: "0%" }}
             />
           </div>
         </div>
 
-        {/* The Horizontal Scrolling Track */}
-        <div className="w-full overflow-visible my-auto z-10 py-2">
+        {/* The Horizontal Scrolling Track (with Touch Swipe Support) */}
+        <div
+          className="w-full overflow-visible my-auto z-10 py-2 touch-pan-y"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           <div
             ref={trackRef}
             className="flex items-center gap-6 sm:gap-8 will-change-transform transition-transform duration-75 ease-out"
             style={{
-              transform: `translate3d(-${translateX}px, 0, 0)`,
+              transform: "translate3d(0, 0, 0)",
             }}
           >
             
             {/* ======================================================== */}
             {/* CHAPTER 01: Academic Rigor & CS Foundations              */}
             {/* ======================================================== */}
-            <div className="w-[86vw] max-w-[900px] min-w-[320px] shrink-0">
+            <div className="w-[88vw] sm:w-[86vw] max-w-[900px] min-w-[280px] shrink-0">
               <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06}>
                 <div className="relative rounded-2xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] backdrop-blur-xl border border-[#EADBCA] hover:border-[#059669] shadow-[0_8px_30px_-6px_rgba(180,120,60,0.08),0_1px_3px_rgba(180,120,60,0.04)] hover:shadow-[0_20px_45px_-10px_rgba(5,150,105,0.16)] overflow-hidden transition-all duration-300 group">
                   {/* Top Specular Dual Hairline: Emerald to Vermillion */}
@@ -377,7 +416,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             {/* ======================================================== */}
             {/* CHAPTER 02: Enterprise ERP Billing & Inventory           */}
             {/* ======================================================== */}
-            <div className="w-[86vw] max-w-[900px] min-w-[320px] shrink-0">
+            <div className="w-[88vw] sm:w-[86vw] max-w-[900px] min-w-[280px] shrink-0">
               <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06}>
                 <div className="relative rounded-2xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] backdrop-blur-xl border border-[#EADBCA] hover:border-[#E34234] shadow-[0_8px_30px_-6px_rgba(180,120,60,0.08),0_1px_3px_rgba(180,120,60,0.04)] hover:shadow-[0_20px_45px_-10px_rgba(227,66,52,0.16)] overflow-hidden transition-all duration-300 group">
                   {/* Top Specular Dual Hairline: Vermillion to Emerald */}
@@ -491,7 +530,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             {/* ======================================================== */}
             {/* CHAPTER 03: Offline-First Mobile Resilience & Published  */}
             {/* ======================================================== */}
-            <div className="w-[86vw] max-w-[900px] min-w-[320px] shrink-0">
+            <div className="w-[88vw] sm:w-[86vw] max-w-[900px] min-w-[280px] shrink-0">
               <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06}>
                 <div className="relative rounded-2xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] backdrop-blur-xl border border-[#EADBCA] hover:border-[#059669] shadow-[0_8px_30px_-6px_rgba(180,120,60,0.08),0_1px_3px_rgba(180,120,60,0.04)] hover:shadow-[0_20px_45px_-10px_rgba(5,150,105,0.16)] overflow-hidden transition-all duration-300 group">
                   {/* Top Specular Dual Hairline: Emerald to Vermillion */}
@@ -597,7 +636,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             {/* ======================================================== */}
             {/* CHAPTER 04: Applied Gen-AI & Peer-Reviewed Research      */}
             {/* ======================================================== */}
-            <div className="w-[86vw] max-w-[900px] min-w-[320px] shrink-0">
+            <div className="w-[88vw] sm:w-[86vw] max-w-[900px] min-w-[280px] shrink-0">
               <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06}>
                 <div className="relative rounded-2xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] backdrop-blur-xl border border-[#EADBCA] hover:border-[#E34234] shadow-[0_8px_30px_-6px_rgba(180,120,60,0.08),0_1px_3px_rgba(180,120,60,0.04)] hover:shadow-[0_20px_45px_-10px_rgba(227,66,52,0.16)] overflow-hidden transition-all duration-300 group">
                   {/* Top Specular Dual Hairline: Vermillion to Emerald */}
@@ -678,7 +717,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             {/* ======================================================== */}
             {/* CHAPTER 05: Cloud Infrastructure & Scale                 */}
             {/* ======================================================== */}
-            <div className="w-[86vw] max-w-[900px] min-w-[320px] shrink-0">
+            <div className="w-[88vw] sm:w-[86vw] max-w-[900px] min-w-[280px] shrink-0">
               <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06}>
                 <div className="relative rounded-2xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] backdrop-blur-xl border border-[#EADBCA] hover:border-[#059669] shadow-[0_8px_30px_-6px_rgba(180,120,60,0.08),0_1px_3px_rgba(180,120,60,0.04)] hover:shadow-[0_20px_45px_-10px_rgba(5,150,105,0.16)] overflow-hidden transition-all duration-300 group">
                   {/* Top Specular Dual Hairline: Emerald to Vermillion */}
@@ -782,8 +821,8 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="text-[11px] text-slate-700 font-bold">
-              {Math.round(progress * 100)}% Narrative Completed
+            <span ref={progressTextRef} className="text-[11px] text-slate-700 font-bold">
+              0% Narrative Completed
             </span>
             <a
               href="#projects"

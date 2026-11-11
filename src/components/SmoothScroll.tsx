@@ -40,7 +40,16 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ isModalOpen = false 
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // Initialize Lenis with tuned physics for both trackpad momentum and mouse wheel increments
+    // Disable virtual smooth scrolling on touch/mobile devices to let native momentum scroll run at hardware 120Hz
+    const isTouchOrMobile =
+      typeof window !== 'undefined' &&
+      (window.innerWidth < 768 || window.matchMedia('(pointer: coarse)').matches);
+
+    if (isTouchOrMobile) {
+      return; // Do NOT initialize Lenis on mobile devices!
+    }
+
+    // Initialize Lenis with tuned physics for desktop wheel & trackpad
     const lenis = new Lenis({
       duration: 1.15, // Perfect sweet spot: not sluggish, yet silky smooth
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential deceleration

@@ -21,6 +21,8 @@ export const TiltCard: React.FC<TiltCardProps> = ({
   ...rest
 }) => {
   const cardRef = useRef<HTMLDivElement | null>(null);
+  const isMobile = typeof window !== "undefined" && (window.innerWidth < 768 || "ontouchstart" in window);
+
   const [transform, setTransform] = useState({
     rotateX: 0,
     rotateY: 0,
@@ -32,7 +34,7 @@ export const TiltCard: React.FC<TiltCardProps> = ({
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
-      if (!cardRef.current) return;
+      if (isMobile || !cardRef.current) return;
       const rect = cardRef.current.getBoundingClientRect();
       if (rect.width === 0 || rect.height === 0) return;
 
@@ -52,10 +54,11 @@ export const TiltCard: React.FC<TiltCardProps> = ({
         isHovered: true,
       });
     },
-    [maxTilt, scale],
+    [maxTilt, scale, isMobile],
   );
 
   const handleMouseLeave = useCallback(() => {
+    if (isMobile) return;
     setTransform({
       rotateX: 0,
       rotateY: 0,
@@ -64,7 +67,15 @@ export const TiltCard: React.FC<TiltCardProps> = ({
       glareY: 50,
       isHovered: false,
     });
-  }, []);
+  }, [isMobile]);
+
+  if (isMobile) {
+    return (
+      <div ref={cardRef} className={className} style={style} {...rest}>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <div

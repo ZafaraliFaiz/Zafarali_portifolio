@@ -160,13 +160,13 @@ export const ContactSection: React.FC = () => {
               <MessageSquare className="w-4 h-4 text-sky-600 stroke-[2.5]" />
               <span>Direct Inquiries</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight ink-adaptive-heading">
               Let&apos;s Build Something{' '}
               <span className="bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
                 Exceptional Together
               </span>
             </h2>
-            <p className="text-slate-700 text-sm sm:text-base mt-2 font-medium leading-relaxed">
+            <p className="text-slate-700 text-sm sm:text-base mt-2 font-medium leading-relaxed ink-adaptive-body">
               Recruiter, engineering manager, founder, or collaborator? Reach out directly to discuss opportunities.
             </p>
           </div>

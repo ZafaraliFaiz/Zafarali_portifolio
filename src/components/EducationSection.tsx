@@ -27,13 +27,13 @@ export const EducationSection: React.FC = () => {
               <GraduationCap className="w-4 h-4 text-emerald-400 stroke-[2.5]" />
               <span>Academic Rigor & Distinction</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight leading-none">
+            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight leading-none ink-adaptive-heading">
               Academic{" "}
               <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-sky-600 bg-clip-text text-transparent">
                 Excellence & Foundations
               </span>
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base mt-4 font-medium leading-relaxed max-w-2xl mx-auto">
+            <p className="text-slate-600 text-sm sm:text-base mt-4 font-medium leading-relaxed max-w-2xl mx-auto ink-adaptive-body">
               Consistent 9.05 CGPA across both Master&apos;s and Bachelor&apos;s
               degrees reflecting uncompromising theoretical foundations in
               Computer Science, Systems Architecture, and Computational

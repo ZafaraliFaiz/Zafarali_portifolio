@@ -19,6 +19,7 @@ export const ScrollFocusZoom: React.FC<ScrollFocusZoomProps> = ({
   glowColor = 'rgba(14, 165, 233, 0.15)',
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -56,6 +57,10 @@ export const ScrollFocusZoom: React.FC<ScrollFocusZoomProps> = ({
     mass: 0.6,
     restDelta: 0.001,
   });
+
+  if (isMobile) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <motion.div

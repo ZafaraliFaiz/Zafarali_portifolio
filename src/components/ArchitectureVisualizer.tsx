@@ -363,13 +363,13 @@ export const ArchitectureVisualizer: React.FC = () => {
               <Cpu className="w-4 h-4 text-sky-600 stroke-[2.5]" />
               <span>Interactive Engineering Visualizer</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight ink-adaptive-heading">
               How I Architect{" "}
               <span className="bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
                 Mission-Critical Systems
               </span>
             </h2>
-            <p className="text-slate-700 text-sm sm:text-base mt-3 leading-relaxed font-medium">
+            <p className="text-slate-700 text-sm sm:text-base mt-3 leading-relaxed font-medium ink-adaptive-body">
               Interact with live simulations of the key engineering patterns I
               designed across my projects: Offline-first queues, atomic
               warehouse stock deductions, multi-provider Gen-AI orchestration,

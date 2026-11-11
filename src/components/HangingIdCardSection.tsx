@@ -55,6 +55,9 @@ export const HangingIdCardSection: React.FC<HangingIdCardSectionProps> = ({
     restLength: 155,
   });
 
+  const isRunningRef = useRef(false);
+  const animIdRef = useRef<number | null>(null);
+
   // Calculate container center for anchor
   useEffect(() => {
     const updateAnchor = () => {
@@ -73,25 +76,9 @@ export const HangingIdCardSection: React.FC<HangingIdCardSectionProps> = ({
     return () => window.removeEventListener('resize', updateAnchor);
   }, []);
 
-  // Toggle card visibility with drop-in bounce
-  const handleToggleCard = () => {
-    if (!isCardVisible) {
-      setIsCardVisible(true);
-      // Trigger drop-in from top with velocity
-      physicsRef.current.y = -60;
-      physicsRef.current.vy = 12;
-      physicsRef.current.spinVelocity = 18;
-      physicsRef.current.angularVelocity = 0.08;
-    } else {
-      setIsCardVisible(false);
-    }
-  };
-
-  // Main 60fps Verlet / Spring Physics Loop
-  useEffect(() => {
-    if (!isCardVisible) return;
-
-    let animId: number;
+  const startLoop = useCallback(() => {
+    if (isRunningRef.current) return;
+    isRunningRef.current = true;
 
     const loop = () => {
       const p = physicsRef.current;
@@ -129,18 +116,68 @@ export const HangingIdCardSection: React.FC<HangingIdCardSectionProps> = ({
           p.spinAngle += (nearestTurn - p.spinAngle) * 0.08;
         }
 
+        const isMobileDevice = typeof window !== 'undefined' && window.innerWidth < 768;
+        const isSettled =
+          (isMobileDevice && Math.abs(p.vy) < 0.3) ||
+          (Math.abs(p.vy) < 0.05 &&
+           Math.abs(p.angularVelocity) < 0.001 &&
+           Math.abs(p.spinVelocity) < 0.05 &&
+           Math.abs(dy) < 0.5 &&
+           Math.abs(p.angle) < 0.005);
+
+        if (isSettled) {
+          p.y = targetY;
+          p.x = p.anchorX;
+          p.angle = 0;
+          p.angularVelocity = 0;
+          p.vy = 0;
+          p.spinVelocity = 0;
+          p.spinAngle = Math.round(p.spinAngle / 360) * 360;
+
+          setCardPos({ x: p.x, y: p.y });
+          setAngleZ(0);
+          setRotateY(p.spinAngle);
+          setStrapLength(p.restLength);
+
+          isRunningRef.current = false;
+          return; // Sleep: stops calling requestAnimationFrame!
+        }
+
         setCardPos({ x: p.x, y: p.y });
         setAngleZ((p.angle * 180) / Math.PI);
         setRotateY(p.spinAngle);
         setStrapLength(currentLength);
       }
 
-      animId = requestAnimationFrame(loop);
+      animIdRef.current = requestAnimationFrame(loop);
     };
 
-    animId = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(animId);
-  }, [isCardVisible]);
+    animIdRef.current = requestAnimationFrame(loop);
+  }, []);
+
+  // Main 60fps Verlet / Spring Physics Loop
+  useEffect(() => {
+    if (!isCardVisible) return;
+    startLoop();
+    return () => {
+      if (animIdRef.current) cancelAnimationFrame(animIdRef.current);
+      isRunningRef.current = false;
+    };
+  }, [isCardVisible, startLoop]);
+
+  // Toggle card visibility with drop-in bounce
+  const handleToggleCard = () => {
+    if (!isCardVisible) {
+      setIsCardVisible(true);
+      physicsRef.current.y = -60;
+      physicsRef.current.vy = 12;
+      physicsRef.current.spinVelocity = 18;
+      physicsRef.current.angularVelocity = 0.08;
+      startLoop();
+    } else {
+      setIsCardVisible(false);
+    }
+  };
 
   // Pointer drag interactions
   const handlePointerDown = (e: React.PointerEvent) => {
@@ -208,6 +245,7 @@ export const HangingIdCardSection: React.FC<HangingIdCardSectionProps> = ({
     p.angularVelocity = p.vx * 0.12;
     p.spinVelocity = -p.vx * 2.2;
     p.vy = p.vy * 4;
+    startLoop();
   };
 
   const anchorX = physicsRef.current.anchorX || 160;
@@ -237,7 +275,7 @@ export const HangingIdCardSection: React.FC<HangingIdCardSectionProps> = ({
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-sky-700">
                 SYSTEMS ARCHITECT &amp; DEVELOPER
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight ink-adaptive-heading">
                 Engineering Modern{' '}
                 <span className="bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
                   Web, Mobile &amp; AI
@@ -247,7 +285,7 @@ export const HangingIdCardSection: React.FC<HangingIdCardSectionProps> = ({
             </div>
 
             {/* Bio summary */}
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium max-w-2xl">
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium max-w-2xl ink-adaptive-body">
               {PERSONAL_INFO.bio}
             </p>
 

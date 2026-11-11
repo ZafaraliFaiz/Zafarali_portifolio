@@ -145,13 +145,13 @@ export const SkillsSection: React.FC = () => {
               <Zap className="w-4 h-4 text-[#059669] animate-pulse stroke-[2.5]" />
               <span>Verified Technical Capabilities</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight leading-none">
+            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight leading-none ink-adaptive-heading">
               Engineered For{" "}
               <span className="bg-gradient-to-r from-[#059669] via-[#10B981] to-[#E34234] bg-clip-text text-transparent">
                 High Complexity
               </span>
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base mt-4 font-medium leading-relaxed max-w-2xl mx-auto">
+            <p className="text-slate-600 text-sm sm:text-base mt-4 font-medium leading-relaxed max-w-2xl mx-auto ink-adaptive-body">
               Languages, frameworks, architecture paradigms, and cloud
               infrastructure verified across production deployments.
             </p>
