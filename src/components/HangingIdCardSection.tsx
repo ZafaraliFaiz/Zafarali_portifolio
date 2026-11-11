@@ -23,8 +23,14 @@ export const HangingIdCardSection: React.FC<HangingIdCardSectionProps> = ({
 }) => {
   const [isCardVisible, setIsCardVisible] = useState(true);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const cardRef = useRef<HTMLDivElement | null>(null);
+  const strapLineRef = useRef<SVGLineElement | null>(null);
+  const strapInnerLineRef = useRef<SVGLineElement | null>(null);
+  const isLoopRunningRef = useRef<boolean>(false);
+  const isVisibleOnScreenRef = useRef<boolean>(true);
+  const animIdRef = useRef<number | null>(null);
 
-  // Physics State
+  // Physics State (for initial render & anchor positioning)
   const [cardPos, setCardPos] = useState({ x: 0, y: 160 });
   const [angleZ, setAngleZ] = useState(0);
   const [rotateY, setRotateY] = useState(0);
@@ -55,6 +61,100 @@ export const HangingIdCardSection: React.FC<HangingIdCardSectionProps> = ({
     restLength: 155,
   });
 
+  // Direct DOM transform update - 120 FPS buttery smooth with ZERO React re-renders!
+  const syncDOMTransform = useCallback(() => {
+    const p = physicsRef.current;
+    const degZ = (p.angle * 180) / Math.PI;
+    if (cardRef.current) {
+      cardRef.current.style.transform = `translate(-50%, -30%) rotate(${degZ}deg) rotateY(${p.spinAngle}deg)`;
+      cardRef.current.style.left = `${p.x}px`;
+      cardRef.current.style.top = `${p.y}px`;
+    }
+    if (strapLineRef.current) {
+      strapLineRef.current.setAttribute('x2', String(p.x));
+      strapLineRef.current.setAttribute('y2', String(p.y - 120));
+    }
+    if (strapInnerLineRef.current) {
+      strapInnerLineRef.current.setAttribute('x2', String(p.x));
+      strapInnerLineRef.current.setAttribute('y2', String(p.y - 120));
+    }
+  }, []);
+
+  // Physics simulation loop with automatic settling to 0 CPU cycles
+  const runPhysicsLoop = useCallback(() => {
+    if (!isLoopRunningRef.current) return;
+    if (!isVisibleOnScreenRef.current) {
+      isLoopRunningRef.current = false;
+      return;
+    }
+
+    const p = physicsRef.current;
+
+    if (!p.isDragging) {
+      // 1. Vertical bounce & gravity towards target rest length
+      const targetY = p.anchorY + p.restLength;
+      const dy = targetY - p.y;
+      const springForceY = dy * 0.08;
+      p.vy = (p.vy + springForceY) * 0.86;
+      p.y += p.vy;
+
+      // 2. Pendulum angular oscillation
+      const dx = p.x - p.anchorX;
+      const currentLength = Math.max(100, Math.hypot(dx, p.y - p.anchorY));
+      const theta = Math.atan2(dx, p.y - p.anchorY);
+
+      const gravity = 0.45;
+      const angularDamping = 0.96;
+      const angularAccel = (-gravity / currentLength) * Math.sin(theta);
+
+      p.angularVelocity = (p.angularVelocity + angularAccel) * angularDamping;
+      p.angle += p.angularVelocity;
+
+      // Reposition card along pendulum arc
+      p.x = p.anchorX + currentLength * Math.sin(p.angle);
+
+      // 3. 3D Y-axis rotational spin with damping
+      p.spinVelocity *= 0.94;
+      p.spinAngle += p.spinVelocity;
+
+      // Settle towards front facing (0 or nearest 360 deg)
+      if (Math.abs(p.spinVelocity) < 0.25) {
+        const nearestTurn = Math.round(p.spinAngle / 360) * 360;
+        p.spinAngle += (nearestTurn - p.spinAngle) * 0.08;
+      }
+
+      // Check settling condition to sleep the RAF loop completely!
+      const isSettled =
+        Math.abs(p.vy) < 0.04 &&
+        Math.abs(p.angularVelocity) < 0.001 &&
+        Math.abs(p.spinVelocity) < 0.04 &&
+        Math.abs(dy) < 0.5 &&
+        Math.abs(dx) < 0.5;
+
+      if (isSettled) {
+        p.y = targetY;
+        p.x = p.anchorX;
+        p.vy = 0;
+        p.angularVelocity = 0;
+        p.spinVelocity = 0;
+        p.angle = 0;
+        p.spinAngle = Math.round(p.spinAngle / 360) * 360;
+        syncDOMTransform();
+        isLoopRunningRef.current = false;
+        return; // SLEEP! No more requestAnimationFrame calls
+      }
+    }
+
+    syncDOMTransform();
+    animIdRef.current = requestAnimationFrame(runPhysicsLoop);
+  }, [syncDOMTransform]);
+
+  const wakePhysicsLoop = useCallback(() => {
+    if (isLoopRunningRef.current) return;
+    isLoopRunningRef.current = true;
+    animIdRef.current = requestAnimationFrame(runPhysicsLoop);
+  }, [runPhysicsLoop]);
+
   // Calculate container center for anchor
   useEffect(() => {
     const updateAnchor = () => {
@@ -65,13 +165,37 @@ export const HangingIdCardSection: React.FC<HangingIdCardSectionProps> = ({
         if (!physicsRef.current.isDragging) {
           physicsRef.current.x = center;
           setCardPos((prev) => ({ ...prev, x: center }));
+          syncDOMTransform();
         }
       }
     };
     updateAnchor();
     window.addEventListener('resize', updateAnchor);
     return () => window.removeEventListener('resize', updateAnchor);
-  }, []);
+  }, [syncDOMTransform]);
+
+  // IntersectionObserver to pause loop when scrolled away from viewport
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        isVisibleOnScreenRef.current = entry.isIntersecting;
+        if (entry.isIntersecting && isCardVisible) {
+          wakePhysicsLoop();
+        } else {
+          isLoopRunningRef.current = false;
+          if (animIdRef.current) cancelAnimationFrame(animIdRef.current);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isCardVisible, wakePhysicsLoop]);
 
   // Toggle card visibility with drop-in bounce
   const handleToggleCard = () => {
@@ -82,65 +206,24 @@ export const HangingIdCardSection: React.FC<HangingIdCardSectionProps> = ({
       physicsRef.current.vy = 12;
       physicsRef.current.spinVelocity = 18;
       physicsRef.current.angularVelocity = 0.08;
+      wakePhysicsLoop();
     } else {
       setIsCardVisible(false);
+      isLoopRunningRef.current = false;
+      if (animIdRef.current) cancelAnimationFrame(animIdRef.current);
     }
   };
 
-  // Main 60fps Verlet / Spring Physics Loop
+  // Start physics on mount if visible
   useEffect(() => {
-    if (!isCardVisible) return;
-
-    let animId: number;
-
-    const loop = () => {
-      const p = physicsRef.current;
-
-      if (!p.isDragging) {
-        // 1. Vertical bounce & gravity towards target rest length
-        const targetY = p.anchorY + p.restLength;
-        const dy = targetY - p.y;
-        const springForceY = dy * 0.08;
-        p.vy = (p.vy + springForceY) * 0.86;
-        p.y += p.vy;
-
-        // 2. Pendulum angular oscillation
-        const dx = p.x - p.anchorX;
-        const currentLength = Math.max(100, Math.hypot(dx, p.y - p.anchorY));
-        const theta = Math.atan2(dx, p.y - p.anchorY);
-        
-        const gravity = 0.45;
-        const angularDamping = 0.96;
-        const angularAccel = (-gravity / currentLength) * Math.sin(theta);
-        
-        p.angularVelocity = (p.angularVelocity + angularAccel) * angularDamping;
-        p.angle += p.angularVelocity;
-
-        // Reposition card along pendulum arc
-        p.x = p.anchorX + currentLength * Math.sin(p.angle);
-        
-        // 3. 3D Y-axis rotational spin with damping
-        p.spinVelocity *= 0.94;
-        p.spinAngle += p.spinVelocity;
-
-        // Subtle settle towards front facing (0 or 360 deg)
-        if (Math.abs(p.spinVelocity) < 0.2) {
-          const nearestTurn = Math.round(p.spinAngle / 360) * 360;
-          p.spinAngle += (nearestTurn - p.spinAngle) * 0.08;
-        }
-
-        setCardPos({ x: p.x, y: p.y });
-        setAngleZ((p.angle * 180) / Math.PI);
-        setRotateY(p.spinAngle);
-        setStrapLength(currentLength);
-      }
-
-      animId = requestAnimationFrame(loop);
+    if (isCardVisible) {
+      wakePhysicsLoop();
+    }
+    return () => {
+      isLoopRunningRef.current = false;
+      if (animIdRef.current) cancelAnimationFrame(animIdRef.current);
     };
-
-    animId = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(animId);
-  }, [isCardVisible]);
+  }, [isCardVisible, wakePhysicsLoop]);
 
   // Pointer drag interactions
   const handlePointerDown = (e: React.PointerEvent) => {
@@ -157,6 +240,7 @@ export const HangingIdCardSection: React.FC<HangingIdCardSectionProps> = ({
     p.lastX = e.clientX;
     p.lastY = e.clientY;
     p.lastTime = performance.now();
+    wakePhysicsLoop();
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
@@ -184,13 +268,10 @@ export const HangingIdCardSection: React.FC<HangingIdCardSectionProps> = ({
 
     const dx = newX - p.anchorX;
     const dy = newY - p.anchorY;
-    const currentLength = Math.hypot(dx, dy);
     const theta = Math.atan2(dx, dy);
     p.angle = theta;
 
-    setCardPos({ x: newX, y: newY });
-    setAngleZ((theta * 180) / Math.PI);
-    setStrapLength(currentLength);
+    syncDOMTransform();
   };
 
   const handlePointerUp = (e: React.PointerEvent) => {
@@ -208,6 +289,7 @@ export const HangingIdCardSection: React.FC<HangingIdCardSectionProps> = ({
     p.angularVelocity = p.vx * 0.12;
     p.spinVelocity = -p.vx * 2.2;
     p.vy = p.vy * 4;
+    wakePhysicsLoop();
   };
 
   const anchorX = physicsRef.current.anchorX || 160;
@@ -319,6 +401,7 @@ export const HangingIdCardSection: React.FC<HangingIdCardSectionProps> = ({
 
                   {/* Connecting Ribbon/Strap */}
                   <line
+                    ref={strapLineRef}
                     x1={anchorX}
                     y1={anchorY}
                     x2={cardPos.x}
@@ -330,6 +413,7 @@ export const HangingIdCardSection: React.FC<HangingIdCardSectionProps> = ({
                   />
                   {/* Subtle inner highlight stitch */}
                   <line
+                    ref={strapInnerLineRef}
                     x1={anchorX}
                     y1={anchorY}
                     x2={cardPos.x}
@@ -351,6 +435,7 @@ export const HangingIdCardSection: React.FC<HangingIdCardSectionProps> = ({
 
                 {/* Interactive Physics ID Card Badge */}
                 <div
+                  ref={cardRef}
                   onPointerDown={handlePointerDown}
                   onPointerMove={handlePointerMove}
                   onPointerUp={handlePointerUp}

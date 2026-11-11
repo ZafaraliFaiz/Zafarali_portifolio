@@ -147,6 +147,25 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
     if (activeChapter < 4) scrollToChapter(activeChapter + 1);
   };
 
+  // Touch swipe gesture handling for mobile devices
+  const touchStartX = useRef<number | null>(null);
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX;
+    if (Math.abs(diff) > 45) {
+      if (diff > 0 && activeChapter < 4) {
+        scrollToChapter(activeChapter + 1);
+      } else if (diff < 0 && activeChapter > 0) {
+        scrollToChapter(activeChapter - 1);
+      }
+    }
+    touchStartX.current = null;
+  };
+
   // Simulation helpers
   const handleDispatchOrder = () => {
     if (erpStockCount <= 25) {
@@ -189,8 +208,8 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
       className="relative w-full"
       style={{ height: "420vh" }}
     >
-      {/* Sticky Fullscreen Scrollytelling Viewport */}
-      <div className="sticky top-0 w-full h-screen overflow-hidden flex flex-col justify-between px-4 sm:px-8 py-5 sm:py-6 bg-[#f8fafc]/95 backdrop-blur-sm z-10">
+      {/* Sticky Fullscreen Scrollytelling Viewport (100dvh for mobile toolbars) */}
+      <div className="sticky top-0 w-full h-screen h-[100dvh] overflow-hidden flex flex-col justify-between px-3 sm:px-8 py-3.5 sm:py-6 bg-[#f8fafc]/95 backdrop-blur-sm z-10">
         
         {/* Scrollytelling Header */}
         <div className="w-full max-w-7xl mx-auto flex flex-col gap-2 z-30">
@@ -262,8 +281,12 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
           </div>
         </div>
 
-        {/* The Horizontal Scrolling Track */}
-        <div className="w-full overflow-visible my-auto z-10 py-2">
+        {/* The Horizontal Scrolling Track (with Touch Swipe Support) */}
+        <div
+          className="w-full overflow-visible my-auto z-10 py-2 touch-pan-y"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           <div
             ref={trackRef}
             className="flex items-center gap-6 sm:gap-8 will-change-transform transition-transform duration-75 ease-out"
@@ -282,7 +305,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#059669] via-[#10B981] to-[#E34234] opacity-90 group-hover:opacity-100 transition-opacity" />
                   <div className="absolute -top-16 -right-16 w-64 h-64 bg-[#059669]/5 rounded-full blur-3xl pointer-events-none" />
 
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-7 items-center">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 p-4 sm:p-7 items-center max-h-[64vh] sm:max-h-none overflow-y-auto sm:overflow-visible">
                     {/* Left Column: Narrative & Credentials */}
                     <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
                       <div>
@@ -384,7 +407,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#E34234] via-[#F25430] to-[#059669] opacity-90 group-hover:opacity-100 transition-opacity" />
                   <div className="absolute -top-16 -right-16 w-64 h-64 bg-[#E34234]/5 rounded-full blur-3xl pointer-events-none" />
 
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-7 items-center">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 p-4 sm:p-7 items-center max-h-[64vh] sm:max-h-none overflow-y-auto sm:overflow-visible">
                     {/* Left Column: Narrative & Metrics */}
                     <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
                       <div>
@@ -498,7 +521,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#059669] via-[#10B981] to-[#E34234] opacity-90 group-hover:opacity-100 transition-opacity" />
                   <div className="absolute -top-16 -right-16 w-64 h-64 bg-[#059669]/5 rounded-full blur-3xl pointer-events-none" />
 
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-7 items-center">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 p-4 sm:p-7 items-center max-h-[64vh] sm:max-h-none overflow-y-auto sm:overflow-visible">
                     {/* Left Column: Narrative & Store Badges */}
                     <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
                       <div>
@@ -604,7 +627,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#E34234] via-[#F25430] to-[#059669] opacity-90 group-hover:opacity-100 transition-opacity" />
                   <div className="absolute -top-16 -right-16 w-64 h-64 bg-[#E34234]/5 rounded-full blur-3xl pointer-events-none" />
 
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-7 items-center">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 p-4 sm:p-7 items-center max-h-[64vh] sm:max-h-none overflow-y-auto sm:overflow-visible">
                     {/* Left Column: Narrative & Paper Download */}
                     <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
                       <div>
@@ -685,7 +708,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#059669] via-[#10B981] to-[#E34234] opacity-90 group-hover:opacity-100 transition-opacity" />
                   <div className="absolute -top-16 -right-16 w-64 h-64 bg-[#059669]/5 rounded-full blur-3xl pointer-events-none" />
 
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-7 items-center">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 p-4 sm:p-7 items-center max-h-[64vh] sm:max-h-none overflow-y-auto sm:overflow-visible">
                     {/* Left Column: Narrative & Action Channels */}
                     <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
                       <div>

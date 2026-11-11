@@ -9,6 +9,7 @@
 
   html {
     scroll-behavior: auto;
+    overflow-x: hidden;
   }
 
   /* Lenis Smooth Scroll Configuration */
@@ -305,4 +306,38 @@
   .print-only {
     display: block !important;
   }
+}
+
+/* Full Cosmos Mode Transitions & Contrast Adaptation */
+html.cosmos-active,
+html.cosmos-active body {
+  background-color: #010206 !important;
+  color: #f1f5f9 !important;
+}
+
+html.cosmos-active .text-slate-900 {
+  color: #f8fafc !important;
+}
+
+html.cosmos-active .text-slate-800 {
+  color: #f1f5f9 !important;
+}
+
+html.cosmos-active .text-slate-700 {
+  color: #cbd5e1 !important;
+}
+
+html.cosmos-active .bg-\[\#f8fafc\] {
+  background-color: transparent !important;
+}
+
+html.cosmos-active .bg-white {
+  background-color: rgba(15, 23, 42, 0.84) !important;
+  border-color: rgba(56, 189, 248, 0.35) !important;
+}
+
+html.cosmos-active .bg-white\/90,
+html.cosmos-active .bg-white\/92,
+html.cosmos-active .bg-white\/95 {
+  background-color: rgba(15, 23, 42, 0.90) !important;
 }
