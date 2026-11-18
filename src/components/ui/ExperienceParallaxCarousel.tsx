@@ -64,7 +64,8 @@ export const ExperienceParallaxCarousel: React.FC<
 }) => {
   const [page, setPage] = useState(0);
   const [direction, setDirection] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
   // Fallback local simulation states if not provided
@@ -170,14 +171,14 @@ export const ExperienceParallaxCarousel: React.FC<
     paginate(diff >= 0 ? 1 : -1);
   };
 
-  // Autoplay timer - runs continuously when isAutoPlaying is true (not blocked by mouse hover)
+  // Autoplay timer - only runs when explicitly activated by user and not hovered
   useEffect(() => {
-    if (!isAutoPlaying || isDragging) return;
+    if (!isAutoPlaying || isDragging || isHovered) return;
     const interval = setInterval(() => {
       paginate(1);
-    }, 2800);
+    }, 4500);
     return () => clearInterval(interval);
-  }, [isAutoPlaying, isDragging, paginate]);
+  }, [isAutoPlaying, isDragging, isHovered, paginate]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -255,10 +256,10 @@ export const ExperienceParallaxCarousel: React.FC<
             onClick={() => setIsAutoPlaying((prev) => !prev)}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-mono font-bold transition-all shadow-xs ${
               isAutoPlaying
-                ? "bg-white text-slate-800 border-slate-200 hover:border-slate-400"
-                : "bg-amber-50 text-amber-800 border-amber-300"
+                ? "bg-sky-50 text-sky-800 border-sky-300 ring-1 ring-sky-300"
+                : "bg-white text-slate-700 border-slate-200 hover:border-slate-400"
             }`}
-            title={isAutoPlaying ? "Pause autoplay loop" : "Resume autoplay loop"}
+            title={isAutoPlaying ? "Pause autoplay loop" : "Start autoplay loop"}
           >
             {isAutoPlaying ? (
               <>
@@ -267,8 +268,8 @@ export const ExperienceParallaxCarousel: React.FC<
               </>
             ) : (
               <>
-                <Play className="w-3.5 h-3.5 text-amber-600" />
-                <span className="hidden md:inline">Auto-loop Paused</span>
+                <Play className="w-3.5 h-3.5 text-slate-600" />
+                <span className="hidden md:inline">Auto-loop OFF</span>
               </>
             )}
           </button>
@@ -299,7 +300,9 @@ export const ExperienceParallaxCarousel: React.FC<
           2. 3D PARALLAX STAGE (LEFT CARD + CENTER CARD + RIGHT CARD)
          ===================================================================== */}
       <div
-        className="relative w-full max-w-7xl min-h-[760px] lg:min-h-[720px] flex items-center justify-center overflow-visible"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className="relative w-full max-w-7xl min-h-[800px] lg:min-h-[760px] flex items-center justify-center overflow-visible"
         style={{ perspective: "1600px" }}
       >
         {/* -----------------------------------------------------------------
@@ -395,7 +398,7 @@ export const ExperienceParallaxCarousel: React.FC<
                 paginate(-1);
               }
             }}
-            className="w-full max-w-3xl xl:max-w-4xl bg-gradient-to-b from-white via-white to-slate-50/90 rounded-3xl border-2 border-slate-200/90 shadow-2xl p-6 sm:p-9 relative overflow-hidden transition-colors"
+            className="w-full max-w-3xl xl:max-w-4xl min-h-[720px] lg:min-h-[740px] bg-gradient-to-b from-white via-white to-slate-50/90 rounded-3xl border-2 border-slate-200/90 shadow-2xl p-6 sm:p-9 relative overflow-hidden transition-colors flex flex-col justify-between"
           >
             {/* Top Accent Specular Hairline */}
             <div

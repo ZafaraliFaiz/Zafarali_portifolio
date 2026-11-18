@@ -185,26 +185,26 @@ export const SkillsSection: React.FC = () => {
 
         {/* Skills Grid with AnimatePresence & Stable Min-Height */}
         <div
-          className="min-h-[760px] md:min-h-[420px] relative"
+          className="min-h-[760px] md:min-h-[520px] relative"
           onMouseEnter={registerUserActivity}
           onTouchStart={registerUserActivity}
         >
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="popLayout">
             <motion.div
               key={activeCategory}
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5"
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-wrap justify-center gap-4 sm:gap-5 w-full"
             >
               {selectedCategoryData.skills.map((skill) => (
-                <div key={skill.name} className="h-full">
+                <div key={skill.name} className="w-full md:w-[calc(50%-10px)] max-w-2xl flex flex-col">
                   <TiltCard
                     maxTilt={3}
                     scale={1.008}
                     glareOpacity={0.06}
-                    className="h-full"
+                    className="w-full h-full flex flex-col flex-1"
                   >
                     <div
                       className="relative bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] p-5 rounded-2xl border border-[#EADBCA] hover:border-[#059669] hover:shadow-[0_12px_28px_-6px_rgba(5,150,105,0.18)] transition-all duration-300 h-full flex flex-col justify-between group shadow-[0_6px_20px_-4px_rgba(180,120,60,0.08)] overflow-hidden"

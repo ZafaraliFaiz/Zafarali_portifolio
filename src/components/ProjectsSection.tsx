@@ -403,8 +403,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                   </div>
                 )}
 
-                {/* Projects Card Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+                {/* Projects Card Grid with Centered Flow Layout */}
+                <div className="min-h-[640px] flex flex-wrap justify-center gap-6 sm:gap-7">
                   {filteredProjects.map((project, idx) => {
                     const theme = getProjectTheme(project);
 
@@ -414,7 +414,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                         direction={idx % 2 === 0 ? "left" : "bottom"}
                         delay={(idx % 3) * 0.08}
                         distance={35}
-                        className="h-full"
+                        className="w-full md:w-[calc(50%-14px)] lg:w-[calc(33.333333%-19px)] max-w-md lg:max-w-none flex flex-col"
                       >
                         <ProjectCardFlip
                           key={project.id}
@@ -423,7 +423,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                           onSelectProject={onSelectProject}
                           defaultFlipped={masterFlip}
                           flipDelay={idx * 75}
-                          className="h-full"
+                          className="w-full h-full flex flex-col flex-1"
                         />
                       </ScrollAssemble>
                     );
@@ -533,8 +533,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               </span>
             </div>
 
-            {/* Brand Glow Tech Grid (FEAT-07) */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5 sm:gap-4">
+            {/* Brand Glow Tech Cards with Centered Flow Layout (FEAT-07) */}
+            <div className="flex flex-wrap justify-center gap-3.5 sm:gap-4">
               {allSkills.map((skill, idx) => (
                 <div
                   key={idx}
@@ -543,7 +543,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                       "--tech-glow-color": skill.brandColor,
                     } as React.CSSProperties
                   }
-                  className="relative p-3.5 rounded-xl bg-gradient-to-br from-[#FFFDF9] to-[#FAF5EB] border border-[#EADBCA] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group overflow-hidden flex flex-col justify-between"
+                  className="w-[calc(50%-7px)] sm:w-[calc(33.333333%-11px)] md:w-[calc(25%-12px)] lg:w-[calc(16.666667%-13.5px)] min-h-[148px] relative p-3.5 rounded-xl bg-gradient-to-br from-[#FFFDF9] to-[#FAF5EB] border border-[#EADBCA] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group overflow-hidden flex flex-col justify-between"
                 >
                   {/* Radial Spotlight Gradient (FEAT-07) */}
                   <div

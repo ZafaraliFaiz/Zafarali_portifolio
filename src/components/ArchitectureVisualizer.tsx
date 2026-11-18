@@ -439,11 +439,11 @@ export const ArchitectureVisualizer: React.FC = () => {
 
         <ScrollFocusZoom maxScale={1.015}>
           <div
-            className="min-h-[560px] lg:min-h-[580px] relative transition-[min-height] duration-300"
+            className="min-h-[640px] lg:min-h-[660px] relative"
             onPointerDown={registerUserActivity}
             onKeyDown={registerUserActivity}
           >
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="popLayout">
               {/* Tab 1: TAIN Elect AI Offline-First Architecture */}
               {activeTab === "tain-electai" && (
                 <motion.div

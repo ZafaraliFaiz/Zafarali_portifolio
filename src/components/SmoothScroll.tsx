@@ -21,7 +21,7 @@ export function scrollToTarget(
   if (typeof window !== 'undefined' && window.__lenis) {
     window.__lenis.scrollTo(target, {
       offset: options?.offset ?? -70,
-      duration: options?.duration ?? 1.15,
+      duration: options?.duration ?? 0.85,
       immediate: options?.immediate ?? false,
     });
   } else if (typeof window !== 'undefined') {
@@ -51,12 +51,12 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ isModalOpen = false 
 
     // Initialize Lenis with tuned physics for desktop wheel & trackpad
     const lenis = new Lenis({
-      duration: 1.15, // Perfect sweet spot: not sluggish, yet silky smooth
+      duration: 0.85, // Snappy & ultra-responsive: zero float, immediate 120 FPS feel
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential deceleration
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true, // Smooths discrete notched mouse wheel ticks
-      wheelMultiplier: 0.95, // Balanced wheel sensitivity
+      wheelMultiplier: 1.05, // Instant responsive wheel sensitivity
       touchMultiplier: 1.25, // Natural touchpad gesture response
       infinite: false,
       prevent: (node) => {
@@ -89,12 +89,12 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ isModalOpen = false 
           e.preventDefault();
           lenis.scrollTo(targetElement as HTMLElement, {
             offset: -70,
-            duration: 1.2,
+            duration: 0.85,
           });
         }
       } else if (href === '#') {
+        // Prevent default jump, but do NOT automatically scroll to top
         e.preventDefault();
-        lenis.scrollTo(0, { duration: 1.2 });
       }
     };
 

@@ -96,19 +96,6 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
     return () => observer.disconnect();
   }, []);
 
-  // 2800ms carousel auto-advance (only when in command-deck mode, in view, and not interacting)
-  useEffect(() => {
-    if (viewLayout !== 'command-deck' || isInteracting || !isSectionInView) {
-      return;
-    }
-
-    const timer = setInterval(() => {
-      handleNextExperience();
-    }, 2800);
-
-    return () => clearInterval(timer);
-  }, [viewLayout, isInteracting, isSectionInView, handleNextExperience]);
-
   // Cleanup on unmount
   useEffect(() => {
     return () => {
@@ -355,14 +342,14 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenProj
               onTouchStart={registerUserActivity}
             >
               <ScrollFocusZoom maxScale={1.015} enableGlow glowColor={`${activeExp.accentColor}25`}>
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="popLayout">
                   <motion.div
                     key={activeExp.id}
-                    initial={{ opacity: 0, y: 30, scale: 0.98 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -20, scale: 0.98 }}
-                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                    className="bg-gradient-to-b from-white via-white to-slate-50/80 rounded-3xl border border-slate-200/90 shadow-xl p-6 sm:p-10 relative overflow-hidden"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full min-h-[720px] lg:min-h-[700px] flex flex-col justify-between bg-gradient-to-b from-white via-white to-slate-50/80 rounded-3xl border border-slate-200/90 shadow-xl p-6 sm:p-10 relative overflow-hidden"
                   >
                     {/* Top Ambient Banner */}
                     <div 

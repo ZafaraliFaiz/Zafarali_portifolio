@@ -9,16 +9,19 @@
 
   html {
     scroll-behavior: auto;
+    overflow-anchor: none;
   }
 
   /* Lenis Smooth Scroll Configuration */
   html.lenis,
   html.lenis body {
     height: auto;
+    overflow-anchor: none;
   }
 
   .lenis.lenis-smooth {
     scroll-behavior: auto !important;
+    overflow-anchor: none;
   }
 
   .lenis.lenis-smooth [data-lenis-prevent] {
@@ -38,6 +41,7 @@
     background-color: #f8fafc;
     color: #0f172a;
     overflow-x: hidden;
+    overflow-anchor: none;
   }
 
   h1,
@@ -68,6 +72,14 @@
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   will-change: transform;
+}
+
+/* Prevent unwanted browser auto-scroll anchoring shifts when cards change size */
+.no-overflow-anchor,
+section,
+[role="tabpanel"],
+.carousel-container {
+  overflow-anchor: none;
 }
 
 /* Custom Cyber/Luxury Glows and Grids */
