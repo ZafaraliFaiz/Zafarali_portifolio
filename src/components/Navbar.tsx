@@ -10,6 +10,7 @@ import {
   Briefcase,
   Clock,
 } from "lucide-react";
+import { scrollToTarget } from "./SmoothScroll";
 
 interface NavbarProps {
   onOpenTerminal: () => void;
@@ -75,10 +76,11 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-[1520px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 flex items-center justify-between gap-2 sm:gap-4">
         {/* Brand Area: Cristiano Ronaldo SUI Celebration Mascot + Clean Brand Anchor */}
         <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-          {/* Cristiano Ronaldo Sui Celebration Mascot (Enlarged and visibly accommodated in the design) */}
+          {/* Cristiano Ronaldo Sui Celebration Mascot */}
           <div
-            className="relative flex items-center justify-center shrink-0 transition-transform duration-300 hover:scale-110 select-none group/sui -my-1.5 sm:-my-2.5"
-            title="Cristiano Ronaldo SIUUU Celebration Mascot"
+            onClick={() => scrollToTarget("#hero", { offset: -80 })}
+            className="relative flex items-center justify-center shrink-0 transition-transform duration-300 hover:scale-110 select-none group/sui -my-1.5 sm:-my-2.5 cursor-pointer"
+            title="Cristiano Ronaldo SIUUU Celebration Mascot (Scroll to Top)"
           >
             <img
               src="/images/sui%20one.gif"
@@ -88,8 +90,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           <a
-            href="#"
-            className="group flex items-center gap-2 sm:gap-2.5 text-left focus:outline-none focus:ring-2 focus:ring-sky-500 rounded-2xl px-1.5 sm:px-2 py-1.5 hover:bg-slate-100/70 transition-all shrink-0"
+            href="#hero"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToTarget("#hero", { offset: -80 });
+            }}
+            className="group flex items-center gap-2 sm:gap-2.5 text-left focus:outline-none focus:ring-2 focus:ring-sky-500 rounded-2xl px-1.5 sm:px-2 py-1.5 hover:bg-slate-100/70 transition-all shrink-0 cursor-pointer"
+            title="Return to Hero Section"
           >
             <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-br from-sky-500 via-indigo-600 to-purple-600 p-[2px] transition-transform duration-300 group-hover:scale-105 shadow-md shrink-0">
               <div className="w-full h-full bg-white rounded-[14px] flex items-center justify-center font-mono font-black text-sky-700 text-sm">

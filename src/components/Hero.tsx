@@ -47,7 +47,7 @@ export const Hero: React.FC<HeroProps> = ({
       short: "React Native Mobile",
     },
     {
-      full: "Enterprise ERP Developer (AgroStock & Greentop)",
+      full: "<Devel></Devel>oper (AgroStock & Greentop)",
       short: "Enterprise ERP",
     },
     {
@@ -103,7 +103,8 @@ export const Hero: React.FC<HeroProps> = ({
   };
 
   // Mouse Parallax Offsets
-  const isMobile = typeof window !== "undefined" && (window.innerWidth < 768 || mouse.isTouch);
+  const isMobile =
+    typeof window !== "undefined" && (window.innerWidth < 768 || mouse.isTouch);
   const mx = isMobile ? 0 : mouse.x;
   const my = isMobile ? 0 : mouse.y;
 
@@ -227,7 +228,7 @@ export const Hero: React.FC<HeroProps> = ({
           }
         >
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 font-display leading-[1.08]">
-            <span>Building Scalable Web, Mobile &{" "}</span>
+            <span>Building Scalable Web, Mobile & </span>
             <span className="bg-gradient-to-r from-blue-700 via-indigo-600 to-sky-500 bg-clip-text text-transparent drop-shadow-sm">
               Gen-AI Systems
             </span>
