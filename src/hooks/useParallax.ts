@@ -26,25 +26,31 @@ export function useMouseParallax(damping = 0.08) {
       return;
     }
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const halfWidth = window.innerWidth / 2;
-      const halfHeight = window.innerHeight / 2;
-      
-      targetRef.current = {
-        rawX: e.clientX,
-        rawY: e.clientY,
-        x: (e.clientX - halfWidth) / halfWidth,
-        y: (e.clientY - halfHeight) / halfHeight,
-      };
-    };
-
     const update = () => {
       const target = targetRef.current;
       const current = currentRef.current;
 
+      const dx = target.x - current.x;
+      const dy = target.y - current.y;
+
+      // When settled, snap to target and sleep (stop scheduling RAF to eliminate idle re-renders)
+      if (Math.abs(dx) < 0.0005 && Math.abs(dy) < 0.0005) {
+        current.x = target.x;
+        current.y = target.y;
+        setMouse({
+          x: current.x,
+          y: current.y,
+          rawX: target.rawX,
+          rawY: target.rawY,
+          isTouch: false,
+        });
+        rafId.current = null;
+        return;
+      }
+
       // Linear interpolation
-      current.x += (target.x - current.x) * damping;
-      current.y += (target.y - current.y) * damping;
+      current.x += dx * damping;
+      current.y += dy * damping;
 
       setMouse({
         x: current.x,
@@ -55,6 +61,22 @@ export function useMouseParallax(damping = 0.08) {
       });
 
       rafId.current = requestAnimationFrame(update);
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const halfWidth = window.innerWidth / 2;
+      const halfHeight = window.innerHeight / 2;
+      
+      targetRef.current = {
+        rawX: e.clientX,
+        rawY: e.clientY,
+        x: (e.clientX - halfWidth) / halfWidth,
+        y: (e.clientY - halfHeight) / halfHeight,
+      };
+
+      if (!rafId.current) {
+        rafId.current = requestAnimationFrame(update);
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
@@ -96,12 +118,15 @@ export function useScrollParallax() {
         const progress = Math.min(1, Math.max(0, currentY / maxScroll));
         const dir = currentY >= lastScrollY.current ? 'down' : 'up';
 
-        lastScrollY.current = currentY;
-        setScrollData({
-          scrollY: currentY,
-          scrollProgress: progress,
-          direction: dir,
-        });
+        // Throttle micro-scroll updates (min 3px) to reduce unnecessary component re-renders
+        if (Math.abs(currentY - lastScrollY.current) >= 3 || currentY === 0) {
+          lastScrollY.current = currentY;
+          setScrollData({
+            scrollY: currentY,
+            scrollProgress: progress,
+            direction: dir,
+          });
+        }
 
         rafId.current = null;
       });

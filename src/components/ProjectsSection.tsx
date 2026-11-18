@@ -216,12 +216,12 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               <span>Production Systems &amp; Technical Showcase</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight leading-none">
-              <span className="ink-adaptive-heading">Engineering </span>
+              <span>Engineering </span>
               <span className="bg-gradient-to-r from-[#059669] via-[#10B981] to-[#E34234] bg-clip-text text-transparent">
                 Portfolio Showcase
               </span>
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base mt-3 max-w-xl mx-auto font-medium leading-relaxed ink-adaptive-body">
+            <p className="text-slate-600 text-sm sm:text-base mt-3 max-w-xl mx-auto font-medium leading-relaxed">
               Explore flagship production architectures, published academic
               research, and verified daily technology proficiencies.
             </p>

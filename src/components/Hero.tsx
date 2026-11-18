@@ -227,7 +227,7 @@ export const Hero: React.FC<HeroProps> = ({
           }
         >
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 font-display leading-[1.08]">
-            <span className="ink-adaptive-heading">Building Scalable Web, Mobile &{" "}</span>
+            <span>Building Scalable Web, Mobile &{" "}</span>
             <span className="bg-gradient-to-r from-blue-700 via-indigo-600 to-sky-500 bg-clip-text text-transparent drop-shadow-sm">
               Gen-AI Systems
             </span>
@@ -237,7 +237,7 @@ export const Hero: React.FC<HeroProps> = ({
           <div className="min-h-11 flex items-center justify-center">
             <p className="text-lg sm:text-2xl font-mono text-sky-700 font-bold tracking-wide flex items-center flex-wrap justify-center text-center">
               <span>&gt; </span>
-              <span className="mx-2 text-slate-800 ink-adaptive-heading">{displayedText}</span>
+              <span className="mx-2 text-slate-800">{displayedText}</span>
               <span className="w-2.5 h-6 bg-sky-500 animate-pulse ml-0.5 inline-block shrink-0"></span>
             </p>
           </div>
@@ -267,7 +267,7 @@ export const Hero: React.FC<HeroProps> = ({
             ))}
           </div>
 
-          <p className="text-slate-700 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed pt-2 font-medium ink-adaptive-body">
+          <p className="text-slate-700 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed pt-2 font-medium">
             Hi, I&apos;m{" "}
             <strong className="text-slate-900 font-black">
               Zafarali Faizahmed Inamdar

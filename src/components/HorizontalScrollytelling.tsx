@@ -240,7 +240,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
                   Chapter 0{activeChapter + 1} of 05
                 </span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-display mt-1 tracking-tight ink-adaptive-heading">
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-display mt-1 tracking-tight">
                 Architectural Storytelling &amp; Technical Milestones
               </h2>
             </div>

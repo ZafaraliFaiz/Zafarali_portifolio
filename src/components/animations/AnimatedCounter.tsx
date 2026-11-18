@@ -36,12 +36,14 @@ export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
     const checkScroll = () => {
       if (window.scrollY > 30) {
         setHasScrolledDown(true);
+        window.removeEventListener('scroll', checkScroll);
       }
     };
 
     // If page was loaded already scrolled
     if (window.scrollY > 30) {
       setHasScrolledDown(true);
+      return;
     }
 
     window.addEventListener('scroll', checkScroll, { passive: true });

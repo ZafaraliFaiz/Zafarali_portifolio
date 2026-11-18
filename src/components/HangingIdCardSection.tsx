@@ -275,7 +275,7 @@ export const HangingIdCardSection: React.FC<HangingIdCardSectionProps> = ({
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-sky-700">
                 SYSTEMS ARCHITECT &amp; DEVELOPER
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight ink-adaptive-heading">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
                 Engineering Modern{' '}
                 <span className="bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
                   Web, Mobile &amp; AI
@@ -285,7 +285,7 @@ export const HangingIdCardSection: React.FC<HangingIdCardSectionProps> = ({
             </div>
 
             {/* Bio summary */}
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium max-w-2xl ink-adaptive-body">
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium max-w-2xl">
               {PERSONAL_INFO.bio}
             </p>
 
