@@ -22,6 +22,13 @@ import {
   RotateCcw,
   Compass,
   LayoutGrid,
+  Server,
+  Cloud,
+  Box,
+  WifiOff,
+  Sliders,
+  FileText,
+  RefreshCw,
 } from "lucide-react";
 import {
   PROJECTS,
@@ -41,31 +48,88 @@ interface ProjectsSectionProps {
   onSelectProject: (project: Project) => void;
 }
 
-// Tech Stack Brand Color Mapping for FEAT-07
+// Tech Stack Brand Color Mapping with Vibrant Authentic Brand Colors
 const TECH_BRAND_COLORS: Record<string, string> = {
-  "React.js": "#61DAFB",
-  "React Native & Expo": "#61DAFB",
-  "Next.js (App Router)": "#0284c7",
-  "TypeScript & JavaScript": "#3178C6",
-  "Tailwind CSS & HeroUI": "#06B6D4",
-  "Redux Toolkit & Zustand": "#764ABC",
-  "React Hook Form & Yup": "#EC5990",
-  "TanStack React Query": "#FF4154",
-  "Node.js & Express.js": "#339933",
-  "FastAPI & Python": "#3776AB",
-  "MySQL & Relational Design": "#4479A1",
-  "Supabase (Postgres & Auth)": "#3ECF8E",
-  "Offline-First Architectures": "#0284C7",
-  "Docker & Containerization": "#2496ED",
+  "React.js": "#0ea5e9",
+  "React Native & Expo": "#0284c7",
+  "Next.js (App Router)": "#0f172a",
+  "TypeScript & JavaScript": "#3178c6",
+  "Tailwind CSS & HeroUI": "#06b6d4",
+  "Redux Toolkit & Zustand": "#764abc",
+  "React Hook Form & Yup": "#ec4899",
+  "TanStack React Query": "#ff4154",
+  "Node.js & Express.js": "#16a34a",
+  "FastAPI & Python": "#0284c7",
+  "MySQL & Relational Design": "#00758f",
+  "Supabase (Postgres & Auth)": "#10b981",
+  "Offline-First Architectures": "#6366f1",
+  "Docker & Containerization": "#2496ed",
   "NGINX Reverse Proxy": "#009639",
-  "Jenkins CI/CD": "#D24939",
-  "AWS (EC2, IAM, S3)": "#FF9900",
-  "EAS Build & App Distribution": "#4630EB",
-  "Git, GitHub & CI/CD": "#F05032",
-  "LangChain Orchestration": "#7C3AED",
-  "OpenAI & Gemini APIs": "#10A37F",
-  "Prompt Engineering": "#8B5CF6",
-  "Scientific Research Methodology": "#EC4899",
+  "Jenkins CI/CD": "#d24939",
+  "AWS (EC2, IAM, S3)": "#f59e0b",
+  "EAS Build & App Distribution": "#4630eb",
+  "Git, GitHub & CI/CD": "#f05032",
+  "LangChain Orchestration": "#7c3aed",
+  "OpenAI & Gemini APIs": "#059669",
+  "Prompt Engineering": "#8b5cf6",
+  "Scientific Research Methodology": "#ec4899",
+};
+
+// Map each technology to its crisp Lucide brand glyph
+const getTechIcon = (name: string) => {
+  switch (name) {
+    case "React.js":
+      return <Layers className="w-4 h-4" />;
+    case "React Native & Expo":
+    case "EAS Build & App Distribution":
+      return <Smartphone className="w-4 h-4" />;
+    case "Next.js (App Router)":
+    case "Node.js & Express.js":
+      return <Server className="w-4 h-4" />;
+    case "TypeScript & JavaScript":
+      return <Code2 className="w-4 h-4" />;
+    case "Tailwind CSS & HeroUI":
+      return <Sparkles className="w-4 h-4" />;
+    case "Redux Toolkit & Zustand":
+      return <Layers className="w-4 h-4" />;
+    case "React Hook Form & Yup":
+      return <FileText className="w-4 h-4" />;
+    case "TanStack React Query":
+      return <RefreshCw className="w-4 h-4" />;
+    case "FastAPI & Python":
+      return <Terminal className="w-4 h-4" />;
+    case "MySQL & Relational Design":
+    case "Supabase (Postgres & Auth)":
+      return <Database className="w-4 h-4" />;
+    case "Offline-First Architectures":
+      return <WifiOff className="w-4 h-4" />;
+    case "Docker & Containerization":
+      return <Box className="w-4 h-4" />;
+    case "NGINX Reverse Proxy":
+      return <ShieldCheck className="w-4 h-4" />;
+    case "Jenkins CI/CD":
+    case "Git, GitHub & CI/CD":
+      return <GitBranch className="w-4 h-4" />;
+    case "AWS (EC2, IAM, S3)":
+      return <Cloud className="w-4 h-4" />;
+    case "LangChain Orchestration":
+      return <Cpu className="w-4 h-4" />;
+    case "OpenAI & Gemini APIs":
+      return <Sparkles className="w-4 h-4" />;
+    case "Prompt Engineering":
+      return <Sliders className="w-4 h-4" />;
+    case "Scientific Research Methodology":
+      return <BookOpen className="w-4 h-4" />;
+    default:
+      return <Code2 className="w-4 h-4" />;
+  }
+};
+
+const getMasteryLabel = (level: number) => {
+  if (level >= 94) return "Production Authority";
+  if (level >= 90) return "Expert Production";
+  if (level >= 86) return "Advanced Architect";
+  return "Proficient Production";
 };
 
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
@@ -193,6 +257,10 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     }
   };
 
+  // Tech Stack Tab Filters
+  const [techFilter, setTechFilter] = useState<string>("All");
+  const [techCoreOnly, setTechCoreOnly] = useState<boolean>(false);
+
   // Flattened all skills for Tech Stack Tab
   const allSkills = SKILL_CATEGORIES.flatMap((cat) =>
     cat.skills.map((s) => ({
@@ -201,6 +269,15 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       brandColor: TECH_BRAND_COLORS[s.name] || "#0284c7",
     })),
   );
+
+  const techCategories = ["All", ...SKILL_CATEGORIES.map((c) => c.category)];
+
+  const filteredSkills = allSkills.filter((s) => {
+    const matchesCategory =
+      techFilter === "All" || s.categoryName === techFilter;
+    const matchesCore = !techCoreOnly || s.highlight;
+    return matchesCategory && matchesCore;
+  });
 
   return (
     <section
@@ -512,7 +589,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           </div>
         )}
 
-        {/* TAB 3: TECH STACK WITH FEAT-07 BRAND GLOW HOVER CARDS */}
+        {/* TAB 3: TECH STACK ARCHITECTURAL SHOWCASE WITH BRAND GLOW CARDS */}
         {showcaseTab === "tech-stack" && (
           <div
             id="panel-tech-stack"
@@ -520,78 +597,179 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             aria-labelledby="tab-tech-stack"
             className="space-y-6 animate-fadeIn"
           >
-            {/* Header Count */}
-            <div className="flex items-center justify-between pb-3 border-b border-[#EADBCA]">
-              <span className="text-xs sm:text-sm font-mono font-black text-stone-800 uppercase tracking-wider flex items-center gap-2">
-                <Code2 className="w-4 h-4 text-[#059669]" />
+            {/* Header & Category Filter Toolbar */}
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-3.5 rounded-2xl bg-[#FFFDF9] backdrop-blur-md border border-[#EADBCA] shadow-xs">
+              {/* Category Filter Pills */}
+              <div className="flex flex-wrap items-center justify-center gap-1.5">
+                {techCategories.map((cat) => {
+                  const count =
+                    cat === "All"
+                      ? allSkills.length
+                      : allSkills.filter((s) => s.categoryName === cat).length;
+                  return (
+                    <button
+                      key={cat}
+                      onClick={() => setTechFilter(cat)}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-mono transition-all font-bold flex items-center gap-1.5 ${
+                        techFilter === cat
+                          ? "bg-[#059669] text-white shadow-xs scale-[1.02]"
+                          : "bg-[#FAF3E7] text-stone-600 hover:text-stone-900 hover:bg-[#F5ECE0] border border-[#EADBCA]"
+                      }`}
+                    >
+                      <span>
+                        {cat === "All" ? "All Stack" : cat.split("&")[0].trim()}
+                      </span>
+                      <span
+                        className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono ${
+                          techFilter === cat
+                            ? "bg-white/25 text-white"
+                            : "bg-black/5 text-stone-600"
+                        }`}
+                      >
+                        {count}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Core Flagship Filter Toggle */}
+              <button
+                onClick={() => setTechCoreOnly((prev) => !prev)}
+                className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold transition-all border shadow-xs whitespace-nowrap active:scale-95 ${
+                  techCoreOnly
+                    ? "bg-amber-500 text-white border-amber-600 shadow-amber-500/25 ring-2 ring-amber-300"
+                    : "bg-[#FAF3E7] text-stone-700 hover:text-stone-900 border-[#EADBCA] hover:bg-[#F5ECE0]"
+                }`}
+                title={
+                  techCoreOnly
+                    ? "Show all skills"
+                    : "Filter by core flagship skills only"
+                }
+              >
+                <Sparkles
+                  className={`w-3.5 h-3.5 ${
+                    techCoreOnly ? "text-white" : "text-amber-600"
+                  }`}
+                />
                 <span>
-                  {allSkills.length} TECHNOLOGIES · DAILY PRODUCTION STACK
+                  {techCoreOnly ? "Core Stack Active" : "Filter Core Only"}
                 </span>
-              </span>
-              <span className="text-xs font-mono text-stone-500 font-bold hidden sm:inline">
-                Hover to illuminate brand radial glow
-              </span>
+              </button>
             </div>
 
-            {/* Brand Glow Tech Cards with Centered Flow Layout (FEAT-07) */}
-            <div className="flex flex-wrap justify-center gap-3.5 sm:gap-4">
-              {allSkills.map((skill, idx) => (
+            {/* Tech Stack Architectural Cards with Centered Flow Layout */}
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-5 min-h-[480px]">
+              {filteredSkills.map((skill, idx) => (
                 <div
                   key={idx}
-                  style={
-                    {
-                      "--tech-glow-color": skill.brandColor,
-                    } as React.CSSProperties
-                  }
-                  className="w-[calc(50%-7px)] sm:w-[calc(33.333333%-11px)] md:w-[calc(25%-12px)] lg:w-[calc(16.666667%-13.5px)] min-h-[148px] relative p-3.5 rounded-xl bg-gradient-to-br from-[#FFFDF9] to-[#FAF5EB] border border-[#EADBCA] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group overflow-hidden flex flex-col justify-between"
+                  className="w-full md:w-[calc(50%-10px)] lg:w-[calc(33.333333%-14px)] flex flex-col"
                 >
-                  {/* Radial Spotlight Gradient (FEAT-07) */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                    style={{
-                      background: `radial-gradient(circle at 50% 0%, ${skill.brandColor}25 0%, transparent 75%)`,
-                    }}
-                  />
-
-                  {/* Brand Colored Border on Hover (FEAT-07) */}
-                  <div
-                    className="absolute inset-0 rounded-xl border border-transparent group-hover:border-slate-300 transition-colors duration-300 pointer-events-none"
-                    style={{ borderColor: skill.brandColor }}
-                  />
-
-                  {/* Tech Content */}
-                  <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-2">
-                      <span
-                        className="w-3 h-3 rounded-full border shadow-2xs"
-                        style={{
-                          backgroundColor: skill.brandColor,
-                          borderColor: "#ffffff",
-                        }}
+                  <TiltCard
+                    maxTilt={2.5}
+                    scale={1.008}
+                    glareOpacity={0.05}
+                    className="w-full h-full flex flex-col flex-1"
+                  >
+                    <div className="w-full h-full min-h-[175px] rounded-2xl bg-white/95 backdrop-blur-xl border border-slate-200/90 hover:border-slate-300 p-4 sm:p-5 flex flex-col justify-between shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-[0_16px_32px_-8px_rgba(15,23,42,0.12)] transition-all duration-300 relative overflow-hidden group select-none">
+                      {/* Top Specular Brand Accent Line */}
+                      <div
+                        className="absolute top-0 left-0 right-0 h-1 transition-all duration-300 group-hover:h-1.5"
+                        style={{ backgroundColor: skill.brandColor }}
                       />
-                      <span className="text-[10px] font-mono font-bold text-stone-500">
-                        {skill.level}%
-                      </span>
+
+                      {/* Ambient Hover Radial Spotlight */}
+                      <div
+                        className="absolute -top-12 -right-12 w-28 h-28 rounded-full blur-2xl opacity-0 group-hover:opacity-20 pointer-events-none transition-opacity duration-500"
+                        style={{ backgroundColor: skill.brandColor }}
+                      />
+
+                      {/* Top Header Row: Icon + Name + Category + Badges */}
+                      <div>
+                        <div className="flex items-start justify-between gap-2.5 mb-2.5">
+                          <div className="flex items-center gap-2.5 min-w-0">
+                            {/* Brand Icon Box */}
+                            <div
+                              className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border transition-transform duration-300 group-hover:scale-105 shadow-2xs"
+                              style={{
+                                backgroundColor: `${skill.brandColor}18`,
+                                borderColor: `${skill.brandColor}35`,
+                                color: skill.brandColor,
+                              }}
+                            >
+                              {getTechIcon(skill.name)}
+                            </div>
+
+                            <div className="min-w-0">
+                              <h4 className="text-sm sm:text-base font-black font-display text-slate-900 group-hover:text-slate-950 transition-colors leading-tight truncate">
+                                {skill.name}
+                              </h4>
+                              <span className="text-[10px] font-mono font-semibold text-slate-500 block truncate mt-0.5">
+                                {skill.categoryName}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* CORE Badge or Mastery Level */}
+                          <div className="flex items-center gap-1.5 shrink-0">
+                            {skill.highlight && (
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-[9px] font-mono font-black uppercase tracking-wider shadow-2xs">
+                                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                                Core
+                              </span>
+                            )}
+                            <span
+                              className="px-2 py-0.5 rounded-lg text-[10px] font-mono font-black border shadow-2xs"
+                              style={{
+                                backgroundColor: `${skill.brandColor}14`,
+                                borderColor: `${skill.brandColor}35`,
+                                color:
+                                  skill.brandColor === "#ffffff"
+                                    ? "#0f172a"
+                                    : skill.brandColor,
+                              }}
+                            >
+                              {skill.level}%
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Production Architecture Capability Description */}
+                        {skill.description && (
+                          <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-2 mt-1.5">
+                            {skill.description}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Bottom Mastery Meter Row */}
+                      <div className="pt-3 mt-3 border-t border-slate-100 flex flex-col gap-1.5">
+                        <div className="flex items-center justify-between text-[10px] font-mono">
+                          <span className="text-slate-700 font-bold flex items-center gap-1.5">
+                            <span
+                              className="w-1.5 h-1.5 rounded-full"
+                              style={{ backgroundColor: skill.brandColor }}
+                            />
+                            {getMasteryLabel(skill.level)}
+                          </span>
+                          <span className="text-slate-400 font-medium">
+                            Production Verified
+                          </span>
+                        </div>
+
+                        {/* Precision Progress Bar */}
+                        <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200/80 p-[0.5px]">
+                          <div
+                            className="h-full rounded-full transition-all duration-700 ease-out"
+                            style={{
+                              width: `${skill.level}%`,
+                              backgroundColor: skill.brandColor,
+                            }}
+                          />
+                        </div>
+                      </div>
                     </div>
-
-                    <h4 className="text-xs sm:text-sm font-black font-display text-slate-900 group-hover:text-slate-950 transition-colors leading-tight">
-                      {skill.name}
-                    </h4>
-                    <span className="text-[10px] font-mono text-stone-500 truncate block mt-0.5">
-                      {skill.categoryName}
-                    </span>
-                  </div>
-
-                  {/* Level Progress Bar in Brand Color */}
-                  <div className="relative z-10 w-full h-1.5 bg-[#FAF1E3] border border-[#EADFCB]/60 rounded-full overflow-hidden mt-3">
-                    <div
-                      className="h-full rounded-full transition-all duration-500"
-                      style={{
-                        width: `${skill.level}%`,
-                        backgroundColor: skill.brandColor,
-                      }}
-                    />
-                  </div>
+                  </TiltCard>
                 </div>
               ))}
             </div>
