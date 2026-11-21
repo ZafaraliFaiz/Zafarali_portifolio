@@ -1,7 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { X, CheckCircle2, Cpu, Database, ExternalLink, Github, Layers, ShieldCheck, Sparkles, Smartphone, Server, Eye, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Project } from '../types/portfolio';
-import { StoreBadges } from './StoreBadges';
+import React, { useState, useEffect } from "react";
+import {
+  X,
+  CheckCircle2,
+  Cpu,
+  Database,
+  ExternalLink,
+  Github,
+  Layers,
+  ShieldCheck,
+  Sparkles,
+  Smartphone,
+  Server,
+  Eye,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import { Project } from "../types/portfolio";
+import { StoreBadges } from "./StoreBadges";
 
 interface ProjectDetailModalProps {
   project: Project | null;
@@ -22,14 +37,19 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
   if (!project) return null;
 
-  const isMobileProject = project.category === 'Mobile' || project.id === 'tain-electai';
-  const previewImages = project.previewImages || (project.imageUrl ? [project.imageUrl] : []);
-  const currentIndex = previewImages.findIndex(img => img === (selectedImage || project.imageUrl));
+  const isMobileProject =
+    project.category === "Mobile" || project.id === "tain-electai";
+  const previewImages =
+    project.previewImages || (project.imageUrl ? [project.imageUrl] : []);
+  const currentIndex = previewImages.findIndex(
+    (img) => img === (selectedImage || project.imageUrl),
+  );
   const activeIndex = currentIndex >= 0 ? currentIndex : 0;
 
   const handlePrev = () => {
     if (previewImages.length === 0) return;
-    const newIdx = (activeIndex - 1 + previewImages.length) % previewImages.length;
+    const newIdx =
+      (activeIndex - 1 + previewImages.length) % previewImages.length;
     setSelectedImage(previewImages[newIdx]);
   };
 
@@ -110,16 +130,21 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                 <div className="space-y-4">
                   <div className="relative w-full py-6 px-4 rounded-3xl overflow-hidden border-2 border-slate-300 bg-gradient-to-b from-slate-950 via-slate-900 to-indigo-950 shadow-2xl flex flex-col items-center justify-center">
                     {/* Subtle Ambient Glow */}
-                    <div 
+                    <div
                       className="absolute inset-0 bg-cover bg-center opacity-30 blur-2xl scale-125 transition-all duration-500 pointer-events-none"
-                      style={{ backgroundImage: `url(${selectedImage || project.imageUrl})` }}
+                      style={{
+                        backgroundImage: `url(${selectedImage || project.imageUrl})`,
+                      }}
                     />
 
                     {/* Top Bar with Screen Title & Counter */}
                     <div className="relative z-10 w-full max-w-lg flex items-center justify-between mb-4 px-2">
                       <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800/90 border border-slate-700 text-sky-400 text-xs font-mono font-bold">
                         <Smartphone className="w-3.5 h-3.5 stroke-[2.5]" />
-                        <span>Mobile Screen {activeIndex + 1} of {previewImages.length}</span>
+                        <span>
+                          Mobile Screen {activeIndex + 1} of{" "}
+                          {previewImages.length}
+                        </span>
                       </span>
 
                       <a
@@ -180,8 +205,12 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                     {(project.appStoreUrl || project.playStoreUrl) && (
                       <div className="relative z-10 w-full max-w-lg mt-5 p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xl">
                         <div className="text-left text-white text-xs font-mono">
-                          <div className="font-black text-sky-300">Live Production Mobile App</div>
-                          <div className="text-[11px] text-slate-300">Approved &amp; distributed on iOS &amp; Android</div>
+                          <div className="font-black text-sky-300">
+                            Live Production Mobile App
+                          </div>
+                          <div className="text-[11px] text-slate-300">
+                            Approved &amp; distributed on iOS &amp; Android
+                          </div>
                         </div>
                         <StoreBadges
                           appStoreUrl={project.appStoreUrl}
@@ -210,8 +239,8 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                             onClick={() => setSelectedImage(img)}
                             className={`relative w-16 sm:w-20 h-32 sm:h-40 rounded-2xl overflow-hidden border-2 transition-all shrink-0 flex flex-col items-center justify-between p-1 bg-slate-900 group ${
                               (selectedImage || project.imageUrl) === img
-                                ? 'border-sky-500 ring-2 ring-sky-400 scale-105 shadow-lg shadow-sky-500/30'
-                                : 'border-slate-300 opacity-70 hover:opacity-100 hover:border-slate-400'
+                                ? "border-sky-500 ring-2 ring-sky-400 scale-105 shadow-lg shadow-sky-500/30"
+                                : "border-slate-300 opacity-70 hover:opacity-100 hover:border-slate-400"
                             }`}
                           >
                             <img
@@ -256,23 +285,28 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                   </div>
 
                   {/* Multi-screen thumbnail gallery */}
-                  {project.previewImages && project.previewImages.length > 1 && (
-                    <div className="flex items-center gap-2 overflow-x-auto pb-1">
-                      {project.previewImages.map((img, i) => (
-                        <button
-                          key={i}
-                          onClick={() => setSelectedImage(img)}
-                          className={`relative w-24 h-16 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${
-                            (selectedImage || project.imageUrl) === img
-                              ? 'border-sky-500 scale-105 shadow-md shadow-sky-500/25 ring-2 ring-sky-400/40'
-                              : 'border-slate-300 opacity-60 hover:opacity-100 hover:border-slate-400'
-                          }`}
-                        >
-                          <img src={img} alt={`thumb-${i}`} className="w-full h-full object-cover" />
-                        </button>
-                      ))}
-                    </div>
-                  )}
+                  {project.previewImages &&
+                    project.previewImages.length > 1 && (
+                      <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                        {project.previewImages.map((img, i) => (
+                          <button
+                            key={i}
+                            onClick={() => setSelectedImage(img)}
+                            className={`relative w-24 h-16 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${
+                              (selectedImage || project.imageUrl) === img
+                                ? "border-sky-500 scale-105 shadow-md shadow-sky-500/25 ring-2 ring-sky-400/40"
+                                : "border-slate-300 opacity-60 hover:opacity-100 hover:border-slate-400"
+                            }`}
+                          >
+                            <img
+                              src={img}
+                              alt={`thumb-${i}`}
+                              className="w-full h-full object-cover"
+                            />
+                          </button>
+                        ))}
+                      </div>
+                    )}
                 </div>
               )}
             </div>
@@ -282,9 +316,16 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           {project.metrics && (
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {project.metrics.map((m, idx) => (
-                <div key={idx} className="p-3.5 rounded-2xl bg-[#FAF3E7]/90 border border-[#EADFCB] text-center shadow-sm">
-                  <div className="text-xs text-stone-600 font-mono font-semibold">{m.label}</div>
-                  <div className="text-sm sm:text-base font-black text-[#059669] font-mono mt-0.5">{m.value}</div>
+                <div
+                  key={idx}
+                  className="p-3.5 rounded-2xl bg-[#FAF3E7]/90 border border-[#EADFCB] text-center shadow-sm"
+                >
+                  <div className="text-xs text-stone-600 font-mono font-semibold">
+                    {m.label}
+                  </div>
+                  <div className="text-sm sm:text-base font-black text-[#059669] font-mono mt-0.5">
+                    {m.value}
+                  </div>
                 </div>
               ))}
             </div>
@@ -309,7 +350,10 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {project.architectureNodes.map((node, idx) => (
-                  <div key={idx} className="p-4 rounded-2xl bg-[#FAF3E7]/90 border border-[#EADFCB] shadow-sm">
+                  <div
+                    key={idx}
+                    className="p-4 rounded-2xl bg-[#FAF3E7]/90 border border-[#EADFCB] shadow-sm"
+                  >
                     <div className="font-black text-stone-900 text-xs sm:text-sm flex items-center gap-2">
                       <div className="w-2.5 h-2.5 rounded-full bg-[#059669]"></div>
                       <span>{node.title}</span>
@@ -331,7 +375,10 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             </h3>
             <ul className="space-y-2.5">
               {project.keyHighlights.map((highlight, idx) => (
-                <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-700 font-medium">
+                <li
+                  key={idx}
+                  className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-700 font-medium"
+                >
                   <span className="w-2 h-2 rounded-full bg-[#E34234] mt-1.5 shrink-0" />
                   <span className="leading-relaxed">{highlight}</span>
                 </li>
@@ -361,7 +408,10 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
         <div className="p-4 sm:p-5 bg-[#FFFDF9] border-t border-[#EADBCA] flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2.5">
             <div className="text-xs text-stone-700 font-mono">
-              Candidate: <strong className="text-stone-900 font-black">Zafarali Faizahmed Inamdar</strong>
+              Candidate:{" "}
+              <strong className="text-stone-900 font-black">
+                Zafarali Faizahmed Inamdar
+              </strong>{" "}
             </div>
             {(project.appStoreUrl || project.playStoreUrl) && (
               <StoreBadges

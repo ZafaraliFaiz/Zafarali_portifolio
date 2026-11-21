@@ -319,38 +319,321 @@ section,
   }
 }
 
-/* Full Cosmos Mode Transitions & Contrast Adaptation */
-html.cosmos-active,
-html.cosmos-active body {
-  background-color: #010206 !important;
-  color: #f1f5f9 !important;
-}
+/* ==========================================================================
+   Full Cosmos Mode Transitions & Contrast Adaptation
+   Transforms all dark/black text, light card backgrounds, borders, and badges
+   into luminous, high-contrast, obsidian cosmic styling.
+   ========================================================================== */
+@media screen {
+  html.cosmos-active,
+  html.cosmos-active body {
+    background-color: #010206 !important;
+    color: #f1f5f9 !important;
+  }
 
-html.cosmos-active .text-slate-900 {
-  color: #f8fafc !important;
-}
+  /* 1. Luminous Headings & Primary Titles (Replaces black/dark-slate with crisp brilliant white) */
+  html.cosmos-active .text-slate-950,
+  html.cosmos-active .text-slate-900,
+  html.cosmos-active .text-stone-900,
+  html.cosmos-active .text-zinc-900,
+  html.cosmos-active .text-neutral-900,
+  html.cosmos-active .text-gray-900,
+  html.cosmos-active .text-black,
+  html.cosmos-active .text-\[\#111827\] {
+    color: #f8fafc !important;
+  }
 
-html.cosmos-active .text-slate-800 {
-  color: #f1f5f9 !important;
-}
+  /* 2. Strong Subheadings & Section Titles */
+  html.cosmos-active .text-slate-800,
+  html.cosmos-active .text-stone-800,
+  html.cosmos-active .text-zinc-800,
+  html.cosmos-active .text-neutral-800,
+  html.cosmos-active .text-gray-800 {
+    color: #f1f5f9 !important;
+  }
 
-html.cosmos-active .text-slate-700 {
-  color: #cbd5e1 !important;
-}
+  /* 3. Secondary Body & High-Contrast Labels */
+  html.cosmos-active .text-slate-700,
+  html.cosmos-active .text-stone-700,
+  html.cosmos-active .text-zinc-700,
+  html.cosmos-active .text-neutral-700,
+  html.cosmos-active .text-gray-700 {
+    color: #e2e8f0 !important;
+  }
 
-html.cosmos-active .bg-\[\#f8fafc\] {
-  background-color: transparent !important;
-}
+  /* 4. Muted Body & Descriptive Text */
+  html.cosmos-active .text-slate-600,
+  html.cosmos-active .text-stone-600,
+  html.cosmos-active .text-zinc-600,
+  html.cosmos-active .text-neutral-600,
+  html.cosmos-active .text-gray-600,
+  html.cosmos-active .text-\[\#5C574F\] {
+    color: #cbd5e1 !important;
+  }
 
-html.cosmos-active .bg-white {
-  background-color: rgba(15, 23, 42, 0.84) !important;
-  border-color: rgba(56, 189, 248, 0.35) !important;
-}
+  /* 5. Captions, Metadata & Subtext */
+  html.cosmos-active .text-slate-500,
+  html.cosmos-active .text-stone-500,
+  html.cosmos-active .text-stone-400,
+  html.cosmos-active .text-zinc-500,
+  html.cosmos-active .text-neutral-500,
+  html.cosmos-active .text-gray-500,
+  html.cosmos-active .text-\[\#78716C\],
+  html.cosmos-active .text-\[\#C4B5A5\] {
+    color: #94a3b8 !important;
+  }
 
-html.cosmos-active .bg-white\/90,
-html.cosmos-active .bg-white\/92,
-html.cosmos-active .bg-white\/95 {
-  background-color: rgba(15, 23, 42, 0.90) !important;
+  /* 6. Accent Dark Badge Text (Emerald, Mint, Cyan, Amber, Rose, Purple) */
+  html.cosmos-active .text-\[\#065F46\],
+  html.cosmos-active .text-\[\#047857\],
+  html.cosmos-active .text-emerald-900,
+  html.cosmos-active .text-emerald-800,
+  html.cosmos-active .text-emerald-700,
+  html.cosmos-active .text-teal-800 {
+    color: #34d399 !important;
+  }
+
+  html.cosmos-active .text-sky-900,
+  html.cosmos-active .text-sky-800,
+  html.cosmos-active .text-sky-700,
+  html.cosmos-active .text-blue-900,
+  html.cosmos-active .text-blue-800,
+  html.cosmos-active .text-blue-700,
+  html.cosmos-active .text-indigo-900,
+  html.cosmos-active .text-indigo-800,
+  html.cosmos-active .text-indigo-700 {
+    color: #38bdf8 !important;
+  }
+
+  html.cosmos-active .text-purple-950,
+  html.cosmos-active .text-purple-900,
+  html.cosmos-active .text-purple-800,
+  html.cosmos-active .text-purple-700 {
+    color: #c084fc !important;
+  }
+
+  html.cosmos-active .text-\[\#78350F\],
+  html.cosmos-active .text-amber-900,
+  html.cosmos-active .text-amber-800,
+  html.cosmos-active .text-amber-700 {
+    color: #fbbf24 !important;
+  }
+
+  html.cosmos-active .text-\[\#D9381E\],
+  html.cosmos-active .text-\[\#E34234\],
+  html.cosmos-active .text-rose-900,
+  html.cosmos-active .text-rose-700 {
+    color: #f87171 !important;
+  }
+
+  /* 7. Hover Text States */
+  html.cosmos-active .hover\:text-slate-900:hover,
+  html.cosmos-active .hover\:text-stone-900:hover {
+    color: #ffffff !important;
+  }
+
+  html.cosmos-active .hover\:text-slate-800:hover,
+  html.cosmos-active .hover\:text-stone-800:hover {
+    color: #f8fafc !important;
+  }
+
+  html.cosmos-active .hover\:bg-slate-100:hover,
+  html.cosmos-active .hover\:bg-slate-100\/70:hover,
+  html.cosmos-active .hover\:bg-slate-200:hover,
+  html.cosmos-active .hover\:bg-\[\#FAF3E7\]:hover,
+  html.cosmos-active .hover\:bg-\[\#F5ECE0\]:hover {
+    background-color: rgba(30, 41, 59, 0.85) !important;
+  }
+
+  /* 8. Light Card Panels & Containers to Obsidian Glass */
+  html.cosmos-active .glass-panel {
+    background: rgba(15, 23, 42, 0.88) !important;
+    border-color: rgba(56, 189, 248, 0.28) !important;
+    box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.7), 0 4px 12px -2px rgba(56, 189, 248, 0.12) !important;
+  }
+
+  html.cosmos-active .bg-white,
+  html.cosmos-active .bg-white\/70,
+  html.cosmos-active .bg-white\/80,
+  html.cosmos-active .bg-white\/85,
+  html.cosmos-active .bg-white\/90,
+  html.cosmos-active .bg-white\/92,
+  html.cosmos-active .bg-white\/95,
+  html.cosmos-active .bg-white\/98 {
+    background-color: rgba(15, 23, 42, 0.88) !important;
+    border-color: rgba(56, 189, 248, 0.28) !important;
+  }
+
+  html.cosmos-active .bg-\[\#f8fafc\],
+  html.cosmos-active .bg-\[\#f8fafc\]\/95 {
+    background-color: rgba(2, 6, 23, 0.88) !important;
+  }
+
+  html.cosmos-active .bg-\[\#FFFDF9\],
+  html.cosmos-active .bg-\[\#FFFDF8\],
+  html.cosmos-active .bg-\[\#FAF6ED\],
+  html.cosmos-active .bg-\[\#F5ECE0\],
+  html.cosmos-active .bg-\[\#FAF5EB\],
+  html.cosmos-active .bg-\[\#FAF1E3\] {
+    background-color: rgba(15, 23, 42, 0.88) !important;
+    border-color: rgba(56, 189, 248, 0.28) !important;
+  }
+
+  html.cosmos-active .bg-slate-50,
+  html.cosmos-active .bg-slate-50\/70,
+  html.cosmos-active .bg-slate-50\/80,
+  html.cosmos-active .bg-slate-50\/90,
+  html.cosmos-active .bg-slate-100,
+  html.cosmos-active .bg-slate-100\/70,
+  html.cosmos-active .bg-slate-100\/80,
+  html.cosmos-active .bg-slate-100\/90,
+  html.cosmos-active .bg-slate-200 {
+    background-color: rgba(20, 28, 48, 0.85) !important;
+    border-color: rgba(56, 189, 248, 0.22) !important;
+  }
+
+  /* 9. Light Gradients Transformed into Cosmic Dark Gradients */
+  html.cosmos-active .from-white,
+  html.cosmos-active .from-\[\#FFFDF9\] {
+    --tw-gradient-from: rgba(15, 23, 42, 0.90) !important;
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) 0%, var(--tw-gradient-to) 100%) !important;
+  }
+
+  html.cosmos-active .via-white,
+  html.cosmos-active .via-\[\#FAF6ED\] {
+    --tw-gradient-via: rgba(15, 23, 42, 0.92) !important;
+  }
+
+  html.cosmos-active .to-slate-50,
+  html.cosmos-active .to-slate-50\/60,
+  html.cosmos-active .to-slate-50\/70,
+  html.cosmos-active .to-slate-50\/80,
+  html.cosmos-active .to-slate-50\/90,
+  html.cosmos-active .to-\[\#F5ECE0\] {
+    --tw-gradient-to: rgba(10, 16, 32, 0.96) !important;
+  }
+
+  /* 10. Light Badge / Tag Backgrounds */
+  html.cosmos-active .bg-emerald-50,
+  html.cosmos-active .bg-emerald-50\/80,
+  html.cosmos-active .bg-emerald-50\/90,
+  html.cosmos-active .bg-emerald-100,
+  html.cosmos-active .bg-emerald-100\/70,
+  html.cosmos-active .bg-\[\#ECFDF5\],
+  html.cosmos-active .bg-\[\#D1FAE5\] {
+    background-color: rgba(6, 78, 59, 0.40) !important;
+    border-color: rgba(52, 211, 153, 0.45) !important;
+  }
+
+  html.cosmos-active .bg-sky-50,
+  html.cosmos-active .bg-sky-50\/80,
+  html.cosmos-active .bg-sky-100,
+  html.cosmos-active .bg-blue-50,
+  html.cosmos-active .bg-blue-100,
+  html.cosmos-active .bg-indigo-50 {
+    background-color: rgba(14, 165, 233, 0.20) !important;
+    border-color: rgba(56, 189, 248, 0.40) !important;
+  }
+
+  html.cosmos-active .bg-purple-50,
+  html.cosmos-active .bg-purple-50\/80,
+  html.cosmos-active .bg-purple-100 {
+    background-color: rgba(147, 51, 234, 0.22) !important;
+    border-color: rgba(192, 132, 252, 0.45) !important;
+  }
+
+  html.cosmos-active .bg-amber-50,
+  html.cosmos-active .bg-amber-100,
+  html.cosmos-active .bg-\[\#FAF3E7\],
+  html.cosmos-active .bg-\[\#FAF3E7\]\/90,
+  html.cosmos-active .bg-\[\#FAF1E3\] {
+    background-color: rgba(245, 158, 11, 0.18) !important;
+    border-color: rgba(251, 191, 36, 0.35) !important;
+  }
+
+  html.cosmos-active .bg-rose-50,
+  html.cosmos-active .bg-\[\#FFF1EE\],
+  html.cosmos-active .bg-\[\#FEE2DC\] {
+    background-color: rgba(225, 29, 72, 0.22) !important;
+    border-color: rgba(251, 113, 133, 0.40) !important;
+  }
+
+  /* 11. Light Borders */
+  html.cosmos-active .border-slate-100,
+  html.cosmos-active .border-slate-200,
+  html.cosmos-active .border-slate-200\/60,
+  html.cosmos-active .border-slate-200\/70,
+  html.cosmos-active .border-slate-200\/75,
+  html.cosmos-active .border-slate-200\/80,
+  html.cosmos-active .border-slate-200\/90,
+  html.cosmos-active .border-slate-300,
+  html.cosmos-active .border-slate-300\/60,
+  html.cosmos-active .border-slate-300\/80,
+  html.cosmos-active .border-slate-300\/90,
+  html.cosmos-active .border-\[\#EADBCA\],
+  html.cosmos-active .border-\[\#EADBCA\]\/70,
+  html.cosmos-active .border-\[\#EADFCB\],
+  html.cosmos-active .border-\[\#EADFCB\]\/60,
+  html.cosmos-active .border-\[\#A7F3D0\],
+  html.cosmos-active .border-\[\#FDCAC1\] {
+    border-color: rgba(56, 189, 248, 0.25) !important;
+  }
+
+  /* 12. Form Controls (Input, Textarea, Select) in Cosmos Mode */
+  html.cosmos-active input,
+  html.cosmos-active textarea,
+  html.cosmos-active select {
+    background-color: rgba(15, 23, 42, 0.88) !important;
+    border-color: rgba(56, 189, 248, 0.35) !important;
+    color: #f8fafc !important;
+  }
+
+  html.cosmos-active input::placeholder,
+  html.cosmos-active textarea::placeholder {
+    color: #94a3b8 !important;
+  }
+
+  /* 13. Top Nav Scrolled Bar & Controls */
+  html.cosmos-active header {
+    border-color: rgba(56, 189, 248, 0.25) !important;
+  }
+
+  html.cosmos-active #nav-link-contact {
+    color: #38bdf8 !important;
+    border-color: rgba(56, 189, 248, 0.35) !important;
+    background-color: rgba(56, 189, 248, 0.12) !important;
+  }
+
+  html.cosmos-active #nav-dev-cli-btn {
+    background-color: rgba(15, 23, 42, 0.92) !important;
+    border-color: rgba(56, 189, 248, 0.5) !important;
+    color: #38bdf8 !important;
+    box-shadow: 0 0 14px -2px rgba(56, 189, 248, 0.35) !important;
+  }
+
+  html.cosmos-active #nav-dev-cli-btn:hover {
+    background-color: rgba(56, 189, 248, 0.2) !important;
+    border-color: #38bdf8 !important;
+  }
+
+  html.cosmos-active .print-page {
+    background-color: rgba(15, 23, 42, 0.95) !important;
+    color: #f8fafc !important;
+    border-color: rgba(56, 189, 248, 0.28) !important;
+  }
+
+  html.cosmos-active .resume-modal-box {
+    background-color: rgba(10, 15, 30, 0.98) !important;
+    border-color: rgba(56, 189, 248, 0.35) !important;
+  }
+
+  /* 14. Back to Top HUD */
+  html.cosmos-active #back-to-top-btn {
+    background-color: rgba(15, 23, 42, 0.92) !important;
+    border-color: rgba(56, 189, 248, 0.5) !important;
+    color: #38bdf8 !important;
+    box-shadow: 0 0 16px -2px rgba(56, 189, 248, 0.35) !important;
+  }
 }
 
 
