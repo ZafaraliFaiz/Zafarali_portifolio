@@ -47,7 +47,7 @@ export const Hero: React.FC<HeroProps> = ({
       short: "React Native Mobile",
     },
     {
-      full: "<Devel></Devel>oper (AgroStock & Greentop)",
+      full: "(AgroStock & Greentop)",
       short: "Enterprise ERP",
     },
     {
