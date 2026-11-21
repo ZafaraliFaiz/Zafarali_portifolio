@@ -36,8 +36,360 @@ interface NebulaCloud {
   pulseSpeed: number;
 }
 
+interface TechGlyphConfig {
+  label: string;
+  initialTop: number;
+  scrollRate: number;
+  mouseXMult: number;
+  mouseYMult: number;
+  horizontalPos: string;
+  colorClasses: string;
+  hasPulse?: boolean;
+}
+
+const TECH_GLYPHS: TechGlyphConfig[] = [
+  // 1. Hero Section (scrollY 0 - 1400px)
+  {
+    label: "+ 01_PARALLAX_GRID",
+    initialTop: 180,
+    scrollRate: 0.28,
+    mouseXMult: -1.5,
+    mouseYMult: -1.2,
+    horizontalPos: "left-4 lg:left-8",
+    colorClasses: "text-sky-800 bg-sky-50/90 border-sky-300 shadow-sky-500/10",
+    hasPulse: false,
+  },
+  // {
+  //   label: "+ 01_PARALLAX_GRID",
+  //   initialTop: 280,
+  //   scrollRate: 0.29,
+  //   mouseXMult: 1.3,
+  //   mouseYMult: 1.1,
+  //   horizontalPos: "left-1/3",
+  //   colorClasses:
+  //     "text-cyan-800 bg-cyan-50/90 border-cyan-300 shadow-cyan-500/10",
+  //   hasPulse: false,
+  // },
+  {
+    label: "◈ // REACT_19_NATIVE_CONCURRENCY",
+    initialTop: 460,
+    scrollRate: 0.32,
+    mouseXMult: 1.5,
+    mouseYMult: 1.2,
+    horizontalPos: "right-6 lg:right-12",
+    colorClasses:
+      "text-indigo-800 bg-indigo-50/90 border-indigo-300 shadow-indigo-500/10",
+    hasPulse: false,
+  },
+  {
+    label: "● LIVE // OPEN_TO_GLOBAL_ROLES",
+    initialTop: 620,
+    scrollRate: 0.27,
+    mouseXMult: -1.2,
+    mouseYMult: -1.0,
+    horizontalPos: "right-1/4",
+    colorClasses:
+      "text-emerald-800 bg-emerald-50/90 border-emerald-300 shadow-emerald-500/10",
+    hasPulse: true,
+  },
+  {
+    label: "◆ OFFLINE_FIRST_ACTIVE",
+    initialTop: 780,
+    scrollRate: 0.3,
+    mouseXMult: -1.4,
+    mouseYMult: -1.2,
+    horizontalPos: "left-1/4",
+    colorClasses:
+      "text-teal-800 bg-teal-50/90 border-teal-300 shadow-teal-500/10",
+    hasPulse: false,
+  },
+  {
+    label: "★ TOP_1%_FULL_STACK_TALENT",
+    initialTop: 940,
+    scrollRate: 0.31,
+    mouseXMult: 1.4,
+    mouseYMult: 1.2,
+    horizontalPos: "left-8 lg:left-16",
+    colorClasses:
+      "text-amber-800 bg-amber-50/90 border-amber-300 shadow-amber-500/10",
+    hasPulse: false,
+  },
+
+  // 2. Journey & Story Section (scrollY 1400 - 3200px)
+  {
+    label: "+ 02_EVENT_DRIVEN_FLOW",
+    initialTop: 1120,
+    scrollRate: 0.28,
+    mouseXMult: 1.3,
+    mouseYMult: 1.0,
+    horizontalPos: "right-1/3",
+    colorClasses:
+      "text-cyan-800 bg-cyan-50/90 border-cyan-300 shadow-cyan-500/10",
+    hasPulse: false,
+  },
+  {
+    label: "⚡ <50ms_P99_RESPONSE_TIME",
+    initialTop: 1280,
+    scrollRate: 0.33,
+    mouseXMult: -1.5,
+    mouseYMult: -1.2,
+    horizontalPos: "left-6 lg:left-12",
+    colorClasses:
+      "text-rose-800 bg-rose-50/90 border-rose-300 shadow-rose-500/10",
+    hasPulse: true,
+  },
+  {
+    label: "◈ // DOCKER_MICROSERVICES_MESH",
+    initialTop: 1460,
+    scrollRate: 0.3,
+    mouseXMult: 1.2,
+    mouseYMult: 1.1,
+    horizontalPos: "left-1/3",
+    colorClasses: "text-sky-800 bg-sky-50/90 border-sky-300 shadow-sky-500/10",
+    hasPulse: false,
+  },
+  {
+    label: "▲ 35+_ENTERPRISE_RELEASES",
+    initialTop: 1640,
+    scrollRate: 0.29,
+    mouseXMult: 1.5,
+    mouseYMult: 1.3,
+    horizontalPos: "right-8 lg:right-16",
+    colorClasses:
+      "text-blue-800 bg-blue-50/90 border-blue-300 shadow-blue-500/10",
+    hasPulse: false,
+  },
+  {
+    label: "◆ SUPABASE_POSTGRES_ROW_SECURITY",
+    initialTop: 1820,
+    scrollRate: 0.31,
+    mouseXMult: -1.3,
+    mouseYMult: -1.0,
+    horizontalPos: "right-1/4",
+    colorClasses:
+      "text-emerald-800 bg-emerald-50/90 border-emerald-300 shadow-emerald-500/10",
+    hasPulse: false,
+  },
+
+  // 3. Architecture & System Design (scrollY 3200 - 5000px)
+  {
+    label: "⚡ 99.99%_ENTERPRISE_UPTIME_SLA",
+    initialTop: 2000,
+    scrollRate: 0.28,
+    mouseXMult: -1.4,
+    mouseYMult: -1.1,
+    horizontalPos: "left-6 lg:left-14",
+    colorClasses:
+      "text-emerald-800 bg-emerald-50/90 border-emerald-300 shadow-emerald-500/10",
+    hasPulse: true,
+  },
+  {
+    label: "+ 03_TANSTACK_QUERY_CACHE",
+    initialTop: 2180,
+    scrollRate: 0.3,
+    mouseXMult: 1.3,
+    mouseYMult: 1.0,
+    horizontalPos: "left-1/4",
+    colorClasses:
+      "text-rose-800 bg-rose-50/90 border-rose-300 shadow-rose-500/10",
+    hasPulse: false,
+  },
+  {
+    label: "◈ // LANGCHAIN_AGENTIC_PIPELINE",
+    initialTop: 2360,
+    scrollRate: 0.32,
+    mouseXMult: 1.6,
+    mouseYMult: 1.3,
+    horizontalPos: "right-6 lg:right-12",
+    colorClasses:
+      "text-purple-800 bg-purple-50/90 border-purple-300 shadow-purple-500/10",
+    hasPulse: false,
+  },
+  {
+    label: "✦ ZERO_DOWNTIME_CI_CD_DEPLOY",
+    initialTop: 2540,
+    scrollRate: 0.29,
+    mouseXMult: -1.3,
+    mouseYMult: -1.1,
+    horizontalPos: "right-1/3",
+    colorClasses:
+      "text-teal-800 bg-teal-50/90 border-teal-300 shadow-teal-500/10",
+    hasPulse: false,
+  },
+  {
+    label: "◆ EAS_BUILD_DISTRIBUTION_EXPO",
+    initialTop: 2720,
+    scrollRate: 0.31,
+    mouseXMult: -1.5,
+    mouseYMult: -1.2,
+    horizontalPos: "left-8 lg:left-16",
+    colorClasses:
+      "text-indigo-800 bg-indigo-50/90 border-indigo-300 shadow-indigo-500/10",
+    hasPulse: false,
+  },
+
+  // 4. Projects Showcase (scrollY 5000 - 7000px)
+  {
+    label: "★ 10K+_ACTIVE_PRODUCTION_USERS",
+    initialTop: 2920,
+    scrollRate: 0.28,
+    mouseXMult: 1.4,
+    mouseYMult: 1.1,
+    horizontalPos: "right-8 lg:right-16",
+    colorClasses:
+      "text-amber-800 bg-amber-50/90 border-amber-300 shadow-amber-500/10",
+    hasPulse: true,
+  },
+  {
+    label: "+ 04_AGROSTOCK_ENTERPRISE_ERP",
+    initialTop: 3100,
+    scrollRate: 0.3,
+    mouseXMult: -1.4,
+    mouseYMult: -1.1,
+    horizontalPos: "left-6 lg:left-12",
+    colorClasses:
+      "text-emerald-800 bg-emerald-50/90 border-emerald-300 shadow-emerald-500/10",
+    hasPulse: false,
+  },
+  {
+    label: "⚡ 1.2M+_API_CALLS_PROCESSED",
+    initialTop: 3280,
+    scrollRate: 0.32,
+    mouseXMult: 1.3,
+    mouseYMult: 1.0,
+    horizontalPos: "left-1/3",
+    colorClasses:
+      "text-cyan-800 bg-cyan-50/90 border-cyan-300 shadow-cyan-500/10",
+    hasPulse: false,
+  },
+  {
+    label: "◈ // MULTI_MODAL_GENAI_STUDIO",
+    initialTop: 3460,
+    scrollRate: 0.29,
+    mouseXMult: 1.5,
+    mouseYMult: 1.2,
+    horizontalPos: "right-6 lg:right-14",
+    colorClasses:
+      "text-purple-800 bg-purple-50/90 border-purple-300 shadow-purple-500/10",
+    hasPulse: false,
+  },
+  {
+    label: "✓ 100%_CROSS_PLATFORM_MOBILE",
+    initialTop: 3640,
+    scrollRate: 0.31,
+    mouseXMult: -1.3,
+    mouseYMult: -1.0,
+    horizontalPos: "right-1/4",
+    colorClasses:
+      "text-blue-800 bg-blue-50/90 border-blue-300 shadow-blue-500/10",
+    hasPulse: false,
+  },
+
+  // 5. Experience & Research (scrollY 7000 - 9000px)
+  {
+    label: "✦ IEEE_PEER_REVIEWED_GENAI_PAPER",
+    initialTop: 3840,
+    scrollRate: 0.28,
+    mouseXMult: -1.4,
+    mouseYMult: -1.1,
+    horizontalPos: "left-6 lg:left-14",
+    colorClasses:
+      "text-fuchsia-800 bg-fuchsia-50/90 border-fuchsia-300 shadow-fuchsia-500/10",
+    hasPulse: false,
+  },
+  {
+    label: "★ GOLD_MEDALIST_FOOTBALL_PLAYER",
+    initialTop: 4020,
+    scrollRate: 0.3,
+    mouseXMult: 1.3,
+    mouseYMult: 1.1,
+    horizontalPos: "right-1/3",
+    colorClasses:
+      "text-amber-800 bg-amber-50/90 border-amber-300 shadow-amber-500/10",
+    hasPulse: true,
+  },
+  {
+    label: "◈ // PRODUCTION_HARDENED_SECURITY",
+    initialTop: 4200,
+    scrollRate: 0.32,
+    mouseXMult: -1.5,
+    mouseYMult: -1.2,
+    horizontalPos: "left-1/4",
+    colorClasses:
+      "text-teal-800 bg-teal-50/90 border-teal-300 shadow-teal-500/10",
+    hasPulse: false,
+  },
+  {
+    label: "▲ FULL_STACK_AGILE_LEAD",
+    initialTop: 4380,
+    scrollRate: 0.29,
+    mouseXMult: 1.4,
+    mouseYMult: 1.2,
+    horizontalPos: "right-8 lg:right-16",
+    colorClasses: "text-sky-800 bg-sky-50/90 border-sky-300 shadow-sky-500/10",
+    hasPulse: false,
+  },
+
+  // 6. Education, Contact & Hire Me (scrollY 9000 - 12000px)
+  {
+    label: "⚡ SECURE_TUNNEL_ESTABLISHED",
+    initialTop: 4560,
+    scrollRate: 0.28,
+    mouseXMult: -1.3,
+    mouseYMult: -1.1,
+    horizontalPos: "left-6 lg:left-12",
+    colorClasses:
+      "text-cyan-800 bg-cyan-50/90 border-cyan-300 shadow-cyan-500/10",
+    hasPulse: false,
+  },
+  {
+    label: "● LIVE: ACCEPTING_HIGH_IMPACT_ROLES",
+    initialTop: 4740,
+    scrollRate: 0.31,
+    mouseXMult: 1.4,
+    mouseYMult: 1.2,
+    horizontalPos: "right-6 lg:right-14",
+    colorClasses:
+      "text-emerald-800 bg-emerald-50/90 border-emerald-300 shadow-emerald-500/10",
+    hasPulse: true,
+  },
+  {
+    label: "◈ // PRODUCTION_DEPLOYED_v2026",
+    initialTop: 4920,
+    scrollRate: 0.3,
+    mouseXMult: -1.4,
+    mouseYMult: -1.0,
+    horizontalPos: "left-1/3",
+    colorClasses: "text-sky-800 bg-sky-50/90 border-sky-300 shadow-sky-500/10",
+    hasPulse: false,
+  },
+  {
+    label: "✦ FAST_TRACK_ONBOARDING_READY",
+    initialTop: 5100,
+    scrollRate: 0.32,
+    mouseXMult: 1.5,
+    mouseYMult: 1.3,
+    horizontalPos: "right-1/4",
+    colorClasses:
+      "text-indigo-800 bg-indigo-50/90 border-indigo-300 shadow-indigo-500/10",
+    hasPulse: false,
+  },
+  {
+    label: "★ LET'S_BUILD_SOMETHING_EXTRAORDINARY",
+    initialTop: 5280,
+    scrollRate: 0.29,
+    mouseXMult: -1.3,
+    mouseYMult: -1.1,
+    horizontalPos: "left-8 lg:left-16",
+    colorClasses:
+      "text-amber-800 bg-amber-50/90 border-amber-300 shadow-amber-500/10",
+    hasPulse: false,
+  },
+];
+
 export const BackgroundCanvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const glyphRefs = useRef<(HTMLDivElement | null)[]>([]);
   const mouse = useMouseParallax(0.06);
   const mouseRef = useRef(mouse);
   mouseRef.current = mouse;
@@ -135,11 +487,15 @@ export const BackgroundCanvas: React.FC = () => {
 
     const deepStarCount = isMobile ? 80 : 260;
     for (let i = 0; i < deepStarCount; i++) {
-      const colorBase = spectralColors[Math.floor(Math.random() * spectralColors.length)];
+      const colorBase =
+        spectralColors[Math.floor(Math.random() * spectralColors.length)];
       deepSpaceStars.push({
         xNorm: Math.random(),
         yNorm: Math.random(),
-        size: Math.random() < 0.88 ? Math.random() * 1.1 + 0.4 : Math.random() * 2.2 + 1.2,
+        size:
+          Math.random() < 0.88
+            ? Math.random() * 1.1 + 0.4
+            : Math.random() * 2.2 + 1.2,
         brightness: Math.random() * 0.5 + 0.5,
         color: colorBase,
         hasSpike: Math.random() < 0.03,
@@ -154,8 +510,12 @@ export const BackgroundCanvas: React.FC = () => {
 
       // Deep galactic dust radial gradient
       const dustGrad = spaceCtx.createRadialGradient(
-        width * 0.5, height * 0.45, 60,
-        width * 0.5, height * 0.45, Math.max(width, height) * 0.65
+        width * 0.5,
+        height * 0.45,
+        60,
+        width * 0.5,
+        height * 0.45,
+        Math.max(width, height) * 0.65,
       );
       dustGrad.addColorStop(0, "rgba(30, 27, 75, 0.4)");
       dustGrad.addColorStop(0.45, "rgba(15, 23, 42, 0.3)");
@@ -201,11 +561,11 @@ export const BackgroundCanvas: React.FC = () => {
     const galaxyColors = [
       "rgba(255, 255, 255, ", // Brilliant core diamond
       "rgba(254, 240, 138, ", // Solar gold
-      "rgba(251, 146, 60, ",  // Warm amber
+      "rgba(251, 146, 60, ", // Warm amber
       "rgba(244, 114, 182, ", // Radiant magenta/rose
       "rgba(192, 132, 252, ", // Luminous violet
-      "rgba(56, 189, 248, ",  // Electric cyan
-      "rgba(96, 165, 250, ",  // Celestial azure
+      "rgba(56, 189, 248, ", // Electric cyan
+      "rgba(96, 165, 250, ", // Celestial azure
     ];
 
     // Generate Luminous Interstellar Gas Clouds along Spiral Arms (Normalized)
@@ -236,7 +596,7 @@ export const BackgroundCanvas: React.FC = () => {
         scatterYNorm,
         radiusNorm: Math.random() * 0.07 + 0.08,
         color,
-        alpha: Math.random() * 0.10 + 0.08,
+        alpha: Math.random() * 0.1 + 0.08,
         pulseSpeed: Math.random() * 0.02 + 0.01,
       });
     }
@@ -250,14 +610,14 @@ export const BackgroundCanvas: React.FC = () => {
 
       const distExp = isMajorArm ? 1.6 : 1.3;
       const distFraction = Math.pow(Math.random(), distExp);
-      const maxRNorm = isMajorArm ? 1.0 : 0.80;
+      const maxRNorm = isMajorArm ? 1.0 : 0.8;
       const rNorm = distFraction * maxRNorm;
 
       // Logarithmic spiral angle calculation
       const spiralAngle = Math.pow(rNorm, 0.72) * 4.4;
       const baseAngle = armOffset + spiralAngle;
 
-      const spreadCoeff = isMajorArm ? 0.22 : 0.30;
+      const spreadCoeff = isMajorArm ? 0.22 : 0.3;
       const spreadNorm = (1 - rNorm) * spreadCoeff + 0.015;
       const scatterXNorm = (Math.random() - 0.5) * spreadNorm;
       const scatterYNorm = (Math.random() - 0.5) * spreadNorm;
@@ -281,7 +641,7 @@ export const BackgroundCanvas: React.FC = () => {
           : Math.random() * 1.3 + 0.5; // Normal field star
       const brightness = isCore
         ? Math.random() * 0.25 + 0.65
-        : Math.random() * 0.40 + 0.35;
+        : Math.random() * 0.4 + 0.35;
 
       galaxyStars.push({
         rNorm,
@@ -331,12 +691,13 @@ export const BackgroundCanvas: React.FC = () => {
         ctx.drawImage(spaceCanvas, 0, 0);
 
         // Responsive galaxy radius based on current viewport
-        const baseDim = Math.max(width * 0.54, Math.min(width, height) * 0.70);
-        const galaxyRadius = baseDim * (isMobile ? 0.54 : 0.60);
+        const baseDim = Math.max(width * 0.54, Math.min(width, height) * 0.7);
+        const galaxyRadius = baseDim * (isMobile ? 0.54 : 0.6);
 
         // Center coordinates for the rotating galaxy with scroll and mouse parallax
         const gcx = width * 0.52 + mouseRef.current.x * 24;
-        const gcy = height * 0.44 - currentScrollY * 0.12 + mouseRef.current.y * 18;
+        const gcy =
+          height * 0.44 - currentScrollY * 0.12 + mouseRef.current.y * 18;
 
         // 1. Draw Multi-Layered Radiant Galactic Bulge & Ambient Halo
         ctx.save();
@@ -345,18 +706,32 @@ export const BackgroundCanvas: React.FC = () => {
         ctx.scale(1, 0.52);
 
         // a. Soft Outer Galactic Halo
-        const outerHalo = ctx.createRadialGradient(0, 0, 0, 0, 0, galaxyRadius * 0.90);
+        const outerHalo = ctx.createRadialGradient(
+          0,
+          0,
+          0,
+          0,
+          0,
+          galaxyRadius * 0.9,
+        );
         outerHalo.addColorStop(0, "rgba(99, 102, 241, 0.16)");
         outerHalo.addColorStop(0.35, "rgba(56, 189, 248, 0.11)");
         outerHalo.addColorStop(0.65, "rgba(147, 51, 234, 0.06)");
         outerHalo.addColorStop(1, "rgba(1, 2, 6, 0)");
         ctx.beginPath();
-        ctx.arc(0, 0, galaxyRadius * 0.90, 0, Math.PI * 2);
+        ctx.arc(0, 0, galaxyRadius * 0.9, 0, Math.PI * 2);
         ctx.fillStyle = outerHalo;
         ctx.fill();
 
         // b. Mid-Disc Luminous Nebula Glow
-        const discGlow = ctx.createRadialGradient(0, 0, 0, 0, 0, galaxyRadius * 0.55);
+        const discGlow = ctx.createRadialGradient(
+          0,
+          0,
+          0,
+          0,
+          0,
+          galaxyRadius * 0.55,
+        );
         discGlow.addColorStop(0, "rgba(254, 240, 138, 0.52)");
         discGlow.addColorStop(0.18, "rgba(244, 114, 182, 0.38)");
         discGlow.addColorStop(0.42, "rgba(56, 189, 248, 0.28)");
@@ -368,7 +743,14 @@ export const BackgroundCanvas: React.FC = () => {
         ctx.fill();
 
         // c. Refined Core Bulge
-        const coreBulge = ctx.createRadialGradient(0, 0, 0, 0, 0, galaxyRadius * 0.22);
+        const coreBulge = ctx.createRadialGradient(
+          0,
+          0,
+          0,
+          0,
+          0,
+          galaxyRadius * 0.22,
+        );
         coreBulge.addColorStop(0, "rgba(255, 255, 255, 0.88)");
         coreBulge.addColorStop(0.18, "rgba(254, 240, 138, 0.76)");
         coreBulge.addColorStop(0.45, "rgba(251, 146, 60, 0.52)");
@@ -389,20 +771,32 @@ export const BackgroundCanvas: React.FC = () => {
           const cloud = nebulaClouds[i];
           const curAngle = cloud.baseAngle + galaxyRotation;
           const cloudR = cloud.rNorm * galaxyRadius;
-          const rawX = Math.cos(curAngle) * cloudR + cloud.scatterXNorm * galaxyRadius;
-          const rawY = Math.sin(curAngle) * cloudR + cloud.scatterYNorm * galaxyRadius;
+          const rawX =
+            Math.cos(curAngle) * cloudR + cloud.scatterXNorm * galaxyRadius;
+          const rawY =
+            Math.sin(curAngle) * cloudR + cloud.scatterYNorm * galaxyRadius;
 
-          const tiltedX = rawX * cosTilt - (rawY * 0.52) * sinTilt;
-          const tiltedY = rawX * sinTilt + (rawY * 0.52) * cosTilt;
+          const tiltedX = rawX * cosTilt - rawY * 0.52 * sinTilt;
+          const tiltedY = rawX * sinTilt + rawY * 0.52 * cosTilt;
 
           const cx = gcx + tiltedX;
           const cy = gcy + tiltedY;
 
           const pulse = Math.sin(now * cloud.pulseSpeed + i) * 0.03;
-          const cloudAlpha = Math.max(0.04, Math.min(0.22, cloud.alpha + pulse));
+          const cloudAlpha = Math.max(
+            0.04,
+            Math.min(0.22, cloud.alpha + pulse),
+          );
           const cloudRadius = cloud.radiusNorm * galaxyRadius;
 
-          const cloudGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, cloudRadius);
+          const cloudGrad = ctx.createRadialGradient(
+            cx,
+            cy,
+            0,
+            cx,
+            cy,
+            cloudRadius,
+          );
           cloudGrad.addColorStop(0, `${cloud.color}${cloudAlpha})`);
           cloudGrad.addColorStop(0.5, `${cloud.color}${cloudAlpha * 0.4})`);
           cloudGrad.addColorStop(1, `${cloud.color}0)`);
@@ -418,17 +812,22 @@ export const BackgroundCanvas: React.FC = () => {
           const star = galaxyStars[i];
           const curAngle = star.baseAngle + galaxyRotation;
           const starR = star.rNorm * galaxyRadius;
-          const rawX = Math.cos(curAngle) * starR + star.scatterXNorm * galaxyRadius;
-          const rawY = Math.sin(curAngle) * starR + star.scatterYNorm * galaxyRadius;
+          const rawX =
+            Math.cos(curAngle) * starR + star.scatterXNorm * galaxyRadius;
+          const rawY =
+            Math.sin(curAngle) * starR + star.scatterYNorm * galaxyRadius;
 
-          const tiltedX = rawX * cosTilt - (rawY * 0.52) * sinTilt;
-          const tiltedY = rawX * sinTilt + (rawY * 0.52) * cosTilt;
+          const tiltedX = rawX * cosTilt - rawY * 0.52 * sinTilt;
+          const tiltedY = rawX * sinTilt + rawY * 0.52 * cosTilt;
 
           const sx = gcx + tiltedX;
           const sy = gcy + tiltedY;
 
           const twinkle = Math.sin(now * star.twinkleSpeed + i) * 0.18;
-          const alpha = Math.max(0.18, Math.min(0.95, star.brightness + twinkle));
+          const alpha = Math.max(
+            0.18,
+            Math.min(0.95, star.brightness + twinkle),
+          );
 
           ctx.beginPath();
           ctx.arc(sx, sy, star.size, 0, Math.PI * 2);
@@ -548,6 +947,35 @@ export const BackgroundCanvas: React.FC = () => {
         }
       }
 
+      // Parallax Floating Cyber Crosshairs & Tech Glyphs (Slow Multi-Section Background Drift)
+      const glyphMouseX = mouseRef.current.x * 35;
+      const glyphMouseY = mouseRef.current.y * 35;
+      const winHeight = window.innerHeight;
+
+      for (let i = 0; i < TECH_GLYPHS.length; i++) {
+        const el = glyphRefs.current[i];
+        if (!el) continue;
+        const cfg = TECH_GLYPHS[i];
+        const py =
+          cfg.initialTop -
+          currentScrollY * cfg.scrollRate +
+          glyphMouseY * cfg.mouseYMult;
+
+        // Offscreen culling: hide when above or below viewport
+        if (py < -120 || py > winHeight + 120) {
+          if (el.style.display !== "none") {
+            el.style.display = "none";
+          }
+          continue;
+        }
+
+        if (el.style.display !== "flex") {
+          el.style.display = "flex";
+        }
+        const px = glyphMouseX * cfg.mouseXMult;
+        el.style.transform = `translate3d(${px}px, ${py}px, 0)`;
+      }
+
       animationFrameId = requestAnimationFrame(render);
     };
 
@@ -560,7 +988,9 @@ export const BackgroundCanvas: React.FC = () => {
     };
   }, []);
 
-  const isTouchDevice = typeof window !== "undefined" && (window.innerWidth < 768 || "ontouchstart" in window);
+  const isTouchDevice =
+    typeof window !== "undefined" &&
+    (window.innerWidth < 768 || "ontouchstart" in window);
 
   return (
     <>
@@ -624,30 +1054,29 @@ export const BackgroundCanvas: React.FC = () => {
           }}
         />
 
-        {/* 4. Parallax Floating Cyber Crosshairs & Tech Glyphs (Normal Mode) */}
-        <div
-          className={`absolute top-80 sm:top-50 left-4 lg:left-8 text-sky-700/60 font-mono text-[11px] font-bold tracking-wider select-none will-change-transform hidden sm:block bg-sky-100/60 px-2 py-0.5 rounded border border-sky-300/60 transition-opacity duration-700 ${
-            isFullCosmos ? "opacity-0" : "opacity-100"
-          }`}
-        >
-          + 01_PARALLAX_GRID
-        </div>
-
-        <div
-          className={`absolute top-1/2 right-6 lg:right-12 text-indigo-700/60 font-mono text-[11px] font-bold tracking-wider select-none will-change-transform hidden sm:block bg-indigo-100/60 px-2 py-0.5 rounded border border-indigo-300/60 transition-opacity duration-700 ${
-            isFullCosmos ? "opacity-0" : "opacity-100"
-          }`}
-        >
-          ◈ // REACT_19_ENGINE
-        </div>
-
-        <div
-          className={`absolute top-2/3 left-1/4 text-emerald-700/60 font-mono text-xs font-bold tracking-wider select-none will-change-transform hidden sm:block bg-emerald-100/60 px-2 py-0.5 rounded border border-emerald-300/60 transition-opacity duration-700 ${
-            isFullCosmos ? "opacity-0" : "opacity-100"
-          }`}
-        >
-          ◆ OFFLINE_FIRST_ACTIVE
-        </div>
+        {/* 4. Parallax Floating Marketing & Tech Glyphs (Slow Multi-Section Drift) */}
+        {TECH_GLYPHS.map((glyph, index) => (
+          <div
+            key={glyph.label}
+            ref={(el) => {
+              glyphRefs.current[index] = el;
+            }}
+            className={`absolute top-0 ${glyph.horizontalPos} ${glyph.colorClasses} font-mono text-[11px] font-bold tracking-wider select-none will-change-transform hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-xl border shadow-xs backdrop-blur-[2px] transition-opacity duration-700 pointer-events-none ${
+              isFullCosmos ? "opacity-0" : "opacity-100"
+            }`}
+            style={{
+              display: "none",
+            }}
+          >
+            {glyph.hasPulse && (
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-current opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-current"></span>
+              </span>
+            )}
+            <span className="whitespace-nowrap">{glyph.label}</span>
+          </div>
+        ))}
 
         {/* 5. Subtle Cyber Grid */}
         <div

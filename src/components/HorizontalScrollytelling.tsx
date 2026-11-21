@@ -38,6 +38,7 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
   const trackRef = useRef<HTMLDivElement | null>(null);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
   const progressTextRef = useRef<HTMLSpanElement | null>(null);
+  const progressPercentBadgeRef = useRef<HTMLSpanElement | null>(null);
   const maxTranslateRef = useRef(0);
   const activeChapterRef = useRef(0);
   const touchStartX = useRef<number | null>(null);
@@ -135,6 +136,9 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
       if (progressTextRef.current) {
         progressTextRef.current.textContent = `${Math.round(normProgress * 100)}% Narrative Completed`;
       }
+      if (progressPercentBadgeRef.current) {
+        progressPercentBadgeRef.current.textContent = `${Math.round(normProgress * 100)}%`;
+      }
 
       const chapterIdx = Math.min(4, Math.floor(normProgress * 5));
       if (chapterIdx !== activeChapterRef.current) {
@@ -224,7 +228,25 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
       style={{ height: "420vh" }}
     >
       {/* Sticky Fullscreen Scrollytelling Viewport (100dvh for mobile toolbars) */}
-      <div className="sticky top-0 w-full h-screen h-[100dvh] overflow-hidden flex flex-col justify-between px-3 sm:px-8 py-3.5 sm:py-6 bg-[#f8fafc]/95 backdrop-blur-sm z-10">
+      <div className="sticky top-0 w-full h-screen h-[100dvh] overflow-hidden flex flex-col justify-between px-3 sm:px-8 py-3.5 sm:py-6 bg-gradient-to-b from-white/80 via-slate-50/75 to-sky-50/60 backdrop-blur-md z-10 relative">
+        {/* Viewport Ambient Engineering Grid Pattern */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-40 z-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, rgba(14, 165, 233, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(14, 165, 233, 0.08) 1px, transparent 1px)",
+            backgroundSize: "36px 36px",
+          }}
+        />
+
+        {/* Viewport Horizon Gradient Border Laser Lines */}
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-emerald-500/40 via-sky-500/50 via-purple-500/40 to-blue-500/40 pointer-events-none z-20" />
+        <div className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-sky-400/20 via-slate-300/40 to-indigo-400/20 pointer-events-none z-20" />
+
+        {/* Soft Ambient Radial Cosmic Glows in Viewport Corners */}
+        <div className="absolute -top-40 -left-40 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-emerald-400/15 via-teal-300/10 to-transparent blur-3xl pointer-events-none z-0" />
+        <div className="absolute -bottom-40 -right-40 w-[34rem] h-[34rem] rounded-full bg-gradient-to-tl from-indigo-400/15 via-purple-400/10 to-transparent blur-3xl pointer-events-none z-0" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[48rem] h-[24rem] rounded-full bg-sky-400/8 blur-[120px] pointer-events-none z-0" />
         
         {/* Scrollytelling Header */}
         <div className="w-full max-w-7xl mx-auto flex flex-col gap-2 z-30">
@@ -287,35 +309,105 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             ))}
           </div>
 
-          {/* Slender Progress Track */}
-          <div className="w-full h-1 bg-slate-200/80 rounded-full overflow-hidden mt-0.5">
-            <div
-              ref={progressBarRef}
-              className="h-full bg-gradient-to-r from-emerald-500 via-sky-500 via-blue-500 to-indigo-600 transition-all duration-75"
-              style={{ width: "0%" }}
-            />
+          {/* Architectural Stage Meter & Segmented CAD Stepper Track */}
+          <div className="flex flex-col gap-1.5 mt-1">
+            {/* Stage Telemetry Metadata Row */}
+            <div className="flex items-center justify-between text-[11px] font-mono font-bold px-0.5">
+              <div className="flex items-center gap-1.5 text-slate-700">
+                <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse" />
+                <span className="text-sky-700 uppercase tracking-wider">
+                  STAGE 0{activeChapter + 1} //
+                </span>
+                <span className="text-slate-800 font-extrabold hidden sm:inline">
+                  {chapters[activeChapter].tag}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest hidden md:inline">
+                  MILESTONE TELEMETRY
+                </span>
+                <span
+                  ref={progressPercentBadgeRef}
+                  className="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-sky-700 text-[10px] font-mono font-black shadow-2xs"
+                >
+                  0%
+                </span>
+              </div>
+            </div>
+
+            {/* Architectural Ruler Groove Track with Segmented Station Dots */}
+            <div className="relative w-full h-2.5 sm:h-3 bg-slate-200/90 rounded-full p-0.5 border border-slate-300/80 shadow-inner">
+              <div
+                ref={progressBarRef}
+                className="h-full rounded-full bg-gradient-to-r from-emerald-500 via-amber-500 via-sky-500 via-purple-500 to-blue-600 transition-all duration-75 shadow-sm relative"
+                style={{ width: "0%" }}
+              >
+                {/* Active Leading Beacon Dot */}
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white shadow-[0_0_8px_rgba(14,165,233,0.9),0_0_14px_rgba(59,130,246,0.6)] border border-sky-400" />
+              </div>
+
+              {/* Segmented Chapter Station Dots (01 to 05) */}
+              <div className="absolute inset-0 px-1 pointer-events-none flex items-center justify-between">
+                {chapters.map((ch, idx) => {
+                  const isPassed = activeChapter >= idx;
+                  const isCurrent = activeChapter === idx;
+                  return (
+                    <button
+                      key={ch.id}
+                      type="button"
+                      onClick={() => scrollToChapter(idx)}
+                      className="relative flex items-center justify-center p-1 pointer-events-auto cursor-pointer group"
+                      title={`Jump to Chapter ${ch.num}: ${ch.shortTitle}`}
+                    >
+                      <span
+                        className={`block rounded-full transition-all duration-300 ${
+                          isCurrent
+                            ? "w-2.5 h-2.5 bg-white ring-2 ring-sky-500 shadow-[0_0_8px_#38bdf8]"
+                            : isPassed
+                              ? "w-1.5 h-1.5 bg-white ring-1 ring-slate-400"
+                              : "w-1.5 h-1.5 bg-slate-400/80 ring-1 ring-slate-300"
+                        }`}
+                      />
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
 
         {/* The Horizontal Scrolling Track (with Touch Swipe Support) */}
         <div
-          className="w-full overflow-visible my-auto z-10 py-2 touch-pan-y"
+          className="w-full overflow-visible my-auto z-10 py-2 touch-pan-y relative"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
           <div
             ref={trackRef}
-            className="flex items-center gap-6 sm:gap-8 will-change-transform transition-transform duration-75 ease-out"
+            className="flex items-center gap-6 sm:gap-8 will-change-transform transition-transform duration-75 ease-out relative"
             style={{
               transform: "translate3d(0, 0, 0)",
             }}
           >
-            
+            {/* Continuous Architectural Timeline Data-Rail */}
+            <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 pointer-events-none z-0 flex items-center">
+              <div className="w-full h-px border-t-2 border-dashed border-sky-400/25" />
+            </div>
+
             {/* ======================================================== */}
             {/* CHAPTER 01: Academic Rigor & CS Foundations              */}
             {/* ======================================================== */}
-            <div className="w-[88vw] sm:w-[86vw] max-w-[900px] min-w-[280px] shrink-0">
-              <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06}>
+            <div className="w-[88vw] sm:w-[86vw] max-w-[900px] min-w-[280px] shrink-0 relative">
+              {/* Chapter 01 Background Watermark Number & Themed Aura */}
+              <div className="absolute -top-14 sm:-top-18 -left-4 sm:-left-8 text-[12rem] sm:text-[16rem] lg:text-[20rem] font-black font-display text-emerald-950/[0.04] pointer-events-none select-none z-0 leading-none tracking-tighter">
+                01
+              </div>
+              <div className="absolute -top-5 left-1 font-mono text-[10px] font-bold text-emerald-800/40 uppercase tracking-widest pointer-events-none select-none z-0">
+                // EPOCH.01: ACADEMIC_RIGOR_SPPU
+              </div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115%] h-[125%] bg-gradient-to-r from-emerald-500/10 via-teal-400/8 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
+
+              <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06} className="relative z-10">
                 <div className="relative rounded-2xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] backdrop-blur-xl border border-[#EADBCA] hover:border-[#059669] shadow-[0_8px_30px_-6px_rgba(180,120,60,0.08),0_1px_3px_rgba(180,120,60,0.04)] hover:shadow-[0_20px_45px_-10px_rgba(5,150,105,0.16)] overflow-hidden transition-all duration-300 group">
                   {/* Top Specular Dual Hairline: Emerald to Vermillion */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#059669] via-[#10B981] to-[#E34234] opacity-90 group-hover:opacity-100 transition-opacity" />
@@ -416,8 +508,17 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             {/* ======================================================== */}
             {/* CHAPTER 02: Enterprise ERP Billing & Inventory           */}
             {/* ======================================================== */}
-            <div className="w-[88vw] sm:w-[86vw] max-w-[900px] min-w-[280px] shrink-0">
-              <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06}>
+            <div className="w-[88vw] sm:w-[86vw] max-w-[900px] min-w-[280px] shrink-0 relative">
+              {/* Chapter 02 Background Watermark Number & Themed Aura */}
+              <div className="absolute -top-14 sm:-top-18 -left-4 sm:-left-8 text-[12rem] sm:text-[16rem] lg:text-[20rem] font-black font-display text-amber-950/[0.04] pointer-events-none select-none z-0 leading-none tracking-tighter">
+                02
+              </div>
+              <div className="absolute -top-5 left-1 font-mono text-[10px] font-bold text-amber-800/40 uppercase tracking-widest pointer-events-none select-none z-0">
+                // EPOCH.02: ENTERPRISE_ERP_SCALE
+              </div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115%] h-[125%] bg-gradient-to-r from-amber-500/10 via-orange-400/8 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
+
+              <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06} className="relative z-10">
                 <div className="relative rounded-2xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] backdrop-blur-xl border border-[#EADBCA] hover:border-[#E34234] shadow-[0_8px_30px_-6px_rgba(180,120,60,0.08),0_1px_3px_rgba(180,120,60,0.04)] hover:shadow-[0_20px_45px_-10px_rgba(227,66,52,0.16)] overflow-hidden transition-all duration-300 group">
                   {/* Top Specular Dual Hairline: Vermillion to Emerald */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#E34234] via-[#F25430] to-[#059669] opacity-90 group-hover:opacity-100 transition-opacity" />
@@ -530,8 +631,17 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             {/* ======================================================== */}
             {/* CHAPTER 03: Offline-First Mobile Resilience & Published  */}
             {/* ======================================================== */}
-            <div className="w-[88vw] sm:w-[86vw] max-w-[900px] min-w-[280px] shrink-0">
-              <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06}>
+            <div className="w-[88vw] sm:w-[86vw] max-w-[900px] min-w-[280px] shrink-0 relative">
+              {/* Chapter 03 Background Watermark Number & Themed Aura */}
+              <div className="absolute -top-14 sm:-top-18 -left-4 sm:-left-8 text-[12rem] sm:text-[16rem] lg:text-[20rem] font-black font-display text-sky-950/[0.04] pointer-events-none select-none z-0 leading-none tracking-tighter">
+                03
+              </div>
+              <div className="absolute -top-5 left-1 font-mono text-[10px] font-bold text-sky-800/40 uppercase tracking-widest pointer-events-none select-none z-0">
+                // EPOCH.03: OFFLINE_MOBILE_RESILIENCE
+              </div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115%] h-[125%] bg-gradient-to-r from-sky-500/12 via-cyan-400/8 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
+
+              <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06} className="relative z-10">
                 <div className="relative rounded-2xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] backdrop-blur-xl border border-[#EADBCA] hover:border-[#059669] shadow-[0_8px_30px_-6px_rgba(180,120,60,0.08),0_1px_3px_rgba(180,120,60,0.04)] hover:shadow-[0_20px_45px_-10px_rgba(5,150,105,0.16)] overflow-hidden transition-all duration-300 group">
                   {/* Top Specular Dual Hairline: Emerald to Vermillion */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#059669] via-[#10B981] to-[#E34234] opacity-90 group-hover:opacity-100 transition-opacity" />
@@ -636,8 +746,17 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             {/* ======================================================== */}
             {/* CHAPTER 04: Applied Gen-AI & Peer-Reviewed Research      */}
             {/* ======================================================== */}
-            <div className="w-[88vw] sm:w-[86vw] max-w-[900px] min-w-[280px] shrink-0">
-              <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06}>
+            <div className="w-[88vw] sm:w-[86vw] max-w-[900px] min-w-[280px] shrink-0 relative">
+              {/* Chapter 04 Background Watermark Number & Themed Aura */}
+              <div className="absolute -top-14 sm:-top-18 -left-4 sm:-left-8 text-[12rem] sm:text-[16rem] lg:text-[20rem] font-black font-display text-purple-950/[0.04] pointer-events-none select-none z-0 leading-none tracking-tighter">
+                04
+              </div>
+              <div className="absolute -top-5 left-1 font-mono text-[10px] font-bold text-purple-800/40 uppercase tracking-widest pointer-events-none select-none z-0">
+                // EPOCH.04: APPLIED_GEN_AI_RESEARCH
+              </div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115%] h-[125%] bg-gradient-to-r from-purple-500/12 via-fuchsia-400/8 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
+
+              <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06} className="relative z-10">
                 <div className="relative rounded-2xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] backdrop-blur-xl border border-[#EADBCA] hover:border-[#E34234] shadow-[0_8px_30px_-6px_rgba(180,120,60,0.08),0_1px_3px_rgba(180,120,60,0.04)] hover:shadow-[0_20px_45px_-10px_rgba(227,66,52,0.16)] overflow-hidden transition-all duration-300 group">
                   {/* Top Specular Dual Hairline: Vermillion to Emerald */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#E34234] via-[#F25430] to-[#059669] opacity-90 group-hover:opacity-100 transition-opacity" />
@@ -717,8 +836,17 @@ export const HorizontalScrollytelling: React.FC<HorizontalScrollytellingProps> =
             {/* ======================================================== */}
             {/* CHAPTER 05: Cloud Infrastructure & Scale                 */}
             {/* ======================================================== */}
-            <div className="w-[88vw] sm:w-[86vw] max-w-[900px] min-w-[280px] shrink-0">
-              <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06}>
+            <div className="w-[88vw] sm:w-[86vw] max-w-[900px] min-w-[280px] shrink-0 relative">
+              {/* Chapter 05 Background Watermark Number & Themed Aura */}
+              <div className="absolute -top-14 sm:-top-18 -left-4 sm:-left-8 text-[12rem] sm:text-[16rem] lg:text-[20rem] font-black font-display text-blue-950/[0.04] pointer-events-none select-none z-0 leading-none tracking-tighter">
+                05
+              </div>
+              <div className="absolute -top-5 left-1 font-mono text-[10px] font-bold text-blue-800/40 uppercase tracking-widest pointer-events-none select-none z-0">
+                // EPOCH.05: HIGH_AVAILABILITY_DEVOPS
+              </div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115%] h-[125%] bg-gradient-to-r from-blue-500/12 via-indigo-400/8 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
+
+              <TiltCard maxTilt={3.5} scale={1.008} glareOpacity={0.06} className="relative z-10">
                 <div className="relative rounded-2xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] backdrop-blur-xl border border-[#EADBCA] hover:border-[#059669] shadow-[0_8px_30px_-6px_rgba(180,120,60,0.08),0_1px_3px_rgba(180,120,60,0.04)] hover:shadow-[0_20px_45px_-10px_rgba(5,150,105,0.16)] overflow-hidden transition-all duration-300 group">
                   {/* Top Specular Dual Hairline: Emerald to Vermillion */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#059669] via-[#10B981] to-[#E34234] opacity-90 group-hover:opacity-100 transition-opacity" />

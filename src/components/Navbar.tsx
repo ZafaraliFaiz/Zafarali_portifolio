@@ -156,7 +156,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* Right Action Buttons */}
-        <div className="hidden sm:flex items-center gap-2 sm:gap-2.5 xl:gap-3 shrink-0 ml-1 sm:ml-2">
+        <div className="hidden sm:flex items-center gap-2.5 sm:gap-3 xl:gap-3.5 shrink-0 ml-1 sm:ml-2">
           {/* Live System Clock (FEAT-02) */}
           <div
             className="hidden 2xl:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100/90 border-2 border-slate-200/90 text-xs font-mono font-bold text-slate-800 shadow-2xs shrink-0"
@@ -203,14 +203,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span>30s Pitch</span>
           </button>
 
-          {/* Hire Me CTA */}
+          {/* Hire Me CTA - Distinct margin to prevent collision with 30s Pitch */}
           <a
             href="#contact"
             onClick={(e) => {
               e.preventDefault();
               scrollToTarget("#contact", { offset: -80 });
             }}
-            className="flex items-center gap-1.5 px-3 xl:px-3.5 py-1.5 text-xs font-black rounded-xl bg-gradient-to-r from-sky-600 to-blue-600 text-white hover:brightness-105 active:scale-95 transition-all shadow-md shadow-sky-600/30 border-2 border-sky-500 shrink-0 cursor-pointer"
+            className="flex items-center gap-1.5 px-3 xl:px-3.5 py-1.5 text-xs font-black rounded-xl bg-gradient-to-r from-sky-600 to-blue-600 text-white hover:brightness-105 active:scale-95 transition-all shadow-md shadow-sky-600/30 border-2 border-sky-500 shrink-0 cursor-pointer ml-1 sm:ml-2"
           >
             <Send className="w-3.5 h-3.5 text-white stroke-[2.5]" />
             <span>Hire Me</span>

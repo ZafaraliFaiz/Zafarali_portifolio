@@ -256,7 +256,7 @@ export const ProjectCardFlip: React.FC<ProjectCardFlipProps> = ({
           {/* BACK FACE: SYSTEM ARCHITECTURE BLUEPRINT & TELEMETRY     */}
           {/* ======================================================== */}
           <div
-            className="absolute inset-0 w-full h-full bg-slate-950 text-white rounded-2xl border border-slate-800 p-5 sm:p-6 flex flex-col justify-between shadow-2xl overflow-hidden"
+            className="absolute inset-0 w-full h-full bg-gradient-to-b from-white via-slate-50/95 to-sky-50/60 backdrop-blur-2xl text-slate-900 rounded-2xl border-2 border-sky-200/90 hover:border-sky-300/90 p-5 sm:p-6 flex flex-col justify-between shadow-xl overflow-hidden transition-all duration-300"
             style={{
               transform: "rotateY(180deg)",
               backfaceVisibility: "hidden",
@@ -265,47 +265,83 @@ export const ProjectCardFlip: React.FC<ProjectCardFlipProps> = ({
           >
             {/* Top Accent Gradient Line */}
             <div
-              className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${theme.gradient}`}
+              className={`absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r ${theme.gradient}`}
             />
 
-            {/* Subtle Blueprint Grid Pattern Watermark */}
+            {/* Radiant Corner Aura Matching Project Accent */}
             <div
-              className="absolute inset-0 opacity-[0.04] pointer-events-none"
+              className="absolute -top-16 -right-16 w-40 h-40 rounded-full blur-3xl opacity-20 pointer-events-none"
+              style={{ backgroundColor: theme.accent }}
+            />
+            <div
+              className="absolute -bottom-16 -left-16 w-36 h-36 rounded-full blur-3xl opacity-15 pointer-events-none"
+              style={{ backgroundColor: theme.accent }}
+            />
+
+            {/* Architectural Blueprint Grid Pattern Watermark */}
+            <div
+              className="absolute inset-0 pointer-events-none opacity-45"
               style={{
                 backgroundImage:
-                  "linear-gradient(to right, #38bdf8 1px, transparent 1px), linear-gradient(to bottom, #38bdf8 1px, transparent 1px)",
-                backgroundSize: "20px 20px",
+                  "linear-gradient(to right, rgba(14, 165, 233, 0.09) 1px, transparent 1px), linear-gradient(to bottom, rgba(14, 165, 233, 0.09) 1px, transparent 1px)",
+                backgroundSize: "22px 22px",
               }}
             />
 
             {/* Header: Blueprint Spec Breadcrumb + Flip Back */}
-            <div>
-              <div className="flex items-center justify-between gap-2 pb-3 border-b border-slate-800/80 mb-3.5">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="font-mono text-[10px] text-sky-400 font-bold uppercase tracking-wider">
-                    // SPEC_BLUEPRINT.architecture
+            <div className="relative z-10">
+              <div className="flex items-center justify-between gap-2 pb-3 border-b border-slate-200/80 mb-3.5">
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-sky-50 border border-sky-200/90 text-sky-800 text-[10px] font-mono font-bold tracking-wider shadow-2xs">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-600" />
+                    </span>
+                    <span>// BLUEPRINT.cad</span>
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-slate-500 bg-white/90 px-2 py-0.5 rounded-md border border-slate-200/70 shadow-2xs">
+                    TOPOLOGY
                   </span>
                 </div>
+
                 <button
                   onClick={handleFlipToggle}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-[10px] font-mono font-bold transition-all hover:scale-105 active:scale-95"
+                  type="button"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white hover:bg-sky-50 text-slate-700 hover:text-sky-700 border border-slate-200/90 hover:border-sky-300 text-[10px] font-mono font-bold transition-all shadow-2xs hover:scale-105 active:scale-95 group/flip cursor-pointer"
+                  title="Flip back to Product Showcase"
                 >
-                  <RotateCcw className="w-3 h-3 text-sky-400" />
+                  <RotateCcw className="w-3 h-3 text-sky-600 transition-transform duration-500 group-hover/flip:-rotate-180" />
                   <span>Product View</span>
                 </button>
               </div>
 
               {/* Title & Architecture Flow */}
-              <h4 className="text-base sm:text-lg font-bold font-display text-white tracking-tight mb-2">
-                {project.title}
-              </h4>
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <h4 className="text-base sm:text-lg font-black font-display text-slate-950 tracking-tight">
+                  {project.title}
+                </h4>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 border border-slate-200/60 shrink-0">
+                  {project.badge}
+                </span>
+              </div>
 
               {/* Data Flow Strip */}
               {project.architectureOverview && (
-                <div className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 mb-3 text-[11px] font-mono text-slate-300 leading-snug">
-                  <span className="text-sky-400 font-bold mr-1.5">FLOW:</span>
-                  <span className="line-clamp-2">{project.architectureOverview}</span>
+                <div
+                  className="p-2.5 rounded-xl bg-white/90 border border-sky-200/80 mb-3 shadow-2xs text-[11px] font-mono text-slate-700 leading-snug relative overflow-hidden"
+                  style={{ borderLeftWidth: "3.5px", borderLeftColor: theme.accent }}
+                >
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <span className="text-[9px] font-mono font-black uppercase tracking-wider text-sky-700 bg-sky-100/80 px-1.5 py-0.5 rounded">
+                      DATA FLOW
+                    </span>
+                    <span className="text-[10px] font-mono font-bold text-slate-400">
+                      ⚡ HIGH-THROUGHPUT PIPELINE
+                    </span>
+                  </div>
+                  <p className="line-clamp-2 text-slate-700 font-medium">
+                    {project.architectureOverview}
+                  </p>
                 </div>
               )}
 
@@ -314,22 +350,26 @@ export const ProjectCardFlip: React.FC<ProjectCardFlipProps> = ({
                 {(project.architectureNodes || []).slice(0, 3).map((node, nIdx) => (
                   <div
                     key={nIdx}
-                    className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80 flex items-start gap-2.5 hover:border-slate-700 transition-colors"
+                    className="p-2.5 rounded-xl bg-white/95 border border-slate-200/90 hover:border-sky-300 hover:shadow-xs transition-all flex items-start gap-2.5 group/node shadow-2xs"
                   >
                     <div
-                      className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
+                      className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5 transition-transform group-hover/node:scale-110 shadow-2xs"
                       style={{
-                        backgroundColor: `${theme.accent}20`,
+                        backgroundColor: `${theme.accent}15`,
                         color: theme.accent,
+                        border: `1px solid ${theme.accent}30`,
                       }}
                     >
                       {getNodeIcon(node.icon)}
                     </div>
-                    <div className="min-w-0">
-                      <div className="text-xs font-bold font-display text-slate-100 flex items-center gap-1.5">
+                    <div className="min-w-0 flex-1">
+                      <div className="text-xs font-bold font-display text-slate-900 flex items-center justify-between">
                         <span>{node.title}</span>
+                        <span className="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-widest">
+                          0{nIdx + 1}
+                        </span>
                       </div>
-                      <div className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">
+                      <div className="text-[11px] text-slate-600 line-clamp-1 mt-0.5 font-medium">
                         {node.desc}
                       </div>
                     </div>
@@ -339,19 +379,20 @@ export const ProjectCardFlip: React.FC<ProjectCardFlipProps> = ({
             </div>
 
             {/* Bottom Metrics Matrix & Modal Launch */}
-            <div>
+            <div className="relative z-10 pt-1">
               {/* Telemetry Pods */}
               {project.metrics && project.metrics.length > 0 && (
-                <div className="grid grid-cols-2 gap-2 mb-3.5">
+                <div className="grid grid-cols-2 gap-2 mb-3">
                   {project.metrics.slice(0, 2).map((m, mIdx) => (
                     <div
                       key={mIdx}
-                      className="p-2 rounded-lg bg-slate-900/80 border border-slate-800 text-left"
+                      className="p-2.5 rounded-xl bg-white/95 border border-slate-200/90 shadow-2xs text-left"
                     >
-                      <div className="text-[9px] font-mono text-slate-400 uppercase">
-                        {m.label}
+                      <div className="text-[9px] font-mono font-bold text-slate-500 uppercase tracking-wider flex items-center justify-between">
+                        <span>{m.label}</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                       </div>
-                      <div className="text-xs font-mono font-bold text-emerald-400 truncate mt-0.5">
+                      <div className="text-xs font-mono font-black text-sky-700 truncate mt-1">
                         {m.value}
                       </div>
                     </div>
@@ -359,13 +400,25 @@ export const ProjectCardFlip: React.FC<ProjectCardFlipProps> = ({
                 </div>
               )}
 
-              <button
-                onClick={() => onSelectProject(project)}
-                className="w-full flex items-center justify-between py-2.5 px-3.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-mono text-xs font-semibold tracking-wide transition-all shadow-md active:scale-98"
-              >
-                <span>Launch Interactive Visualizer</span>
-                <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.2]" />
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => onSelectProject(project)}
+                  type="button"
+                  className="flex-1 flex items-center justify-between py-2.5 px-3.5 rounded-xl bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 hover:brightness-105 active:scale-98 text-white font-mono text-xs font-bold tracking-wide transition-all shadow-md shadow-sky-600/25 group/btn cursor-pointer"
+                >
+                  <span>Launch Visualizer</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.2] transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                </button>
+                <button
+                  onClick={handleFlipToggle}
+                  type="button"
+                  className="p-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/90 hover:border-slate-300 transition-all hover:scale-105 active:scale-95 shadow-2xs cursor-pointer"
+                  title="Flip back to Product View"
+                  aria-label="Flip back to Product View"
+                >
+                  <RotateCcw className="w-4 h-4 text-sky-600" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
