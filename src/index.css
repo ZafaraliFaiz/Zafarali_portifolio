@@ -445,13 +445,12 @@ section,
     background-color: rgba(30, 41, 59, 0.85) !important;
   }
 
-  /* 8. Light Card Panels & Containers to Obsidian Glass */
-  html.cosmos-active .glass-panel {
-    background: rgba(15, 23, 42, 0.88) !important;
-    border-color: rgba(56, 189, 248, 0.28) !important;
-    box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.7), 0 4px 12px -2px rgba(56, 189, 248, 0.12) !important;
-  }
-
+  /* ==========================================================================
+     8. COSMOS MODE CARDS: Obsidian Nebula Cyber-Glass Architecture
+     Upgrades all cards to frosted aerospace cybernetic obsidian glass with 
+     specular inset lighting, luminescent neon borders, and volumetric depth.
+     ========================================================================== */
+  html.cosmos-active .glass-panel,
   html.cosmos-active .bg-white,
   html.cosmos-active .bg-white\/70,
   html.cosmos-active .bg-white\/80,
@@ -459,26 +458,48 @@ section,
   html.cosmos-active .bg-white\/90,
   html.cosmos-active .bg-white\/92,
   html.cosmos-active .bg-white\/95,
-  html.cosmos-active .bg-white\/98 {
-    background-color: rgba(15, 23, 42, 0.88) !important;
-    border-color: rgba(56, 189, 248, 0.28) !important;
-  }
-
-  html.cosmos-active .bg-\[\#f8fafc\],
-  html.cosmos-active .bg-\[\#f8fafc\]\/95 {
-    background-color: rgba(2, 6, 23, 0.88) !important;
-  }
-
+  html.cosmos-active .bg-white\/98,
   html.cosmos-active .bg-\[\#FFFDF9\],
   html.cosmos-active .bg-\[\#FFFDF8\],
   html.cosmos-active .bg-\[\#FAF6ED\],
   html.cosmos-active .bg-\[\#F5ECE0\],
   html.cosmos-active .bg-\[\#FAF5EB\],
   html.cosmos-active .bg-\[\#FAF1E3\] {
-    background-color: rgba(15, 23, 42, 0.88) !important;
-    border-color: rgba(56, 189, 248, 0.28) !important;
+    background: linear-gradient(145deg, rgba(10, 16, 35, 0.85) 0%, rgba(6, 11, 26, 0.90) 50%, rgba(13, 20, 44, 0.88) 100%) !important;
+    backdrop-filter: blur(28px) saturate(190%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+    border-color: rgba(56, 189, 248, 0.35) !important;
+    box-shadow: 
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.16),
+      inset 0 0 20px 0 rgba(56, 189, 248, 0.05),
+      0 16px 36px -8px rgba(0, 0, 0, 0.82),
+      0 0 24px -4px rgba(56, 189, 248, 0.14) !important;
   }
 
+  html.cosmos-active .bg-\[\#f8fafc\],
+  html.cosmos-active .bg-\[\#f8fafc\]\/95 {
+    background-color: rgba(2, 6, 23, 0.92) !important;
+  }
+
+  /* Card Hover Elevation & Specular Flare */
+  html.cosmos-active .glass-card-hover:hover,
+  html.cosmos-active .hover\:border-slate-300:hover,
+  html.cosmos-active .hover\:border-slate-400:hover,
+  html.cosmos-active .hover\:border-emerald-500:hover,
+  html.cosmos-active .hover\:border-purple-300:hover,
+  html.cosmos-active .hover\:border-sky-300:hover,
+  html.cosmos-active .hover\:border-sky-500:hover,
+  html.cosmos-active .group:hover > div[class*="border"],
+  html.cosmos-active .group:hover > div[class*="bg-white"] {
+    border-color: rgba(56, 189, 248, 0.75) !important;
+    box-shadow: 
+      inset 0 1px 2px 0 rgba(255, 255, 255, 0.28),
+      inset 0 0 28px 0 rgba(56, 189, 248, 0.14),
+      0 24px 50px -10px rgba(0, 0, 0, 0.95),
+      0 0 36px -2px rgba(56, 189, 248, 0.32) !important;
+  }
+
+  /* Nested Inset Pods, Metrics & Notes Containers */
   html.cosmos-active .bg-slate-50,
   html.cosmos-active .bg-slate-50\/70,
   html.cosmos-active .bg-slate-50\/80,
@@ -488,20 +509,23 @@ section,
   html.cosmos-active .bg-slate-100\/80,
   html.cosmos-active .bg-slate-100\/90,
   html.cosmos-active .bg-slate-200 {
-    background-color: rgba(20, 28, 48, 0.85) !important;
-    border-color: rgba(56, 189, 248, 0.22) !important;
+    background: linear-gradient(135deg, rgba(16, 24, 48, 0.78) 0%, rgba(9, 14, 32, 0.86) 100%) !important;
+    border-color: rgba(56, 189, 248, 0.25) !important;
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.08), 0 2px 8px rgba(0, 0, 0, 0.5) !important;
   }
 
-  /* 9. Light Gradients Transformed into Cosmic Dark Gradients */
+  /* 9. Light Gradients Transformed into Multi-Stop Cosmic Gradients */
   html.cosmos-active .from-white,
   html.cosmos-active .from-\[\#FFFDF9\] {
-    --tw-gradient-from: rgba(15, 23, 42, 0.90) !important;
+    --tw-gradient-from: rgba(13, 20, 44, 0.88) !important;
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) 0%, var(--tw-gradient-to) 100%) !important;
   }
 
   html.cosmos-active .via-white,
-  html.cosmos-active .via-\[\#FAF6ED\] {
-    --tw-gradient-via: rgba(15, 23, 42, 0.92) !important;
+  html.cosmos-active .via-\[\#FAF6ED\],
+  html.cosmos-active .via-slate-50,
+  html.cosmos-active .via-slate-50\/95 {
+    --tw-gradient-via: rgba(8, 13, 30, 0.92) !important;
   }
 
   html.cosmos-active .to-slate-50,
@@ -509,11 +533,62 @@ section,
   html.cosmos-active .to-slate-50\/70,
   html.cosmos-active .to-slate-50\/80,
   html.cosmos-active .to-slate-50\/90,
+  html.cosmos-active .to-sky-50\/60,
   html.cosmos-active .to-\[\#F5ECE0\] {
-    --tw-gradient-to: rgba(10, 16, 32, 0.96) !important;
+    --tw-gradient-to: rgba(5, 9, 22, 0.96) !important;
   }
 
-  /* 10. Light Badge / Tag Backgrounds */
+  /* 10. Holographic CAD Blueprint HUD (Card Back Face in Cosmos Mode) */
+  html.cosmos-active [style*="rotateY(180deg)"] {
+    background: linear-gradient(180deg, rgba(6, 18, 42, 0.95) 0%, rgba(3, 10, 26, 0.98) 50%, rgba(8, 22, 48, 0.94) 100%) !important;
+    border: 2px solid rgba(56, 189, 248, 0.55) !important;
+    box-shadow: 
+      inset 0 1px 2px 0 rgba(255, 255, 255, 0.25),
+      inset 0 0 32px 0 rgba(56, 189, 248, 0.16),
+      0 20px 48px -10px rgba(0, 0, 0, 0.88),
+      0 0 36px -4px rgba(56, 189, 248, 0.35) !important;
+  }
+
+  html.cosmos-active [style*="rotateY(180deg)"] [style*="background-size: 22px 22px"] {
+    opacity: 0.65 !important;
+    background-image: 
+      linear-gradient(to right, rgba(56, 189, 248, 0.18) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(56, 189, 248, 0.18) 1px, transparent 1px) !important;
+  }
+
+  /* 11. Horizontal Journey Viewport & Cosmic Watermark Numbers */
+  html.cosmos-active .sticky.top-0 {
+    background: rgba(3, 7, 18, 0.65) !important;
+    backdrop-filter: blur(22px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(180%) !important;
+  }
+
+  html.cosmos-active .text-emerald-950\/\[0\.04\],
+  html.cosmos-active .text-slate-950\/\[0\.04\],
+  html.cosmos-active .text-blue-950\/\[0\.04\],
+  html.cosmos-active .text-purple-950\/\[0\.04\],
+  html.cosmos-active .text-amber-950\/\[0\.04\] {
+    color: rgba(56, 189, 248, 0.12) !important;
+    text-shadow: 0 0 60px rgba(56, 189, 248, 0.25) !important;
+  }
+
+  /* 12. Primary Action Buttons on Cards */
+  html.cosmos-active button.bg-slate-900,
+  html.cosmos-active a.bg-slate-900 {
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.38) 0%, rgba(99, 102, 241, 0.38) 100%) !important;
+    border: 1px solid rgba(56, 189, 248, 0.55) !important;
+    color: #f8fafc !important;
+    box-shadow: 0 0 16px -2px rgba(56, 189, 248, 0.28) !important;
+  }
+
+  html.cosmos-active button.bg-slate-900:hover,
+  html.cosmos-active a.bg-slate-900:hover {
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.65) 0%, rgba(99, 102, 241, 0.65) 100%) !important;
+    border-color: #38bdf8 !important;
+    box-shadow: 0 0 24px rgba(56, 189, 248, 0.5) !important;
+  }
+
+  /* 13. Neon Cyber Badges & Telemetry Tags */
   html.cosmos-active .bg-emerald-50,
   html.cosmos-active .bg-emerald-50\/80,
   html.cosmos-active .bg-emerald-50\/90,
@@ -521,8 +596,10 @@ section,
   html.cosmos-active .bg-emerald-100\/70,
   html.cosmos-active .bg-\[\#ECFDF5\],
   html.cosmos-active .bg-\[\#D1FAE5\] {
-    background-color: rgba(6, 78, 59, 0.40) !important;
-    border-color: rgba(52, 211, 153, 0.45) !important;
+    background-color: rgba(6, 78, 59, 0.38) !important;
+    border-color: rgba(52, 211, 153, 0.5) !important;
+    color: #34d399 !important;
+    box-shadow: 0 0 10px rgba(52, 211, 153, 0.18) !important;
   }
 
   html.cosmos-active .bg-sky-50,
@@ -531,15 +608,19 @@ section,
   html.cosmos-active .bg-blue-50,
   html.cosmos-active .bg-blue-100,
   html.cosmos-active .bg-indigo-50 {
-    background-color: rgba(14, 165, 233, 0.20) !important;
-    border-color: rgba(56, 189, 248, 0.40) !important;
+    background-color: rgba(14, 165, 233, 0.22) !important;
+    border-color: rgba(56, 189, 248, 0.5) !important;
+    color: #38bdf8 !important;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.2) !important;
   }
 
   html.cosmos-active .bg-purple-50,
   html.cosmos-active .bg-purple-50\/80,
   html.cosmos-active .bg-purple-100 {
-    background-color: rgba(147, 51, 234, 0.22) !important;
-    border-color: rgba(192, 132, 252, 0.45) !important;
+    background-color: rgba(147, 51, 234, 0.25) !important;
+    border-color: rgba(192, 132, 252, 0.5) !important;
+    color: #c084fc !important;
+    box-shadow: 0 0 10px rgba(192, 132, 252, 0.2) !important;
   }
 
   html.cosmos-active .bg-amber-50,
@@ -547,18 +628,22 @@ section,
   html.cosmos-active .bg-\[\#FAF3E7\],
   html.cosmos-active .bg-\[\#FAF3E7\]\/90,
   html.cosmos-active .bg-\[\#FAF1E3\] {
-    background-color: rgba(245, 158, 11, 0.18) !important;
-    border-color: rgba(251, 191, 36, 0.35) !important;
+    background-color: rgba(245, 158, 11, 0.2) !important;
+    border-color: rgba(251, 191, 36, 0.48) !important;
+    color: #fbbf24 !important;
+    box-shadow: 0 0 10px rgba(251, 191, 36, 0.18) !important;
   }
 
   html.cosmos-active .bg-rose-50,
   html.cosmos-active .bg-\[\#FFF1EE\],
   html.cosmos-active .bg-\[\#FEE2DC\] {
-    background-color: rgba(225, 29, 72, 0.22) !important;
-    border-color: rgba(251, 113, 133, 0.40) !important;
+    background-color: rgba(225, 29, 72, 0.24) !important;
+    border-color: rgba(251, 113, 133, 0.48) !important;
+    color: #f87171 !important;
+    box-shadow: 0 0 10px rgba(251, 113, 133, 0.18) !important;
   }
 
-  /* 11. Light Borders */
+  /* 14. Light Borders Transformed into Luminescent Cyber Edges */
   html.cosmos-active .border-slate-100,
   html.cosmos-active .border-slate-200,
   html.cosmos-active .border-slate-200\/60,
@@ -576,10 +661,35 @@ section,
   html.cosmos-active .border-\[\#EADFCB\]\/60,
   html.cosmos-active .border-\[\#A7F3D0\],
   html.cosmos-active .border-\[\#FDCAC1\] {
-    border-color: rgba(56, 189, 248, 0.25) !important;
+    border-color: rgba(56, 189, 248, 0.3) !important;
   }
 
-  /* 12. Form Controls (Input, Textarea, Select) in Cosmos Mode */
+  /* 15. Card Interactive Controls, Flip Buttons & Specular Aura */
+  html.cosmos-active button[title*="Flip to Blueprint"],
+  html.cosmos-active button[title*="Flip back"],
+  html.cosmos-active button[title*="Blueprint"] {
+    background: rgba(14, 25, 48, 0.85) !important;
+    border-color: rgba(56, 189, 248, 0.45) !important;
+    color: #38bdf8 !important;
+    box-shadow: 0 0 12px -2px rgba(56, 189, 248, 0.22) !important;
+  }
+
+  html.cosmos-active button[title*="Flip to Blueprint"]:hover,
+  html.cosmos-active button[title*="Flip back"]:hover,
+  html.cosmos-active button[title*="Blueprint"]:hover {
+    background: rgba(56, 189, 248, 0.2) !important;
+    border-color: #38bdf8 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.4) !important;
+  }
+
+  /* Enhance card ambient aura in Cosmos Mode */
+  html.cosmos-active .group:hover .blur-3xl,
+  html.cosmos-active .group .blur-3xl {
+    opacity: 0.38 !important;
+  }
+
+  /* 16. Form Controls (Input, Textarea, Select) in Cosmos Mode */
   html.cosmos-active input,
   html.cosmos-active textarea,
   html.cosmos-active select {
@@ -593,7 +703,7 @@ section,
     color: #94a3b8 !important;
   }
 
-  /* 13. Top Nav Scrolled Bar & Controls */
+  /* 17. Top Nav Scrolled Bar & Controls */
   html.cosmos-active header {
     border-color: rgba(56, 189, 248, 0.25) !important;
   }
@@ -627,7 +737,7 @@ section,
     border-color: rgba(56, 189, 248, 0.35) !important;
   }
 
-  /* 14. Back to Top HUD */
+  /* 18. Back to Top HUD */
   html.cosmos-active #back-to-top-btn {
     background-color: rgba(15, 23, 42, 0.92) !important;
     border-color: rgba(56, 189, 248, 0.5) !important;
